@@ -57,6 +57,7 @@
 #include "CACFNumber.h"
 #include "CAException.h"
 #include "CAHostTimeBase.h"
+#include "log.h"
 
 namespace CMIO { namespace DPA { namespace Sample { namespace Server
 {
@@ -89,6 +90,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mStepping(false),
 		mStepCount(0)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::Deck CONSTRUCTOR");
 		StartSimulationThread();
 	}
 	
@@ -97,6 +99,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Deck::~Deck()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::~Deck DESTRUCTOR");
 		// Grab the mutex for the deck's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -110,6 +113,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Deck::Play()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::Play");
 		SetDeckMode(kCMIODeckStatePlay);
 	}
 	
@@ -118,6 +122,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Deck::Stop()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::Stop");
 		SetDeckMode(kCMIODeckStateStop);
 	}
 
@@ -127,6 +132,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Deck::Jog(SInt32 speed)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::Jog");
 		if (0 == speed)
 		{
 			SetDeckMode((UInt32)kCMIODeckStatePause);
@@ -152,6 +158,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Deck::CueTo(Float64 requestedTimecode, Boolean	playOnCue)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::CueTo");
 		// Grab the mutex for the deck's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -166,7 +173,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		}
 		else
 		{
-			DebugMessage("Trying to Cue when in Cueing state");
+			LOGINFO("Trying to Cue when in Cueing state");
 		}
 		
 	}
@@ -177,6 +184,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Deck::StartSimulationThread()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::StartSimulationThread");
 		// Grab the mutex for the deck's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -199,6 +207,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Deck::StopSimulationThread()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::StopSimulationThread");
 		// Grab the mutex for the deck's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -220,15 +229,13 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	// StartThreads()
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Deck::StartThreads()
-	{		
-		DebugMessage("Deck::StartThreads");
+	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::StartThreads");
 		// Don't need to do anything if the threads are already running
 		if (mDeckThreadRunning)
 			return;
 
 		// Grab the mutex for the deck's state
-//		CAMutex::Locker locker(mStateMutex);
-
 		{
 			// Grab the timecode update thread guard
 			CAGuard::Locker timecodeUpdateGuard(mTimecodeUpdateGuard);
@@ -265,7 +272,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Deck::StopThreads()
 	{
-//		DebugMessage("Deck::StopThreads");
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::StopThreads");
 
 		// Don't need to do anything they threads are not running
 		if (not mDeckThreadRunning)
@@ -273,9 +280,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 
 		// Remember that the deck threads are stopped
 		mDeckThreadRunning = false;
-
-		// Grab the mutex for the deck's state
-//		CAMutex::Locker locker(mStateMutex);
 
 		if (mCueingThread.IsRunning())
 		{
@@ -309,6 +313,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Deck::SetDeckMode(UInt32 mode)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::SetDeckMode");
 		// Grab the mutex for the deck's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -376,6 +381,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Deck::FrameArrived()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::FrameArrived");
 		mTimecodeUpdateGuard.NotifyAll();
 	}
 	
@@ -385,6 +391,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void* Deck::CueingEntry(Deck& deck)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::CueingEntry");
 		{
 			// Grab the cueing guard
 			CAGuard::Locker	cueingGuard(deck.mCueingGuard);
@@ -409,7 +416,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 				// See if the requested timecode has been reached
 				if (0 == difference and deck.mStepping and 0 == deck.mStepCount)
 				{
-					DebugMessage("Deck::CueingEntry: at exactly the requested timecode");
+					LOGINFO("Deck::CueingEntry: at exactly the requested timecode");
 					deck.mCueing = false;
 					deck.SetDeckMode(kCMIODeckStatePause);
 					deck.mCueState = 1;
@@ -424,14 +431,14 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 				// Shuttle in stages depending on how many frames the difference is
 				if (0 == difference)
 				{
-					DebugMessage("Deck::CueingEntry: 0 == difference, begin stepping.");
+					LOGINFO("Deck::CueingEntry: 0 == difference, begin stepping.");
 					deck.mCueing = false;
 					deck.mCueState = 1;
 					deck.mOwningStream.DeckCueingChanged();
 					
 					if (deck.mPlayOnCue)
 					{
-						DebugMessage("Deck::CueingEntry: Calling CueComplete");
+						LOGINFO("Deck::CueingEntry: Calling CueComplete");
 						deck.SetDeckMode(kCMIODeckStatePlay);
 						continue;
 					}
@@ -489,6 +496,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void* Deck::SimulationEntry(Deck& deck)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::SimulationEntry");
 		{
 			// Grab the simulation guard
 			CAGuard::Locker	simulationGuard(deck.mSimulationGuard);
@@ -499,14 +507,14 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		
 		while (not deck.mStopSimulationThread)
 		{
-			DebugMessage("Deck::SimulationEntry: in loop");
+			LOGINFO("Deck::SimulationEntry: in loop");
 
 			if (deck.mCurrentDeckMode != deck.mNewDeckMode)
 			{
 				// Grab the mutex for the deck's state
 				CAMutex::Locker locker(deck.mStateMutex);
 
-				DebugMessage("Deck::SimulationEntry: mCurrentDeckMode != mNewDeckMode");
+				LOGINFO("Deck::SimulationEntry: mCurrentDeckMode != mNewDeckMode");
 				deck.mCurrentDeckMode = deck.mNewDeckMode;
 				deck.SetStreamDeck(kCMIODeckStatusOpcode, deck.mCurrentDeckMode, 0);
 				deck.mOwningStream.StreamDeckChanged();
@@ -533,6 +541,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void* Deck::TimecodeUpdateEntry(Deck& deck)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Deck::TimecodeUpdateEntry");
 		{
 			// Grab the conversion guard
 			CAGuard::Locker	timecodeUpdateGuard(deck.mTimecodeUpdateGuard);
@@ -551,13 +560,13 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 				{
 					case kCMIODeckStateStop:
 					case kCMIODeckStatePause:
-						DebugMessage("TimecodeUpdateEntry stop");
+						LOGINFO("TimecodeUpdateEntry stop");
 						break;
 						
 					case kCMIODeckStatePlay:
 					case kCMIODeckStatePlaySlow:
 					{
-						DebugMessage("TimecodeUpdateEntry +1");
+						LOGINFO("TimecodeUpdateEntry +1");
 						deck.mTimecode += 1;
 						break;
 					}

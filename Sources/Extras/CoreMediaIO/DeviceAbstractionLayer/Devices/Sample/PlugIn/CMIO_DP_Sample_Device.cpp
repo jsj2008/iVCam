@@ -92,8 +92,8 @@ namespace CMIO { namespace DP { namespace Sample
 		mRegistryEntry(IORegistryEntryFromPath(kIOMasterPortDefault, registryPath)), 
 		mAssistantPort(assistantPort),
         mDeviceUID(CFStringCreateWithFormat(0, 0, CFSTR("%#16llx-SampleVideo"), guid)),
-		mDeviceName(CFSTR("Sample"), false),						// ••• A proper name and device manufacturer should also be reported
-		mDeviceManufacturerName(CFSTR("Apple"), false),				// ••• Need to determine a the proper manufacturer provide the manufacturer
+		mDeviceName(CFSTR("Insta360 Virtual Camera"), false),
+		mDeviceManufacturerName(CFSTR("Arashi Vision Co. Ltd"), false),
 		mPropertyCacheTime(0),
 		mHogMode(NULL),
 		mClientSyncDiscontinuity(NULL),
@@ -219,7 +219,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	CFStringRef	Device::CopyModelUID() const
 	{
-		// ••• At some point in the future, if the model of the device can be determined n a unique ID should be returned		
+		// ••• At some point in the future, if the model of the device can be determined, a unique ID should be returned
 		return NULL;
 	}
 	
@@ -269,6 +269,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	bool Device::HasProperty(const CMIOObjectPropertyAddress& address) const
 	{
+        LOGINFO("Device::HasProperty");
 		bool answer = false;
 		
 		// Take and hold the state mutex
@@ -294,6 +295,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	bool Device::IsPropertySettable(const CMIOObjectPropertyAddress& address) const
 	{
+        LOGINFO("Device::IsPropertySettable");
 		bool answer = false;
 		
 		// Take and hold the state mutex
@@ -319,6 +321,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	UInt32 Device::GetPropertyDataSize(const CMIOObjectPropertyAddress& address, UInt32 qualifierDataSize, const void* qualifierData) const
 	{
+        LOGINFO("Device::GetPropertyDataSize");
 		UInt32 answer = 0;
 		
 		// Take and hold the state mutex
@@ -351,11 +354,13 @@ namespace CMIO { namespace DP { namespace Sample
 		switch (address.mSelector)
 		{
 			case kCMIODevicePropertyHogMode:
+                LOGINFO("kCMIODevicePropertyHogMode");
 				ThrowIf(dataSize != GetPropertyDataSize(address, qualifierDataSize, qualifierData), CAException(kCMIOHardwareBadPropertySizeError), "CMIO::DP::Sample::Device::GetPropertyData: wrong data size for kCMIODevicePropertyHogMode");
 				mHogMode->GetPropertyData(address, qualifierDataSize, qualifierData, dataSize, dataUsed, data);
 				break;
 				
 			case kCMIODevicePropertyCanProcessRS422Command:
+                LOGINFO("kCMIODevicePropertyCanProcessRS422Command");
 				ThrowIf(dataSize != GetPropertyDataSize(address, qualifierDataSize, qualifierData), CAException(kCMIOHardwareBadPropertySizeError), "CMIO::DP::Device::GetPropertyData: wrong data size for kCMIODevicePropertyCanProcessRS422Command");
 				*static_cast<Boolean*>(data) = true;
 				dataUsed = sizeof(Boolean);
@@ -363,6 +368,7 @@ namespace CMIO { namespace DP { namespace Sample
 				
 			case kCMIODevicePropertyLinkedCoreAudioDeviceUID:
 			case kCMIODevicePropertyLinkedAndSyncedCoreAudioDeviceUID:
+                LOGINFO("kCMIODevicePropertyLinkedCoreAudioDeviceUID or kCMIODevicePropertyLinkedAndSyncedCoreAudioDeviceUID");
 				if (kCMIODevicePropertyScopeInput == address.mScope)
 				{
 					ThrowIf(dataSize != GetPropertyDataSize(address, qualifierDataSize, qualifierData), CAException(kCMIOHardwareBadPropertySizeError), "CMIO::DP::Sample::Device::GetPropertyData: wrong data size for kCMIO_DPA_Sample_StreamPropertyLinkedAndSyncedCoreAudioDeviceUID");
@@ -389,6 +395,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::SetPropertyData(const CMIOObjectPropertyAddress& address, UInt32 qualifierDataSize, const void* qualifierData, UInt32 dataSize, const void* data)
 	{
+        LOGINFO("Device::SetPropertyData");
 		// Take and hold the state mutex
 		CAMutex::Locker stateMutex(GetStateMutex());
 		
@@ -748,6 +755,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::ReleaseControls(bool reportDeath) 
 	{
+        LOGINFO("Device::ReleaseControls");
 		// Grab the muxtex for the device's state
 		CAMutex::Locker locker(GetStateMutex());
 	
@@ -772,6 +780,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::Event(CFMachPortRef port, mach_msg_header_t* header, CFIndex size, Device& device) 
 	{
+        LOGINFO("Device::Event");
 		// Don't let any exceptions	leave this callback
 		try
 		{	
@@ -1024,6 +1033,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::StopStream(CMIOStreamID streamID)
 	{
+        LOGINFO("Device::StopStream");
 		// See if the streamID is an input stream
 		Stream* stream = static_cast<Stream*>(GetStreamByID(kCMIODevicePropertyScopeInput, streamID));
 		
@@ -1068,6 +1078,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::StopAllStreams()
 	{
+        LOGINFO("Device::StopAllStreams");
 		// Stop all the input streams
 		UInt32 numberStreams = GetNumberStreams(kCMIODevicePropertyScopeInput);
 		for (UInt32 streamIndex = 0; streamIndex != numberStreams; ++streamIndex)
@@ -1095,6 +1106,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::SuspendAllStreams()
 	{
+        LOGINFO("Device::SuspendAllStreams");
 		// Suspend all the input streams
 		UInt32 numberStreams = GetNumberStreams(kCMIODevicePropertyScopeInput);
 		for (UInt32 streamIndex = 0; streamIndex != numberStreams; ++streamIndex)
@@ -1117,6 +1129,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::CreateStreams(CMIOObjectPropertyScope scope) 
 	{
+        LOGINFO("Device::CreateStreams");
 		// Get the stream configuration from the Assistant in 
 		DPA::Sample::AutoFreeUnboundedArray<UInt32> configuration;
 		DPA::Sample::GetStreamConfiguration(GetAssistantPort(), GetDeviceGUID(), scope, configuration);

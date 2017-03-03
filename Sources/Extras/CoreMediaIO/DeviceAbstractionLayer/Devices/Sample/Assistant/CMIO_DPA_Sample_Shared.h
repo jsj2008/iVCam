@@ -210,8 +210,8 @@ namespace CMIO { namespace DPA { namespace Sample
 
 		FrameType			mFrameType;
 		CMVideoCodecType	mCodecType;
-		SInt32				mWidth;
-		SInt32				mHeight;
+		SInt32				mWidth;   // Frame width
+		SInt32				mHeight;  // Frame height
 	};
 	typedef FrameFormat* FrameFormatPtr;				// A typedef'd pointer for use by MIG
 

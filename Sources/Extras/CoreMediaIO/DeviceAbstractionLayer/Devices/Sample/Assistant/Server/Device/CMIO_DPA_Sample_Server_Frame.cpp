@@ -51,6 +51,7 @@
 
 // Self Include
 #include "CMIO_DPA_Sample_Server_Frame.h"
+#include "log.h"
 
 
 namespace CMIO { namespace DPA { namespace Sample { namespace Server
@@ -72,6 +73,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mClients(),
 		mClientsMutex("frame clients mutex")
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Frame::Frame CONSTRUCTOR");
 	}
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -79,6 +81,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Frame::~Frame()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Frame::~Frame DESTRUCTOR");
 		// Return the frame to the queue
 		(**mStream).EnqueueInputBuffer(mStream, mBufferID, 0, 0, 0, 0);
 		(**mStream).SendInputNotification(mStream, 0xAA);
@@ -89,6 +92,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Frame::AddClient(Client client)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Frame::AddClient");
 		// Grab the mutex for the the set of clients
 		CAMutex::Locker locker(mClientsMutex);
 
@@ -102,6 +106,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Frame::RemoveClient(Client client)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Frame::RemoveClient");
 		{
 			// Grab the mutex for the the set of clients
 			CAMutex::Locker locker(mClientsMutex);

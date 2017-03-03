@@ -55,6 +55,7 @@
 
 // Super Class Includes
 #include "CMIO_DP_Property_Base.h"
+#include "log.h"
 
 namespace CMIO { namespace DP { namespace Sample { namespace Property
 {
