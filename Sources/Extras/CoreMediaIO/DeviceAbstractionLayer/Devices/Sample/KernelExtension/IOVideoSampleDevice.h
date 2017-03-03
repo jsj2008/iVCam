@@ -75,7 +75,7 @@ struct SampleVideoDeviceControlBuffer
 
 class IOVideoSampleDevice : IOVideoDevice
 {
-								OSDeclareDefaultStructors(IOVideoSampleDevice);
+	OSDeclareDefaultStructors(IOVideoSampleDevice);
 
 protected:
     IOStreamBufferID			_currentBuffer;
@@ -139,8 +139,8 @@ private:
 	bool						ResetInputStreams();
 	bool						ResetOutputStreams();
 
-	IOReturn					AllocateFrameBuffers(size_t size);
-	IOReturn					AllocateControlBuffers(size_t size);
+	IOReturn                AllocateFrameBuffers(size_t size);
+	IOReturn                  AllocateControlBuffers(size_t size);
 	void						LoadFrameBuffer(void* buffer, char* src, IOByteCount frameSize, SInt32 number);
     void                        ZeroControlBuffer(void* buffer, IOByteCount bufSize);
     UInt32                      CodecFlagsToFrameRate(UInt32 codecFlags);
@@ -151,8 +151,8 @@ private:
 #if START_SENDING_ON_TWO_SECOND_BOUNDRY
 	uint64_t					mFirstInputAtTwoSecondBoundaryHostTimeUptime;
 	uint64_t					mHostTimeFudge;
-	bool						mWaitingToStart;
-	bool						mCalculateHostTimeFudge;
+	bool					mWaitingToStart;
+	bool					mCalculateHostTimeFudge;
 #endif
 };
 

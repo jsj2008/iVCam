@@ -252,9 +252,6 @@
 		14F1EAF311A7375400B28A43 /* SampleUserClient-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SampleUserClient-Info.plist"; sourceTree = "<group>"; };
 		14F1EAF411A7375400B28A43 /* IOVideoSampleStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = IOVideoSampleStream.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		14F1EAF511A7375400B28A43 /* IOVideoSampleStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOVideoSampleStream.h; sourceTree = "<group>"; };
-		14F1EAF611A7375400B28A43 /* ntsc2Vuy1280x720Data.yuv */ = {isa = PBXFileReference; explicitFileType = video; fileEncoding = 4; path = ntsc2Vuy1280x720Data.yuv; sourceTree = "<group>"; };
-		14F1EAF711A7375400B28A43 /* ntsc2Vuy1920x1080Data.yuv */ = {isa = PBXFileReference; explicitFileType = video; path = ntsc2Vuy1920x1080Data.yuv; sourceTree = "<group>"; };
-		14F1EAF811A7375400B28A43 /* ntsc2vuy720x480.yuv */ = {isa = PBXFileReference; explicitFileType = video; path = ntsc2vuy720x480.yuv; sourceTree = "<group>"; };
 		14F5AC9D0BFC917500B292F9 /* CMIO_DP_Property_SuspendedByUser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIO_DP_Property_SuspendedByUser.cpp; sourceTree = "<group>"; };
 		14F5AC9E0BFC917500B292F9 /* CMIO_DP_Property_SuspendedByUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_DP_Property_SuspendedByUser.h; sourceTree = "<group>"; };
 		14F89AA8158FDEAD003491F8 /* CMIO_CVA_Pixel_Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_CVA_Pixel_Buffer.h; sourceTree = "<group>"; };
@@ -701,9 +698,6 @@
 				14F1EAF211A7375400B28A43 /* IOVideoSampleDeviceShared.h */,
 				14F1EAF511A7375400B28A43 /* IOVideoSampleStream.h */,
 				14F1EAF411A7375400B28A43 /* IOVideoSampleStream.cpp */,
-				14F1EAF611A7375400B28A43 /* ntsc2Vuy1280x720Data.yuv */,
-				14F1EAF711A7375400B28A43 /* ntsc2Vuy1920x1080Data.yuv */,
-				14F1EAF811A7375400B28A43 /* ntsc2vuy720x480.yuv */,
 			);
 			path = KernelExtension;
 			sourceTree = "<group>";
