@@ -108,10 +108,10 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mEndOfData(false),
 		mUnderrunCount(0),
 		mFrameFormats(),
-		mFrameType(kYUV422_10_720x486),
+		mFrameType(kRGB24_1472x736),
 		mFrameRatesMap(),
-		mFrameRate(30000.0 / 1001.0),
-		mNominalFrameDuration(CMTimeMake(1001, 30000)),
+		mFrameRate(30000.0 / 1000.0),
+		mNominalFrameDuration(CMTimeMake(1000, 30000)),
 		mClientStreams(),
 		mClientStreamsMutex("CMIO::DPA::Sample::Server::Stream client streams mutex"),
 		mFrameAvailableGuard("frame available guard"),
@@ -152,25 +152,26 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						formatCACFDictionary.GetUInt32(CFSTR(kIOVideoStreamFormatKey_CodecFlags), codecFlags);
 						formatCACFDictionary.GetUInt32(CFSTR(kIOVideoStreamFormatKey_Width), formatWidth);
 						formatCACFDictionary.GetUInt32(CFSTR(kIOVideoStreamFormatKey_Height), formatHeight);
-						
+                        LOGINFO("Format Width: %d, Format Height: %d", formatWidth, formatHeight);
+                        
 						switch (codecType)
 						{
-							case kYUV422_720x480:
+							case kRGB24_1472x736:
 								{
-									mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
-									mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
+									mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_JPEG, formatWidth, formatHeight));
+									mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1000.0)] = CMTimeMake(1000, 30000);
 								}
 								break;
-							case kYUV422_1280x720:
+							case kRGB24_2176x1088:
 							{
-								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
-								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
+								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_JPEG, formatWidth, formatHeight));
+								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1000.0)] = CMTimeMake(1000, 30000);
 							}
 								break;
-							case kYUV422_1920x1080:
+							case kRGB24_3008x1504:
 							{
-								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
-								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
+								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_JPEG, formatWidth, formatHeight));
+								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1000.0)] = CMTimeMake(1000, 30000);
 							}
 								break;
 						}
@@ -734,6 +735,27 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mWidth = 1920;
 						theNewFormat.mHeight = 1080;
 						break;
+                        
+                    case kRGB24_1472x736:
+                        theNewFormat.mVideoCodecType = kRGB24_1472x736;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 1472;
+                        theNewFormat.mHeight = 736;
+                        break;
+                        
+                    case kRGB24_2176x1088:
+                        theNewFormat.mVideoCodecType = kRGB24_2176x1088;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 2176;
+                        theNewFormat.mHeight = 1088;
+                        break;
+                        
+                    case kRGB24_3008x1504:
+                        theNewFormat.mVideoCodecType = kRGB24_3008x1504;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 3008;
+                        theNewFormat.mHeight = 1504;
+                        break;
 						
 					default:
 						LOGINFO("Stream::SetFrameType: Unknown FrameType %lu", (unsigned long int) mFrameType);
@@ -844,6 +866,27 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mWidth = 1920;
 						theNewFormat.mHeight = 1080;
 						break;
+                        
+                    case kRGB24_1472x736:
+                        theNewFormat.mVideoCodecType = kRGB24_1472x736;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 1472;
+                        theNewFormat.mHeight = 736;
+                        break;
+                        
+                    case kRGB24_2176x1088:
+                        theNewFormat.mVideoCodecType = kRGB24_2176x1088;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 2176;
+                        theNewFormat.mHeight = 1088;
+                        break;
+                        
+                    case kRGB24_3008x1504:
+                        theNewFormat.mVideoCodecType = kRGB24_3008x1504;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 3008;
+                        theNewFormat.mHeight = 1504;
+                        break;
 						
 					default:
 						LOGINFO("Stream::SetFrameType: Unknown FrameType %lu", (unsigned long int) mFrameType);
@@ -1012,7 +1055,27 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mWidth = 1920;
 						theNewFormat.mHeight = 1080;
 						break;
-
+                        
+                    case kRGB24_1472x736:
+                        theNewFormat.mVideoCodecType = kRGB24_1472x736;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 1472;
+                        theNewFormat.mHeight = 736;
+                        break;
+                        
+                    case kRGB24_2176x1088:
+                        theNewFormat.mVideoCodecType = kRGB24_2176x1088;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 2176;
+                        theNewFormat.mHeight = 1088;
+                        break;
+                        
+                    case kRGB24_3008x1504:
+                        theNewFormat.mVideoCodecType = kRGB24_3008x1504;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 3008;
+                        theNewFormat.mHeight = 1504;
+                        break;
 						
 				}
 				LOGINFO("SetFrameRate newFormat.mVideoCodecType = %lu newFormat.mVideoCodecFlags = %x\n", (long unsigned int)theNewFormat.mVideoCodecType, (unsigned int)theNewFormat.mVideoCodecFlags);
@@ -1116,6 +1179,27 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mWidth = 1920;
 						theNewFormat.mHeight = 1080;
 						break;
+                        
+                    case kRGB24_1472x736:
+                        theNewFormat.mVideoCodecType = kRGB24_1472x736;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 1472;
+                        theNewFormat.mHeight = 736;
+                        break;
+                        
+                    case kRGB24_2176x1088:
+                        theNewFormat.mVideoCodecType = kRGB24_2176x1088;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 2176;
+                        theNewFormat.mHeight = 1088;
+                        break;
+                        
+                    case kRGB24_3008x1504:
+                        theNewFormat.mVideoCodecType = kRGB24_3008x1504;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 3008;
+                        theNewFormat.mHeight = 1504;
+                        break;
                }
 				
 				GetOwningDevice().GetIOVADevice().SetStreamFormat(CACFNumber(static_cast<CFNumberRef>(CFDictionaryGetValue(mStreamDictionary.GetCFDictionary(), CFSTR(kIOVideoStreamKey_StreamID))), false).GetSInt32(), &theNewFormat);

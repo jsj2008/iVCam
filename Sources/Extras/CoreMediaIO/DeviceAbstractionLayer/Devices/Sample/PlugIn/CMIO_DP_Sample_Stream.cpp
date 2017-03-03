@@ -887,7 +887,7 @@ namespace CMIO { namespace DP { namespace Sample
 		extensions.AddCFType(kCMFormatDescriptionExtension_ColorPrimaries, kCMFormatDescriptionColorPrimaries_SMPTE_C);
 		extensions.AddCFType(kCMFormatDescriptionExtension_TransferFunction, kCMFormatDescriptionTransferFunction_ITU_R_709_2);
 		extensions.AddCFType(kCMFormatDescriptionExtension_YCbCrMatrix, kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4);
-
+        
 		for (int i = 0; i < frameFormats.GetLength() ; ++i)
 		{
 			switch (frameFormats[i].mCodecType)
@@ -903,7 +903,11 @@ namespace CMIO { namespace DP { namespace Sample
 				case kCMPixelFormat_32ARGB:
 					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 RGB"));
 					break;
-				
+                    
+                case kCMVideoCodecType_JPEG:
+                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - JPEG RGB24"));
+                    break;
+                    
 				default:
 					ThrowIf(true, CAException(kCMIODeviceUnsupportedFormatError), "CMIO::DP::Sample::Stream::AddAvailableFormatDescriptions: Assistant returned an unknown format");
 			}

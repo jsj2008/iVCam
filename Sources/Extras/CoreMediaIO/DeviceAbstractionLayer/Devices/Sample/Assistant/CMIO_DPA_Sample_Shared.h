@@ -156,6 +156,9 @@ namespace CMIO { namespace DPA { namespace Sample
         kYUV422_10_720x576,
         kYUV422_10_1280x720,
         kYUV422_10_1920x1080,
+        kRGB24_1472x736,
+        kRGB24_2176x1088,
+        kRGB24_3008x1504,
 		kFrameTypePad = 0xFFFFFFFFUL
 	};
 
