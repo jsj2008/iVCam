@@ -266,7 +266,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		
 		// Assume no property state change messages will have to be sent
 		bool sendPropertyStatesChangedMessage = false;
-		
 
 		// Release device mastership if this client had owned it
 		if (client == mDeviceMasterClient)

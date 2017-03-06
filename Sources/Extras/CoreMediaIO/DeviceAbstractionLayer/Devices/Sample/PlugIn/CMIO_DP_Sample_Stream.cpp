@@ -117,7 +117,7 @@ namespace CMIO { namespace DP { namespace Sample
 		mScheduledOutputNotificationProc(NULL),
 		mDeck(NULL),
 		mFormatPairs(),
-		mFrameType(DPA::Sample::kYUV422_720x480),
+		mFrameType(DPA::Sample::kRGB24_1472x736),
 		mDeckPropertyListeners(),
 		mMessageThread(),
 		mBufferQueue(CMA::SimpleQueue<CMSampleBufferRef>::Create(NULL, 30)),
@@ -904,8 +904,12 @@ namespace CMIO { namespace DP { namespace Sample
 					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 RGB"));
 					break;
                     
+                case kCMPixelFormat_24RGB:
+                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - RGB24"));
+                    break;
+                    
                 case kCMVideoCodecType_JPEG:
-                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - JPEG RGB24"));
+                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - RGBA32"));
                     break;
                     
 				default:
@@ -1143,17 +1147,20 @@ namespace CMIO { namespace DP { namespace Sample
 		// Don't do anything if the buffer queue is full
 		if (1.0 == mBufferQueue.Fullness())
 		{
+            LOGINFO("marker1");
 			// Deallocate the frame data
 			vm_deallocate(mach_task_self(), reinterpret_cast<vm_address_t>(message->mDescriptor.address), message->mDescriptor.size);
 
 			// Try and use "extended duration" timing if this frame and the stream lacks any "hard" discontinuities
 			if (~kCMIOSampleBufferDiscontinuityFlag_DurationWasExtended & (message->mDiscontinuityFlags | GetDiscontinuityFlags()))
 			{
+                LOGINFO("marker3");
 				// The were hard discontinuities, so update the stream's discontinuity flags so the logical sum can be passed on with the next frame
 				SetDiscontinuityFlags(GetDiscontinuityFlags() | message->mDiscontinuityFlags | kCMIOSampleBufferDiscontinuityFlag_DataWasDropped);
 			}
 			else
 			{
+                LOGINFO("marker4");
 				// Rather than mark a "hard" discontinuity, remember the frame's duration so the NEXT frame's duration can be extended accordingly
 				if (0 == mExtendedDurationHostTime)
 				{
@@ -1167,7 +1174,7 @@ namespace CMIO { namespace DP { namespace Sample
 					mExtendedDurationTimingInfo.duration = CMTimeAdd(mExtendedDurationTimingInfo.duration, message->mTimingInfo.duration);
 				}
 			}
-			
+			LOGINFO("marker2");
 			return;
 		}
 		
@@ -1193,6 +1200,7 @@ namespace CMIO { namespace DP { namespace Sample
 		// Don't let any exceptions leave this routine
 		try
 		{
+            LOGINFO("marker5");
 			// Resync the presentiontime time stamp if it is invalid or there have been any "hard" discontinuities
 			if (CMTIME_IS_INVALID(mTimingInfo.presentationTimeStamp) or (~kCMIOSampleBufferDiscontinuityFlag_DurationWasExtended & GetDiscontinuityFlags()))
 			{
@@ -1242,7 +1250,7 @@ namespace CMIO { namespace DP { namespace Sample
 			
 
 			CMBlockBufferCustomBlockSource customBlockSource = { kCMBlockBufferCustomBlockSourceVersion, NULL, ReleaseBufferCallback, this };
-
+            LOGINFO("marker6");
 			// Get the size & data for the frame
 			size_t frameSize = message->mDescriptor.size;
             LOGINFO("frameSize: %d", frameSize);

@@ -125,13 +125,13 @@ namespace
 #define kRGB24_3008x1504_DataSize (kRGB24_3008x1504_FrameSize)
 
 
-#define MAX_FRAME_SIZE							(3008*1504*4)
+#define MAX_FRAME_SIZE							(3008*1504*3)
 
-#if DEBUG
-#define kprintf(format, ...) IOLog("%s[%d]: " format, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
-#else
-#define kprintf(format, ...)
-#endif
+//#if DEBUG
+//#define kprintf(format, ...) IOLog("%s[%d]: " format, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
+//#else
+//#define kprintf(format, ...)
+//#endif
 
 #define super IOVideoDevice
 
@@ -204,20 +204,17 @@ bool IOVideoSampleDevice::start(IOService* provider)
     kprintf("IOVideoSampleDevice::start");
 	KernelDebugEnable(true);
 	KernelDebugSetLevel(7);
-	KernelDebugSetOutputType(kKernelDebugOutputKextLoggerType);
-	kprintf("This is a test\n");
+	KernelDebugSetOutputType(kKernelDebugOutputKextLoggerType); 
 
-	if (! super::start(provider))
+	if (!super::start(provider))
 		return false;
-	
-	kprintf("start\n");
 	
 	_outputStream = NULL;
 	_inputStream = NULL;
 	mFrameCountFromStart = 0;
 	mDroppedFrameCount = 0;
     mLastDisplayedSequenceNumber = 0;
-    mTimeInterval = kTimerIntervalNTSC;
+    mTimeInterval = kTimerInterval30;
 	
 	mCurrentDirection = true;
 	do
@@ -228,49 +225,7 @@ bool IOVideoSampleDevice::start(IOService* provider)
 		OSArray*		theSourceSelectorMap = NULL;
 		OSDictionary*	theSelectorControl =  NULL;
 		OSDictionary*	theSelectorItem = NULL;
-
-//		struct mach_header_t*  mh;
-//		extern kmod_info_t kmod_info;
-
-//		mh = (struct mach_header_t*)kmod_info.address;
-//		mYUVData = (char*)getsectdatafromheader(mh,
-//										(char*) "YUV_DATA",
-//										(char*)	 "yuv_data",
-//										&mYUVSize);
-			  
-//		if (NULL == mYUVData)
-//		{
-//			kprintf("couldn't get YUV_DATA section\n");
-//			break;
-//		}
-//
-//		mNumBuffers = mYUVSize / kYUVVFrameSize;
-//		mh = (struct mach_header_t*)kmod_info.address;
-//		mHD720pYUVData = (char*)getsectdatafromheader(mh,
-//												  (char*) "HD720YUV_DATA",
-//												  (char*) "hd720yuv_data",
-//												 &mHD720pYUVSize);
-//
-//		if (NULL == mHD720pYUVData)
-//		{
-//			kprintf("couldn't get HD720YUV_DATA section\n");
-//			break;
-//		}
-//
-//		mh = (struct mach_header_t*)kmod_info.address;
-//		mHD1080pYUVData = (char*)getsectdatafromheader(mh,
-//													   (char*) "HD1080YUV_DATA",
-//														(char*) "hd1080yuv_data",
-//													   &mHD1080pYUVSize);
-//
-//		if (NULL == mHD1080pYUVData)
-//		{
-//			kprintf("couldn't get HD1080YUV_DATA section\n");
-//			break;
-//		}
-
-
-//		mNumBuffers = mYUVSize / kYUVVFrameSize;
+ 
         mNumBuffers = 30;
 		mMaxNumBuffers = mNumBuffers;
  
@@ -289,14 +244,7 @@ bool IOVideoSampleDevice::start(IOService* provider)
 		}
         
         ZeroControlBuffer(mControlBuf,sizeof(struct SampleVideoDeviceControlBuffer)*mNumBuffers);
-		 
-		// write colors to the frame buffer for content
-//		int i;
-//		for (i=0; i<mNumBuffers; i++)
-//		{
-//			LoadFrameBuffer(mFrameBuf+(i*MAX_FRAME_SIZE), mYUVData, kYUVVFrameSize, i);
-//		}
-
+		  
 		//	create the array that will hold the controls
 		theControlList = OSArray::withCapacity(1);
 		if (!theControlList)
@@ -1057,8 +1005,6 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 	return kIOReturnSuccess; 
 }
 
-
-
 OSDictionary*	IOVideoSampleDevice::createDefaultInputStreamDictionary()
 {
 	kprintf("IOVideoSampleDevice::createDefaultInputStreamDictionary()");
@@ -1263,7 +1209,7 @@ bool IOVideoSampleDevice::AddInputStreams()
 	IOMemoryDescriptor* cntrldescr;
 	IOStreamBuffer* buf;
 	OSArray* buffers;
-	int numBuffers;
+	int numBuffers = 30;
 	OSDictionary*	theInputStream = NULL;
 	OSArray*		theInputStreamList = NULL;
 	IOByteCount		theBufferSize;
@@ -1315,7 +1261,6 @@ bool IOVideoSampleDevice::AddInputStreams()
 		}
 		
         srcBuffer = NULL;
-        numBuffers = 30;
 		mNumBuffers = numBuffers;
 		
 		buffers = OSArray::withCapacity(numBuffers);
@@ -1379,9 +1324,6 @@ bool IOVideoSampleDevice::AddInputStreams()
 		{
 			theInputStreamList->release();
 		}
-
-
-		kprintf("AddInputStreams successful\n");
 		
 		return true;
 		
@@ -1648,7 +1590,7 @@ bool IOVideoSampleDevice::ResetInputStreams()
 	int i;
 	IOStreamBuffer* buf;
 	IOByteCount		bufferSize;
-	int numBuffers;
+	int numBuffers = 30;
 	char*	srcBuffer;
 	IOReturn removeStatus = kIOReturnSuccess;  
 	
@@ -1684,7 +1626,6 @@ bool IOVideoSampleDevice::ResetInputStreams()
 					break;
 			}
             srcBuffer = NULL;
-            numBuffers = 30;
 			mNumBuffers = numBuffers;
 			
 			kprintf("bufferSize = %ld\n", (long int)bufferSize);

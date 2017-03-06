@@ -646,6 +646,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		// Save the current frame type & frame rate control in the event of an error so a restore attempt can be made
 		FrameType currentFrameType = mFrameType;
 		Float64 currentFrameRate = mFrameRate;
+        LOGINFO("current frame rate: %lf", currentFrameRate);
 		
         FrameRates::const_iterator i = mFrameRatesMap[frameType].find(mFrameRate);
         if (i == mFrameRatesMap[frameType].end())
@@ -776,6 +777,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 			}
 			catch (...)
 			{
+                LOGINFO("CMIO::DPA::Sample::Server::Stream::SetFrameType UNHANDLED EXCEPTION...!");
 				// Something went wrong, so try and restore the previous frame type & frame rate control
 				mFrameType = currentFrameType;
 				mFrameRate = currentFrameRate;
@@ -911,7 +913,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
                 mNominalFrameDuration = mFrameRatesMap[mFrameType][mFrameRate];
 				
 				// DoWhatYouWouldNeedToDoToProgramTheHardware();
-
+                LOGINFO("CMIO::DPA::Sample::Server::Stream::SetFrameType UNHANDLED EXCEPTION...!");
 			}
 		}
 	}	
@@ -946,7 +948,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::SetFrameRate(Float64 frameRate)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Stream::SetFrameRate");
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::SetFrameRate. frame rate: %lf", frameRate);
 		// No need to do anything if the frameRate hasn't changed
 		if (frameRate == mFrameRate)
 			return;
@@ -965,7 +967,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		
 		// Save the current frame type & frame rate control in the event of an error so a restore attempt can be made
 		Float64 currentFrameRate = mFrameRate;
-		
         
         FrameRates::const_iterator i = mFrameRatesMap[mFrameType].find(frameRate);
         if (i == mFrameRatesMap[mFrameType].end())
@@ -1085,7 +1086,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 				Start(MACH_PORT_NULL, MACH_PORT_NULL, kCMIOSampleBufferDiscontinuityFlag_DataFormatChanged);
 
 				mFrameRate = frameRate;
-
 				
 				// Update the shadow time for the frame rate
 				mProperties[PropertyAddress(kCMIOStreamPropertyFrameRate, GetDevicePropertyScope(), GetStartingDeviceChannelNumber())].mShadowTime = CAHostTimeBase::GetTheCurrentTime();
