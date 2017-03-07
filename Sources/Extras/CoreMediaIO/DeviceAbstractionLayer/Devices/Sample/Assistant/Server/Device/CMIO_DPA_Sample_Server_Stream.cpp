@@ -108,10 +108,10 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mEndOfData(false),
 		mUnderrunCount(0),
 		mFrameFormats(),
-		mFrameType(kRGB24_1472x736),
+		mFrameType(kYUV422_10_720x486),
 		mFrameRatesMap(),
-		mFrameRate(30000.0 / 1000.0),
-		mNominalFrameDuration(CMTimeMake(1000, 30000)),
+		mFrameRate(30000.0 / 1001.0),
+		mNominalFrameDuration(CMTimeMake(1001, 30000)),
 		mClientStreams(),
 		mClientStreamsMutex("CMIO::DPA::Sample::Server::Stream client streams mutex"),
 		mFrameAvailableGuard("frame available guard"),
@@ -156,22 +156,22 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
                         
 						switch (codecType)
 						{
-							case kRGB24_1472x736:
+							case kYUV422_720x480:
 								{
-									mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_JPEG, formatWidth, formatHeight));
-									mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1000.0)] = CMTimeMake(1000, 30000);
+									mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
+									mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
 								}
 								break;
-							case kRGB24_2176x1088:
+							case kYUV422_1280x720:
 							{
-								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_JPEG, formatWidth, formatHeight));
-								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1000.0)] = CMTimeMake(1000, 30000);
+								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
+								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
 							}
 								break;
-							case kRGB24_3008x1504:
+							case kYUV422_1920x1080:
 							{
-								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_JPEG, formatWidth, formatHeight));
-								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1000.0)] = CMTimeMake(1000, 30000);
+								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
+								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
 							}
 								break;
 						}

@@ -117,7 +117,7 @@ namespace CMIO { namespace DP { namespace Sample
 		mScheduledOutputNotificationProc(NULL),
 		mDeck(NULL),
 		mFormatPairs(),
-		mFrameType(DPA::Sample::kRGB24_1472x736),
+		mFrameType(DPA::Sample::kYUV422_720x480),
 		mDeckPropertyListeners(),
 		mMessageThread(),
 		mBufferQueue(CMA::SimpleQueue<CMSampleBufferRef>::Create(NULL, 30)),
@@ -901,15 +901,15 @@ namespace CMIO { namespace DP { namespace Sample
 					break;
                     
 				case kCMPixelFormat_32ARGB:
-					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 RGB"));
+					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 ARGB"));
 					break;
                     
                 case kCMPixelFormat_24RGB:
-                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - RGB24"));
+                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 RGB24"));
                     break;
                     
                 case kCMVideoCodecType_JPEG:
-                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - RGBA32"));
+                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 JPEG"));
                     break;
                     
 				default:
@@ -1256,14 +1256,14 @@ namespace CMIO { namespace DP { namespace Sample
             LOGINFO("frameSize: %d", frameSize);
 			void* data = message->mDescriptor.address;
             
-            static Boolean flag = false;
-            
-            if (!flag) {
-                FILE* file = fopen("/Users/zhangzhongke/Documents/projects/out.bin", "wb");
-                fwrite(data, 1, frameSize, file);
-                fclose(file);
-                flag = true;
-            }
+//            static Boolean flag = false;
+//            
+//            if (!flag) {
+//                FILE* file = fopen("/Users/zhangzhongke/Documents/projects/out.bin", "wb");
+//                fwrite(data, 1, frameSize, file);
+//                fclose(file);
+//                flag = true;
+//            }
             
 			DebugMessageLevel(2, "CMIO::DP::Sample::Stream::FrameArrived: Frametype = %d discontinuity = %d frameSize = %ld", message->mFrameType, GetDiscontinuityFlags(), frameSize);
 			
