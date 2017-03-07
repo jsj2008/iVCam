@@ -1213,10 +1213,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 			catch (...)
 			{
 				// Something went wrong, so try and restore the previous frame rate control
-				mFrameRate = currentFrameRate;
-				
-				// DoWhatYouWouldNeedToDoToProgramTheHardware();
-                
+				mFrameRate = currentFrameRate; 
 			}
 		}
 		

@@ -16,6 +16,8 @@
 		14C6D76E11AB20D700E54D26 /* IOVideoSampleDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14F1EAF011A7375400B28A43 /* IOVideoSampleDevice.cpp */; };
 		14C6D76F11AB20D900E54D26 /* IOVideoSampleStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14F1EAF411A7375400B28A43 /* IOVideoSampleStream.cpp */; };
 		7206D01514633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7206D01314633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp */; };
+		7B3DEBCA1E6EA5FD002FF975 /* libuvc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; };
+		7B3DEBCD1E6EA856002FF975 /* libuvc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7B45EB7A1E65597100BF6BBF /* libCoreAudioStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B45EB791E65597100BF6BBF /* libCoreAudioStatic.a */; };
 		7B45EB7B1E65598100BF6BBF /* libCoreAudioStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B45EB791E65597100BF6BBF /* libCoreAudioStatic.a */; };
 		7B45EB7F1E6564E300BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
@@ -151,6 +153,16 @@
 			name = "Copy com.apple.cmio.DPA.Sample.plist to /Library/LaunchDaemons";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7B3DEBCC1E6EA821002FF975 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7B3DEBCD1E6EA856002FF975 /* libuvc.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -262,6 +274,7 @@
 		1948B2400D99BFAF00011B5D /* CMIO_CC_608_Scraper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_CC_608_Scraper.h; sourceTree = "<group>"; };
 		7206D01314633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIO_DP_Property_ScheduledOutputNotificationProc.cpp; sourceTree = "<group>"; };
 		7206D01414633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_DP_Property_ScheduledOutputNotificationProc.h; sourceTree = "<group>"; };
+		7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuvc.dylib; path = ../Lib/libuvc.dylib; sourceTree = "<group>"; };
 		7B45EB0A1E65576000BF6BBF /* ACBaseCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACBaseCodec.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACBaseCodec.h; sourceTree = "<absolute>"; };
 		7B45EB0B1E65576000BF6BBF /* ACCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACCodec.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACCodec.h; sourceTree = "<absolute>"; };
 		7B45EB0C1E65576000BF6BBF /* ACCodecDispatchTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACCodecDispatchTypes.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACCodecDispatchTypes.h; sourceTree = "<absolute>"; };
@@ -449,6 +462,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B3DEBCA1E6EA5FD002FF975 /* libuvc.dylib in Frameworks */,
 				7B45EB7A1E65597100BF6BBF /* libCoreAudioStatic.a in Frameworks */,
 				E42AA5870E073EEC000C4D64 /* CoreFoundation.framework in Frameworks */,
 				E47C6D2111AC8B1C004DD1E7 /* CoreMedia.framework in Frameworks */,
@@ -717,6 +731,7 @@
 		19E34B2909F9981000F50E49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */,
 				7B45EB791E65597100BF6BBF /* libCoreAudioStatic.a */,
 				E4E791EC1610E85700C2316E /* IOSurface.framework */,
 				1423170A0AB0CC8700467E80 /* CoreFoundation.framework */,
@@ -1090,6 +1105,7 @@
 				E42AA5580E073EEC000C4D64 /* Sources */,
 				E42AA5860E073EEC000C4D64 /* Frameworks */,
 				DE322FA91421A9F100B8490C /* Make FCP Twin */,
+				7B3DEBCC1E6EA821002FF975 /* CopyFiles */,
 			);
 			buildRules = (
 				E42AA58C0E073EEC000C4D64 /* PBXBuildRule */,
@@ -1360,12 +1376,14 @@
 					"$(value)",
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					/Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/include,
 				);
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DERIVED_FILES_DIR)/$(CURRENT_ARCH)\"";
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/PlugIn/Sample-Info.plist";
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
 				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
 				OTHER_CFLAGS = (
 					"$(value)",
@@ -1508,6 +1526,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/PlugIn/Sample-Info.plist";
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
 				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
 				OTHER_CFLAGS = (
 					"$(value)",
