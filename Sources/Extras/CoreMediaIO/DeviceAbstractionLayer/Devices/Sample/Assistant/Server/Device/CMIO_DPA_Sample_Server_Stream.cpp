@@ -108,7 +108,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mEndOfData(false),
 		mUnderrunCount(0),
 		mFrameFormats(),
-		mFrameType(kYUV422_10_720x486),
+		mFrameType(kYUV422_1472x736),
 		mFrameRatesMap(),
 		mFrameRate(30000.0 / 1001.0),
 		mNominalFrameDuration(CMTimeMake(1001, 30000)),
@@ -156,19 +156,19 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
                         
 						switch (codecType)
 						{
-							case kYUV422_720x480:
-								{
-									mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
-									mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
-								}
+							case kYUV422_1472x736:
+                            {
+                                mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
+                                mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
+                            }
 								break;
-							case kYUV422_1280x720:
+							case kYUV422_2176x1088:
 							{
 								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
 								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
 							}
 								break;
-							case kYUV422_1920x1080:
+							case kYUV422_3008x1504:
 							{
 								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
 								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
@@ -737,22 +737,22 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mHeight = 1080;
 						break;
                         
-                    case kRGB24_1472x736:
-                        theNewFormat.mVideoCodecType = kRGB24_1472x736;
+                    case kYUV422_1472x736:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x736;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 1472;
                         theNewFormat.mHeight = 736;
                         break;
                         
-                    case kRGB24_2176x1088:
-                        theNewFormat.mVideoCodecType = kRGB24_2176x1088;
+                    case kYUV422_2176x1088:
+                        theNewFormat.mVideoCodecType = kYUV422_2176x1088;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 2176;
                         theNewFormat.mHeight = 1088;
                         break;
                         
-                    case kRGB24_3008x1504:
-                        theNewFormat.mVideoCodecType = kRGB24_3008x1504;
+                    case kYUV422_3008x1504:
+                        theNewFormat.mVideoCodecType = kYUV422_3008x1504;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 3008;
                         theNewFormat.mHeight = 1504;
@@ -869,22 +869,22 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mHeight = 1080;
 						break;
                         
-                    case kRGB24_1472x736:
-                        theNewFormat.mVideoCodecType = kRGB24_1472x736;
+                    case kYUV422_1472x736:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x736;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 1472;
                         theNewFormat.mHeight = 736;
                         break;
                         
-                    case kRGB24_2176x1088:
-                        theNewFormat.mVideoCodecType = kRGB24_2176x1088;
+                    case kYUV422_2176x1088:
+                        theNewFormat.mVideoCodecType = kYUV422_2176x1088;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 2176;
                         theNewFormat.mHeight = 1088;
                         break;
                         
-                    case kRGB24_3008x1504:
-                        theNewFormat.mVideoCodecType = kRGB24_3008x1504;
+                    case kYUV422_3008x1504:
+                        theNewFormat.mVideoCodecType = kYUV422_3008x1504;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 3008;
                         theNewFormat.mHeight = 1504;
@@ -1057,22 +1057,22 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mHeight = 1080;
 						break;
                         
-                    case kRGB24_1472x736:
-                        theNewFormat.mVideoCodecType = kRGB24_1472x736;
+                    case kYUV422_1472x736:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x736;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 1472;
                         theNewFormat.mHeight = 736;
                         break;
                         
-                    case kRGB24_2176x1088:
-                        theNewFormat.mVideoCodecType = kRGB24_2176x1088;
+                    case kYUV422_2176x1088:
+                        theNewFormat.mVideoCodecType = kYUV422_2176x1088;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 2176;
                         theNewFormat.mHeight = 1088;
                         break;
                         
-                    case kRGB24_3008x1504:
-                        theNewFormat.mVideoCodecType = kRGB24_3008x1504;
+                    case kYUV422_3008x1504:
+                        theNewFormat.mVideoCodecType = kYUV422_3008x1504;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 3008;
                         theNewFormat.mHeight = 1504;
@@ -1180,22 +1180,22 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mHeight = 1080;
 						break;
                         
-                    case kRGB24_1472x736:
-                        theNewFormat.mVideoCodecType = kRGB24_1472x736;
+                    case kYUV422_1472x736:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x736;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 1472;
                         theNewFormat.mHeight = 736;
                         break;
                         
-                    case kRGB24_2176x1088:
-                        theNewFormat.mVideoCodecType = kRGB24_2176x1088;
+                    case kYUV422_2176x1088:
+                        theNewFormat.mVideoCodecType = kYUV422_2176x1088;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 2176;
                         theNewFormat.mHeight = 1088;
                         break;
                         
-                    case kRGB24_3008x1504:
-                        theNewFormat.mVideoCodecType = kRGB24_3008x1504;
+                    case kYUV422_3008x1504:
+                        theNewFormat.mVideoCodecType = kYUV422_3008x1504;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 3008;
                         theNewFormat.mHeight = 1504;

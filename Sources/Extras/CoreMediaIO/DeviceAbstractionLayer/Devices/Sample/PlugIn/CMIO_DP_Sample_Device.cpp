@@ -91,7 +91,7 @@ namespace CMIO { namespace DP { namespace Sample
 		mDeviceGUID(guid),
 		mRegistryEntry(IORegistryEntryFromPath(kIOMasterPortDefault, registryPath)), 
 		mAssistantPort(assistantPort),
-        mDeviceUID(CFStringCreateWithFormat(0, 0, CFSTR("%#16llx-SampleVideo"), guid)),
+        mDeviceUID(CFStringCreateWithFormat(0, 0, CFSTR("%#16llx-Insta360Video"), guid)),
 		mDeviceName(CFSTR("Insta360 Virtual Camera"), false),
 		mDeviceManufacturerName(CFSTR("Arashi Vision Co. Ltd"), false),
 		mPropertyCacheTime(0),

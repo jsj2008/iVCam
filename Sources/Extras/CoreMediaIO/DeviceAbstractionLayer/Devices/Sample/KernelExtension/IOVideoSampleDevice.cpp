@@ -115,17 +115,17 @@ namespace
 #define kHD1080pYUVV_10_FrameSize (5529600)
 #define kHD1080pYUV_10_DataSize (kHD1080pYUVV_10_FrameSize)
 
-#define kRGB24_1472X736_FrameSize (3250176)
-#define kRGB24_1472x736_DataSize (kRGB24_1472X736_FrameSize)
+#define kYUV_1472X736_FrameSize (2166784)
+#define kYUV_1472x736_DataSize (kYUV_1472X736_FrameSize)
 
-#define kRGB24_2176X1088_FrameSize (7102464)
-#define kRGB24_2176X1088_DataSize (kRGB24_2176X1088_FrameSize)
+#define kYUV_2176X1088_FrameSize (4734976)
+#define kYUV_2176X1088_DataSize (kYUV_2176X1088_FrameSize)
 
-#define kRGB24_3008x1504_FrameSize (13572096)
-#define kRGB24_3008x1504_DataSize (kRGB24_3008x1504_FrameSize)
+#define kYUV_3008x1504_FrameSize (9048064)
+#define kYUV_3008x1504_DataSize (kYUV_3008x1504_FrameSize)
 
 
-#define MAX_FRAME_SIZE							(1080*1920*4)
+#define MAX_FRAME_SIZE							(3008*1504*4)
 
 #if DEBUG
 #define DEBUG_LOG(format, ...) IOLog("%s[%d]: " format, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
@@ -826,17 +826,17 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 									
 									switch (mCurrentInputStreamFormat.mVideoCodecType)
 									{
-										case kYUV422_720x480:
+										case kYUV422_1472x736:
 										{
                                             mTimeInterval = kTimerIntervalNTSC;
 										}
 											break;
-										case kYUV422_1280x720:
+										case kYUV422_2176x1088:
 										{
                                             mTimeInterval = kTimerIntervalNTSC;
 										}
 											break;
-										case kYUV422_1920x1080:
+										case kYUV422_3008x1504:
 										{
                                             mTimeInterval = kTimerIntervalNTSC;
 										}
@@ -1024,19 +1024,19 @@ OSDictionary*	IOVideoSampleDevice::createDefaultInputStreamDictionary()
 	}
 
 	//	make the current format ()
-	theCurrentFormat = IOVideoStreamFormatDictionary::create(kYUV422_1920x1080, kSampleCodecFlags_30fps+kSampleCodecFlags_1001_1000_adjust, 1920, 1080);
+	theCurrentFormat = IOVideoStreamFormatDictionary::create(kYUV422_1472x736, kSampleCodecFlags_30fps+kSampleCodecFlags_1001_1000_adjust, 1472, 736);
 	FailIfNULL(theCurrentFormat, Done, "NullDevice::createDefaultInputStreamDictionary: couldn't allocate current format");
 	theFormatList->setObject(theCurrentFormat);
 	theCurrentFormat->release();
 
 	//	make the current format ()
-	theCurrentFormat = IOVideoStreamFormatDictionary::create(kYUV422_1280x720, kSampleCodecFlags_30fps+kSampleCodecFlags_1001_1000_adjust, 1280, 720);
+	theCurrentFormat = IOVideoStreamFormatDictionary::create(kYUV422_2176x1088, kSampleCodecFlags_30fps+kSampleCodecFlags_1001_1000_adjust, 2176, 1088);
 	FailIfNULL(theCurrentFormat, Done, "NullDevice::createDefaultInputStreamDictionary: couldn't allocate current format");
 	theFormatList->setObject(theCurrentFormat);
 	theCurrentFormat->release();
 	
 	//	make the current format ()
-	theCurrentFormat = IOVideoStreamFormatDictionary::create(kYUV422_720x480, kSampleCodecFlags_30fps+kSampleCodecFlags_1001_1000_adjust, 720, 480);
+	theCurrentFormat = IOVideoStreamFormatDictionary::create(kYUV422_3008x1504, kSampleCodecFlags_30fps+kSampleCodecFlags_1001_1000_adjust, 3008, 1504);
 	FailIfNULL(theCurrentFormat, Done, "NullDevice::createDefaultInputStreamDictionary: couldn't allocate current format");
 	theFormatList->setObject(theCurrentFormat);
 
@@ -1236,25 +1236,25 @@ bool IOVideoSampleDevice::AddInputStreams()
 
 		switch (mCurrentInputStreamFormat.mVideoCodecType)
 		{
-			case kYUV422_720x480:
+			case kYUV422_1472x736:
 			{
-				theBufferSize = kYUVVFrameSize; 
+				theBufferSize = kYUV_1472X736_FrameSize;
 			}
 				break;
                 
-			case kYUV422_1280x720:
+			case kYUV422_2176x1088:
 			{
 				if (numBuffers > mMaxNumBuffers)
 					numBuffers = mMaxNumBuffers;
-				theBufferSize = kHD720pYUVVFrameSize; 
+				theBufferSize = kYUV_2176X1088_FrameSize;
 			}
 				break;
                 
-			case kYUV422_1920x1080:
+			case kYUV422_3008x1504:
 			{
 				if (numBuffers > mMaxNumBuffers)
 					numBuffers = mMaxNumBuffers;
-				theBufferSize = kHD1080pYUVVFrameSize; 
+				theBufferSize = kYUV_3008x1504_FrameSize;
 				
 			}
 				break;
@@ -1603,24 +1603,24 @@ bool IOVideoSampleDevice::ResetInputStreams()
 			
 			switch (mCurrentInputStreamFormat.mVideoCodecType)
 			{
-				case kYUV422_720x480:
+				case kYUV422_1472x736:
 				{
-					bufferSize = kYUVVFrameSize; 
+					bufferSize = kYUV_1472X736_FrameSize;
 				}
 					break;
-				case kYUV422_1280x720:
+				case kYUV422_2176x1088:
 				{
 					if (numBuffers > mMaxNumBuffers)
 						numBuffers = mMaxNumBuffers;
-					bufferSize = kHD720pYUVVFrameSize; 
+					bufferSize = kYUV_2176X1088_FrameSize;
 					
 				}
 					break;
-				case kYUV422_1920x1080:
+				case kYUV422_3008x1504:
 				{
 					if (numBuffers > mMaxNumBuffers)
 						numBuffers = mMaxNumBuffers;
-					bufferSize = kHD1080pYUVVFrameSize; 
+					bufferSize = kYUV_3008x1504_FrameSize;
 					
 				}
 					break;
