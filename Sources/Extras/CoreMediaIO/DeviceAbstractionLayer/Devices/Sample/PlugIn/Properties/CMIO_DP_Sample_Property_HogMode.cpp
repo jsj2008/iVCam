@@ -65,6 +65,7 @@ namespace CMIO { namespace DP { namespace Sample { namespace Property
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	UInt32 HogMode::GetPropertyDataSize(const CMIOObjectPropertyAddress& address, UInt32 /*qualifierDataSize*/, const void* /*qualifierData*/) const
 	{
+        LOGINFO("DP::Sample::Property::HogMode::GetPropertyDataSize");
 		UInt32 answer = 0;
 		
 		switch (address.mSelector)
@@ -82,6 +83,7 @@ namespace CMIO { namespace DP { namespace Sample { namespace Property
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void HogMode::GetPropertyData(const CMIOObjectPropertyAddress& address, UInt32 /*qualifierDataSize*/, const void* /*qualifierData*/, UInt32 dataSize, UInt32& dataUsed, void* data) const
 	{
+        LOGINFO("DP::Sample::Property::HogMode::GetImplementedAddressByIndex");
 		switch (address.mSelector)
 		{
 			case kCMIODevicePropertyHogMode:
@@ -96,6 +98,7 @@ namespace CMIO { namespace DP { namespace Sample { namespace Property
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void HogMode::GetImplementedAddressByIndex(UInt32 index, CMIOObjectPropertyAddress& address) const
 	{
+        LOGINFO("DP::Sample::Property::HogMode::GetPropertyData");
 		switch(index)
 		{
 			case 0:

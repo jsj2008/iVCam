@@ -1330,6 +1330,7 @@
 				"CONFIGURATIONPREFIX[sdk=macosx10.7]" = "Lion-";
 				"CONFIGURATIONPREFIX[sdk=macosx10.8]" = "MountainLion-";
 				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/SamplePrefix.h";
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
@@ -1469,6 +1470,7 @@
 				"CONFIGURATIONPREFIX[sdk=macosx10.7]" = "Lion-";
 				"CONFIGURATIONPREFIX[sdk=macosx10.8]" = "MountainLion-";
 				DEAD_CODE_STRIPPING = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/SamplePrefix.h";
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;

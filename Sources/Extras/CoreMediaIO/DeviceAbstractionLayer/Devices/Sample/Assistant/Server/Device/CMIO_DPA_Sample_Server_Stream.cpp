@@ -66,6 +66,7 @@
 // CA Public Utility Includes
 #include "CACFNumber.h"
 #include "CAHostTimeBase.h"
+#include "log.h"
 
 // System Includes
 #include <IOKit/video/IOVideoTypes.h>
@@ -107,7 +108,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mEndOfData(false),
 		mUnderrunCount(0),
 		mFrameFormats(),
-		mFrameType(kYUV422_10_720x486),
+		mFrameType(kYUV422_1472x736),
 		mFrameRatesMap(),
 		mFrameRate(30000.0 / 1001.0),
 		mNominalFrameDuration(CMTimeMake(1001, 30000)),
@@ -116,6 +117,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mFrameAvailableGuard("frame available guard"),
 		mDeck(*this)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::Stream CONSTRUCTOR");
 		mStreamDictionary = streamDictionary;
 		// Specify the stream's callback
 		mIOSAStream.SetOutputCallback(reinterpret_cast<IOStreamOutputCallback>(StreamOutputCallback), this);
@@ -150,22 +152,23 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						formatCACFDictionary.GetUInt32(CFSTR(kIOVideoStreamFormatKey_CodecFlags), codecFlags);
 						formatCACFDictionary.GetUInt32(CFSTR(kIOVideoStreamFormatKey_Width), formatWidth);
 						formatCACFDictionary.GetUInt32(CFSTR(kIOVideoStreamFormatKey_Height), formatHeight);
-						
+                        LOGINFO("Format Width: %d, Format Height: %d", formatWidth, formatHeight);
+                        
 						switch (codecType)
 						{
-							case kYUV422_720x480:
-								{
-									mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
-									mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
-								}
+							case kYUV422_1472x736:
+                            {
+                                mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
+                                mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
+                            }
 								break;
-							case kYUV422_1280x720:
+							case kYUV422_2176x1088:
 							{
 								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
 								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
 							}
 								break;
-							case kYUV422_1920x1080:
+							case kYUV422_3008x1504:
 							{
 								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
 								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
@@ -396,6 +399,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Stream::~Stream()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::~Stream DESTRUCTOR");
 		if (mIOSAStream.IsValid())
 		{
 			// Remove the stream's callback
@@ -415,6 +419,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	UInt32 Stream::GetStartingDeviceChannelNumber() const
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::GetStartingDeviceChannelNumber");
 		return CACFNumber(static_cast<CFNumberRef>(CFDictionaryGetValue(mStreamDictionary.GetCFDictionary(), CFSTR(kIOVideoStreamKey_StartingDeviceChannelNumber))), false).GetSInt32();
 	}
 
@@ -423,6 +428,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	UInt32 Stream::GetCurrentNumberChannels() const
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::GetCurrentNumberChannels");
 		#warning CMIO::DPA::Sample::Server::Stream::GetCurrentNumberChannels() should decided how to report multiple channels...currently always reporting 1
 		return 1;
 	}
@@ -433,6 +439,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::GetProperties(UInt64 time, const PropertyAddress& matchAddress, PropertyAddressList& matches) const
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::GetProperties");
 		// Iterate over the properties and check for matches
 		for (Properties::const_iterator i = mProperties.begin() ; i != mProperties.end() ; std::advance(i, 1))
 		{
@@ -450,6 +457,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::SetNoDataTimeout(UInt32 noDataTimeout)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::SetNoDataTimeout");
 		// Don't do anything if there are no changes
 		if (noDataTimeout == mNoDataTimeout)
 			return;
@@ -463,6 +471,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::SetDeviceSyncTimeout(UInt32 deviceSyncTimeout)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::SetDeviceSyncTimeout");
 		// Don't do anything if there are no changes
 		if (deviceSyncTimeout == mDeviceSyncTimeout)
 			return;
@@ -477,6 +486,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::SetEndOfData(bool endOfData)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::SetEndOfData");
 		// Don't do anything if there are no changes
 		if (endOfData == mEndOfData)
 			return;
@@ -489,6 +499,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 
     UInt32  Stream::FrameRateToCodecFlags(Float64 framerate)
     {
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::FrameRateToCodecFlags");
         UInt32 codecFlags = 0;
         
         if (framerate > 0.0)
@@ -542,6 +553,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 
     Float64 Stream::CodecFlagsToFrameRate(UInt32 codecFlags)
     {
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::CodecFlagsToFrameRate");
         Float64 frameRate= 0.0;
         
         switch(codecFlags)
@@ -596,6 +608,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	vm_size_t Stream::GetFrameFormats(FrameFormat** formats) const
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::GetFrameFormats");
 		vm_size_t size = sizeof(FrameFormat) * mFrameFormats.size();
 		ThrowIfKernelError(vm_allocate(mach_task_self(), reinterpret_cast<vm_address_t*>(formats), size, true), CAException(-1), "Stream::GetFrameFormats: allocation failed for kCMIOStreamPropertyFormatDescriptions");
 
@@ -613,6 +626,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::SetFrameType(FrameType frameType)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::SetFrameType");
 		// No need to do anything if the frame type hasn't changed
 		if (frameType == mFrameType)
 			return;
@@ -632,8 +646,8 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		// Save the current frame type & frame rate control in the event of an error so a restore attempt can be made
 		FrameType currentFrameType = mFrameType;
 		Float64 currentFrameRate = mFrameRate;
+        LOGINFO("current frame rate: %lf", currentFrameRate);
 		
-
         FrameRates::const_iterator i = mFrameRatesMap[frameType].find(mFrameRate);
         if (i == mFrameRatesMap[frameType].end())
         {
@@ -643,9 +657,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		// Remember the new frame type
 		mFrameType = frameType;
         mNominalFrameDuration = mFrameRatesMap[mFrameType][mFrameRate];
-
-		// Set the frame rate to the fastest possible for this frame type
-//		mFrameRate = (*mFrameRatesMap[mFrameType].rbegin()).first;
 		
 		if (programSettings)
 		{
@@ -725,6 +736,27 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mWidth = 1920;
 						theNewFormat.mHeight = 1080;
 						break;
+                        
+                    case kYUV422_1472x736:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x736;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 1472;
+                        theNewFormat.mHeight = 736;
+                        break;
+                        
+                    case kYUV422_2176x1088:
+                        theNewFormat.mVideoCodecType = kYUV422_2176x1088;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 2176;
+                        theNewFormat.mHeight = 1088;
+                        break;
+                        
+                    case kYUV422_3008x1504:
+                        theNewFormat.mVideoCodecType = kYUV422_3008x1504;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 3008;
+                        theNewFormat.mHeight = 1504;
+                        break;
 						
 					default:
 						LOGINFO("Stream::SetFrameType: Unknown FrameType %lu", (unsigned long int) mFrameType);
@@ -745,6 +777,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 			}
 			catch (...)
 			{
+                LOGINFO("CMIO::DPA::Sample::Server::Stream::SetFrameType UNHANDLED EXCEPTION...!");
 				// Something went wrong, so try and restore the previous frame type & frame rate control
 				mFrameType = currentFrameType;
 				mFrameRate = currentFrameRate;
@@ -835,6 +868,27 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mWidth = 1920;
 						theNewFormat.mHeight = 1080;
 						break;
+                        
+                    case kYUV422_1472x736:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x736;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 1472;
+                        theNewFormat.mHeight = 736;
+                        break;
+                        
+                    case kYUV422_2176x1088:
+                        theNewFormat.mVideoCodecType = kYUV422_2176x1088;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 2176;
+                        theNewFormat.mHeight = 1088;
+                        break;
+                        
+                    case kYUV422_3008x1504:
+                        theNewFormat.mVideoCodecType = kYUV422_3008x1504;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 3008;
+                        theNewFormat.mHeight = 1504;
+                        break;
 						
 					default:
 						LOGINFO("Stream::SetFrameType: Unknown FrameType %lu", (unsigned long int) mFrameType);
@@ -859,7 +913,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
                 mNominalFrameDuration = mFrameRatesMap[mFrameType][mFrameRate];
 				
 				// DoWhatYouWouldNeedToDoToProgramTheHardware();
-
+                LOGINFO("CMIO::DPA::Sample::Server::Stream::SetFrameType UNHANDLED EXCEPTION...!");
 			}
 		}
 	}	
@@ -869,6 +923,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	vm_size_t Stream::GetFrameRates(const FrameType* qualifier, Float64** frameRates) const
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::GetFrameRates");
 		// If there is no qualifier, then this request is for the frame rates of the current FrameType
 		FrameType frameType = (NULL == qualifier) ? GetFrameType() : *qualifier;
 		
@@ -893,6 +948,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::SetFrameRate(Float64 frameRate)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::SetFrameRate. frame rate: %lf", frameRate);
 		// No need to do anything if the frameRate hasn't changed
 		if (frameRate == mFrameRate)
 			return;
@@ -911,7 +967,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		
 		// Save the current frame type & frame rate control in the event of an error so a restore attempt can be made
 		Float64 currentFrameRate = mFrameRate;
-		
         
         FrameRates::const_iterator i = mFrameRatesMap[mFrameType].find(frameRate);
         if (i == mFrameRatesMap[mFrameType].end())
@@ -1001,17 +1056,36 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mWidth = 1920;
 						theNewFormat.mHeight = 1080;
 						break;
-
+                        
+                    case kYUV422_1472x736:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x736;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 1472;
+                        theNewFormat.mHeight = 736;
+                        break;
+                        
+                    case kYUV422_2176x1088:
+                        theNewFormat.mVideoCodecType = kYUV422_2176x1088;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 2176;
+                        theNewFormat.mHeight = 1088;
+                        break;
+                        
+                    case kYUV422_3008x1504:
+                        theNewFormat.mVideoCodecType = kYUV422_3008x1504;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 3008;
+                        theNewFormat.mHeight = 1504;
+                        break;
 						
 				}
-				printf("SetFrameRate newFormat.mVideoCodecType = %lu newFormat.mVideoCodecFlags = %x\n", (long unsigned int)theNewFormat.mVideoCodecType, (unsigned int)theNewFormat.mVideoCodecFlags);
+				LOGINFO("SetFrameRate newFormat.mVideoCodecType = %lu newFormat.mVideoCodecFlags = %x\n", (long unsigned int)theNewFormat.mVideoCodecType, (unsigned int)theNewFormat.mVideoCodecFlags);
                 
 				GetOwningDevice().GetIOVADevice().SetStreamFormat(CACFNumber(static_cast<CFNumberRef>(CFDictionaryGetValue(mStreamDictionary.GetCFDictionary(), CFSTR(kIOVideoStreamKey_StreamID))), false).GetSInt32(), &theNewFormat);
                 
 				Start(MACH_PORT_NULL, MACH_PORT_NULL, kCMIOSampleBufferDiscontinuityFlag_DataFormatChanged);
 
 				mFrameRate = frameRate;
-
 				
 				// Update the shadow time for the frame rate
 				mProperties[PropertyAddress(kCMIOStreamPropertyFrameRate, GetDevicePropertyScope(), GetStartingDeviceChannelNumber())].mShadowTime = CAHostTimeBase::GetTheCurrentTime();
@@ -1105,6 +1179,27 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						theNewFormat.mWidth = 1920;
 						theNewFormat.mHeight = 1080;
 						break;
+                        
+                    case kYUV422_1472x736:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x736;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 1472;
+                        theNewFormat.mHeight = 736;
+                        break;
+                        
+                    case kYUV422_2176x1088:
+                        theNewFormat.mVideoCodecType = kYUV422_2176x1088;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 2176;
+                        theNewFormat.mHeight = 1088;
+                        break;
+                        
+                    case kYUV422_3008x1504:
+                        theNewFormat.mVideoCodecType = kYUV422_3008x1504;
+                        theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
+                        theNewFormat.mWidth = 3008;
+                        theNewFormat.mHeight = 1504;
+                        break;
                }
 				
 				GetOwningDevice().GetIOVADevice().SetStreamFormat(CACFNumber(static_cast<CFNumberRef>(CFDictionaryGetValue(mStreamDictionary.GetCFDictionary(), CFSTR(kIOVideoStreamKey_StreamID))), false).GetSInt32(), &theNewFormat);
@@ -1133,6 +1228,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Start(Client client, mach_port_t messagePort, UInt32 initialDiscontinuityFlags)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::Start");
 		try
 		{
 			// Grab the mutex for the device's state
@@ -1237,6 +1333,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Stop(Client client)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::Stop");
 		// Grab the mutex for the overall device's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -1313,6 +1410,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     void Stream::StreamOutputCallback(IOStreamRef /*streamRef*/, Stream& stream)
     {
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::StreamOutputCallback");
 		// Indicate that the output callback is being invoked so Stop() won't release resources  
 		stream.mInOutputCallBack = true;
 		
@@ -1454,6 +1552,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::FrameArrived(IOStreamBufferQueueEntry& entry)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::FrameArrived");
 		// Get the host time of the the frame (currently reported as the sole contents of the entry's control buffer)
 		SampleVideoDeviceControlBuffer* theBufferControl = reinterpret_cast<SampleVideoDeviceControlBuffer*>(mIOSAStream.GetControlBuffer(entry.bufferID));
 		ThrowIfNULL(theBufferControl, CAException(kCMIOHardwareUnspecifiedError), "Stream::FrameArrived: unable to get control buffer");
@@ -1518,6 +1617,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::GetOutputBuffer(mach_port_t& recipient)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::GetOutputBuffer");
 		// Get timing information so the client can drive their output clock
 		CMTime clockTime = kCMTimeInvalid;
 		UInt64 hostTimeInNanos = 0LL;
@@ -1546,7 +1646,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		
 		// Setup the message
 		message.asOutputBufferRequestedMessage.mHeader.msgh_bits		= MACH_MSGH_BITS(MACH_MSG_TYPE_COPY_SEND, MACH_MSG_TYPE_MAKE_SEND_ONCE);
-		//		message.asOutputBufferRequestedMessage.mHeader.msgh_bits		= MACH_MSGH_BITS(MACH_MSG_TYPE_COPY_SEND, MACH_MSG_TYPE_MAKE_SEND_ONCE) | MACH_MSGH_BITS_COMPLEX;
 		message.asOutputBufferRequestedMessage.mHeader.msgh_size		= sizeof(OutputBufferRequestedMessage);
 		message.asOutputBufferRequestedMessage.mHeader.msgh_remote_port	= recipient;
 		message.asOutputBufferRequestedMessage.mHeader.msgh_local_port	= mig_get_reply_port();
@@ -1556,8 +1655,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		message.asOutputBufferRequestedMessage.mClockTime				= CMTimeOverride(clockTime);
 		message.asOutputBufferRequestedMessage.mHostTimeInNanos			= hostTimeInNanos;
 		message.asOutputBufferRequestedMessage.mLastSequenceNumber      = mLastOutputSequenceNumber;
-        
-//        LOGINFO("mHostTimeInNanos = %lld message.asOutputBufferRequestedMessage.mSequenceNumber = %lld", message.asOutputBufferRequestedMessage.mHostTimeInNanos,message.asOutputBufferRequestedMessage.mLastSequenceNumber);
        
 		mach_msg_size_t replySizeLimit = sizeof(OutputBufferMessages) + sizeof(mach_msg_trailer_t);
 		mach_msg_return_t err = mach_msg(&(message.asOutputBufferRequestedMessage.mHeader), MACH_SEND_MSG | MACH_RCV_MSG, message.asOutputBufferRequestedMessage.mHeader.msgh_size, replySizeLimit, message.asOutputBufferRequestedMessage.mHeader.msgh_local_port, MACH_MSG_TIMEOUT_NONE, MACH_PORT_NULL);
@@ -1649,7 +1746,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::StartDeckThreads(Client client)
 	{
-        LOGINFO("Stream::StartDeckThreads");
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::StartDeckThreads");
 		// Add the client to the set of clients which have have requested the deck threads be started
 		if (MACH_PORT_NULL != client)
 		{
@@ -1670,6 +1767,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::StopDeckThreads(Client client)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::StopDeckThreads");
 		// Remove the client from the set of listing to the deck
 		mDeckListeners.erase(client);
 		
@@ -1687,6 +1785,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::ReleaseOutputBufferCallBack(void* refCon, void *doomedMemoryBlock, size_t sizeInBytes)
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::ReleaseOutputBufferCallBack");
 		(void) vm_deallocate(mach_task_self(), reinterpret_cast<vm_address_t>(doomedMemoryBlock), sizeInBytes);
 	}
 
@@ -1695,7 +1794,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::ReleasePixelBufferCallback(void* refCon, void *doomedMemoryBlock, size_t sizeInBytes)
 	{
-        LOGINFO("ReleasePixelBufferCallback");
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::ReleasePixelBufferCallback");
 		// The frame was being provided in an IOSurface-backed CVPixelBuffer so release it
 		CVA::Pixel::Buffer pixelBuffer(static_cast<CVPixelBufferRef>(refCon));
 		pixelBuffer.UnlockBaseAddress(kCVPixelBufferLock_ReadOnly);
@@ -1707,6 +1806,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::StreamDeckChanged()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::StreamDeckChanged");
 		mProperties[PropertyAddress(kCMIOStreamPropertyDeck, GetDevicePropertyScope(), GetStartingDeviceChannelNumber())].mShadowTime = CAHostTimeBase::GetTheCurrentTime();
 		GetOwningDevice().SendPropertyStatesChangedMessage();
 	}
@@ -1716,6 +1816,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::DeckTimecodeChanged()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::DeckCueingChanged");
 		mProperties[PropertyAddress(kCMIOStreamPropertyDeckFrameNumber, GetDevicePropertyScope(), GetStartingDeviceChannelNumber())].mShadowTime = CAHostTimeBase::GetTheCurrentTime();
 		GetOwningDevice().SendPropertyStatesChangedMessage();
 	}
@@ -1725,6 +1826,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::DeckCueingChanged()
 	{
+        LOGINFO("CMIO::DPA::Sample::Server::Stream::GetCurrentNumberChannels");
 		mProperties[PropertyAddress(kCMIOStreamPropertyDeckCueing, GetDevicePropertyScope(), GetStartingDeviceChannelNumber())].mShadowTime = CAHostTimeBase::GetTheCurrentTime();
 		GetOwningDevice().SendPropertyStatesChangedMessage();
 	}
