@@ -12,11 +12,10 @@
 class Frame
 {
 public:
-    Frame(void *data, int size, bool isStillImage)
+    Frame(void *data, int size)
     {
         mBuf = std::shared_ptr<std::vector<uint8_t> >(new std::vector<uint8_t>(size));
         memcpy((*mBuf).data(), data, size);
-        mIsStillImage = isStillImage;
     }
 
     uint8_t *data()
@@ -29,14 +28,8 @@ public:
         return (int)mBuf->size();
     }
 
-    bool isStillImage()
-    {
-        return mIsStillImage;
-    }
-
 private:
-    std::shared_ptr<std::vector<uint8_t> > mBuf;
-    bool mIsStillImage;
+    std::shared_ptr<std::vector<uint8_t> > mBuf; 
 };
 
 #endif //INSTA360_FRAME_H

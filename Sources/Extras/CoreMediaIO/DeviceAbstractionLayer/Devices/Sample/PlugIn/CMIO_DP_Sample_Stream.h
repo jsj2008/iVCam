@@ -69,6 +69,11 @@
 #include "CAPThread.h"
 #include "CAGuard.h"
 
+#include "AtomCamera.h"
+#include "Frame.h"
+#include <boost/lockfree/spsc_queue.hpp>
+#include <thread>
+
 // System Includes
 #include <CoreMedia/CMSampleBuffer.h>
 
@@ -208,7 +213,6 @@ namespace CMIO { namespace DP { namespace Sample
 
 		static void								Messages(CFMachPortRef port, mach_msg_header_t* header, CFIndex size, Stream& stream);
 		void									FrameArrived(DPA::Sample::FrameArrivedMessage* message);
-//		void									DriveClock(UInt64 hostTime, const CMTime& duration);
 		static void								ReleaseBufferCallback(void* refCon, void *doomedMemoryBlock, size_t sizeInBytes);
 
 		void									GetOutputBuffer(DPA::Sample::OutputBufferRequestedMessage* message);
@@ -236,7 +240,7 @@ namespace CMIO { namespace DP { namespace Sample
 		void									CueComplete(SInt32 cueStatus);
 		void									TimecodeChanged(Float64 timecode);
 		void									StreamDeckChanged(UInt32 changed, UInt16 opcode, UInt16 operand);
-
+        void                                    StreamThread();
 	protected:
 		PropertyAddressList						mDeckPropertyListeners;
 
@@ -266,7 +270,12 @@ namespace CMIO { namespace DP { namespace Sample
 		CMTime									mClockTime;
 		RecentTimingInfo						mRecentTimingInfo[2];
 		UInt32									mRecentTimingInfoIdx;
-		
+        
+        AtomCamera                                mAtomCamera;
+        boost::lockfree::spsc_queue<std::shared_ptr<Frame>, boost::lockfree::capacity<10> > mFrames;
+        std::string                             mOffset;
+        std::thread                             mStreamThread;
+        bool                                   mIsActive; // Stop the stream thread when finalize the plugin
 	};
 }}}
 

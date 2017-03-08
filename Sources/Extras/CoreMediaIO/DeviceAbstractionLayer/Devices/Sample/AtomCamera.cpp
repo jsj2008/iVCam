@@ -31,13 +31,12 @@ static bool checkStillImage(const shared_ptr<Frame> &frame)
 
 int AtomCamera::open(StreamFormat format, int width, int height, int fps, int bitrate)
 {
-    LOGINFO("UVC Device found");
     int retv = ERR_UNKNOWN;
     shared_ptr<Frame> frame;
-    uvc_error_t res = uvc_open(mUvcDevice, &mUvcDevicheHandle);
+    uvc_error_t res = uvc_open(*mUvcDevice, &mUvcDevicheHandle);
     if(res < 0)
     {
-        LOGINFO("uvc_open error: %s", uvc_strerror(res));
+        LOGINFO("UVC open error: %s", uvc_strerror(res));
         goto error;
     }
 
@@ -51,38 +50,38 @@ int AtomCamera::open(StreamFormat format, int width, int height, int fps, int bi
     );
     if(res < 0)
     {
-        LOGINFO("uvc device set unsupported params group:%d", res);
+        LOGINFO("UVC device set unsupported params group:%d", res);
         goto error;
     }
 
     res = (uvc_error_t)uvcext_set_stream_bitrate_xu(mUvcDevicheHandle, bitrate);
     if(res < 0)
     {
-        LOGINFO("failed set bitrate(%d): %d", bitrate, res);
+        LOGINFO("Failed set bitrate(%d): %d", bitrate, res);
         goto error;
     }
 
     res = uvc_start_streaming2(mUvcDevicheHandle, mStreamCtrl,UVC_FRAME_FORMAT_ANY,3008,1504, NULL, NULL, 0, &mStreamHandle);
     if(res < 0)
     {
-        LOGINFO("start_streaming error: %s", uvc_strerror(res));
+        LOGINFO("Start_streaming error: %s", uvc_strerror(res));
         goto error;
     }
 
-    LOGINFO("try read one video frame");
+    LOGINFO("Try read one video frame");
     retv = readFrame(&frame);
     if(retv != 0)
     {
-        LOGINFO("read frame failed: %d", retv);
+        LOGINFO("Read frame failed: %d", retv);
         goto error;
     }
-    LOGINFO("got one frame, size: %d(start bytes: 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x)",
+    LOGINFO("Got one frame, size: %d(start bytes: 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x 0x%x)",
         frame->size(),
         (int)frame->data()[0], (int)frame->data()[1], (int)frame->data()[2], (int)frame->data()[3],
         (int)frame->data()[4], (int)frame->data()[5], (int)frame->data()[6], (int)frame->data()[7]);
 
-    LOGINFO("pause stream");
-    uvc_pause_streaming(mStreamHandle);
+//    LOGINFO("Pause stream");
+//    uvc_pause_streaming(mStreamHandle);
     
     return 0;
 
@@ -98,7 +97,7 @@ error:
     if(mUvcDevice)
     {
         LOGINFO("unref device");
-        uvc_unref_device(mUvcDevice);
+        uvc_unref_device(*mUvcDevice);
         mUvcDevice = nullptr;
     }
 
@@ -118,7 +117,7 @@ void AtomCamera::close()
     if(mUvcDevice != nullptr)
     {
         LOGINFO("unref device");
-        uvc_unref_device(mUvcDevice);
+        uvc_unref_device(*mUvcDevice);
         mUvcDevice = nullptr;
     }
     mClosed = true;
@@ -126,12 +125,37 @@ void AtomCamera::close()
     mStreamCtrl = nullptr;
 }
 
-AtomCamera::AtomCamera(string name, uvc_device_t *device, uvc_context_t *context) :
-    mTag("Insta360Air" + name), mName(name), mUvcContext(context), mUvcDevice(device)
+AtomCamera::AtomCamera()
 {
-    LOGINFO("camera name: %s", name.c_str());
+    int numDevs;
+    uvc_init(NULL ,&mUvcContext, NULL);
+    int retv = uvc_get_devices(mUvcContext, &mUvcDevice, &numDevs, 0x2e1a, 0x1000);
+    if(retv != 0)
+    {
+        mInitialStatus = false;
+        if(retv == UVC_ERROR_NO_DEVICE)
+        {
+            LOGERR("NO UVC device found");
+        }
+        else
+        {
+            LOGINFO("Failed get uvc device list: %s", uvc_strerror((uvc_error_t) retv));
+        }
+    }
+    else
+    {
+        LOGINFO("Found %d device(s)", numDevs);
+        mInitialStatus = true;
+    }
+    uvc_ref_device(*mUvcDevice);
+}
+
+AtomCamera::AtomCamera(string name, uvc_device_t **device, uvc_context_t *context) :
+    mTag("Insta360Air" + name), mName(name), mUvcContext(context), mUvcDevice(device), mInitialStatus(true)
+{
+    LOGINFO("Camera name: %s", name.c_str());
     TAG = mTag.c_str();
-    uvc_ref_device(mUvcDevice);
+    uvc_ref_device(*mUvcDevice);
 }
 
 static const int kMaxReadFrameTimeUs = 10*1000*1000;
@@ -147,23 +171,29 @@ int AtomCamera::readFrame(std::shared_ptr<Frame> *pframe)
     }
     
     if(uvcFrame == NULL)
+    {
+        LOGINFO("Time out to fetch UVC frame!");
         return ERR_TIMEOUT;
-    *pframe = shared_ptr<Frame>(new Frame(uvcFrame->data, uvcFrame->data_bytes, uvcFrame->is_still_image));
+    }
+    
+    *pframe = shared_ptr<Frame>(new Frame(uvcFrame->data, uvcFrame->data_bytes));
     
     return 0;
 }
 
-std::string AtomCamera::readOffset()
+std::string AtomCamera::readCameraOffset()
 {
+    std::string temp;
     char* offset = nullptr;
     int len = 0;
+    // version 2.0 of function 'uvcext_read_offset()'
     uvcext_read_offset_20(mUvcDevicheHandle, &offset, &len);
     if (offset) {
-        mOffset = std::string(offset);
+        temp = std::string(offset);
         free(offset);
     }
     
-    return mOffset;
+    return temp;
 }
 
 
@@ -174,15 +204,17 @@ bool AtomCamera::isClosed()
 
 std::string AtomCamera::readCameraUUID()
 {
+    std::string temp;
     char *uuid=nullptr;
     int len=0;
+    // version 2.0 of function 'uvcext_read_uuid()'
     uvcext_read_uuid_20(mUvcDevicheHandle, &uuid, &len);
     if(uuid)
     {
-        mUUID = std::string(uuid);
+        temp = std::string(uuid);
         free(uuid);
     }
-    return mUUID;
+    return temp;
 }
 
 

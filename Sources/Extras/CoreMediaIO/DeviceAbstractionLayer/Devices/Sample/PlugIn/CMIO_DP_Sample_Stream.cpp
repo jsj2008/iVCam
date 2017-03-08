@@ -130,7 +130,9 @@ namespace CMIO { namespace DP { namespace Sample
 		mDeferredNoDataBufferEvent(kCMIOSampleBufferNoDataEvent_Unknown),
 		mOutputHosttimeCorrection(0LL),
 		mPreviousCycleTimeSeconds(0xFFFFFFFF),
-		mSyncClock(true)
+		mSyncClock(true),
+        mAtomCamera(),
+        mIsActive(true)
 	{
 	}
 	
@@ -178,7 +180,12 @@ namespace CMIO { namespace DP { namespace Sample
 			}
             
             // *** Create a new thread to open device and get preview stream
-            
+            mAtomCamera.open(StreamFormat::H264, 2560, 1280, 30, 8*1024*1024);
+            //mOffset = mAtomCamera.readCameraOffset();
+            //LOGINFO("Device offset: %s", mOffset.c_str());
+            // Start the thread to read frame from device.
+            mStreamThread = std::thread(&Stream::StreamThread, this);
+            mStreamThread.detach();
 		}
 		else if (IsOutput())
 		{
@@ -235,7 +242,10 @@ namespace CMIO { namespace DP { namespace Sample
 			delete mDeck;
 			mDeck = NULL;
 		}
-
+        
+        // Signal the stream thread to terminate.
+        mIsActive = false;
+        
 		if (IsInput())
 		{
 			if (NULL != mNoData)
@@ -962,6 +972,32 @@ namespace CMIO { namespace DP { namespace Sample
 
 		return true;
 	}
+    
+    void Stream::StreamThread()
+    {
+        int ret;
+        std::shared_ptr<Frame> frame;
+        while (mIsActive) {
+            ret = mAtomCamera.readFrame(&frame);
+            if (ret != 0)
+            {
+                LOGERR("Failed to read frame. Error code: %d", ret);
+                continue;
+            }
+            if (mFrames.write_available()) {
+                mFrames.push(frame);
+            }
+            else
+            {
+                LOGINFO("The buffer is full. Frame dropped...");
+            }
+        }
+        
+        if (!mAtomCamera.isClosed())
+        {
+            mAtomCamera.close();
+        }
+    }
 
 	#pragma mark -
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -986,7 +1022,7 @@ namespace CMIO { namespace DP { namespace Sample
 
 		// Make sure the notification port is not invalid
 		ThrowIf(PTA::CFMachPortThread::kInvalid == mMessageThread.GetState(), -1, "CMIO::DP::Sample::Stream::Start: CFMachPortThread thread invalid");
-
+        
 		if (IsInput())
 		{
 			// Initialize the clock support
@@ -1007,6 +1043,7 @@ namespace CMIO { namespace DP { namespace Sample
 	
 			// Start the stream
 			DPA::Sample::StartStream(GetOwningDevice().GetAssistantPort(), GetOwningDevice().GetDeviceGUID(), mMessageThread.GetMachPort(), GetDevicePropertyScope(), GetStartingDeviceChannelNumber());
+            
 		}
 		else if (IsOutput())
 		{
@@ -1249,8 +1286,28 @@ namespace CMIO { namespace DP { namespace Sample
 			CMBlockBufferCustomBlockSource customBlockSource = { kCMBlockBufferCustomBlockSourceVersion, NULL, ReleaseBufferCallback, this };
 			// Get the size & data for the frame
 			size_t frameSize = message->mDescriptor.size;
-			void* data = message->mDescriptor.address;
             
+            // Get a frame from frame queue
+            void* data = message->mDescriptor.address;;
+            std::shared_ptr<Frame> ptr;
+            int size;
+            
+            if (mFrames.read_available())
+            {
+                ptr = mFrames.front();
+                void* data1 = ptr->data();
+                size = ptr->size();
+                
+                FILE* file = fopen("/Users/zhangzhongke/Documents/out.bin", "wb");
+                fwrite(data1, 1, size, file);
+                fclose(file);
+                
+                mFrames.pop();
+            }
+            else
+            {
+                LOGINFO("The frame buffer is empty. Use default background.");
+            }
             
 			DebugMessageLevel(2, "CMIO::DP::Sample::Stream::FrameArrived: Frametype = %d discontinuity = %d frameSize = %ld", message->mFrameType, GetDiscontinuityFlags(), frameSize);
 			

@@ -20,30 +20,28 @@ class Frame;
 class AtomCamera
 {
 public:
+    explicit AtomCamera();
+    AtomCamera(std::string name, uvc_device_t **device, uvc_context_t *context);
+    
     int open(StreamFormat format, int width, int height, int fps, int bitrate);
     void close();
     bool isClosed();
     std::string readCameraUUID();
-    std::string readOffset();
-    std::string name() { return mName; }
-
-    AtomCamera(std::string name, uvc_device_t *device, uvc_context_t *context);
-
-private:
+    std::string readCameraOffset();
+    std::string name() { return mName; } 
     int readFrame(std::shared_ptr<Frame> *frame);
 
 private:
     std::string mTag = "Insta360Air";
-    std::string mName;
-    std::string mUUID;
-    std::string mOffset;
+    std::string mName; 
     uvc_context_t *mUvcContext = nullptr;
-    uvc_device_t *mUvcDevice = nullptr;
+    uvc_device_t **mUvcDevice = nullptr;
     uvc_device_handle_t *mUvcDevicheHandle = nullptr;
     uvc_stream_ctrl_t *mStreamCtrl = nullptr;
     uvc_stream_handle_t *mStreamHandle = nullptr;
     LedColor mCurrentLedColor = LedColor::None;
     bool mClosed=false;
+    bool mInitialStatus = false;
 
     const char *TAG = nullptr;
 
