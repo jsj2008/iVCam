@@ -180,12 +180,18 @@ namespace CMIO { namespace DP { namespace Sample
 			}
             
             // *** Create a new thread to open device and get preview stream
-            mAtomCamera.open(StreamFormat::H264, 2560, 1280, 30, 8*1024*1024);
-            //mOffset = mAtomCamera.readCameraOffset();
-            //LOGINFO("Device offset: %s", mOffset.c_str());
-            // Start the thread to read frame from device.
-            mStreamThread = std::thread(&Stream::StreamThread, this);
-            mStreamThread.detach();
+            int ret = mAtomCamera.open(StreamFormat::H264, 2560, 1280, 30, 8*1024*1024);
+            if (ret == 0)
+            {
+                // Get offset from device.
+                ret = mAtomCamera.getCameraOffset(mOffset);
+                if (ret == 0)
+                {
+                    // Start the thread to read frame from device.
+                    mStreamThread = std::thread(&Stream::StreamThread, this);
+                    mStreamThread.detach();
+                }
+            }
 		}
 		else if (IsOutput())
 		{
@@ -982,10 +988,11 @@ namespace CMIO { namespace DP { namespace Sample
             if (ret != 0)
             {
                 LOGERR("Failed to read frame. Error code: %d", ret);
-                continue;
+                break;
             }
             if (mFrames.write_available()) {
                 mFrames.push(frame);
+                std::this_thread::sleep_for(std::chrono::milliseconds(30));
             }
             else
             {

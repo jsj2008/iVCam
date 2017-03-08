@@ -3,36 +3,25 @@
 //
 
 #include "AtomCamera.h"
-#include <chrono>
 #include "Error.h"
 #include "Frame.h"
 #include "log.h"
+#include <chrono>
 #include <stdlib.h>
 #include <sys/types.h>
 
 using namespace std;
 using namespace chrono;
 
-static const uint8_t UVC_EXTENSION_UNIT_CS_IO_START = 0x0E;
-static const uint8_t UVC_EXTENSION_UNIT_CS_IO_READ_DATA = 0x0B;
-static const uint8_t UVC_EXTENSION_UNIT_CS_IO_END = 0x0E;
-static const uint8_t INDEX_INSTA_DATA_UUID = 5;
-static const uint8_t EXTENSION_UNIT_ID_VENDOR = 6;
-
 typedef unsigned char BYTE;
-
-static bool checkStillImage(const shared_ptr<Frame> &frame)
-{
-    if(frame->size() < 4)
-        return false;
-    uint8_t *data = frame->data();
-    return data[0]  == 0xFF && data[1] == 0xD8 && data[2]  == 0xFF;
-}
-
+  
 int AtomCamera::open(StreamFormat format, int width, int height, int fps, int bitrate)
 {
     int retv = ERR_UNKNOWN;
     shared_ptr<Frame> frame;
+    if (!mInitialStatus) {
+        return ERR_INIT;
+    }
     uvc_error_t res = uvc_open(*mUvcDevice, &mUvcDevicheHandle);
     if(res < 0)
     {
@@ -67,8 +56,7 @@ int AtomCamera::open(StreamFormat format, int width, int height, int fps, int bi
         LOGINFO("Start_streaming error: %s", uvc_strerror(res));
         goto error;
     }
-
-    LOGINFO("Try read one video frame");
+    
     retv = readFrame(&frame);
     if(retv != 0)
     {
@@ -79,9 +67,6 @@ int AtomCamera::open(StreamFormat format, int width, int height, int fps, int bi
         frame->size(),
         (int)frame->data()[0], (int)frame->data()[1], (int)frame->data()[2], (int)frame->data()[3],
         (int)frame->data()[4], (int)frame->data()[5], (int)frame->data()[6], (int)frame->data()[7]);
-
-//    LOGINFO("Pause stream");
-//    uvc_pause_streaming(mStreamHandle);
     
     return 0;
 
@@ -144,10 +129,10 @@ AtomCamera::AtomCamera()
     }
     else
     {
-        LOGINFO("Found %d device(s)", numDevs);
         mInitialStatus = true;
+        LOGINFO("Found %d device(s)", numDevs);
+        uvc_ref_device(*mUvcDevice);
     }
-    uvc_ref_device(*mUvcDevice);
 }
 
 AtomCamera::AtomCamera(string name, uvc_device_t **device, uvc_context_t *context) :
@@ -162,6 +147,9 @@ static const int kMaxReadFrameTimeUs = 10*1000*1000;
 
 int AtomCamera::readFrame(std::shared_ptr<Frame> *pframe)
 {
+    if (!mInitialStatus) {
+        return ERR_INIT;
+    }
     struct uvc_frame *uvcFrame = NULL;
     uvc_error_t err = uvc_stream_get_frame(mStreamHandle, &uvcFrame, kMaxReadFrameTimeUs);
     if(err != 0)
@@ -181,40 +169,55 @@ int AtomCamera::readFrame(std::shared_ptr<Frame> *pframe)
     return 0;
 }
 
-std::string AtomCamera::readCameraOffset()
-{
-    std::string temp;
-    char* offset = nullptr;
-    int len = 0;
-    // version 2.0 of function 'uvcext_read_offset()'
-    uvcext_read_offset_20(mUvcDevicheHandle, &offset, &len);
-    if (offset) {
-        temp = std::string(offset);
-        free(offset);
-    }
-    
-    return temp;
-}
-
-
 bool AtomCamera::isClosed()
 {
     return mClosed;
 }
 
-std::string AtomCamera::readCameraUUID()
+int AtomCamera::getCameraUUID(std::string& UUID)
 {
-    std::string temp;
-    char *uuid=nullptr;
-    int len=0;
-    // version 2.0 of function 'uvcext_read_uuid()'
-    uvcext_read_uuid_20(mUvcDevicheHandle, &uuid, &len);
-    if(uuid)
+    if (!mInitialStatus)
     {
-        temp = std::string(uuid);
-        free(uuid);
+        return ERR_INIT;
     }
-    return temp;
+    
+    char* temp = nullptr;
+    int len = 0;
+    // version 2.0 of function 'uvcext_read_uuid()'
+    uvcext_read_uuid_20(mUvcDevicheHandle, &temp, &len);
+    if (temp) {
+        UUID = std::string(temp);
+        free(temp);
+    }
+    else
+    {
+        LOGINFO("Failed to get UUID from device.");
+        return ERR_UNKNOWN;
+    }
+    
+    return 0;
 }
 
-
+int AtomCamera::getCameraOffset(std::string& offset)
+{
+    if (!mInitialStatus)
+    {
+        return ERR_INIT;
+    }
+    
+    char* temp = nullptr;
+    int len = 0;
+    // version 2.0 of function 'uvcext_read_offset()'
+    uvcext_read_offset_20(mUvcDevicheHandle, &temp, &len);
+    if (temp) {
+        offset = std::string(temp);
+        free(temp);
+    }
+    else
+    {
+        LOGINFO("Failed to get offset from device.");
+        return ERR_UNKNOWN;
+    }
+    
+    return 0;
+}
