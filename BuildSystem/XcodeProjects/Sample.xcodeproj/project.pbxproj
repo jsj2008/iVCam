@@ -18,6 +18,7 @@
 		7206D01514633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7206D01314633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp */; };
 		7B3DEBCA1E6EA5FD002FF975 /* libuvc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; };
 		7B3DEBCD1E6EA856002FF975 /* libuvc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7B3DEBD01E6F9869002FF975 /* AtomCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */; };
 		7B45EB7A1E65597100BF6BBF /* libCoreAudioStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B45EB791E65597100BF6BBF /* libCoreAudioStatic.a */; };
 		7B45EB7B1E65598100BF6BBF /* libCoreAudioStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B45EB791E65597100BF6BBF /* libCoreAudioStatic.a */; };
 		7B45EB7F1E6564E300BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
@@ -275,6 +276,10 @@
 		7206D01314633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIO_DP_Property_ScheduledOutputNotificationProc.cpp; sourceTree = "<group>"; };
 		7206D01414633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_DP_Property_ScheduledOutputNotificationProc.h; sourceTree = "<group>"; };
 		7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuvc.dylib; path = ../Lib/libuvc.dylib; sourceTree = "<group>"; };
+		7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AtomCamera.cpp; sourceTree = "<group>"; };
+		7B3DEBCF1E6F9869002FF975 /* AtomCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomCamera.h; sourceTree = "<group>"; };
+		7B3DEBD21E6F9910002FF975 /* Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
+		7B3DEBD31E6F9910002FF975 /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
 		7B45EB0A1E65576000BF6BBF /* ACBaseCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACBaseCodec.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACBaseCodec.h; sourceTree = "<absolute>"; };
 		7B45EB0B1E65576000BF6BBF /* ACCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACCodec.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACCodec.h; sourceTree = "<absolute>"; };
 		7B45EB0C1E65576000BF6BBF /* ACCodecDispatchTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACCodecDispatchTypes.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACCodecDispatchTypes.h; sourceTree = "<absolute>"; };
@@ -682,9 +687,7 @@
 		14F1EACF11A7328A00B28A43 /* Sample */ = {
 			isa = PBXGroup;
 			children = (
-				7B45EB7C1E6564E300BF6BBF /* log.cpp */,
-				7B45EB7D1E6564E300BF6BBF /* log.h */,
-				7B45EB7E1E6564E300BF6BBF /* macro.h */,
+				7B3DEBD11E6F9879002FF975 /* Utils */,
 				14DEB09E155AEE0900E49CEA /* SamplePrefix.h */,
 				E42AA5BE0E07410B000C4D64 /* PlugIn */,
 				E42AA5D30E07412E000C4D64 /* Assistant */,
@@ -741,6 +744,20 @@
 				1469AC5A0A22D6E9001B6AE0 /* IOKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7B3DEBD11E6F9879002FF975 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7B3DEBD21E6F9910002FF975 /* Error.h */,
+				7B3DEBD31E6F9910002FF975 /* Frame.h */,
+				7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */,
+				7B3DEBCF1E6F9869002FF975 /* AtomCamera.h */,
+				7B45EB7C1E6564E300BF6BBF /* log.cpp */,
+				7B45EB7D1E6564E300BF6BBF /* log.h */,
+				7B45EB7E1E6564E300BF6BBF /* macro.h */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		DEFCDA6809E701B800413E85 = {
@@ -1247,6 +1264,7 @@
 				E42AA56F0E073EEC000C4D64 /* CMIO_DP_Property_Base.cpp in Sources */,
 				E42AA5700E073EEC000C4D64 /* CMIO_DP_Property_FormatList.cpp in Sources */,
 				7B45EB7F1E6564E300BF6BBF /* log.cpp in Sources */,
+				7B3DEBD01E6F9869002FF975 /* AtomCamera.cpp in Sources */,
 				E42AA5720E073EEC000C4D64 /* CMIO_DP_Property_Clock.cpp in Sources */,
 				E42AA5750E073EEC000C4D64 /* CMIO_PTA_CFMachPortThread.cpp in Sources */,
 				E42AA5760E073EEC000C4D64 /* CMIO_DP_Property_SuspendedByUser.cpp in Sources */,
@@ -1377,6 +1395,7 @@
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 					/Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/include,
+					/Users/zhangzhongke/Documents/projects/boost,
 				);
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DERIVED_FILES_DIR)/$(CURRENT_ARCH)\"";
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
