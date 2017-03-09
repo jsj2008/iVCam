@@ -71,6 +71,8 @@
 
 #include "AtomCamera.h"
 #include "Frame.h"
+#include "h264dec.h"
+#include "BlenderWrapper.h"
 #include <boost/lockfree/spsc_queue.hpp>
 #include <thread>
 #include <chrono>
@@ -240,6 +242,8 @@ namespace CMIO { namespace DP { namespace Sample
 		void									TimecodeChanged(Float64 timecode);
 		void									StreamDeckChanged(UInt32 changed, UInt16 opcode, UInt16 operand);
         void                                    StreamThread();
+        void                                    ParseNAL(const int8_t* data, const int32_t data_size, unsigned char nal_type, int& start_pos, int& size);
+        bool                                    ParseSPSPPS(const int8_t* data, const int32_t data_size, unsigned char* sps_buffer, int& sps_len, unsigned char* pps_buffer, int& pps_len);
 	protected:
 		PropertyAddressList						mDeckPropertyListeners;
 
@@ -270,11 +274,16 @@ namespace CMIO { namespace DP { namespace Sample
 		RecentTimingInfo						mRecentTimingInfo[2];
 		UInt32									mRecentTimingInfoIdx;
         
+        H264Dec                                  mDecoder;
         AtomCamera                                mAtomCamera;
         boost::lockfree::spsc_queue<std::shared_ptr<Frame>, boost::lockfree::capacity<10> > mFrames;
         std::string                             mOffset;
         std::thread                             mStreamThread;
         bool                                   mIsActive; // Stop the stream thread when finalize the plugin
+        unsigned char                         mSpsBuffer[256];
+        int                                   mSpsSize;
+        unsigned char                         mPpsBuffer[256];
+        int                                   mPpsSize; 
 	};
 }}}
 

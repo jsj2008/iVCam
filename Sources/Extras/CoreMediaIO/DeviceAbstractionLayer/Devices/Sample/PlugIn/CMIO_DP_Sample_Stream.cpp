@@ -134,6 +134,8 @@ namespace CMIO { namespace DP { namespace Sample
         mAtomCamera(),
         mIsActive(true)
 	{
+        memset(mSpsBuffer, 0, 256);
+        memset(mPpsBuffer, 0, 256);
 	}
 	
 
@@ -187,6 +189,7 @@ namespace CMIO { namespace DP { namespace Sample
                 ret = mAtomCamera.getCameraOffset(mOffset);
                 if (ret == 0)
                 {
+                    LOGINFO("Device offset: %s", mOffset.c_str());
                     // Start the thread to read frame from device.
                     mStreamThread = std::thread(&Stream::StreamThread, this);
                     mStreamThread.detach();
@@ -251,6 +254,7 @@ namespace CMIO { namespace DP { namespace Sample
         
         // Signal the stream thread to terminate.
         mIsActive = false;
+        mDecoder.Close();
         
 		if (IsInput())
 		{
@@ -979,6 +983,66 @@ namespace CMIO { namespace DP { namespace Sample
 		return true;
 	}
     
+    void Stream::ParseNAL(const int8_t* data, const int32_t data_size, unsigned char nal_type, int& start_pos, int& size)
+    {
+        start_pos = -1;
+        size = 0;
+        for (int i = 0; i < data_size - 4; i++)
+        {
+            int offset = 0;
+            if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 0 && data[i + 3] == 1)
+            {
+                offset = 4;
+            }
+            else if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1)
+            {
+                offset = 3;
+            }
+            else
+            {
+                continue;
+            }
+            
+            if (start_pos != -1)
+            {
+                size = i - start_pos;
+                break;
+            }
+            else
+            {
+                if (nal_type == (data[i + offset] & 0x1f))
+                {
+                    start_pos = i + offset;
+                }
+            }
+            i += offset;
+        }
+    }
+    
+    bool Stream::ParseSPSPPS(const int8_t* data, const int32_t data_size, unsigned char* sps_buffer, int& sps_len, unsigned char* pps_buffer, int& pps_len)
+    {
+        int sps_start_pos;
+        int sps_size;
+        int pps_start_pos;
+        int pps_size;
+        
+        ParseNAL(data, data_size, 7, sps_start_pos, sps_size);
+        ParseNAL(data, data_size, 8, pps_start_pos, pps_size);
+        if (sps_size == 0 || pps_size == 0)
+        {
+            LOGERR("sps_size == 0 or pps_size == 0");
+            return false;
+        }
+        
+        sps_len = sps_size;
+        pps_len = pps_size;
+        
+        memcpy(sps_buffer, data + sps_start_pos, sps_size);
+        memcpy(pps_buffer, data + pps_start_pos, pps_size);
+        
+        return true;
+    }
+    
     void Stream::StreamThread()
     {
         int ret;
@@ -1296,18 +1360,40 @@ namespace CMIO { namespace DP { namespace Sample
             
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;;
+            
             std::shared_ptr<Frame> ptr;
-            int size;
+            int rawFrameSize;
+            static bool didGetSPS = false;
             
             if (mFrames.read_available())
             {
                 ptr = mFrames.front();
-                void* data1 = ptr->data();
-                size = ptr->size();
+                void* rawFrame = ptr->data();
+                rawFrameSize = ptr->size();
                 
-                FILE* file = fopen("/Users/zhangzhongke/Documents/out.bin", "wb");
-                fwrite(data1, 1, size, file);
-                fclose(file);
+                if (!didGetSPS) {
+                    didGetSPS = ParseSPSPPS((int8_t*)rawFrame, rawFrameSize, mSpsBuffer, mSpsSize, mPpsBuffer, mPpsSize);
+                    if (didGetSPS)
+                    {
+                        H264DecParam param;
+                        param.width = 2560;
+                        param.height = 1280;
+                        param.sps = mSpsBuffer;
+                        param.sps_len = mSpsSize;
+                        param.pps = mPpsBuffer;
+                        param.pps_len = mPpsSize;
+                        param.pix_fmt = CM_PIX_FMT_YUV422P;
+                        
+                        mDecoder.Open(param);
+                    }
+                }
+                else
+                {
+                    std::shared_ptr<DecodeFrame2> decodedFrame = mDecoder.Decode2((unsigned char*)rawFrame, rawFrameSize, 0, 0);
+                    FILE* file = fopen("/Users/zhangzhongke/Documents/out.bin", "wb");
+                    fwrite(decodedFrame->data, 1, decodedFrame->len, file);
+                    fclose(file);
+                }
                 
                 mFrames.pop();
             }
