@@ -215,9 +215,7 @@ namespace CMIO { namespace DP { namespace Sample
 		static void								Messages(CFMachPortRef port, mach_msg_header_t* header, CFIndex size, Stream& stream);
 		void									FrameArrived(DPA::Sample::FrameArrivedMessage* message);
 		static void								ReleaseBufferCallback(void* refCon, void *doomedMemoryBlock, size_t sizeInBytes);
-
 		void									GetOutputBuffer(DPA::Sample::OutputBufferRequestedMessage* message);
-
 		void									DriveOutputClock(CMTime presentationTimeStamp, CMTime clockTime, UInt64 nanosecondsHostTime);
 
 	protected:

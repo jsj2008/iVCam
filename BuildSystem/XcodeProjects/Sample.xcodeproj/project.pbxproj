@@ -23,6 +23,28 @@
 		7B45EB7B1E65598100BF6BBF /* libCoreAudioStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B45EB791E65597100BF6BBF /* libCoreAudioStatic.a */; };
 		7B45EB7F1E6564E300BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
 		7B45EB851E67F34C00BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
+		7BCC92C21E713BA90063E5BA /* libAirDecoder.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92BB1E713BA90063E5BA /* libAirDecoder.dylib */; };
+		7BCC92C31E713BA90063E5BA /* libavcodec.56.60.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92BC1E713BA90063E5BA /* libavcodec.56.60.100.dylib */; };
+		7BCC92C41E713BA90063E5BA /* libavformat.56.40.101.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92BD1E713BA90063E5BA /* libavformat.56.40.101.dylib */; };
+		7BCC92C51E713BA90063E5BA /* libavutil.54.31.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92BE1E713BA90063E5BA /* libavutil.54.31.100.dylib */; };
+		7BCC92C61E713BA90063E5BA /* libfdk-aac.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92BF1E713BA90063E5BA /* libfdk-aac.1.dylib */; };
+		7BCC92C71E713BA90063E5BA /* libswscale.3.1.101.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92C01E713BA90063E5BA /* libswscale.3.1.101.dylib */; };
+		7BCC92C81E713BA90063E5BA /* libx264.148.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92C11E713BA90063E5BA /* libx264.148.dylib */; };
+		7BCC92C91E713BCD0063E5BA /* libAirDecoder.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92BB1E713BA90063E5BA /* libAirDecoder.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BCC92CA1E713BCD0063E5BA /* libavcodec.56.60.100.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92BC1E713BA90063E5BA /* libavcodec.56.60.100.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BCC92CB1E713BCD0063E5BA /* libavformat.56.40.101.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92BD1E713BA90063E5BA /* libavformat.56.40.101.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BCC92CC1E713BCD0063E5BA /* libavutil.54.31.100.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92BE1E713BA90063E5BA /* libavutil.54.31.100.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BCC92CD1E713BCD0063E5BA /* libfdk-aac.1.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92BF1E713BA90063E5BA /* libfdk-aac.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BCC92CE1E713BCD0063E5BA /* libswscale.3.1.101.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92C01E713BA90063E5BA /* libswscale.3.1.101.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BCC92CF1E713BCD0063E5BA /* libx264.148.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92C11E713BA90063E5BA /* libx264.148.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BCC92D71E71447E0063E5BA /* libcublas.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D31E71447E0063E5BA /* libcublas.7.5.dylib */; };
+		7BCC92D81E71447E0063E5BA /* libcudart.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */; };
+		7BCC92D91E71447E0063E5BA /* libUniversalBlender.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */; };
+		7BCC92DA1E71447E0063E5BA /* libunrollmap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D61E71447E0063E5BA /* libunrollmap.dylib */; };
+		7BCC92DB1E7144C60063E5BA /* libcublas.7.5.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92D31E71447E0063E5BA /* libcublas.7.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BCC92DC1E7144C60063E5BA /* libcudart.7.5.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BCC92DD1E7144C60063E5BA /* libUniversalBlender.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BCC92DE1E7144C60063E5BA /* libunrollmap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92D61E71447E0063E5BA /* libunrollmap.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E42920F810B75DB700EDA003 /* CMIO_DP_Property_Deck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E42920F610B75DB700EDA003 /* CMIO_DP_Property_Deck.cpp */; };
 		E42920F910B75DB700EDA003 /* CMIO_DP_Property_Deck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E42920F610B75DB700EDA003 /* CMIO_DP_Property_Deck.cpp */; };
 		E42AA55A0E073EEC000C4D64 /* CMIODebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEFCDB6509E703CE00413E85 /* CMIODebugMacros.cpp */; };
@@ -160,6 +182,17 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				7BCC92DB1E7144C60063E5BA /* libcublas.7.5.dylib in CopyFiles */,
+				7BCC92DC1E7144C60063E5BA /* libcudart.7.5.dylib in CopyFiles */,
+				7BCC92DD1E7144C60063E5BA /* libUniversalBlender.dylib in CopyFiles */,
+				7BCC92DE1E7144C60063E5BA /* libunrollmap.dylib in CopyFiles */,
+				7BCC92C91E713BCD0063E5BA /* libAirDecoder.dylib in CopyFiles */,
+				7BCC92CA1E713BCD0063E5BA /* libavcodec.56.60.100.dylib in CopyFiles */,
+				7BCC92CB1E713BCD0063E5BA /* libavformat.56.40.101.dylib in CopyFiles */,
+				7BCC92CC1E713BCD0063E5BA /* libavutil.54.31.100.dylib in CopyFiles */,
+				7BCC92CD1E713BCD0063E5BA /* libfdk-aac.1.dylib in CopyFiles */,
+				7BCC92CE1E713BCD0063E5BA /* libswscale.3.1.101.dylib in CopyFiles */,
+				7BCC92CF1E713BCD0063E5BA /* libx264.148.dylib in CopyFiles */,
 				7B3DEBCD1E6EA856002FF975 /* libuvc.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,6 +428,21 @@
 		7B45EB7C1E6564E300BF6BBF /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
 		7B45EB7D1E6564E300BF6BBF /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		7B45EB7E1E6564E300BF6BBF /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
+		7BCC92BB1E713BA90063E5BA /* libAirDecoder.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libAirDecoder.dylib; path = ../Lib/libAirDecoder.dylib; sourceTree = "<group>"; };
+		7BCC92BC1E713BA90063E5BA /* libavcodec.56.60.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.56.60.100.dylib; path = ../Lib/libavcodec.56.60.100.dylib; sourceTree = "<group>"; };
+		7BCC92BD1E713BA90063E5BA /* libavformat.56.40.101.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.56.40.101.dylib; path = ../Lib/libavformat.56.40.101.dylib; sourceTree = "<group>"; };
+		7BCC92BE1E713BA90063E5BA /* libavutil.54.31.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.54.31.100.dylib; path = ../Lib/libavutil.54.31.100.dylib; sourceTree = "<group>"; };
+		7BCC92BF1E713BA90063E5BA /* libfdk-aac.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libfdk-aac.1.dylib"; path = "../Lib/libfdk-aac.1.dylib"; sourceTree = "<group>"; };
+		7BCC92C01E713BA90063E5BA /* libswscale.3.1.101.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.3.1.101.dylib; path = ../Lib/libswscale.3.1.101.dylib; sourceTree = "<group>"; };
+		7BCC92C11E713BA90063E5BA /* libx264.148.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.148.dylib; path = ../Lib/libx264.148.dylib; sourceTree = "<group>"; };
+		7BCC92D01E713C410063E5BA /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		7BCC92D11E713C410063E5BA /* h264dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = h264dec.h; sourceTree = "<group>"; };
+		7BCC92D21E713C410063E5BA /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		7BCC92D31E71447E0063E5BA /* libcublas.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcublas.7.5.dylib; path = ../Lib/libcublas.7.5.dylib; sourceTree = "<group>"; };
+		7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcudart.7.5.dylib; path = ../Lib/libcudart.7.5.dylib; sourceTree = "<group>"; };
+		7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUniversalBlender.dylib; path = ../Lib/libUniversalBlender.dylib; sourceTree = "<group>"; };
+		7BCC92D61E71447E0063E5BA /* libunrollmap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunrollmap.dylib; path = ../Lib/libunrollmap.dylib; sourceTree = "<group>"; };
+		7BCC92DF1E71474D0063E5BA /* BlenderWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlenderWrapper.h; sourceTree = "<group>"; };
 		DE69900A0DBE99B60077AED4 /* CoreMediaIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMediaIO.framework; path = /System/Library/Frameworks/CoreMediaIO.framework; sourceTree = "<absolute>"; };
 		DEFCDB6509E703CE00413E85 /* CMIODebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIODebugMacros.cpp; sourceTree = "<group>"; };
 		DEFCDB6609E703CE00413E85 /* CMIODebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIODebugMacros.h; sourceTree = "<group>"; };
@@ -467,6 +515,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BCC92D71E71447E0063E5BA /* libcublas.7.5.dylib in Frameworks */,
+				7BCC92D81E71447E0063E5BA /* libcudart.7.5.dylib in Frameworks */,
+				7BCC92D91E71447E0063E5BA /* libUniversalBlender.dylib in Frameworks */,
+				7BCC92DA1E71447E0063E5BA /* libunrollmap.dylib in Frameworks */,
+				7BCC92C21E713BA90063E5BA /* libAirDecoder.dylib in Frameworks */,
+				7BCC92C31E713BA90063E5BA /* libavcodec.56.60.100.dylib in Frameworks */,
+				7BCC92C41E713BA90063E5BA /* libavformat.56.40.101.dylib in Frameworks */,
+				7BCC92C51E713BA90063E5BA /* libavutil.54.31.100.dylib in Frameworks */,
+				7BCC92C61E713BA90063E5BA /* libfdk-aac.1.dylib in Frameworks */,
+				7BCC92C71E713BA90063E5BA /* libswscale.3.1.101.dylib in Frameworks */,
+				7BCC92C81E713BA90063E5BA /* libx264.148.dylib in Frameworks */,
 				7B3DEBCA1E6EA5FD002FF975 /* libuvc.dylib in Frameworks */,
 				7B45EB7A1E65597100BF6BBF /* libCoreAudioStatic.a in Frameworks */,
 				E42AA5870E073EEC000C4D64 /* CoreFoundation.framework in Frameworks */,
@@ -734,6 +793,17 @@
 		19E34B2909F9981000F50E49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7BCC92D31E71447E0063E5BA /* libcublas.7.5.dylib */,
+				7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */,
+				7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */,
+				7BCC92D61E71447E0063E5BA /* libunrollmap.dylib */,
+				7BCC92BB1E713BA90063E5BA /* libAirDecoder.dylib */,
+				7BCC92BC1E713BA90063E5BA /* libavcodec.56.60.100.dylib */,
+				7BCC92BD1E713BA90063E5BA /* libavformat.56.40.101.dylib */,
+				7BCC92BE1E713BA90063E5BA /* libavutil.54.31.100.dylib */,
+				7BCC92BF1E713BA90063E5BA /* libfdk-aac.1.dylib */,
+				7BCC92C01E713BA90063E5BA /* libswscale.3.1.101.dylib */,
+				7BCC92C11E713BA90063E5BA /* libx264.148.dylib */,
 				7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */,
 				7B45EB791E65597100BF6BBF /* libCoreAudioStatic.a */,
 				E4E791EC1610E85700C2316E /* IOSurface.framework */,
@@ -749,6 +819,10 @@
 		7B3DEBD11E6F9879002FF975 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7BCC92DF1E71474D0063E5BA /* BlenderWrapper.h */,
+				7BCC92D01E713C410063E5BA /* common.h */,
+				7BCC92D11E713C410063E5BA /* h264dec.h */,
+				7BCC92D21E713C410063E5BA /* util.h */,
 				7B3DEBD21E6F9910002FF975 /* Error.h */,
 				7B3DEBD31E6F9910002FF975 /* Frame.h */,
 				7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */,
