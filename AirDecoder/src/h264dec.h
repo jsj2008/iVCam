@@ -33,7 +33,7 @@ public:
 	int Open(H264DecParam& param);
 	void Close();
 	std::shared_ptr<DecodeFrame> Decode(unsigned char* data, unsigned int len, long long pts, long long dts);
-    std::shared_ptr<DecodeFrame2> Decode2(unsigned char* data, unsigned int len, long long pts, long long dts);
+    std::shared_ptr<DecodeFrame2> Decode2(unsigned char* data, unsigned int len, long long pts, long long dts, int type, std::string offset);
     void FlushBuff();
 
 private:

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7BBD2B721E72A86100CDD061 /* libavcodec.56.60.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B691E72A86100CDD061 /* libavcodec.56.60.100.dylib */; };
+		7BBD2B731E72A86100CDD061 /* libavformat.56.40.101.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6A1E72A86100CDD061 /* libavformat.56.40.101.dylib */; };
+		7BBD2B741E72A86100CDD061 /* libavutil.54.31.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6B1E72A86100CDD061 /* libavutil.54.31.100.dylib */; };
+		7BBD2B751E72A86100CDD061 /* libcublas.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6C1E72A86100CDD061 /* libcublas.7.5.dylib */; };
+		7BBD2B761E72A86100CDD061 /* libcudart.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6D1E72A86100CDD061 /* libcudart.7.5.dylib */; };
+		7BBD2B771E72A86100CDD061 /* libswscale.3.1.101.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6E1E72A86100CDD061 /* libswscale.3.1.101.dylib */; };
+		7BBD2B781E72A86100CDD061 /* libUniversalBlender.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6F1E72A86100CDD061 /* libUniversalBlender.dylib */; };
+		7BBD2B791E72A86100CDD061 /* libunrollmap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B701E72A86100CDD061 /* libunrollmap.dylib */; };
+		7BBD2B7A1E72A86100CDD061 /* libx264.148.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B711E72A86100CDD061 /* libx264.148.dylib */; };
 		7BCC92971E712A1F0063E5BA /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC928E1E712A1F0063E5BA /* common.h */; };
 		7BCC92981E712A1F0063E5BA /* h264dec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC928F1E712A1F0063E5BA /* h264dec.cpp */; };
 		7BCC92991E712A1F0063E5BA /* h264dec.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92901E712A1F0063E5BA /* h264dec.h */; };
@@ -14,16 +23,21 @@
 		7BCC929B1E712A1F0063E5BA /* h264decimpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92921E712A1F0063E5BA /* h264decimpl.h */; };
 		7BCC929E1E712A1F0063E5BA /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC92951E712A1F0063E5BA /* util.cpp */; };
 		7BCC929F1E712A1F0063E5BA /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92961E712A1F0063E5BA /* util.h */; };
-		7BCC92A81E712F240063E5BA /* libavcodec.56.60.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92A21E712F240063E5BA /* libavcodec.56.60.100.dylib */; };
-		7BCC92A91E712F240063E5BA /* libavformat.56.40.101.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92A31E712F240063E5BA /* libavformat.56.40.101.dylib */; };
-		7BCC92AA1E712F240063E5BA /* libavutil.54.31.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92A41E712F240063E5BA /* libavutil.54.31.100.dylib */; };
-		7BCC92AC1E712F240063E5BA /* libswscale.3.1.101.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92A61E712F240063E5BA /* libswscale.3.1.101.dylib */; };
 		7BCC92B71E71310F0063E5BA /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC92B51E71310F0063E5BA /* log.cpp */; };
 		7BCC92B81E71310F0063E5BA /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92B61E71310F0063E5BA /* log.h */; };
 		7BCC92BA1E71312A0063E5BA /* macro.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92B91E71312A0063E5BA /* macro.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7BBD2B691E72A86100CDD061 /* libavcodec.56.60.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.56.60.100.dylib; path = ../BuildSystem/Lib/libavcodec.56.60.100.dylib; sourceTree = "<group>"; };
+		7BBD2B6A1E72A86100CDD061 /* libavformat.56.40.101.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.56.40.101.dylib; path = ../BuildSystem/Lib/libavformat.56.40.101.dylib; sourceTree = "<group>"; };
+		7BBD2B6B1E72A86100CDD061 /* libavutil.54.31.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.54.31.100.dylib; path = ../BuildSystem/Lib/libavutil.54.31.100.dylib; sourceTree = "<group>"; };
+		7BBD2B6C1E72A86100CDD061 /* libcublas.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcublas.7.5.dylib; path = ../BuildSystem/Lib/libcublas.7.5.dylib; sourceTree = "<group>"; };
+		7BBD2B6D1E72A86100CDD061 /* libcudart.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcudart.7.5.dylib; path = ../BuildSystem/Lib/libcudart.7.5.dylib; sourceTree = "<group>"; };
+		7BBD2B6E1E72A86100CDD061 /* libswscale.3.1.101.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.3.1.101.dylib; path = ../BuildSystem/Lib/libswscale.3.1.101.dylib; sourceTree = "<group>"; };
+		7BBD2B6F1E72A86100CDD061 /* libUniversalBlender.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUniversalBlender.dylib; path = ../BuildSystem/Lib/libUniversalBlender.dylib; sourceTree = "<group>"; };
+		7BBD2B701E72A86100CDD061 /* libunrollmap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunrollmap.dylib; path = ../BuildSystem/Lib/libunrollmap.dylib; sourceTree = "<group>"; };
+		7BBD2B711E72A86100CDD061 /* libx264.148.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.148.dylib; path = ../BuildSystem/Lib/libx264.148.dylib; sourceTree = "<group>"; };
 		7BCC92871E7129290063E5BA /* libAirDecoder.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libAirDecoder.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BCC928E1E712A1F0063E5BA /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = src/common.h; sourceTree = "<group>"; };
 		7BCC928F1E712A1F0063E5BA /* h264dec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = h264dec.cpp; path = src/h264dec.cpp; sourceTree = "<group>"; };
@@ -32,12 +46,6 @@
 		7BCC92921E712A1F0063E5BA /* h264decimpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = h264decimpl.h; path = src/h264decimpl.h; sourceTree = "<group>"; };
 		7BCC92951E712A1F0063E5BA /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = src/util.cpp; sourceTree = "<group>"; };
 		7BCC92961E712A1F0063E5BA /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = src/util.h; sourceTree = "<group>"; };
-		7BCC92A21E712F240063E5BA /* libavcodec.56.60.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.56.60.100.dylib; path = ffmpeg/lib/libavcodec.56.60.100.dylib; sourceTree = "<group>"; };
-		7BCC92A31E712F240063E5BA /* libavformat.56.40.101.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.56.40.101.dylib; path = ffmpeg/lib/libavformat.56.40.101.dylib; sourceTree = "<group>"; };
-		7BCC92A41E712F240063E5BA /* libavutil.54.31.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.54.31.100.dylib; path = ffmpeg/lib/libavutil.54.31.100.dylib; sourceTree = "<group>"; };
-		7BCC92A51E712F240063E5BA /* libfdk-aac.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libfdk-aac.1.dylib"; path = "ffmpeg/lib/libfdk-aac.1.dylib"; sourceTree = "<group>"; };
-		7BCC92A61E712F240063E5BA /* libswscale.3.1.101.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.3.1.101.dylib; path = ffmpeg/lib/libswscale.3.1.101.dylib; sourceTree = "<group>"; };
-		7BCC92A71E712F240063E5BA /* libx264.148.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.148.dylib; path = ffmpeg/lib/libx264.148.dylib; sourceTree = "<group>"; };
 		7BCC92B51E71310F0063E5BA /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = log.cpp; path = src/log.cpp; sourceTree = "<group>"; };
 		7BCC92B61E71310F0063E5BA /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = log.h; path = src/log.h; sourceTree = "<group>"; };
 		7BCC92B91E71312A0063E5BA /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = macro.h; path = src/macro.h; sourceTree = "<group>"; };
@@ -48,10 +56,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BCC92A81E712F240063E5BA /* libavcodec.56.60.100.dylib in Frameworks */,
-				7BCC92A91E712F240063E5BA /* libavformat.56.40.101.dylib in Frameworks */,
-				7BCC92AA1E712F240063E5BA /* libavutil.54.31.100.dylib in Frameworks */,
-				7BCC92AC1E712F240063E5BA /* libswscale.3.1.101.dylib in Frameworks */,
+				7BBD2B721E72A86100CDD061 /* libavcodec.56.60.100.dylib in Frameworks */,
+				7BBD2B731E72A86100CDD061 /* libavformat.56.40.101.dylib in Frameworks */,
+				7BBD2B741E72A86100CDD061 /* libavutil.54.31.100.dylib in Frameworks */,
+				7BBD2B751E72A86100CDD061 /* libcublas.7.5.dylib in Frameworks */,
+				7BBD2B761E72A86100CDD061 /* libcudart.7.5.dylib in Frameworks */,
+				7BBD2B771E72A86100CDD061 /* libswscale.3.1.101.dylib in Frameworks */,
+				7BBD2B781E72A86100CDD061 /* libUniversalBlender.dylib in Frameworks */,
+				7BBD2B791E72A86100CDD061 /* libunrollmap.dylib in Frameworks */,
+				7BBD2B7A1E72A86100CDD061 /* libx264.148.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,12 +108,15 @@
 		7BCC92A11E712F240063E5BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7BCC92A21E712F240063E5BA /* libavcodec.56.60.100.dylib */,
-				7BCC92A31E712F240063E5BA /* libavformat.56.40.101.dylib */,
-				7BCC92A41E712F240063E5BA /* libavutil.54.31.100.dylib */,
-				7BCC92A51E712F240063E5BA /* libfdk-aac.1.dylib */,
-				7BCC92A61E712F240063E5BA /* libswscale.3.1.101.dylib */,
-				7BCC92A71E712F240063E5BA /* libx264.148.dylib */,
+				7BBD2B691E72A86100CDD061 /* libavcodec.56.60.100.dylib */,
+				7BBD2B6A1E72A86100CDD061 /* libavformat.56.40.101.dylib */,
+				7BBD2B6B1E72A86100CDD061 /* libavutil.54.31.100.dylib */,
+				7BBD2B6C1E72A86100CDD061 /* libcublas.7.5.dylib */,
+				7BBD2B6D1E72A86100CDD061 /* libcudart.7.5.dylib */,
+				7BBD2B6E1E72A86100CDD061 /* libswscale.3.1.101.dylib */,
+				7BBD2B6F1E72A86100CDD061 /* libUniversalBlender.dylib */,
+				7BBD2B701E72A86100CDD061 /* libunrollmap.dylib */,
+				7BBD2B711E72A86100CDD061 /* libx264.148.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -285,10 +301,7 @@
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ffmpeg/include/";
 				LD_DYLIB_INSTALL_NAME = "@rpath/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/ffmpeg/lib/",
-					"$(PROJECT_DIR)/ffmpeg/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../BuildSystem/lib/";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -303,10 +316,7 @@
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ffmpeg/include/";
 				LD_DYLIB_INSTALL_NAME = "@rpath/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/ffmpeg/lib/",
-					"$(PROJECT_DIR)/ffmpeg/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../BuildSystem/lib/";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -330,6 +340,7 @@
 				7BCC928D1E7129290063E5BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

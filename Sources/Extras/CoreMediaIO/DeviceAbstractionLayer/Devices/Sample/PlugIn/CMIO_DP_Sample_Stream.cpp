@@ -1364,8 +1364,9 @@ namespace CMIO { namespace DP { namespace Sample
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;;
             
+            std::shared_ptr<DecodeFrame2> decodedFrame;
             std::shared_ptr<Frame> ptr;
-            int rawFrameSize;
+            int rawFrameSize = 0;
             static bool didGetSPS = false;
             
             if (mFrames.read_available())
@@ -1393,10 +1394,14 @@ namespace CMIO { namespace DP { namespace Sample
                 }
                 else
                 {
-                    std::shared_ptr<DecodeFrame2> decodedFrame = mDecoder.Decode2((unsigned char*)rawFrame, rawFrameSize, 0, 0);
+                    decodedFrame = mDecoder.Decode2((unsigned char*)rawFrame, rawFrameSize, 0, 0, frameSize, mOffset);
                     if (decodedFrame != nullptr)
                     {
                         LOGINFO("Decoded frame size: %d", decodedFrame->len);
+                        if (frameSize == decodedFrame->len)
+                        {
+                            data = decodedFrame->data;
+                        }
                     }
                     else
                     {

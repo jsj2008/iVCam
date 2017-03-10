@@ -37,11 +37,11 @@ std::shared_ptr<DecodeFrame> H264Dec::Decode(unsigned char* data, unsigned int l
 	}
 }
 
-std::shared_ptr<DecodeFrame2> H264Dec::Decode2(unsigned char* data, unsigned int len, long long pts, long long dts)
+std::shared_ptr<DecodeFrame2> H264Dec::Decode2(unsigned char* data, unsigned int len, long long pts, long long dts, int type, std::string offset)
 {
     if (h264decimpl_)
     {
-        return h264decimpl_->Decode2(data, len, pts, dts);
+        return h264decimpl_->Decode2(data, len, pts, dts, type, offset);
     }
     else
     {
