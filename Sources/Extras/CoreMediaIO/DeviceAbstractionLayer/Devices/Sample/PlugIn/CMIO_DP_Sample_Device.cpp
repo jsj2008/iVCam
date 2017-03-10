@@ -102,7 +102,6 @@ namespace CMIO { namespace DP { namespace Sample
 		mControlCacheTime(0),
 		mEventPort(reinterpret_cast<CFMachPortCallBack>(Event), this)
 	{
-        LOGINFO("Device::Device()");
 		// Make sure the registry entry is valid
 		ThrowIf(not mRegistryEntry.IsValid(), CAException(kIOReturnBadArgument), "CMIO::DP::Sample::Device: invalid registry entry");
 		
@@ -122,7 +121,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::Initialize()
 	{
-        LOGINFO("Device::Initialize()");
 		// italize the super class
 		DP::Device::Initialize();
 
@@ -167,7 +165,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::Teardown()
 	{
-        LOGINFO("Device::Teardown()");
 		// Remove the event loop run loop source from the DAL's sources
 		CFRunLoopRemoveSource(CFRunLoopGetMain(), GetEventPort().GetRunLoopSource(), kCFRunLoopCommonModes);
 			
@@ -187,7 +184,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::Finalize()
 	{
-        LOGINFO("Device::Finalize()");
 		// Finalize the input streams
 		UInt32 numberStreams = GetNumberStreams(kCMIODevicePropertyScopeInput);
 		for (UInt32 streamIndex = 0; streamIndex != numberStreams; ++streamIndex)
@@ -269,7 +265,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	bool Device::HasProperty(const CMIOObjectPropertyAddress& address) const
 	{
-        LOGINFO("Device::HasProperty");
 		bool answer = false;
 		
 		// Take and hold the state mutex
@@ -295,7 +290,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	bool Device::IsPropertySettable(const CMIOObjectPropertyAddress& address) const
 	{
-        LOGINFO("Device::IsPropertySettable");
 		bool answer = false;
 		
 		// Take and hold the state mutex
@@ -321,7 +315,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	UInt32 Device::GetPropertyDataSize(const CMIOObjectPropertyAddress& address, UInt32 qualifierDataSize, const void* qualifierData) const
 	{
-        LOGINFO("Device::GetPropertyDataSize");
 		UInt32 answer = 0;
 		
 		// Take and hold the state mutex
@@ -347,20 +340,17 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::GetPropertyData(const CMIOObjectPropertyAddress& address, UInt32 qualifierDataSize, const void* qualifierData, UInt32 dataSize, UInt32& dataUsed, void* data) const
 	{
-        LOGINFO("Device::GetPropertyData()");
 		// Take and hold the state mutex
 		CAMutex::Locker stateMutex(const_cast<Device*>(this)->GetStateMutex());
 		
 		switch (address.mSelector)
 		{
 			case kCMIODevicePropertyHogMode:
-                LOGINFO("kCMIODevicePropertyHogMode");
 				ThrowIf(dataSize != GetPropertyDataSize(address, qualifierDataSize, qualifierData), CAException(kCMIOHardwareBadPropertySizeError), "CMIO::DP::Sample::Device::GetPropertyData: wrong data size for kCMIODevicePropertyHogMode");
 				mHogMode->GetPropertyData(address, qualifierDataSize, qualifierData, dataSize, dataUsed, data);
 				break;
 				
 			case kCMIODevicePropertyCanProcessRS422Command:
-                LOGINFO("kCMIODevicePropertyCanProcessRS422Command");
 				ThrowIf(dataSize != GetPropertyDataSize(address, qualifierDataSize, qualifierData), CAException(kCMIOHardwareBadPropertySizeError), "CMIO::DP::Device::GetPropertyData: wrong data size for kCMIODevicePropertyCanProcessRS422Command");
 				*static_cast<Boolean*>(data) = true;
 				dataUsed = sizeof(Boolean);
@@ -368,7 +358,6 @@ namespace CMIO { namespace DP { namespace Sample
 				
 			case kCMIODevicePropertyLinkedCoreAudioDeviceUID:
 			case kCMIODevicePropertyLinkedAndSyncedCoreAudioDeviceUID:
-                LOGINFO("kCMIODevicePropertyLinkedCoreAudioDeviceUID or kCMIODevicePropertyLinkedAndSyncedCoreAudioDeviceUID");
 				if (kCMIODevicePropertyScopeInput == address.mScope)
 				{
 					ThrowIf(dataSize != GetPropertyDataSize(address, qualifierDataSize, qualifierData), CAException(kCMIOHardwareBadPropertySizeError), "CMIO::DP::Sample::Device::GetPropertyData: wrong data size for kCMIO_DPA_Sample_StreamPropertyLinkedAndSyncedCoreAudioDeviceUID");
@@ -395,7 +384,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::SetPropertyData(const CMIOObjectPropertyAddress& address, UInt32 qualifierDataSize, const void* qualifierData, UInt32 dataSize, const void* data)
 	{
-        LOGINFO("Device::SetPropertyData");
 		// Take and hold the state mutex
 		CAMutex::Locker stateMutex(GetStateMutex());
 		
@@ -421,7 +409,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::CreateProperties() 
 	{
-        LOGINFO("Device::CreateProperties()");
 		// Remember when the properties were last cached
 		mPropertyCacheTime = CAHostTimeBase::GetTheCurrentTime();
 		
@@ -452,7 +439,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::ReleaseProperties() 
 	{
-        LOGINFO("Device::ReleaseProperties()");
 		if (NULL != mHogMode)
 		{
 			RemoveProperty(mHogMode);
@@ -482,7 +468,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	DP::Control* Device::GetControlByControlID(UInt32 controlID) const
 	{
-        LOGINFO("Device::GetControlByControlID()");
 		// Iterate through the control list
 		for(ControlList::const_iterator iterator = mControlList.begin() ; iterator != mControlList.end() ; std::advance(iterator, 1))
 		{
@@ -518,7 +503,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::SetControlValue(UInt32 controlID, UInt32 value, UInt32* newValue)
 	{
-        LOGINFO("Device::SetControlValue()");
 		// Grab the muxtex for the device's state
 		CAMutex::Locker locker(GetStateMutex());
 
@@ -538,7 +522,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	CFDictionaryRef	Device::CopyControlDictionaryByControlID(UInt32 controlID) const
 	{
-        LOGINFO("Device::CopyControlDictionaryByControlID()");
 		CFDictionaryRef answer = NULL;
 		
 		// Get the control list from the IORegistry
@@ -600,7 +583,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::CreateRegistryControls() 
 	{
-        LOGINFO("Device::CreateRegistryControls()");
 		// Create a vector of CMIOObjectIDs to hold the objects being created
 		std::vector<CMIOObjectID> controlIDs;
 
@@ -679,7 +661,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::CreatePluginControls() 
 	{
-        LOGINFO("Device::CreatePluginControls");
 		// Remember when the controls were last cached
 		mControlCacheTime = CAHostTimeBase::GetTheCurrentTime();
 		
@@ -755,7 +736,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::ReleaseControls(bool reportDeath) 
 	{
-        LOGINFO("Device::ReleaseControls");
 		// Grab the muxtex for the device's state
 		CAMutex::Locker locker(GetStateMutex());
 	
@@ -780,7 +760,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::Event(CFMachPortRef port, mach_msg_header_t* header, CFIndex size, Device& device) 
 	{
-        LOGINFO("Device::Event");
 		// Don't let any exceptions	leave this callback
 		try
 		{	
@@ -814,7 +793,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::UpdatePropertyStates() 
 	{
-        LOGINFO("Device::UpdatePropertyStates");
 		// Grab the muxtex for the device's state
 		CAMutex::Locker locker(GetStateMutex());
 
@@ -892,7 +870,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::UpdateControlStates(bool sendChangeNotifications) 
 	{
-        LOGINFO("Device::UpdateControlStates");
 		// Grab the muxtex for the device's state
 		CAMutex::Locker locker(GetStateMutex());
 
@@ -962,7 +939,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::ProcessRS422Command(CMIODeviceRS422Command* ioRS422Command) 
 	{
-		LOGINFO("CMIO::DP::Sample::Device::ProcessRS422Command");
 		DPA::Sample::ProcessRS422Command(GetAssistantPort(), GetDeviceGUID(), *ioRS422Command);
 	}
 
@@ -1004,7 +980,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::StartStream(CMIOStreamID streamID)
 	{
-        LOGINFO("Device::StartStream");
 		// See if the streamID is an input stream
 		Stream* stream = static_cast<Stream*>(GetStreamByID(kCMIODevicePropertyScopeInput, streamID));
 		
@@ -1033,7 +1008,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::StopStream(CMIOStreamID streamID)
 	{
-        LOGINFO("Device::StopStream");
 		// See if the streamID is an input stream
 		Stream* stream = static_cast<Stream*>(GetStreamByID(kCMIODevicePropertyScopeInput, streamID));
 		
@@ -1078,7 +1052,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::StopAllStreams()
 	{
-        LOGINFO("Device::StopAllStreams");
 		// Stop all the input streams
 		UInt32 numberStreams = GetNumberStreams(kCMIODevicePropertyScopeInput);
 		for (UInt32 streamIndex = 0; streamIndex != numberStreams; ++streamIndex)
@@ -1106,7 +1079,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::SuspendAllStreams()
 	{
-        LOGINFO("Device::SuspendAllStreams");
 		// Suspend all the input streams
 		UInt32 numberStreams = GetNumberStreams(kCMIODevicePropertyScopeInput);
 		for (UInt32 streamIndex = 0; streamIndex != numberStreams; ++streamIndex)
@@ -1128,8 +1100,7 @@ namespace CMIO { namespace DP { namespace Sample
 	// CreateStreams()
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::CreateStreams(CMIOObjectPropertyScope scope) 
-	{
-        LOGINFO("Device::CreateStreams");
+	{ 
 		// Get the stream configuration from the Assistant in 
 		DPA::Sample::AutoFreeUnboundedArray<UInt32> configuration;
 		DPA::Sample::GetStreamConfiguration(GetAssistantPort(), GetDeviceGUID(), scope, configuration);

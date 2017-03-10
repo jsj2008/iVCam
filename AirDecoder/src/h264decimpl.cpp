@@ -426,16 +426,19 @@ bool H264DecImpl::blendImage(std::shared_ptr<DecodeFrame2> dframe, int type)
             break;
         }
     }
+    
+    LOGINFO("Input width: %d, Input height: %d, Output width: %d, Output height: %d", width_, height_, params.output_width, params.output_height);
+    
     params.input_data = dst_data[0];
     params.output_data = blendedImage;
     params.offset = offset_;
     
     if (blender)
     {
-        blender->runImageBlender(params, CBlenderWrapper::PANORAMIC_BLENDER);
-        FILE* file = fopen("/Users/zhangzhongke/Documents/after_blend_rgb24.bin", "wb");
-        fwrite(blendedImage, 1, params.output_width*params.output_height*3, file);
-        fclose(file);
+//        blender->runImageBlender(params, CBlenderWrapper::PANORAMIC_BLENDER);
+//        FILE* file = fopen("/Users/zhangzhongke/Documents/after_blend_rgb24.bin", "wb");
+//        fwrite(blendedImage, 1, params.output_width*params.output_height*3, file);
+//        fclose(file);
     }
     
     sws_freeContext(yuv2rgbCxt);
