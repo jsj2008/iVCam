@@ -72,10 +72,14 @@
 #include "AtomCamera.h"
 #include "Frame.h"
 #include "h264dec.h"
-#include "BlenderWrapper.h"
 #include <boost/lockfree/spsc_queue.hpp>
 #include <thread>
 #include <chrono>
+
+extern "C"
+{ 
+#include "libswscale/swscale.h"
+}
 
 // System Includes
 #include <CoreMedia/CMSampleBuffer.h>
@@ -283,7 +287,7 @@ namespace CMIO { namespace DP { namespace Sample
         unsigned char                         mSpsBuffer[256];
         int                                   mSpsSize;
         unsigned char                         mPpsBuffer[256];
-        int                                   mPpsSize; 
+        int                                   mPpsSize;
 	};
 }}}
 

@@ -194,6 +194,10 @@ namespace CMIO { namespace DP { namespace Sample
                     mStreamThread = std::thread(&Stream::StreamThread, this);
                     mStreamThread.detach();
                 }
+                else
+                {
+                    LOGERR("Failed to get device offset...");
+                }
             }
 		}
 		else if (IsOutput())
@@ -255,7 +259,6 @@ namespace CMIO { namespace DP { namespace Sample
         // Signal the stream thread to terminate.
         mIsActive = false;
         mDecoder.Close();
-        
 		if (IsInput())
 		{
 			if (NULL != mNoData)
@@ -1370,6 +1373,7 @@ namespace CMIO { namespace DP { namespace Sample
                 ptr = mFrames.front();
                 void* rawFrame = ptr->data();
                 rawFrameSize = ptr->size();
+                LOGINFO("Raw frame size: %d", rawFrameSize);
                 
                 if (!didGetSPS) {
                     didGetSPS = ParseSPSPPS((int8_t*)rawFrame, rawFrameSize, mSpsBuffer, mSpsSize, mPpsBuffer, mPpsSize);
@@ -1390,9 +1394,14 @@ namespace CMIO { namespace DP { namespace Sample
                 else
                 {
                     std::shared_ptr<DecodeFrame2> decodedFrame = mDecoder.Decode2((unsigned char*)rawFrame, rawFrameSize, 0, 0);
-                    FILE* file = fopen("/Users/zhangzhongke/Documents/out.bin", "wb");
-                    fwrite(decodedFrame->data, 1, decodedFrame->len, file);
-                    fclose(file);
+                    if (decodedFrame != nullptr)
+                    {
+                        LOGINFO("Decoded frame size: %d", decodedFrame->len);
+                    }
+                    else
+                    {
+                        LOGERR("Failed to decode frame!");
+                    }
                 }
                 
                 mFrames.pop();

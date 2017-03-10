@@ -442,7 +442,6 @@
 		7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcudart.7.5.dylib; path = ../Lib/libcudart.7.5.dylib; sourceTree = "<group>"; };
 		7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUniversalBlender.dylib; path = ../Lib/libUniversalBlender.dylib; sourceTree = "<group>"; };
 		7BCC92D61E71447E0063E5BA /* libunrollmap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunrollmap.dylib; path = ../Lib/libunrollmap.dylib; sourceTree = "<group>"; };
-		7BCC92DF1E71474D0063E5BA /* BlenderWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlenderWrapper.h; sourceTree = "<group>"; };
 		DE69900A0DBE99B60077AED4 /* CoreMediaIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMediaIO.framework; path = /System/Library/Frameworks/CoreMediaIO.framework; sourceTree = "<absolute>"; };
 		DEFCDB6509E703CE00413E85 /* CMIODebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIODebugMacros.cpp; sourceTree = "<group>"; };
 		DEFCDB6609E703CE00413E85 /* CMIODebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIODebugMacros.h; sourceTree = "<group>"; };
@@ -819,7 +818,6 @@
 		7B3DEBD11E6F9879002FF975 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				7BCC92DF1E71474D0063E5BA /* BlenderWrapper.h */,
 				7BCC92D01E713C410063E5BA /* common.h */,
 				7BCC92D11E713C410063E5BA /* h264dec.h */,
 				7BCC92D21E713C410063E5BA /* util.h */,
@@ -1469,8 +1467,9 @@
 					"$(value)",
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
-					/Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/include,
 					/Users/zhangzhongke/Documents/projects/boost,
+					"$(PROJECT_DIR)/../include",
+					"$(PROJECT_DIR)/../../AirDecoder/ffmpeg/include/",
 				);
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DERIVED_FILES_DIR)/$(CURRENT_ARCH)\"";
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
