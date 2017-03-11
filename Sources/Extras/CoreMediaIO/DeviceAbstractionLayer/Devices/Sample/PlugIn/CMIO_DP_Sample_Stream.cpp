@@ -1380,7 +1380,7 @@ namespace CMIO { namespace DP { namespace Sample
                         LOGINFO("Decoded frame size: %d", decodedFrame->len);
                         if (frameSize == decodedFrame->len)
                         {
-                            //data = decodedFrame->data;
+                            data = decodedFrame->data;
                         }
                     }
                     else

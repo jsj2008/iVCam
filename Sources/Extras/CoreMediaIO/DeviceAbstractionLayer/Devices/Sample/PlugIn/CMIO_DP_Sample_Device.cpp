@@ -1100,7 +1100,7 @@ namespace CMIO { namespace DP { namespace Sample
 	// CreateStreams()
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::CreateStreams(CMIOObjectPropertyScope scope) 
-	{ 
+	{
 		// Get the stream configuration from the Assistant in 
 		DPA::Sample::AutoFreeUnboundedArray<UInt32> configuration;
 		DPA::Sample::GetStreamConfiguration(GetAssistantPort(), GetDeviceGUID(), scope, configuration);

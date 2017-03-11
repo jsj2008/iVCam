@@ -52,12 +52,12 @@ int H264DecImpl::Open(H264DecParam& param)
     LOGINFO("Open decoder successfully.");
     
     // The biggest resolution
-    blendedImage = new unsigned char[3008*1504*3]();
+    blendedImage = new unsigned char[3008*1504*4]();
     
     blender = new CBlenderWrapper;
     if (blender) {
         blender->capabilityAssessment();
-        blender->getSingleInstance(CBlenderWrapper::THREE_CHANNELS);
+        blender->getSingleInstance(CBlenderWrapper::FOUR_CHANNELS);
         blender->initializeDevice();
         LOGINFO("Create blender context successfully.");
     }
@@ -274,7 +274,7 @@ std::shared_ptr<DecodeFrame2> H264DecImpl::Decode2(unsigned char* data, unsigned
             decode_frame->len = width_*height_*2;
             frame->private_data = nullptr;
             
-            // convert to RGB24 from YUV422P and blend image
+            // convert to RGBA from YUV422P and blend image
             bool ret = blendImage(decode_frame, type);
             if (ret) {
                 LOGINFO("Blending image done.");
@@ -283,13 +283,13 @@ std::shared_ptr<DecodeFrame2> H264DecImpl::Decode2(unsigned char* data, unsigned
                 blendedFrame->dts = frame->dts;
                 blendedFrame->private_type = DEC_PRI_DATA_TYPE_ARRY;
                 blendedFrame->data = new unsigned char[params.output_width*params.output_height*2]();
+                
                 cvtColorSpace(blendedFrame->data);
-                FILE* file = fopen("/Users/zhangzhongke/Documents/after_blend_yuv422p.bin", "wb");
-                fwrite(blendedFrame->data, 1, params.output_width*params.output_height*2, file);
-                fclose(file);
                 
                 blendedFrame->private_data = blendedFrame->data;
                 blendedFrame->len = type;
+                decode_frame = nullptr;
+                
                 return blendedFrame;
             }
             break;
@@ -325,7 +325,7 @@ void H264DecImpl::cvtColorSpace(unsigned char* data)
     int dst_linesize[4];
     
     int ret=0;
-    ret= av_image_alloc(src_data, src_linesize, params.output_width, params.output_height, AV_PIX_FMT_RGB24, 1);
+    ret= av_image_alloc(src_data, src_linesize, params.output_width, params.output_height, AV_PIX_FMT_RGBA, 1);
     if (ret< 0) {
         LOGERR( "Could not allocate source image\n");
         return;
@@ -337,17 +337,17 @@ void H264DecImpl::cvtColorSpace(unsigned char* data)
         return;
     }
     
-    rgb2yuvCxt = sws_getContext(params.output_width, params.output_height, AV_PIX_FMT_YUV422P, params.output_width, params.output_height, AV_PIX_FMT_RGB24, SWS_BICUBIC, NULL, NULL, NULL);
+    rgb2yuvCxt = sws_getContext(params.output_width, params.output_height, AV_PIX_FMT_RGBA, params.output_width, params.output_height, AV_PIX_FMT_YUV422P, SWS_BICUBIC, NULL, NULL, NULL);
     if (!rgb2yuvCxt) {
-        LOGERR("YUV to RGB sws_getContext() failed...");
+        LOGERR("YUV422P to RGBA sws_getContext() failed...");
         av_freep(&src_data[0]);
         av_freep(&dst_data[0]);
         return;
     }
     
-    memcpy(src_data[0], blendedImage, params.output_width*params.output_height*3);
+    memcpy(src_data[0], blendedImage, params.output_width*params.output_height*4);
     
-    // RGB24 to YUV422P
+    // RGBA to YUV422P
     sws_scale(rgb2yuvCxt, src_data, src_linesize, 0, params.output_height, dst_data, dst_linesize);
     
     memcpy(data, dst_data[0], params.output_width*params.output_height);
@@ -375,16 +375,16 @@ bool H264DecImpl::blendImage(std::shared_ptr<DecodeFrame2> dframe, int type)
         LOGERR( "Could not allocate source image\n");
         return false;
     }
-    ret = av_image_alloc(dst_data, dst_linesize, width_, height_, AV_PIX_FMT_RGB24, 1);
+    ret = av_image_alloc(dst_data, dst_linesize, width_, height_, AV_PIX_FMT_RGBA, 1);
     if (ret< 0) {
         LOGERR("Could not allocate destination image\n");
         av_freep(&src_data[0]);
         return false;
     }
     
-    yuv2rgbCxt = sws_getContext(width_, height_, AV_PIX_FMT_YUV422P, width_, height_, AV_PIX_FMT_RGB24, SWS_BICUBIC, NULL, NULL, NULL);
+    yuv2rgbCxt = sws_getContext(width_, height_, AV_PIX_FMT_YUV422P, width_, height_, AV_PIX_FMT_RGBA, SWS_BICUBIC, NULL, NULL, NULL);
     if (!yuv2rgbCxt) {
-        LOGERR("YUV to RGB sws_getContext() failed...");
+        LOGERR("YUV to RGBA sws_getContext() failed...");
         av_freep(&src_data[0]);
         av_freep(&dst_data[0]);
         return false;
@@ -394,10 +394,10 @@ bool H264DecImpl::blendImage(std::shared_ptr<DecodeFrame2> dframe, int type)
     memcpy(src_data[1], dframe->data+width_*height_, width_*height_/2);      //U
     memcpy(src_data[2], dframe->data+width_*height_*3/2, width_*height_/2);   //V
     
-    // YUV422P to RGB24
+    // YUV422P to RGBA
     sws_scale(yuv2rgbCxt, src_data, src_linesize, 0, height_, dst_data, dst_linesize);
-    FILE* file = fopen("/Users/zhangzhongke/Documents/before_blend_rgb24.bin", "wb");
-    fwrite(dst_data[0], 1, width_*height_*3, file);
+    FILE* file = fopen("/Users/zhangzhongke/Documents/RGBA.bin", "wb");
+    fwrite(dst_data[0], 1, width_*height_*4, file);
     fclose(file);
     
     params.input_width = width_;
@@ -435,10 +435,11 @@ bool H264DecImpl::blendImage(std::shared_ptr<DecodeFrame2> dframe, int type)
     
     if (blender)
     {
-//        blender->runImageBlender(params, CBlenderWrapper::PANORAMIC_BLENDER);
-//        FILE* file = fopen("/Users/zhangzhongke/Documents/after_blend_rgb24.bin", "wb");
-//        fwrite(blendedImage, 1, params.output_width*params.output_height*3, file);
-//        fclose(file);
+        blender->runImageBlender(params, CBlenderWrapper::PANORAMIC_BLENDER);
+        
+        FILE* file = fopen("/Users/zhangzhongke/Documents/blend_RGBA.bin", "wb");
+        fwrite(blendedImage, 1, params.output_width*params.output_height*4, file);
+        fclose(file);
     }
     
     sws_freeContext(yuv2rgbCxt);
