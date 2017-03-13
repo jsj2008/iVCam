@@ -71,15 +71,9 @@
 
 #include "AtomCamera.h"
 #include "Frame.h"
-#include "h264dec.h"
 #include <boost/lockfree/spsc_queue.hpp>
 #include <thread>
-#include <chrono>
-
-extern "C"
-{ 
-#include "libswscale/swscale.h"
-}
+#include <chrono> 
 
 // System Includes
 #include <CoreMedia/CMSampleBuffer.h>
@@ -278,7 +272,6 @@ namespace CMIO { namespace DP { namespace Sample
 		RecentTimingInfo						mRecentTimingInfo[2];
 		UInt32									mRecentTimingInfoIdx;
         
-        H264Dec                                  mDecoder;
         AtomCamera                                mAtomCamera;
         boost::lockfree::spsc_queue<std::shared_ptr<Frame>, boost::lockfree::capacity<10> > mFrames;
         std::string                             mOffset;

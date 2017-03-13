@@ -256,7 +256,6 @@ namespace CMIO { namespace DP { namespace Sample
         
         // Signal the stream thread to terminate.
         mIsActive = false;
-        mDecoder.Close();
 		if (IsInput())
 		{
 			if (NULL != mNoData)
@@ -1344,10 +1343,8 @@ namespace CMIO { namespace DP { namespace Sample
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;
             
-            std::shared_ptr<DecodeFrame2> decodedFrame;
             std::shared_ptr<Frame> rawFrame;
             int rawFrameSize = 0;
-            static bool didGetSPS = false;
             
             if (mFrames.read_available())
             {
@@ -1355,39 +1352,6 @@ namespace CMIO { namespace DP { namespace Sample
                 void* rawFrameData = rawFrame->data();
                 rawFrameSize = rawFrame->size();
                 LOGINFO("Raw frame size: %d", rawFrameSize);
-                
-                if (!didGetSPS) {
-                    didGetSPS = ParseSPSPPS((int8_t*)rawFrameData, rawFrameSize, mSpsBuffer, mSpsSize, mPpsBuffer, mPpsSize);
-                    if (didGetSPS)
-                    {
-                        H264DecParam param;
-                        param.width = 2560;
-                        param.height = 1280;
-                        param.sps = mSpsBuffer;
-                        param.sps_len = mSpsSize;
-                        param.pps = mPpsBuffer;
-                        param.pps_len = mPpsSize;
-                        param.pix_fmt = CM_PIX_FMT_YUV422P;
-                        
-                        mDecoder.Open(param);
-                    }
-                }
-                else
-                {
-                    decodedFrame = mDecoder.Decode2((unsigned char*)rawFrameData, rawFrameSize, 0, 0, frameSize, mOffset);
-                    if (decodedFrame != nullptr)
-                    {
-                        if (frameSize == decodedFrame->len)
-                        {
-                            LOGINFO("Decoded frame size: %d", decodedFrame->len);
-                            memcpy(message->mDescriptor.address, decodedFrame->data, frameSize);
-                        }
-                    }
-                    else
-                    {
-                        LOGERR("Failed to decode frame!");
-                    }
-                }
                 
                 mFrames.pop();
             }

@@ -7,116 +7,68 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7BBD2B721E72A86100CDD061 /* libavcodec.56.60.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B691E72A86100CDD061 /* libavcodec.56.60.100.dylib */; };
-		7BBD2B731E72A86100CDD061 /* libavformat.56.40.101.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6A1E72A86100CDD061 /* libavformat.56.40.101.dylib */; };
-		7BBD2B741E72A86100CDD061 /* libavutil.54.31.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6B1E72A86100CDD061 /* libavutil.54.31.100.dylib */; };
-		7BBD2B751E72A86100CDD061 /* libcublas.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6C1E72A86100CDD061 /* libcublas.7.5.dylib */; };
-		7BBD2B761E72A86100CDD061 /* libcudart.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6D1E72A86100CDD061 /* libcudart.7.5.dylib */; };
-		7BBD2B771E72A86100CDD061 /* libswscale.3.1.101.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6E1E72A86100CDD061 /* libswscale.3.1.101.dylib */; };
-		7BBD2B781E72A86100CDD061 /* libUniversalBlender.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6F1E72A86100CDD061 /* libUniversalBlender.dylib */; };
-		7BBD2B791E72A86100CDD061 /* libunrollmap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B701E72A86100CDD061 /* libunrollmap.dylib */; };
-		7BBD2B7A1E72A86100CDD061 /* libx264.148.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B711E72A86100CDD061 /* libx264.148.dylib */; };
-		7BCC92971E712A1F0063E5BA /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC928E1E712A1F0063E5BA /* common.h */; };
-		7BCC92981E712A1F0063E5BA /* h264dec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC928F1E712A1F0063E5BA /* h264dec.cpp */; };
-		7BCC92991E712A1F0063E5BA /* h264dec.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92901E712A1F0063E5BA /* h264dec.h */; };
-		7BCC929A1E712A1F0063E5BA /* h264decimpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC92911E712A1F0063E5BA /* h264decimpl.cpp */; };
-		7BCC929B1E712A1F0063E5BA /* h264decimpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92921E712A1F0063E5BA /* h264decimpl.h */; };
-		7BCC929E1E712A1F0063E5BA /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC92951E712A1F0063E5BA /* util.cpp */; };
-		7BCC929F1E712A1F0063E5BA /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92961E712A1F0063E5BA /* util.h */; };
-		7BCC92B71E71310F0063E5BA /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC92B51E71310F0063E5BA /* log.cpp */; };
-		7BCC92B81E71310F0063E5BA /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92B61E71310F0063E5BA /* log.h */; };
-		7BCC92BA1E71312A0063E5BA /* macro.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92B91E71312A0063E5BA /* macro.h */; };
+		7BBD2BC21E76956800CDD061 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BBD1E76956800CDD061 /* libavcodec.a */; };
+		7BBD2BC31E76956800CDD061 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BBE1E76956800CDD061 /* libavformat.a */; };
+		7BBD2BC41E76956800CDD061 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BBF1E76956800CDD061 /* libavutil.a */; };
+		7BBD2BC51E76956800CDD061 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BC01E76956800CDD061 /* libswresample.a */; };
+		7BBD2BC61E76956800CDD061 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BC11E76956800CDD061 /* libswscale.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7BBD2B691E72A86100CDD061 /* libavcodec.56.60.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.56.60.100.dylib; path = ../BuildSystem/Lib/libavcodec.56.60.100.dylib; sourceTree = "<group>"; };
-		7BBD2B6A1E72A86100CDD061 /* libavformat.56.40.101.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.56.40.101.dylib; path = ../BuildSystem/Lib/libavformat.56.40.101.dylib; sourceTree = "<group>"; };
-		7BBD2B6B1E72A86100CDD061 /* libavutil.54.31.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.54.31.100.dylib; path = ../BuildSystem/Lib/libavutil.54.31.100.dylib; sourceTree = "<group>"; };
-		7BBD2B6C1E72A86100CDD061 /* libcublas.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcublas.7.5.dylib; path = ../BuildSystem/Lib/libcublas.7.5.dylib; sourceTree = "<group>"; };
-		7BBD2B6D1E72A86100CDD061 /* libcudart.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcudart.7.5.dylib; path = ../BuildSystem/Lib/libcudart.7.5.dylib; sourceTree = "<group>"; };
-		7BBD2B6E1E72A86100CDD061 /* libswscale.3.1.101.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.3.1.101.dylib; path = ../BuildSystem/Lib/libswscale.3.1.101.dylib; sourceTree = "<group>"; };
-		7BBD2B6F1E72A86100CDD061 /* libUniversalBlender.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUniversalBlender.dylib; path = ../BuildSystem/Lib/libUniversalBlender.dylib; sourceTree = "<group>"; };
-		7BBD2B701E72A86100CDD061 /* libunrollmap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunrollmap.dylib; path = ../BuildSystem/Lib/libunrollmap.dylib; sourceTree = "<group>"; };
-		7BBD2B711E72A86100CDD061 /* libx264.148.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.148.dylib; path = ../BuildSystem/Lib/libx264.148.dylib; sourceTree = "<group>"; };
-		7BCC92871E7129290063E5BA /* libAirDecoder.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libAirDecoder.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BCC928E1E712A1F0063E5BA /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = src/common.h; sourceTree = "<group>"; };
-		7BCC928F1E712A1F0063E5BA /* h264dec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = h264dec.cpp; path = src/h264dec.cpp; sourceTree = "<group>"; };
-		7BCC92901E712A1F0063E5BA /* h264dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = h264dec.h; path = src/h264dec.h; sourceTree = "<group>"; };
-		7BCC92911E712A1F0063E5BA /* h264decimpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = h264decimpl.cpp; path = src/h264decimpl.cpp; sourceTree = "<group>"; };
-		7BCC92921E712A1F0063E5BA /* h264decimpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = h264decimpl.h; path = src/h264decimpl.h; sourceTree = "<group>"; };
-		7BCC92951E712A1F0063E5BA /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = src/util.cpp; sourceTree = "<group>"; };
-		7BCC92961E712A1F0063E5BA /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = src/util.h; sourceTree = "<group>"; };
-		7BCC92B51E71310F0063E5BA /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = log.cpp; path = src/log.cpp; sourceTree = "<group>"; };
-		7BCC92B61E71310F0063E5BA /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = log.h; path = src/log.h; sourceTree = "<group>"; };
-		7BCC92B91E71312A0063E5BA /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = macro.h; path = src/macro.h; sourceTree = "<group>"; };
+		7BBD2BB21E7694AB00CDD061 /* libAirDecoder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirDecoder.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BBD2BB91E76952E00CDD061 /* av_toolbox */ = {isa = PBXFileReference; lastKnownFileType = folder; name = av_toolbox; path = src/av_toolbox; sourceTree = "<group>"; };
+		7BBD2BBA1E76952E00CDD061 /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; name = editor; path = src/editor; sourceTree = "<group>"; };
+		7BBD2BBB1E76952E00CDD061 /* llog */ = {isa = PBXFileReference; lastKnownFileType = folder; name = llog; path = src/llog; sourceTree = "<group>"; };
+		7BBD2BBD1E76956800CDD061 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = lib/libavcodec.a; sourceTree = "<group>"; };
+		7BBD2BBE1E76956800CDD061 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = lib/libavformat.a; sourceTree = "<group>"; };
+		7BBD2BBF1E76956800CDD061 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = lib/libavutil.a; sourceTree = "<group>"; };
+		7BBD2BC01E76956800CDD061 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = lib/libswresample.a; sourceTree = "<group>"; };
+		7BBD2BC11E76956800CDD061 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = lib/libswscale.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7BCC92841E7129290063E5BA /* Frameworks */ = {
+		7BBD2BAF1E7694AB00CDD061 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BBD2B721E72A86100CDD061 /* libavcodec.56.60.100.dylib in Frameworks */,
-				7BBD2B731E72A86100CDD061 /* libavformat.56.40.101.dylib in Frameworks */,
-				7BBD2B741E72A86100CDD061 /* libavutil.54.31.100.dylib in Frameworks */,
-				7BBD2B751E72A86100CDD061 /* libcublas.7.5.dylib in Frameworks */,
-				7BBD2B761E72A86100CDD061 /* libcudart.7.5.dylib in Frameworks */,
-				7BBD2B771E72A86100CDD061 /* libswscale.3.1.101.dylib in Frameworks */,
-				7BBD2B781E72A86100CDD061 /* libUniversalBlender.dylib in Frameworks */,
-				7BBD2B791E72A86100CDD061 /* libunrollmap.dylib in Frameworks */,
-				7BBD2B7A1E72A86100CDD061 /* libx264.148.dylib in Frameworks */,
+				7BBD2BC21E76956800CDD061 /* libavcodec.a in Frameworks */,
+				7BBD2BC31E76956800CDD061 /* libavformat.a in Frameworks */,
+				7BBD2BC41E76956800CDD061 /* libavutil.a in Frameworks */,
+				7BBD2BC51E76956800CDD061 /* libswresample.a in Frameworks */,
+				7BBD2BC61E76956800CDD061 /* libswscale.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7BCC927E1E7129290063E5BA = {
+		7BBD2BA91E7694AB00CDD061 = {
 			isa = PBXGroup;
 			children = (
-				7BCC92A01E712A2A0063E5BA /* src */,
-				7BCC92881E7129290063E5BA /* Products */,
-				7BCC92A11E712F240063E5BA /* Frameworks */,
+				7BBD2BB91E76952E00CDD061 /* av_toolbox */,
+				7BBD2BBA1E76952E00CDD061 /* editor */,
+				7BBD2BBB1E76952E00CDD061 /* llog */,
+				7BBD2BB31E7694AB00CDD061 /* Products */,
+				7BBD2BBC1E76956800CDD061 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		7BCC92881E7129290063E5BA /* Products */ = {
+		7BBD2BB31E7694AB00CDD061 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7BCC92871E7129290063E5BA /* libAirDecoder.dylib */,
+				7BBD2BB21E7694AB00CDD061 /* libAirDecoder.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7BCC92A01E712A2A0063E5BA /* src */ = {
+		7BBD2BBC1E76956800CDD061 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7BCC92B91E71312A0063E5BA /* macro.h */,
-				7BCC92B51E71310F0063E5BA /* log.cpp */,
-				7BCC92B61E71310F0063E5BA /* log.h */,
-				7BCC928E1E712A1F0063E5BA /* common.h */,
-				7BCC928F1E712A1F0063E5BA /* h264dec.cpp */,
-				7BCC92901E712A1F0063E5BA /* h264dec.h */,
-				7BCC92911E712A1F0063E5BA /* h264decimpl.cpp */,
-				7BCC92921E712A1F0063E5BA /* h264decimpl.h */,
-				7BCC92951E712A1F0063E5BA /* util.cpp */,
-				7BCC92961E712A1F0063E5BA /* util.h */,
-			);
-			name = src;
-			sourceTree = "<group>";
-		};
-		7BCC92A11E712F240063E5BA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7BBD2B691E72A86100CDD061 /* libavcodec.56.60.100.dylib */,
-				7BBD2B6A1E72A86100CDD061 /* libavformat.56.40.101.dylib */,
-				7BBD2B6B1E72A86100CDD061 /* libavutil.54.31.100.dylib */,
-				7BBD2B6C1E72A86100CDD061 /* libcublas.7.5.dylib */,
-				7BBD2B6D1E72A86100CDD061 /* libcudart.7.5.dylib */,
-				7BBD2B6E1E72A86100CDD061 /* libswscale.3.1.101.dylib */,
-				7BBD2B6F1E72A86100CDD061 /* libUniversalBlender.dylib */,
-				7BBD2B701E72A86100CDD061 /* libunrollmap.dylib */,
-				7BBD2B711E72A86100CDD061 /* libx264.148.dylib */,
+				7BBD2BBD1E76956800CDD061 /* libavcodec.a */,
+				7BBD2BBE1E76956800CDD061 /* libavformat.a */,
+				7BBD2BBF1E76956800CDD061 /* libavutil.a */,
+				7BBD2BC01E76956800CDD061 /* libswresample.a */,
+				7BBD2BC11E76956800CDD061 /* libswscale.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -124,29 +76,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7BCC92851E7129290063E5BA /* Headers */ = {
+		7BBD2BB01E7694AB00CDD061 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BCC929F1E712A1F0063E5BA /* util.h in Headers */,
-				7BCC92971E712A1F0063E5BA /* common.h in Headers */,
-				7BCC92B81E71310F0063E5BA /* log.h in Headers */,
-				7BCC92BA1E71312A0063E5BA /* macro.h in Headers */,
-				7BCC929B1E712A1F0063E5BA /* h264decimpl.h in Headers */,
-				7BCC92991E712A1F0063E5BA /* h264dec.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7BCC92861E7129290063E5BA /* AirDecoder */ = {
+		7BBD2BB11E7694AB00CDD061 /* AirDecoder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7BCC928B1E7129290063E5BA /* Build configuration list for PBXNativeTarget "AirDecoder" */;
+			buildConfigurationList = 7BBD2BB61E7694AB00CDD061 /* Build configuration list for PBXNativeTarget "AirDecoder" */;
 			buildPhases = (
-				7BCC92831E7129290063E5BA /* Sources */,
-				7BCC92841E7129290063E5BA /* Frameworks */,
-				7BCC92851E7129290063E5BA /* Headers */,
+				7BBD2BAE1E7694AB00CDD061 /* Sources */,
+				7BBD2BAF1E7694AB00CDD061 /* Frameworks */,
+				7BBD2BB01E7694AB00CDD061 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -154,57 +100,53 @@
 			);
 			name = AirDecoder;
 			productName = AirDecoder;
-			productReference = 7BCC92871E7129290063E5BA /* libAirDecoder.dylib */;
-			productType = "com.apple.product-type.library.dynamic";
+			productReference = 7BBD2BB21E7694AB00CDD061 /* libAirDecoder.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7BCC927F1E7129290063E5BA /* Project object */ = {
+		7BBD2BAA1E7694AB00CDD061 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Insta360;
 				TargetAttributes = {
-					7BCC92861E7129290063E5BA = {
+					7BBD2BB11E7694AB00CDD061 = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 7BCC92821E7129290063E5BA /* Build configuration list for PBXProject "AirDecoder" */;
+			buildConfigurationList = 7BBD2BAD1E7694AB00CDD061 /* Build configuration list for PBXProject "AirDecoder" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 7BCC927E1E7129290063E5BA;
-			productRefGroup = 7BCC92881E7129290063E5BA /* Products */;
+			mainGroup = 7BBD2BA91E7694AB00CDD061;
+			productRefGroup = 7BBD2BB31E7694AB00CDD061 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7BCC92861E7129290063E5BA /* AirDecoder */,
+				7BBD2BB11E7694AB00CDD061 /* AirDecoder */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7BCC92831E7129290063E5BA /* Sources */ = {
+		7BBD2BAE1E7694AB00CDD061 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BCC929A1E712A1F0063E5BA /* h264decimpl.cpp in Sources */,
-				7BCC92981E712A1F0063E5BA /* h264dec.cpp in Sources */,
-				7BCC92B71E71310F0063E5BA /* log.cpp in Sources */,
-				7BCC929E1E712A1F0063E5BA /* util.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		7BCC92891E7129290063E5BA /* Debug */ = {
+		7BBD2BB41E7694AB00CDD061 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -251,7 +193,7 @@
 			};
 			name = Debug;
 		};
-		7BCC928A1E7129290063E5BA /* Release */ = {
+		7BBD2BB51E7694AB00CDD061 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -291,32 +233,28 @@
 			};
 			name = Release;
 		};
-		7BCC928C1E7129290063E5BA /* Debug */ = {
+		7BBD2BB71E7694AB00CDD061 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath/";
 				EXECUTABLE_PREFIX = lib;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ffmpeg/include/";
-				LD_DYLIB_INSTALL_NAME = "@rpath/$(EXECUTABLE_PATH)";
-				LD_RUNPATH_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../BuildSystem/lib/";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include/ffmpeg";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		7BCC928D1E7129290063E5BA /* Release */ = {
+		7BBD2BB81E7694AB00CDD061 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath/";
 				EXECUTABLE_PREFIX = lib;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ffmpeg/include/";
-				LD_DYLIB_INSTALL_NAME = "@rpath/$(EXECUTABLE_PATH)";
-				LD_RUNPATH_SEARCH_PATHS = "";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../BuildSystem/lib/";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include/ffmpeg";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -324,25 +262,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7BCC92821E7129290063E5BA /* Build configuration list for PBXProject "AirDecoder" */ = {
+		7BBD2BAD1E7694AB00CDD061 /* Build configuration list for PBXProject "AirDecoder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7BCC92891E7129290063E5BA /* Debug */,
-				7BCC928A1E7129290063E5BA /* Release */,
+				7BBD2BB41E7694AB00CDD061 /* Debug */,
+				7BBD2BB51E7694AB00CDD061 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7BCC928B1E7129290063E5BA /* Build configuration list for PBXNativeTarget "AirDecoder" */ = {
+		7BBD2BB61E7694AB00CDD061 /* Build configuration list for PBXNativeTarget "AirDecoder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7BCC928C1E7129290063E5BA /* Debug */,
-				7BCC928D1E7129290063E5BA /* Release */,
+				7BBD2BB71E7694AB00CDD061 /* Debug */,
+				7BBD2BB81E7694AB00CDD061 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7BCC927F1E7129290063E5BA /* Project object */;
+	rootObject = 7BBD2BAA1E7694AB00CDD061 /* Project object */;
 }
