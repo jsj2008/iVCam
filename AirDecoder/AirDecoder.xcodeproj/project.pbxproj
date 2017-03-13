@@ -12,18 +12,30 @@
 		7BBD2BC41E76956800CDD061 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BBF1E76956800CDD061 /* libavutil.a */; };
 		7BBD2BC51E76956800CDD061 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BC01E76956800CDD061 /* libswresample.a */; };
 		7BBD2BC61E76956800CDD061 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BC11E76956800CDD061 /* libswscale.a */; };
+		7BBD2BC91E769A1C00CDD061 /* RawFrameSrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD2BC71E769A1C00CDD061 /* RawFrameSrc.cpp */; };
+		7BBD2BCA1E769A1C00CDD061 /* RawFrameSrc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7BBD2BC81E769A1C00CDD061 /* RawFrameSrc.hpp */; };
+		7BBD2BCD1E769A5A00CDD061 /* BlenderFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD2BCB1E769A5A00CDD061 /* BlenderFilter.cpp */; };
+		7BBD2BCE1E769A5A00CDD061 /* BlenderFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7BBD2BCC1E769A5A00CDD061 /* BlenderFilter.hpp */; };
+		7BBD2BD11E769A8100CDD061 /* H264Decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD2BCF1E769A8100CDD061 /* H264Decoder.cpp */; };
+		7BBD2BD21E769A8100CDD061 /* H264Decoder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7BBD2BD01E769A8100CDD061 /* H264Decoder.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7BBD2BB21E7694AB00CDD061 /* libAirDecoder.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAirDecoder.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BBD2BB91E76952E00CDD061 /* av_toolbox */ = {isa = PBXFileReference; lastKnownFileType = folder; name = av_toolbox; path = src/av_toolbox; sourceTree = "<group>"; };
-		7BBD2BBA1E76952E00CDD061 /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; name = editor; path = src/editor; sourceTree = "<group>"; };
-		7BBD2BBB1E76952E00CDD061 /* llog */ = {isa = PBXFileReference; lastKnownFileType = folder; name = llog; path = src/llog; sourceTree = "<group>"; };
 		7BBD2BBD1E76956800CDD061 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = lib/libavcodec.a; sourceTree = "<group>"; };
 		7BBD2BBE1E76956800CDD061 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = lib/libavformat.a; sourceTree = "<group>"; };
 		7BBD2BBF1E76956800CDD061 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = lib/libavutil.a; sourceTree = "<group>"; };
 		7BBD2BC01E76956800CDD061 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = lib/libswresample.a; sourceTree = "<group>"; };
 		7BBD2BC11E76956800CDD061 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = lib/libswscale.a; sourceTree = "<group>"; };
+		7BBD2BC71E769A1C00CDD061 /* RawFrameSrc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RawFrameSrc.cpp; sourceTree = "<group>"; };
+		7BBD2BC81E769A1C00CDD061 /* RawFrameSrc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RawFrameSrc.hpp; sourceTree = "<group>"; };
+		7BBD2BCB1E769A5A00CDD061 /* BlenderFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlenderFilter.cpp; sourceTree = "<group>"; };
+		7BBD2BCC1E769A5A00CDD061 /* BlenderFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlenderFilter.hpp; sourceTree = "<group>"; };
+		7BBD2BCF1E769A8100CDD061 /* H264Decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = H264Decoder.cpp; sourceTree = "<group>"; };
+		7BBD2BD01E769A8100CDD061 /* H264Decoder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = H264Decoder.hpp; sourceTree = "<group>"; };
+		7BBD2BD31E769AC900CDD061 /* av_toolbox */ = {isa = PBXFileReference; lastKnownFileType = folder; name = av_toolbox; path = arv/av_toolbox; sourceTree = "<group>"; };
+		7BBD2BD41E769AC900CDD061 /* editor */ = {isa = PBXFileReference; lastKnownFileType = folder; name = editor; path = arv/editor; sourceTree = "<group>"; };
+		7BBD2BD51E769AC900CDD061 /* llog */ = {isa = PBXFileReference; lastKnownFileType = folder; name = llog; path = arv/llog; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,9 +57,15 @@
 		7BBD2BA91E7694AB00CDD061 = {
 			isa = PBXGroup;
 			children = (
-				7BBD2BB91E76952E00CDD061 /* av_toolbox */,
-				7BBD2BBA1E76952E00CDD061 /* editor */,
-				7BBD2BBB1E76952E00CDD061 /* llog */,
+				7BBD2BD31E769AC900CDD061 /* av_toolbox */,
+				7BBD2BD41E769AC900CDD061 /* editor */,
+				7BBD2BD51E769AC900CDD061 /* llog */,
+				7BBD2BCF1E769A8100CDD061 /* H264Decoder.cpp */,
+				7BBD2BD01E769A8100CDD061 /* H264Decoder.hpp */,
+				7BBD2BCB1E769A5A00CDD061 /* BlenderFilter.cpp */,
+				7BBD2BCC1E769A5A00CDD061 /* BlenderFilter.hpp */,
+				7BBD2BC71E769A1C00CDD061 /* RawFrameSrc.cpp */,
+				7BBD2BC81E769A1C00CDD061 /* RawFrameSrc.hpp */,
 				7BBD2BB31E7694AB00CDD061 /* Products */,
 				7BBD2BBC1E76956800CDD061 /* Frameworks */,
 			);
@@ -80,6 +98,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BBD2BCA1E769A1C00CDD061 /* RawFrameSrc.hpp in Headers */,
+				7BBD2BCE1E769A5A00CDD061 /* BlenderFilter.hpp in Headers */,
+				7BBD2BD21E769A8100CDD061 /* H264Decoder.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +161,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BBD2BCD1E769A5A00CDD061 /* BlenderFilter.cpp in Sources */,
+				7BBD2BC91E769A1C00CDD061 /* RawFrameSrc.cpp in Sources */,
+				7BBD2BD11E769A8100CDD061 /* H264Decoder.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
