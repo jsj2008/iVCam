@@ -130,8 +130,12 @@ namespace CMIO { namespace DP { namespace Sample
 		mDeferredNoDataBufferEvent(kCMIOSampleBufferNoDataEvent_Unknown),
 		mOutputHosttimeCorrection(0LL),
 		mPreviousCycleTimeSeconds(0xFFFFFFFF),
-		mSyncClock(true)
+		mSyncClock(true),
+        mAtomCamera(),
+        mIsActive(true)
 	{
+        memset(mSpsBuffer, 0, 256);
+        memset(mPpsBuffer, 0, 256);
 	}
 	
 
@@ -146,8 +150,7 @@ namespace CMIO { namespace DP { namespace Sample
 	// Initialize()
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Initialize()
-	{
-        LOGINFO("DP::Sample::Stream::Initialize");
+	{ 
 		// Initialize the super class
 		DP::Stream::Initialize();
 
@@ -178,7 +181,23 @@ namespace CMIO { namespace DP { namespace Sample
 			}
             
             // *** Create a new thread to open device and get preview stream
-            
+            int ret = mAtomCamera.open(StreamFormat::H264, 2560, 1280, 30, 8*1024*1024);
+            if (ret == 0)
+            {
+                // Get offset from device.
+                ret = mAtomCamera.getCameraOffset(mOffset);
+                if (ret == 0)
+                {
+                    LOGINFO("Device offset: %s", mOffset.c_str());
+                    // Start the thread to read frame from device.
+                    mStreamThread = std::thread(&Stream::StreamThread, this);
+                    mStreamThread.detach();
+                }
+                else
+                {
+                    LOGERR("Failed to get device offset...");
+                }
+            }
 		}
 		else if (IsOutput())
 		{
@@ -225,7 +244,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Teardown()
 	{
-        LOGINFO("DP::Sample::Stream::Teardown");
 		// Empty all the format descriptions from the format list
 		mFormatList->RemoveAllAvailableFormats();
 		
@@ -235,7 +253,10 @@ namespace CMIO { namespace DP { namespace Sample
 			delete mDeck;
 			mDeck = NULL;
 		}
-
+        
+        // Signal the stream thread to terminate.
+        mIsActive = false;
+        mDecoder.Close();
 		if (IsInput())
 		{
 			if (NULL != mNoData)
@@ -355,7 +376,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	bool Stream::HasProperty(const CMIOObjectPropertyAddress& address) const
 	{
-        LOGINFO("DP::Sample::Stream::HasProperty");
 		bool answer = false;
 		
 		// Take and hold the state mutex
@@ -385,7 +405,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	bool Stream::IsPropertySettable(const CMIOObjectPropertyAddress& address) const
 	{
-        LOGINFO("DP::Sample::Stream::IsPropertySettable");
 		bool answer = false;
 		
 		// Take and hold the state mutex
@@ -415,7 +434,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	UInt32 Stream::GetPropertyDataSize(const CMIOObjectPropertyAddress& address, UInt32 qualifierDataSize, const void* qualifierData) const
 	{
-        LOGINFO("DP::Sample::Stream::GetPropertyDataSize");
 		UInt32	answer = 0;
 		
 		// Take and hold the state mutex
@@ -445,7 +463,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::GetPropertyData(const CMIOObjectPropertyAddress& address, UInt32 qualifierDataSize, const void* qualifierData, UInt32 dataSize, UInt32& dataUsed, void* data) const
 	{
-        LOGINFO("DP::Sample::Stream::GetPropertyData");
 		// Take and hold the state mutex
 		CAMutex::Locker stateMutex(GetOwningDevice().GetStateMutex());
 		
@@ -583,7 +600,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::SetPropertyData(const CMIOObjectPropertyAddress& address, UInt32 qualifierDataSize, const void* qualifierData, UInt32 dataSize, const void* data)
 	{
-        LOGINFO("DP::Sample::Stream::SetPropertyData");
 		ThrowIf(not GetOwningDevice().HogModeIsOwnedBySelfOrIsFree(), CAException(kCMIODevicePermissionsError), "CMIO::DP::Sample::Stream::SetPropertyData: can't set the property because hog mode is owned by another process");
 
 		// Take and hold the state mutex
@@ -602,7 +618,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::PropertyListenerAdded(const CMIOObjectPropertyAddress& address)
 	{
-		LOGINFO("DP::Sample::Stream::PropertyListenerAdded");
 		DP::Stream::PropertyListenerAdded(address);
 		
 		// Don't do anything if the address is not deck related
@@ -630,7 +645,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::PropertyListenerRemoved(const CMIOObjectPropertyAddress& address)
 	{
-        LOGINFO("DP::Sample::Stream::PropertyListenerRemoved");
 		// Call the super class
 		DP::Stream::PropertyListenerRemoved(address);
 		
@@ -661,7 +675,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::UpdatePropertyState(const PropertyAddress& address, bool sendChangeNotifications) 
 	{
-        LOGINFO("DP::Sample::Stream::UpdatePropertyState");
 		// Take and hold the state mutex
 		CAMutex::Locker stateMutex(GetOwningDevice().GetStateMutex());
 
@@ -766,7 +779,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::DriveOutputClock(CMTime presentationTimeStamp, CMTime clockTime, UInt64 nanosecondsHostTime)
 	{
-        LOGINFO("DP::Sample::Stream::DriveOutputClock");
 		// If we are syncing the clock, then we need to get the current hosttime and calculate a correction to pull the driving clock time into the past.  This is because we want to make
 		// sure that the device clock is not trying to see into the future.
 		if (mSyncClock)
@@ -817,7 +829,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	bool Stream::TellHardwareToSetFormatDescription(CMFormatDescriptionRef format)
 	{
-        LOGINFO("DP::Sample::Stream::TellHardwareToSetFormatDescription");
 		// Make sure this process is allowed to make changes
 		ThrowIf(not GetOwningDevice().DeviceMasterIsOwnedBySelfOrIsFree(), CAException(kCMIODevicePermissionsError), "CMIO::DP::Sample::Stream::TellHardwareToSetFormatDescription: can't set the property because the device master is owned by another process");
 
@@ -840,7 +851,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::RefreshAvailableFormatDescriptions()
 	{
-        LOGINFO("DP::Sample::Stream::RefreshAvailableFormatDescriptions");
 		mFormatList->RemoveAllAvailableFormats();
 		AddAvailableFormatDescriptions();
 		
@@ -870,7 +880,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::AddAvailableFormatDescriptions()
 	{
-        LOGINFO("DP::Sample::Stream::AddAvailableFormatDescriptions");
 		// Get frame formats
 		DPA::Sample::AutoFreeUnboundedArray<DPA::Sample::FrameFormat> frameFormats;
 		DPA::Sample::GetFormatDescriptions(GetOwningDevice().GetAssistantPort(), GetOwningDevice().GetDeviceGUID(), GetDevicePropertyScope(), GetStartingDeviceChannelNumber(), frameFormats);
@@ -949,7 +958,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	bool Stream::TellHardwareToSetFrameRate(Float64 frameRate)
 	{
-        LOGINFO("DP::Sample::Stream::TellHardwareToSetFrameRate");
 		// Make sure this process is allowed to make changes
 		ThrowIf(not GetOwningDevice().DeviceMasterIsOwnedBySelfOrIsFree(), CAException(kCMIODevicePermissionsError), "CMIO::DP::Sample::Stream::TellHardwareToSetFrameRate: can't set the property because the device master is owned by another process");
 
@@ -962,6 +970,93 @@ namespace CMIO { namespace DP { namespace Sample
 
 		return true;
 	}
+    
+    void Stream::ParseNAL(const int8_t* data, const int32_t data_size, unsigned char nal_type, int& start_pos, int& size)
+    {
+        start_pos = -1;
+        size = 0;
+        for (int i = 0; i < data_size - 4; i++)
+        {
+            int offset = 0;
+            if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 0 && data[i + 3] == 1)
+            {
+                offset = 4;
+            }
+            else if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1)
+            {
+                offset = 3;
+            }
+            else
+            {
+                continue;
+            }
+            
+            if (start_pos != -1)
+            {
+                size = i - start_pos;
+                break;
+            }
+            else
+            {
+                if (nal_type == (data[i + offset] & 0x1f))
+                {
+                    start_pos = i + offset;
+                }
+            }
+            i += offset;
+        }
+    }
+    
+    bool Stream::ParseSPSPPS(const int8_t* data, const int32_t data_size, unsigned char* sps_buffer, int& sps_len, unsigned char* pps_buffer, int& pps_len)
+    {
+        int sps_start_pos;
+        int sps_size;
+        int pps_start_pos;
+        int pps_size;
+        
+        ParseNAL(data, data_size, 7, sps_start_pos, sps_size);
+        ParseNAL(data, data_size, 8, pps_start_pos, pps_size);
+        if (sps_size == 0 || pps_size == 0)
+        {
+            LOGERR("sps_size == 0 or pps_size == 0");
+            return false;
+        }
+        
+        sps_len = sps_size;
+        pps_len = pps_size;
+        
+        memcpy(sps_buffer, data + sps_start_pos, sps_size);
+        memcpy(pps_buffer, data + pps_start_pos, pps_size);
+        
+        return true;
+    }
+    
+    void Stream::StreamThread()
+    {
+        int ret;
+        std::shared_ptr<Frame> frame;
+        while (mIsActive) {
+            ret = mAtomCamera.readFrame(&frame);
+            if (ret != 0)
+            {
+                LOGERR("Failed to read frame. Error code: %d", ret);
+                break;
+            }
+            if (mFrames.write_available()) {
+                mFrames.push(frame);
+                std::this_thread::sleep_for(std::chrono::milliseconds(30));
+            }
+            else
+            {
+                LOGINFO("The buffer is full. Frame dropped...");
+            }
+        }
+        
+        if (!mAtomCamera.isClosed())
+        {
+            mAtomCamera.close();
+        }
+    }
 
 	#pragma mark -
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -969,7 +1064,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Start()
 	{
-        LOGINFO("DP::Sample::Stream::Start");
 		// Throw an exception if another process is hogging the device
 		ThrowIf(not GetOwningDevice().HogModeIsOwnedBySelfOrIsFree(), CAException(kCMIODevicePermissionsError), "CMIO::DP::Sample::Stream::Start: can't start the stream because hog mode is owned by another process");
 
@@ -986,7 +1080,7 @@ namespace CMIO { namespace DP { namespace Sample
 
 		// Make sure the notification port is not invalid
 		ThrowIf(PTA::CFMachPortThread::kInvalid == mMessageThread.GetState(), -1, "CMIO::DP::Sample::Stream::Start: CFMachPortThread thread invalid");
-
+        
 		if (IsInput())
 		{
 			// Initialize the clock support
@@ -1007,6 +1101,7 @@ namespace CMIO { namespace DP { namespace Sample
 	
 			// Start the stream
 			DPA::Sample::StartStream(GetOwningDevice().GetAssistantPort(), GetOwningDevice().GetDeviceGUID(), mMessageThread.GetMachPort(), GetDevicePropertyScope(), GetStartingDeviceChannelNumber());
+            
 		}
 		else if (IsOutput())
 		{
@@ -1030,7 +1125,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Stop()
 	{
-        LOGINFO("DP::Sample::Stream::Stop");
 		// Simply return if not streaming
 		if (not Streaming())
 			return;
@@ -1072,7 +1166,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Unplug()
 	{
-        LOGINFO("DP::Sample::Stream::Unplug");
 		// Simply return if not streaming or already suspended
 		if (not Streaming() or mSuspended)
 			return;
@@ -1093,7 +1186,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	CMSimpleQueueRef Stream::CopyBufferQueue(CMIODeviceStreamQueueAlteredProc queueAlteredProc, void* queueAlteredRefCon)
 	{
-        LOGINFO("DP::Sample::Stream::CopyBufferQueue");
 		// Initialize the queue altered proc and its associated refCon
 		mQueueAlteredProc = queueAlteredProc;
 		mQueueAlteredRefCon	= queueAlteredRefCon;
@@ -1124,7 +1216,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Messages(CFMachPortRef port, mach_msg_header_t* header, CFIndex size, Stream& stream) 
 	{
-        LOGINFO("DP::Sample::Stream::Messages");
 		// Examine the message ID
 		switch (header->msgh_id)
 		{
@@ -1249,8 +1340,61 @@ namespace CMIO { namespace DP { namespace Sample
 			CMBlockBufferCustomBlockSource customBlockSource = { kCMBlockBufferCustomBlockSourceVersion, NULL, ReleaseBufferCallback, this };
 			// Get the size & data for the frame
 			size_t frameSize = message->mDescriptor.size;
-			void* data = message->mDescriptor.address;
+            LOGINFO("original frame size: %d", frameSize);
+            // Get a frame from frame queue
+            void* data = message->mDescriptor.address;
             
+            std::shared_ptr<DecodeFrame2> decodedFrame;
+            std::shared_ptr<Frame> rawFrame;
+            int rawFrameSize = 0;
+            static bool didGetSPS = false;
+            
+            if (mFrames.read_available())
+            {
+                rawFrame = mFrames.front();
+                void* rawFrameData = rawFrame->data();
+                rawFrameSize = rawFrame->size();
+                LOGINFO("Raw frame size: %d", rawFrameSize);
+                
+                if (!didGetSPS) {
+                    didGetSPS = ParseSPSPPS((int8_t*)rawFrameData, rawFrameSize, mSpsBuffer, mSpsSize, mPpsBuffer, mPpsSize);
+                    if (didGetSPS)
+                    {
+                        H264DecParam param;
+                        param.width = 2560;
+                        param.height = 1280;
+                        param.sps = mSpsBuffer;
+                        param.sps_len = mSpsSize;
+                        param.pps = mPpsBuffer;
+                        param.pps_len = mPpsSize;
+                        param.pix_fmt = CM_PIX_FMT_YUV422P;
+                        
+                        mDecoder.Open(param);
+                    }
+                }
+                else
+                {
+                    decodedFrame = mDecoder.Decode2((unsigned char*)rawFrameData, rawFrameSize, 0, 0, frameSize, mOffset);
+                    if (decodedFrame != nullptr)
+                    {
+                        if (frameSize == decodedFrame->len)
+                        {
+                            LOGINFO("Decoded frame size: %d", decodedFrame->len);
+                            memcpy(message->mDescriptor.address, decodedFrame->data, frameSize);
+                        }
+                    }
+                    else
+                    {
+                        LOGERR("Failed to decode frame!");
+                    }
+                }
+                
+                mFrames.pop();
+            }
+            else
+            {
+                LOGINFO("The frame buffer is empty. Use default background.");
+            }
             
 			DebugMessageLevel(2, "CMIO::DP::Sample::Stream::FrameArrived: Frametype = %d discontinuity = %d frameSize = %ld", message->mFrameType, GetDiscontinuityFlags(), frameSize);
 			
@@ -1313,7 +1457,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::GetOutputBuffer(DPA::Sample::OutputBufferRequestedMessage* request) 
 	{
-        LOGINFO("DP::Sample::Stream::GetOutputBuffer");
+        
         if (request->mHostTimeInNanos > 0)
         {
  			// Inform that we are going to play the buffer

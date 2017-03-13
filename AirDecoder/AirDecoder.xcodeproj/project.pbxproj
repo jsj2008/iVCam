@@ -1,0 +1,348 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7BBD2B721E72A86100CDD061 /* libavcodec.56.60.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B691E72A86100CDD061 /* libavcodec.56.60.100.dylib */; };
+		7BBD2B731E72A86100CDD061 /* libavformat.56.40.101.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6A1E72A86100CDD061 /* libavformat.56.40.101.dylib */; };
+		7BBD2B741E72A86100CDD061 /* libavutil.54.31.100.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6B1E72A86100CDD061 /* libavutil.54.31.100.dylib */; };
+		7BBD2B751E72A86100CDD061 /* libcublas.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6C1E72A86100CDD061 /* libcublas.7.5.dylib */; };
+		7BBD2B761E72A86100CDD061 /* libcudart.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6D1E72A86100CDD061 /* libcudart.7.5.dylib */; };
+		7BBD2B771E72A86100CDD061 /* libswscale.3.1.101.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6E1E72A86100CDD061 /* libswscale.3.1.101.dylib */; };
+		7BBD2B781E72A86100CDD061 /* libUniversalBlender.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B6F1E72A86100CDD061 /* libUniversalBlender.dylib */; };
+		7BBD2B791E72A86100CDD061 /* libunrollmap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B701E72A86100CDD061 /* libunrollmap.dylib */; };
+		7BBD2B7A1E72A86100CDD061 /* libx264.148.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2B711E72A86100CDD061 /* libx264.148.dylib */; };
+		7BCC92971E712A1F0063E5BA /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC928E1E712A1F0063E5BA /* common.h */; };
+		7BCC92981E712A1F0063E5BA /* h264dec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC928F1E712A1F0063E5BA /* h264dec.cpp */; };
+		7BCC92991E712A1F0063E5BA /* h264dec.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92901E712A1F0063E5BA /* h264dec.h */; };
+		7BCC929A1E712A1F0063E5BA /* h264decimpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC92911E712A1F0063E5BA /* h264decimpl.cpp */; };
+		7BCC929B1E712A1F0063E5BA /* h264decimpl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92921E712A1F0063E5BA /* h264decimpl.h */; };
+		7BCC929E1E712A1F0063E5BA /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC92951E712A1F0063E5BA /* util.cpp */; };
+		7BCC929F1E712A1F0063E5BA /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92961E712A1F0063E5BA /* util.h */; };
+		7BCC92B71E71310F0063E5BA /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC92B51E71310F0063E5BA /* log.cpp */; };
+		7BCC92B81E71310F0063E5BA /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92B61E71310F0063E5BA /* log.h */; };
+		7BCC92BA1E71312A0063E5BA /* macro.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BCC92B91E71312A0063E5BA /* macro.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7BBD2B691E72A86100CDD061 /* libavcodec.56.60.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavcodec.56.60.100.dylib; path = ../BuildSystem/Lib/libavcodec.56.60.100.dylib; sourceTree = "<group>"; };
+		7BBD2B6A1E72A86100CDD061 /* libavformat.56.40.101.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavformat.56.40.101.dylib; path = ../BuildSystem/Lib/libavformat.56.40.101.dylib; sourceTree = "<group>"; };
+		7BBD2B6B1E72A86100CDD061 /* libavutil.54.31.100.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libavutil.54.31.100.dylib; path = ../BuildSystem/Lib/libavutil.54.31.100.dylib; sourceTree = "<group>"; };
+		7BBD2B6C1E72A86100CDD061 /* libcublas.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcublas.7.5.dylib; path = ../BuildSystem/Lib/libcublas.7.5.dylib; sourceTree = "<group>"; };
+		7BBD2B6D1E72A86100CDD061 /* libcudart.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcudart.7.5.dylib; path = ../BuildSystem/Lib/libcudart.7.5.dylib; sourceTree = "<group>"; };
+		7BBD2B6E1E72A86100CDD061 /* libswscale.3.1.101.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libswscale.3.1.101.dylib; path = ../BuildSystem/Lib/libswscale.3.1.101.dylib; sourceTree = "<group>"; };
+		7BBD2B6F1E72A86100CDD061 /* libUniversalBlender.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUniversalBlender.dylib; path = ../BuildSystem/Lib/libUniversalBlender.dylib; sourceTree = "<group>"; };
+		7BBD2B701E72A86100CDD061 /* libunrollmap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunrollmap.dylib; path = ../BuildSystem/Lib/libunrollmap.dylib; sourceTree = "<group>"; };
+		7BBD2B711E72A86100CDD061 /* libx264.148.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libx264.148.dylib; path = ../BuildSystem/Lib/libx264.148.dylib; sourceTree = "<group>"; };
+		7BCC92871E7129290063E5BA /* libAirDecoder.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libAirDecoder.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BCC928E1E712A1F0063E5BA /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = common.h; path = src/common.h; sourceTree = "<group>"; };
+		7BCC928F1E712A1F0063E5BA /* h264dec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = h264dec.cpp; path = src/h264dec.cpp; sourceTree = "<group>"; };
+		7BCC92901E712A1F0063E5BA /* h264dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = h264dec.h; path = src/h264dec.h; sourceTree = "<group>"; };
+		7BCC92911E712A1F0063E5BA /* h264decimpl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = h264decimpl.cpp; path = src/h264decimpl.cpp; sourceTree = "<group>"; };
+		7BCC92921E712A1F0063E5BA /* h264decimpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = h264decimpl.h; path = src/h264decimpl.h; sourceTree = "<group>"; };
+		7BCC92951E712A1F0063E5BA /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = util.cpp; path = src/util.cpp; sourceTree = "<group>"; };
+		7BCC92961E712A1F0063E5BA /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = src/util.h; sourceTree = "<group>"; };
+		7BCC92B51E71310F0063E5BA /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = log.cpp; path = src/log.cpp; sourceTree = "<group>"; };
+		7BCC92B61E71310F0063E5BA /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = log.h; path = src/log.h; sourceTree = "<group>"; };
+		7BCC92B91E71312A0063E5BA /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = macro.h; path = src/macro.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7BCC92841E7129290063E5BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BBD2B721E72A86100CDD061 /* libavcodec.56.60.100.dylib in Frameworks */,
+				7BBD2B731E72A86100CDD061 /* libavformat.56.40.101.dylib in Frameworks */,
+				7BBD2B741E72A86100CDD061 /* libavutil.54.31.100.dylib in Frameworks */,
+				7BBD2B751E72A86100CDD061 /* libcublas.7.5.dylib in Frameworks */,
+				7BBD2B761E72A86100CDD061 /* libcudart.7.5.dylib in Frameworks */,
+				7BBD2B771E72A86100CDD061 /* libswscale.3.1.101.dylib in Frameworks */,
+				7BBD2B781E72A86100CDD061 /* libUniversalBlender.dylib in Frameworks */,
+				7BBD2B791E72A86100CDD061 /* libunrollmap.dylib in Frameworks */,
+				7BBD2B7A1E72A86100CDD061 /* libx264.148.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7BCC927E1E7129290063E5BA = {
+			isa = PBXGroup;
+			children = (
+				7BCC92A01E712A2A0063E5BA /* src */,
+				7BCC92881E7129290063E5BA /* Products */,
+				7BCC92A11E712F240063E5BA /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		7BCC92881E7129290063E5BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BCC92871E7129290063E5BA /* libAirDecoder.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7BCC92A01E712A2A0063E5BA /* src */ = {
+			isa = PBXGroup;
+			children = (
+				7BCC92B91E71312A0063E5BA /* macro.h */,
+				7BCC92B51E71310F0063E5BA /* log.cpp */,
+				7BCC92B61E71310F0063E5BA /* log.h */,
+				7BCC928E1E712A1F0063E5BA /* common.h */,
+				7BCC928F1E712A1F0063E5BA /* h264dec.cpp */,
+				7BCC92901E712A1F0063E5BA /* h264dec.h */,
+				7BCC92911E712A1F0063E5BA /* h264decimpl.cpp */,
+				7BCC92921E712A1F0063E5BA /* h264decimpl.h */,
+				7BCC92951E712A1F0063E5BA /* util.cpp */,
+				7BCC92961E712A1F0063E5BA /* util.h */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		7BCC92A11E712F240063E5BA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7BBD2B691E72A86100CDD061 /* libavcodec.56.60.100.dylib */,
+				7BBD2B6A1E72A86100CDD061 /* libavformat.56.40.101.dylib */,
+				7BBD2B6B1E72A86100CDD061 /* libavutil.54.31.100.dylib */,
+				7BBD2B6C1E72A86100CDD061 /* libcublas.7.5.dylib */,
+				7BBD2B6D1E72A86100CDD061 /* libcudart.7.5.dylib */,
+				7BBD2B6E1E72A86100CDD061 /* libswscale.3.1.101.dylib */,
+				7BBD2B6F1E72A86100CDD061 /* libUniversalBlender.dylib */,
+				7BBD2B701E72A86100CDD061 /* libunrollmap.dylib */,
+				7BBD2B711E72A86100CDD061 /* libx264.148.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		7BCC92851E7129290063E5BA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BCC929F1E712A1F0063E5BA /* util.h in Headers */,
+				7BCC92971E712A1F0063E5BA /* common.h in Headers */,
+				7BCC92B81E71310F0063E5BA /* log.h in Headers */,
+				7BCC92BA1E71312A0063E5BA /* macro.h in Headers */,
+				7BCC929B1E712A1F0063E5BA /* h264decimpl.h in Headers */,
+				7BCC92991E712A1F0063E5BA /* h264dec.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		7BCC92861E7129290063E5BA /* AirDecoder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7BCC928B1E7129290063E5BA /* Build configuration list for PBXNativeTarget "AirDecoder" */;
+			buildPhases = (
+				7BCC92831E7129290063E5BA /* Sources */,
+				7BCC92841E7129290063E5BA /* Frameworks */,
+				7BCC92851E7129290063E5BA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AirDecoder;
+			productName = AirDecoder;
+			productReference = 7BCC92871E7129290063E5BA /* libAirDecoder.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7BCC927F1E7129290063E5BA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = Insta360;
+				TargetAttributes = {
+					7BCC92861E7129290063E5BA = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 7BCC92821E7129290063E5BA /* Build configuration list for PBXProject "AirDecoder" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7BCC927E1E7129290063E5BA;
+			productRefGroup = 7BCC92881E7129290063E5BA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7BCC92861E7129290063E5BA /* AirDecoder */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7BCC92831E7129290063E5BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BCC929A1E712A1F0063E5BA /* h264decimpl.cpp in Sources */,
+				7BCC92981E712A1F0063E5BA /* h264dec.cpp in Sources */,
+				7BCC92B71E71310F0063E5BA /* log.cpp in Sources */,
+				7BCC929E1E712A1F0063E5BA /* util.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7BCC92891E7129290063E5BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		7BCC928A1E7129290063E5BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		7BCC928C1E7129290063E5BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath/";
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ffmpeg/include/";
+				LD_DYLIB_INSTALL_NAME = "@rpath/$(EXECUTABLE_PATH)";
+				LD_RUNPATH_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../BuildSystem/lib/";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7BCC928D1E7129290063E5BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath/";
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ffmpeg/include/";
+				LD_DYLIB_INSTALL_NAME = "@rpath/$(EXECUTABLE_PATH)";
+				LD_RUNPATH_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../BuildSystem/lib/";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7BCC92821E7129290063E5BA /* Build configuration list for PBXProject "AirDecoder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BCC92891E7129290063E5BA /* Debug */,
+				7BCC928A1E7129290063E5BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7BCC928B1E7129290063E5BA /* Build configuration list for PBXNativeTarget "AirDecoder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BCC928C1E7129290063E5BA /* Debug */,
+				7BCC928D1E7129290063E5BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7BCC927F1E7129290063E5BA /* Project object */;
+}
