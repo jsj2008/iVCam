@@ -1345,19 +1345,19 @@ namespace CMIO { namespace DP { namespace Sample
             void* data = message->mDescriptor.address;
             
             std::shared_ptr<DecodeFrame2> decodedFrame;
-            std::shared_ptr<Frame> ptr;
+            std::shared_ptr<Frame> rawFrame;
             int rawFrameSize = 0;
             static bool didGetSPS = false;
             
             if (mFrames.read_available())
             {
-                ptr = mFrames.front();
-                void* rawFrame = ptr->data();
-                rawFrameSize = ptr->size();
+                rawFrame = mFrames.front();
+                void* rawFrameData = rawFrame->data();
+                rawFrameSize = rawFrame->size();
                 LOGINFO("Raw frame size: %d", rawFrameSize);
                 
                 if (!didGetSPS) {
-                    didGetSPS = ParseSPSPPS((int8_t*)rawFrame, rawFrameSize, mSpsBuffer, mSpsSize, mPpsBuffer, mPpsSize);
+                    didGetSPS = ParseSPSPPS((int8_t*)rawFrameData, rawFrameSize, mSpsBuffer, mSpsSize, mPpsBuffer, mPpsSize);
                     if (didGetSPS)
                     {
                         H264DecParam param;
@@ -1374,7 +1374,7 @@ namespace CMIO { namespace DP { namespace Sample
                 }
                 else
                 {
-                    decodedFrame = mDecoder.Decode2((unsigned char*)rawFrame, rawFrameSize, 0, 0, frameSize, mOffset);
+                    decodedFrame = mDecoder.Decode2((unsigned char*)rawFrameData, rawFrameSize, 0, 0, frameSize, mOffset);
                     if (decodedFrame != nullptr)
                     {
                         if (frameSize == decodedFrame->len)
