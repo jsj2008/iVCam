@@ -134,8 +134,27 @@ namespace CMIO { namespace DP { namespace Sample
         mAtomCamera(),
         mIsActive(true)
 	{
-        memset(mSpsBuffer, 0, 256);
-        memset(mPpsBuffer, 0, 256);
+        m1472x736Buffer = new unsigned char[1472*736*2]();
+        if (m1472x736Buffer)
+        {
+            FILE* file = fopen("/Users/zhangzhongke/Documents/1472x736.yuv", "rb");
+            fread(m1472x736Buffer, 1, RESOLUTION_1472X736, file);
+            fclose(file);
+        }
+        m2176x1088Buffer = new unsigned char[2176*1088*2]();
+        if (m2176x1088Buffer)
+        {
+            FILE* file = fopen("/Users/zhangzhongke/Documents/2176x1088.yuv", "rb");
+            fread(m2176x1088Buffer, 1, RESOLUTION_2176X1088, file);
+            fclose(file);
+        }
+        m3008x1504Buffer = new unsigned char[3008*1504*2]();
+        if (m3008x1504Buffer)
+        {
+            FILE* file = fopen("/Users/zhangzhongke/Documents/3008x1504.yuv", "rb");
+            fread(m3008x1504Buffer, 1, RESOLUTION_3008X1504, file);
+            fclose(file);
+        }
 	}
 	
 
@@ -144,6 +163,20 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Stream::~Stream()
 	{
+        if (m1472x736Buffer)
+        {
+            delete [] m1472x736Buffer;
+        }
+        
+        if (m2176x1088Buffer)
+        {
+            delete [] m2176x1088Buffer;
+        }
+        
+        if (m3008x1504Buffer)
+        {
+            delete [] m3008x1504Buffer;
+        }
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1340,25 +1373,56 @@ namespace CMIO { namespace DP { namespace Sample
 			// Get the size & data for the frame
 			size_t frameSize = message->mDescriptor.size;
             LOGINFO("original frame size: %d", frameSize);
+            
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;
+
+            switch (frameSize) {
+                case RESOLUTION_1472X736:
+                {
+                    LOGINFO("1472x736");
+                    //data = m1472x736Buffer;
+                    memcpy(message->mDescriptor.address, m1472x736Buffer, frameSize);
+                    break;
+                }
+                case RESOLUTION_2176X1088:
+                {
+                    LOGINFO("2176x1088");
+                    //data = m2176x1088Buffer;
+                    memcpy(message->mDescriptor.address, m2176x1088Buffer, frameSize);
+                    break;
+                }
+                case RESOLUTION_3008X1504:
+                {
+                    LOGINFO("3008x1504");
+                    //data = m3008x1504Buffer;
+                    memcpy(message->mDescriptor.address, m3008x1504Buffer, frameSize);
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            FILE* file = fopen("/Users/zhangzhongke/Documents/out.bin", "wb");
+            fwrite(message->mDescriptor.address, 1, frameSize, file);
+            fclose(file);
             
             std::shared_ptr<Frame> rawFrame;
             int rawFrameSize = 0;
             
-            if (mFrames.read_available())
-            {
-                rawFrame = mFrames.front();
-                void* rawFrameData = rawFrame->data();
-                rawFrameSize = rawFrame->size();
-                LOGINFO("Raw frame size: %d", rawFrameSize);
-                
-                mFrames.pop();
-            }
-            else
-            {
-                LOGINFO("The frame buffer is empty. Use default background.");
-            }
+//            if (mFrames.read_available())
+//            {
+//                rawFrame = mFrames.front();
+//                void* rawFrameData = rawFrame->data();
+//                rawFrameSize = rawFrame->size();
+//                LOGINFO("Raw frame size: %d", rawFrameSize);
+//                
+//                mFrames.pop();
+//            }
+//            else
+//            {
+//                LOGINFO("The frame buffer is empty. Use default background.");
+//            }
             
 			DebugMessageLevel(2, "CMIO::DP::Sample::Stream::FrameArrived: Frametype = %d discontinuity = %d frameSize = %ld", message->mFrameType, GetDiscontinuityFlags(), frameSize);
 			

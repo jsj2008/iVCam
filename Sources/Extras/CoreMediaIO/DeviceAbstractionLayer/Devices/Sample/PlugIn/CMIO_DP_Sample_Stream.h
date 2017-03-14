@@ -78,6 +78,10 @@
 // System Includes
 #include <CoreMedia/CMSampleBuffer.h>
 
+#define RESOLUTION_1472X736 2166784
+#define RESOLUTION_2176X1088 4734976
+#define RESOLUTION_3008X1504 9048064
+
 namespace CMIO { namespace DP { namespace Property
 {
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -276,11 +280,10 @@ namespace CMIO { namespace DP { namespace Sample
         boost::lockfree::spsc_queue<std::shared_ptr<Frame>, boost::lockfree::capacity<10> > mFrames;
         std::string                             mOffset;
         std::thread                             mStreamThread;
-        bool                                   mIsActive; // Stop the stream thread when finalize the plugin
-        unsigned char                         mSpsBuffer[256];
-        int                                   mSpsSize;
-        unsigned char                         mPpsBuffer[256];
-        int                                   mPpsSize;
+        bool                                  mIsActive; // Stop the stream thread when finalize the plugin
+        unsigned char*                        m1472x736Buffer;
+        unsigned char*                        m2176x1088Buffer;
+        unsigned char*                        m3008x1504Buffer;
 	};
 }}}
 
