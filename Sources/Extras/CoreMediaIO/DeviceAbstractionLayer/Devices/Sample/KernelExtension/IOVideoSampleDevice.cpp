@@ -399,7 +399,10 @@ IOReturn IOVideoSampleDevice::sendOutputFrame(void)
 		kprintf("help, no buffer at index %d!\n", (int)_currentBuffer);
 		return kIOReturnNotReady;
 	}
-	
+    
+    IOByteCount len = buffer->getDataBuffer()->getLength();
+    buffer->getDataBuffer()->writeBytes(0, 0, 0);
+    
 	ctrlDescriptor = OSDynamicCast(IOMemoryDescriptor, buffer->getControlBuffer());
 	if (NULL != ctrlDescriptor)
 	{
@@ -506,18 +509,19 @@ IOReturn IOVideoSampleDevice::consumeInputFrame(void)
         if (readBytes == sizeof(UInt64))
         {
             kprintf("mLastDisplayedSequenceNumber = %lld\n",lastDisplayedSequenceNumber);
-
         }
         else
         {
             lastDisplayedSequenceNumber = 0;
         }
+        
         readBytes = ctrlDescriptor->readBytes(offsetof(SampleVideoDeviceControlBuffer,discontinuityFlags),&frameDiscontinuityFlags,sizeof(UInt32));
         if (readBytes == sizeof(UInt32))
         {
             //If this flag is non-zero then the buffer was from a scrub operation
             kprintf("discontinuityFlags = %lld\n", (long long int)frameDiscontinuityFlags);
         }
+        
         readBytes = ctrlDescriptor->readBytes(offsetof(SampleVideoDeviceControlBuffer,smpteTime),&frameSMPTETime,sizeof(IOAudioSMPTETime));
         if (readBytes == sizeof(IOAudioSMPTETime))
         {

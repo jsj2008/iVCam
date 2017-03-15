@@ -76,11 +76,7 @@
 #include <chrono> 
 
 // System Includes
-#include <CoreMedia/CMSampleBuffer.h>
-
-#define RESOLUTION_1472X736 2166784
-#define RESOLUTION_2176X1088 4734976
-#define RESOLUTION_3008X1504 9048064
+#include <CoreMedia/CMSampleBuffer.h> 
 
 namespace CMIO { namespace DP { namespace Property
 {

@@ -261,7 +261,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include/ffmpeg";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/include/ffmpeg",
+					"$(PROJECT)",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
@@ -274,7 +277,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/include/ffmpeg";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/include/ffmpeg",
+					"$(PROJECT)",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
@@ -302,6 +308,7 @@
 				7BBD2BB81E7694AB00CDD061 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

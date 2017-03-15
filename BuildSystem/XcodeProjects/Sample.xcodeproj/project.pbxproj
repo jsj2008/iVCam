@@ -23,6 +23,9 @@
 		7B45EB7B1E65598100BF6BBF /* libCoreAudioStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B45EB791E65597100BF6BBF /* libCoreAudioStatic.a */; };
 		7B45EB7F1E6564E300BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
 		7B45EB851E67F34C00BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
+		7BBD2BD91E77E45200CDD061 /* 1472x736.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7BBD2BD61E77E45200CDD061 /* 1472x736.yuv */; };
+		7BBD2BDA1E77E45200CDD061 /* 2176x1088.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7BBD2BD71E77E45200CDD061 /* 2176x1088.yuv */; };
+		7BBD2BDB1E77E45200CDD061 /* 3008x1504.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7BBD2BD81E77E45200CDD061 /* 3008x1504.yuv */; };
 		7BCC92D71E71447E0063E5BA /* libcublas.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D31E71447E0063E5BA /* libcublas.7.5.dylib */; };
 		7BCC92D81E71447E0063E5BA /* libcudart.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */; };
 		7BCC92D91E71447E0063E5BA /* libUniversalBlender.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */; };
@@ -407,6 +410,9 @@
 		7B45EB7C1E6564E300BF6BBF /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
 		7B45EB7D1E6564E300BF6BBF /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		7B45EB7E1E6564E300BF6BBF /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
+		7BBD2BD61E77E45200CDD061 /* 1472x736.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1472x736.yuv; sourceTree = "<group>"; };
+		7BBD2BD71E77E45200CDD061 /* 2176x1088.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2176x1088.yuv; sourceTree = "<group>"; };
+		7BBD2BD81E77E45200CDD061 /* 3008x1504.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3008x1504.yuv; sourceTree = "<group>"; };
 		7BCC92D01E713C410063E5BA /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		7BCC92D21E713C410063E5BA /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		7BCC92D31E71447E0063E5BA /* libcublas.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcublas.7.5.dylib; path = ../Lib/libcublas.7.5.dylib; sourceTree = "<group>"; };
@@ -729,6 +735,9 @@
 		14F1EAE711A7375400B28A43 /* KernelExtension */ = {
 			isa = PBXGroup;
 			children = (
+				7BBD2BD61E77E45200CDD061 /* 1472x736.yuv */,
+				7BBD2BD71E77E45200CDD061 /* 2176x1088.yuv */,
+				7BBD2BD81E77E45200CDD061 /* 3008x1504.yuv */,
 				14F1EAEF11A7375400B28A43 /* SampleDriver-Info.plist */,
 				14F1EAF311A7375400B28A43 /* SampleUserClient-Info.plist */,
 				14F1EAE811A7375400B28A43 /* CMIO_KEXT_Sample_ControlIDs.h */,
@@ -1232,6 +1241,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BBD2BDA1E77E45200CDD061 /* 2176x1088.yuv in Resources */,
+				7BBD2BD91E77E45200CDD061 /* 1472x736.yuv in Resources */,
+				7BBD2BDB1E77E45200CDD061 /* 3008x1504.yuv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
