@@ -26,6 +26,13 @@
 		7BBD2BD91E77E45200CDD061 /* 1472x736.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7BBD2BD61E77E45200CDD061 /* 1472x736.yuv */; };
 		7BBD2BDA1E77E45200CDD061 /* 2176x1088.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7BBD2BD71E77E45200CDD061 /* 2176x1088.yuv */; };
 		7BBD2BDB1E77E45200CDD061 /* 3008x1504.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7BBD2BD81E77E45200CDD061 /* 3008x1504.yuv */; };
+		7BBD2BE11E791D1200CDD061 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDC1E791D1200CDD061 /* libavcodec.a */; };
+		7BBD2BE21E791D1200CDD061 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDD1E791D1200CDD061 /* libavformat.a */; };
+		7BBD2BE31E791D1200CDD061 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDE1E791D1200CDD061 /* libavutil.a */; };
+		7BBD2BE41E791D1200CDD061 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDF1E791D1200CDD061 /* libswresample.a */; };
+		7BBD2BE51E791D1200CDD061 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BE01E791D1200CDD061 /* libswscale.a */; };
+		7BBD2BEC1E791D8400CDD061 /* BlenderFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD2BE61E791D8400CDD061 /* BlenderFilter.cpp */; };
+		7BBD2BEE1E791D8400CDD061 /* RawFrameSrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD2BEA1E791D8400CDD061 /* RawFrameSrc.cpp */; };
 		7BCC92D71E71447E0063E5BA /* libcublas.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D31E71447E0063E5BA /* libcublas.7.5.dylib */; };
 		7BCC92D81E71447E0063E5BA /* libcudart.7.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */; };
 		7BCC92D91E71447E0063E5BA /* libUniversalBlender.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */; };
@@ -413,6 +420,16 @@
 		7BBD2BD61E77E45200CDD061 /* 1472x736.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1472x736.yuv; sourceTree = "<group>"; };
 		7BBD2BD71E77E45200CDD061 /* 2176x1088.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2176x1088.yuv; sourceTree = "<group>"; };
 		7BBD2BD81E77E45200CDD061 /* 3008x1504.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3008x1504.yuv; sourceTree = "<group>"; };
+		7BBD2BDC1E791D1200CDD061 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../Lib/libavcodec.a; sourceTree = "<group>"; };
+		7BBD2BDD1E791D1200CDD061 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ../Lib/libavformat.a; sourceTree = "<group>"; };
+		7BBD2BDE1E791D1200CDD061 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ../Lib/libavutil.a; sourceTree = "<group>"; };
+		7BBD2BDF1E791D1200CDD061 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = ../Lib/libswresample.a; sourceTree = "<group>"; };
+		7BBD2BE01E791D1200CDD061 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ../Lib/libswscale.a; sourceTree = "<group>"; };
+		7BBD2BE61E791D8400CDD061 /* BlenderFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlenderFilter.cpp; path = Decoder/BlenderFilter.cpp; sourceTree = "<group>"; };
+		7BBD2BE71E791D8400CDD061 /* BlenderFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BlenderFilter.hpp; path = Decoder/BlenderFilter.hpp; sourceTree = "<group>"; };
+		7BBD2BEA1E791D8400CDD061 /* RawFrameSrc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RawFrameSrc.cpp; path = Decoder/RawFrameSrc.cpp; sourceTree = "<group>"; };
+		7BBD2BEB1E791D8400CDD061 /* RawFrameSrc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RawFrameSrc.hpp; path = Decoder/RawFrameSrc.hpp; sourceTree = "<group>"; };
+		7BBD2BF01E7933B200CDD061 /* BlenderWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlenderWrapper.h; sourceTree = "<group>"; };
 		7BCC92D01E713C410063E5BA /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		7BCC92D21E713C410063E5BA /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		7BCC92D31E71447E0063E5BA /* libcublas.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcublas.7.5.dylib; path = ../Lib/libcublas.7.5.dylib; sourceTree = "<group>"; };
@@ -491,6 +508,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BBD2BE11E791D1200CDD061 /* libavcodec.a in Frameworks */,
+				7BBD2BE21E791D1200CDD061 /* libavformat.a in Frameworks */,
+				7BBD2BE31E791D1200CDD061 /* libavutil.a in Frameworks */,
+				7BBD2BE41E791D1200CDD061 /* libswresample.a in Frameworks */,
+				7BBD2BE51E791D1200CDD061 /* libswscale.a in Frameworks */,
 				7BCC92D71E71447E0063E5BA /* libcublas.7.5.dylib in Frameworks */,
 				7BCC92D81E71447E0063E5BA /* libcudart.7.5.dylib in Frameworks */,
 				7BCC92D91E71447E0063E5BA /* libUniversalBlender.dylib in Frameworks */,
@@ -715,6 +737,7 @@
 		14F1EACF11A7328A00B28A43 /* Sample */ = {
 			isa = PBXGroup;
 			children = (
+				7BBD2BEF1E791D9300CDD061 /* Decoder */,
 				7B3DEBD11E6F9879002FF975 /* Utils */,
 				14DEB09E155AEE0900E49CEA /* SamplePrefix.h */,
 				E42AA5BE0E07410B000C4D64 /* PlugIn */,
@@ -765,6 +788,11 @@
 		19E34B2909F9981000F50E49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7BBD2BDC1E791D1200CDD061 /* libavcodec.a */,
+				7BBD2BDD1E791D1200CDD061 /* libavformat.a */,
+				7BBD2BDE1E791D1200CDD061 /* libavutil.a */,
+				7BBD2BDF1E791D1200CDD061 /* libswresample.a */,
+				7BBD2BE01E791D1200CDD061 /* libswscale.a */,
 				7BCC92D31E71447E0063E5BA /* libcublas.7.5.dylib */,
 				7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */,
 				7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */,
@@ -784,6 +812,7 @@
 		7B3DEBD11E6F9879002FF975 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7BBD2BF01E7933B200CDD061 /* BlenderWrapper.h */,
 				7BCC92D01E713C410063E5BA /* common.h */,
 				7BCC92D21E713C410063E5BA /* util.h */,
 				7B3DEBD21E6F9910002FF975 /* Error.h */,
@@ -795,6 +824,17 @@
 				7B45EB7E1E6564E300BF6BBF /* macro.h */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		7BBD2BEF1E791D9300CDD061 /* Decoder */ = {
+			isa = PBXGroup;
+			children = (
+				7BBD2BE61E791D8400CDD061 /* BlenderFilter.cpp */,
+				7BBD2BE71E791D8400CDD061 /* BlenderFilter.hpp */,
+				7BBD2BEA1E791D8400CDD061 /* RawFrameSrc.cpp */,
+				7BBD2BEB1E791D8400CDD061 /* RawFrameSrc.hpp */,
+			);
+			name = Decoder;
 			sourceTree = "<group>";
 		};
 		DEFCDA6809E701B800413E85 = {
@@ -1298,6 +1338,7 @@
 				E42AA5690E073EEC000C4D64 /* CMIO_DP_Control.cpp in Sources */,
 				E42AA56A0E073EEC000C4D64 /* CMIO_DP_Command.cpp in Sources */,
 				E42AA56B0E073EEC000C4D64 /* CMIO_DP_DeviceCommands.cpp in Sources */,
+				7BBD2BEC1E791D8400CDD061 /* BlenderFilter.cpp in Sources */,
 				E42AA56C0E073EEC000C4D64 /* CMIO_DP_DeviceSettings.cpp in Sources */,
 				E42AA56D0E073EEC000C4D64 /* CMIO_DP_HardwarePlugInInterface.cpp in Sources */,
 				E42AA56E0E073EEC000C4D64 /* CMIO_DP_UserInfo.cpp in Sources */,
@@ -1330,6 +1371,7 @@
 				E47C6D2E11AC8BFC004DD1E7 /* CMIO_DPA_Sample_Server_Frame.cpp in Sources */,
 				E47C6D2C11AC8BCC004DD1E7 /* CMIO_DPA_Sample_Server_ClientStream.cpp in Sources */,
 				E47C6D2911AC8B84004DD1E7 /* CMIO_DPA_Sample_Server_Stream.cpp in Sources */,
+				7BBD2BEE1E791D8400CDD061 /* RawFrameSrc.cpp in Sources */,
 				E4857F2A10C8448C008FE5C2 /* CMIO_DPA_Sample_Server_Deck.cpp in Sources */,
 				E497688010F81488006AAA12 /* CMIO_DP_Property_FirstOutputPresentationTimeStamp.cpp in Sources */,
 				E47C6D3311AC8C47004DD1E7 /* CMIO_IOSA_Assistance.cpp in Sources */,
@@ -1437,6 +1479,8 @@
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 					/Users/zhangzhongke/Documents/projects/boost,
 					"$(PROJECT_DIR)/../include",
+					"$(PROJECT_DIR)/../include/arv",
+					"$(PROJECT_DIR)/../include/ffmpeg",
 				);
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DERIVED_FILES_DIR)/$(CURRENT_ARCH)\"";
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
