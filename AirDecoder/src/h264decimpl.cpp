@@ -282,8 +282,8 @@ std::shared_ptr<DecodeFrame2> H264DecImpl::Decode2(unsigned char* data, unsigned
                 blendedFrame->dts = frame->dts;
                 blendedFrame->private_type = DEC_PRI_DATA_TYPE_ARRY;
                 blendedFrame->data = new unsigned char[params.output_width*params.output_height*2]();
-                
-                cvtColorSpace(blendedFrame->data);
+                memcpy(blendedFrame->data, blendedImage, params.output_width*params.output_height*2);
+                //cvtColorSpace(blendedFrame->data);
                 
                 blendedFrame->private_data = blendedFrame->data;
                 blendedFrame->len = type;
@@ -401,14 +401,14 @@ bool H264DecImpl::blendImage(std::shared_ptr<DecodeFrame2> dframe, int type)
         LOGERR( "Could not allocate source image\n");
         return false;
     }
-    ret = av_image_alloc(dst_data, dst_linesize, params.output_width, params.output_height, AV_PIX_FMT_RGBA, 1);
+    ret = av_image_alloc(dst_data, dst_linesize, params.output_width, params.output_height, AV_PIX_FMT_UYVY422, 1);
     if (ret< 0) {
         LOGERR("Could not allocate destination image\n");
         av_freep(&src_data[0]);
         return false;
     }
     
-    yuv2rgbCxt = sws_getContext(width_, height_, AV_PIX_FMT_YUV422P, params.output_width, params.output_height, AV_PIX_FMT_YUV422P, SWS_BICUBIC, NULL, NULL, NULL);
+    yuv2rgbCxt = sws_getContext(width_, height_, AV_PIX_FMT_YUV422P, params.output_width, params.output_height, AV_PIX_FMT_UYVY422, SWS_BICUBIC, NULL, NULL, NULL);
     if (!yuv2rgbCxt) {
         LOGERR("YUV to RGBA sws_getContext() failed...");
         av_freep(&src_data[0]);
@@ -422,11 +422,8 @@ bool H264DecImpl::blendImage(std::shared_ptr<DecodeFrame2> dframe, int type)
     
     // YUV422P to RGBA
     sws_scale(yuv2rgbCxt, src_data, src_linesize, 0, height_, dst_data, dst_linesize);
-    FILE* file = fopen("/Users/zhangzhongke/Documents/RGBA.bin", "wb");
-    fwrite(dst_data[0], 1, params.output_width*params.output_height*4, file);
-    fclose(file);
     
-    memcpy(blendedImage, dst_data[0], params.output_width*params.output_height*4);
+    memcpy(blendedImage, dst_data[0], params.output_width*params.output_height*2);
     
     LOGINFO("Input width: %d, Input height: %d, Output width: %d, Output height: %d", width_, height_, params.output_width, params.output_height);
     

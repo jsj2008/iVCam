@@ -1343,6 +1343,7 @@ namespace CMIO { namespace DP { namespace Sample
             LOGINFO("original frame size: %d", frameSize);
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;
+            memset(data, 0, frameSize);
             
             std::shared_ptr<DecodeFrame2> decodedFrame;
             std::shared_ptr<Frame> rawFrame;
