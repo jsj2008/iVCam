@@ -14,30 +14,27 @@ extern "C" {
 #include <llog/llog.h>
 #include <chrono>
 #include <algorithm>
-#include <av_toolbox/demuxer.h>
 #include <av_toolbox/ffmpeg_util.h>
 #include <av_toolbox/any.h>
 
 namespace ins {
     
-    RawFrameSrc::RawFrameSrc(){
-        ;
-    }
+    RawFrameSrc::RawFrameSrc(AtomCamera* camera)
+    : mCamera(camera)
+    {}
     
-    RawFrameSrc::~RawFrameSrc() {
+    RawFrameSrc::~RawFrameSrc()
+    {
         
     }
     
-    void RawFrameSrc::SetOpt(const std::string &key, const any &val) {
+    void RawFrameSrc::SetOpt(const std::string &key, const any &val)
+    {
         
     }
     
-    const AVStream* RawFrameSrc::video_stream() const {
-        
-    }
-    
-    void RawFrameSrc::Loop() {
-        
+    void RawFrameSrc::Loop()
+    {
         while (!stop_)
         {
             sp<ARVPacket> pkt; 
@@ -57,32 +54,37 @@ namespace ins {
                 OnError();
             }
         }
-        LOG(VERBOSE) << "loop finish .";
+        LOG(VERBOSE) << "Loop finish.";
     }
     
-    void RawFrameSrc::OnEnd() {
-        LOG(VERBOSE) << "error eof...";
+    void RawFrameSrc::OnEnd()
+    {
         eof_ = true;
         stop_ = true;
-        if (state_callback_) {
+        if (state_callback_)
+        {
             state_callback_(MediaSourceEnd);
         }
     }
     
-    void RawFrameSrc::OnError() {
+    void RawFrameSrc::OnError()
+    {
         stop_ = true;
-        if (state_callback_) {
+        if (state_callback_)
+        {
             state_callback_(MediaSourceError);
         }
     }
     
-    bool RawFrameSrc::Prepare() {
+    bool RawFrameSrc::Prepare()
+    {
     
         stop_ = false;
         eof_ = false;
         
         //init filter
-        if (video_filter_) {
+        if (video_filter_)
+        {
             MediaBus video_bus;
 //            auto video_stream = NewH264Stream(0, 0, 0, 0, 0, 0, 0, 0);
 //            auto codecpar = NewAVCodecParameters();
@@ -96,15 +98,18 @@ namespace ins {
         return true;
     }
     
-    void RawFrameSrc::Start() {
+    void RawFrameSrc::Start()
+    {
         Loop();
     }
     
-    void RawFrameSrc::Cancel() {
+    void RawFrameSrc::Cancel()
+    {
         stop_ = true;
     }
     
-    void RawFrameSrc::Close() {
+    void RawFrameSrc::Close()
+    {
         if (video_filter_) video_filter_->Close();
     }
     

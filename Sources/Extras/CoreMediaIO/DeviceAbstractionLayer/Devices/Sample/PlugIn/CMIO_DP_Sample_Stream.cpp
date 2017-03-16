@@ -242,6 +242,11 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Teardown()
 	{
+        if (!mAtomCamera.isClosed())
+        {
+            mAtomCamera.close();
+        }
+        
 		// Empty all the format descriptions from the format list
 		mFormatList->RemoveAllAvailableFormats();
 		
@@ -1049,10 +1054,6 @@ namespace CMIO { namespace DP { namespace Sample
             }
         }
         
-        if (!mAtomCamera.isClosed())
-        {
-            mAtomCamera.close();
-        }
     }
 
 	#pragma mark -

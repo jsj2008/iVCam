@@ -16,6 +16,7 @@
 		14C6D76E11AB20D700E54D26 /* IOVideoSampleDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14F1EAF011A7375400B28A43 /* IOVideoSampleDevice.cpp */; };
 		14C6D76F11AB20D900E54D26 /* IOVideoSampleStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14F1EAF411A7375400B28A43 /* IOVideoSampleStream.cpp */; };
 		7206D01514633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7206D01314633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp */; };
+		7B33363F1E7A305100368971 /* BlenderSink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33363D1E7A305100368971 /* BlenderSink.cpp */; };
 		7B3DEBCA1E6EA5FD002FF975 /* libuvc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; };
 		7B3DEBCD1E6EA856002FF975 /* libuvc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7B3DEBD01E6F9869002FF975 /* AtomCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */; };
@@ -297,6 +298,8 @@
 		1948B2400D99BFAF00011B5D /* CMIO_CC_608_Scraper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_CC_608_Scraper.h; sourceTree = "<group>"; };
 		7206D01314633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIO_DP_Property_ScheduledOutputNotificationProc.cpp; sourceTree = "<group>"; };
 		7206D01414633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_DP_Property_ScheduledOutputNotificationProc.h; sourceTree = "<group>"; };
+		7B33363D1E7A305100368971 /* BlenderSink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlenderSink.cpp; path = Decoder/BlenderSink.cpp; sourceTree = "<group>"; };
+		7B33363E1E7A305100368971 /* BlenderSink.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BlenderSink.hpp; path = Decoder/BlenderSink.hpp; sourceTree = "<group>"; };
 		7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuvc.dylib; path = ../Lib/libuvc.dylib; sourceTree = "<group>"; };
 		7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AtomCamera.cpp; sourceTree = "<group>"; };
 		7B3DEBCF1E6F9869002FF975 /* AtomCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomCamera.h; sourceTree = "<group>"; };
@@ -833,6 +836,8 @@
 				7BBD2BE71E791D8400CDD061 /* BlenderFilter.hpp */,
 				7BBD2BEA1E791D8400CDD061 /* RawFrameSrc.cpp */,
 				7BBD2BEB1E791D8400CDD061 /* RawFrameSrc.hpp */,
+				7B33363D1E7A305100368971 /* BlenderSink.cpp */,
+				7B33363E1E7A305100368971 /* BlenderSink.hpp */,
 			);
 			name = Decoder;
 			sourceTree = "<group>";
@@ -1349,6 +1354,7 @@
 				E42AA5720E073EEC000C4D64 /* CMIO_DP_Property_Clock.cpp in Sources */,
 				E42AA5750E073EEC000C4D64 /* CMIO_PTA_CFMachPortThread.cpp in Sources */,
 				E42AA5760E073EEC000C4D64 /* CMIO_DP_Property_SuspendedByUser.cpp in Sources */,
+				7B33363F1E7A305100368971 /* BlenderSink.cpp in Sources */,
 				E42AA5770E073EEC000C4D64 /* CMIO_DP_Property_DeviceMaster.cpp in Sources */,
 				E42AA5780E073EEC000C4D64 /* CMIO_DP_Property_HogMode.cpp in Sources */,
 				E42AA5790E073EEC000C4D64 /* CMIO_DP_IOV_ControlDictionary.cpp in Sources */,

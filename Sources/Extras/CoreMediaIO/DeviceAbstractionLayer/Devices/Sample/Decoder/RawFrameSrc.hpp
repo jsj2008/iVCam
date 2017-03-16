@@ -13,6 +13,7 @@
 #include <tuple>
 #include <av_toolbox/sp.h>
 #include <editor/media_src.h>
+#include "AtomCamera.h"
 
 struct AVStream;
 
@@ -23,7 +24,7 @@ namespace ins {
     class RawFrameSrc : public MediaSrc {
     public:
         
-        explicit RawFrameSrc();
+        explicit RawFrameSrc(AtomCamera* camera);
         ~RawFrameSrc();
         RawFrameSrc(const RawFrameSrc&) = delete;
         RawFrameSrc(RawFrameSrc &&) = delete;
@@ -55,6 +56,7 @@ namespace ins {
         bool eof_ = false;
         double progress_ = 0;
         bool stop_ = false;
+        AtomCamera* mCamera;
     };
     
 }
