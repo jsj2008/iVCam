@@ -80,6 +80,9 @@
 // System Includes
 #include <IOKit/audio/IOAudioTypes.h>
 
+#define FRAME_WIDTH 2560
+#define FRAME_HEIGHT 1280
+
 namespace
 {
 	bool IsDeckPropertyAddress(const CMIO::PropertyAddress& address)
@@ -179,7 +182,7 @@ namespace CMIO { namespace DP { namespace Sample
 			}
             
             // *** Create a new thread to open device and get preview stream
-            int ret = mAtomCamera.open(StreamFormat::H264, 2560, 1280, 30, 8*1024*1024);
+            int ret = mAtomCamera.open(StreamFormat::H264, FRAME_WIDTH, FRAME_HEIGHT, 30, 8*1024*1024);
             if (ret == 0)
             {
                 // Get offset from device.
@@ -973,87 +976,39 @@ namespace CMIO { namespace DP { namespace Sample
 		return true;
 	}
     
-    void Stream::ParseNAL(const int8_t* data, const int32_t data_size, unsigned char nal_type, int& start_pos, int& size)
-    {
-        start_pos = -1;
-        size = 0;
-        for (int i = 0; i < data_size - 4; i++)
-        {
-            int offset = 0;
-            if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 0 && data[i + 3] == 1)
-            {
-                offset = 4;
-            }
-            else if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1)
-            {
-                offset = 3;
-            }
-            else
-            {
-                continue;
-            }
-            
-            if (start_pos != -1)
-            {
-                size = i - start_pos;
-                break;
-            }
-            else
-            {
-                if (nal_type == (data[i + offset] & 0x1f))
-                {
-                    start_pos = i + offset;
-                }
-            }
-            i += offset;
-        }
-    }
-    
-    bool Stream::ParseSPSPPS(const int8_t* data, const int32_t data_size, unsigned char* sps_buffer, int& sps_len, unsigned char* pps_buffer, int& pps_len)
-    {
-        int sps_start_pos;
-        int sps_size;
-        int pps_start_pos;
-        int pps_size;
-        
-        ParseNAL(data, data_size, 7, sps_start_pos, sps_size);
-        ParseNAL(data, data_size, 8, pps_start_pos, pps_size);
-        if (sps_size == 0 || pps_size == 0)
-        {
-            LOGERR("sps_size == 0 or pps_size == 0");
-            return false;
-        }
-        
-        sps_len = sps_size;
-        pps_len = pps_size;
-        
-        memcpy(sps_buffer, data + sps_start_pos, sps_size);
-        memcpy(pps_buffer, data + pps_start_pos, pps_size);
-        
-        return true;
-    }
-    
     void Stream::StreamThread()
-    {
-        int ret;
-        std::shared_ptr<Frame> frame;
-        while (mIsActive) {
-            ret = mAtomCamera.readFrame(&frame);
-            if (ret != 0)
-            {
-                LOGERR("Failed to read frame. Error code: %d", ret);
-                break;
-            }
-            if (mFrames.write_available()) {
-                mFrames.push(frame);
-                std::this_thread::sleep_for(std::chrono::milliseconds(30));
-            }
-            else
-            {
-                LOGINFO("The buffer is full. Frame dropped...");
-            }
+    { 
+        std::shared_ptr<ins::MediaPipe> mediaPipe = std::make_shared<ins::MediaPipe>();
+        std::shared_ptr<ins::RawFrameSrc> rawFrameSrc = std::make_shared<ins::RawFrameSrc>(&mAtomCamera, FRAME_WIDTH, FRAME_HEIGHT);
+        std::shared_ptr<ins::DecodeFilter> decoderFilter = std::make_shared<ins::DecodeFilter>();
+        std::shared_ptr<ins::ScaleFilter> scalerBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_RGBA, SWS_FAST_BILINEAR);
+        std::shared_ptr<ins::BlenderFilter> blenderFilter = std::make_shared<ins::BlenderFilter>(FRAME_WIDTH, FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, mOffset);
+        std::shared_ptr<ins::ScaleFilter> scalerAfterBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_UYVY422, SWS_FAST_BILINEAR);
+        std::shared_ptr<ins::BlenderSink> blenderSink = std::make_shared<ins::BlenderSink>(&mFrames);
+        rawFrameSrc->set_video_filter(decoderFilter)
+                    ->set_next_filter(scalerBeforeBlend)
+                    ->set_next_filter(blenderFilter)
+                    ->set_next_filter(scalerAfterBlend)
+                    ->set_next_filter(blenderSink);
+        if (rawFrameSrc->Prepare())
+        {
+            LOGERR("Raw frame source isn't ready.");
+            return;
         }
         
+        mediaPipe->AddMediaSrc(rawFrameSrc);
+        
+        mediaPipe->RegisterCallback([&](ins::MediaPipe::MediaPipeState state){
+            if (state == ins::MediaPipe::kMediaPipeError)
+            {
+                mediaPipe->Cancel();
+                LOGERR("Media pipe canceled.");
+            }
+        });
+        mediaPipe->Run();
+        mediaPipe->Wait();
+        
+        LOGINFO("Stream thread terminated.");
     }
 
 	#pragma mark -
@@ -1343,22 +1298,6 @@ namespace CMIO { namespace DP { namespace Sample
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;
             
-//            std::shared_ptr<Frame> rawFrame;
-//            int rawFrameSize = 0;
-            
-//            if (mFrames.read_available())
-//            {
-//                rawFrame = mFrames.front();
-//                void* rawFrameData = rawFrame->data();
-//                rawFrameSize = rawFrame->size();
-//                LOGINFO("Raw frame size: %d", rawFrameSize);
-//                
-//                mFrames.pop();
-//            }
-//            else
-//            {
-//                LOGINFO("The frame buffer is empty. Use default background.");
-//            }
             
 			DebugMessageLevel(2, "CMIO::DP::Sample::Stream::FrameArrived: Frametype = %d discontinuity = %d frameSize = %ld", message->mFrameType, GetDiscontinuityFlags(), frameSize);
 			

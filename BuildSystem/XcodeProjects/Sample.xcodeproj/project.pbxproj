@@ -17,6 +17,19 @@
 		14C6D76F11AB20D900E54D26 /* IOVideoSampleStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14F1EAF411A7375400B28A43 /* IOVideoSampleStream.cpp */; };
 		7206D01514633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7206D01314633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp */; };
 		7B33363F1E7A305100368971 /* BlenderSink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33363D1E7A305100368971 /* BlenderSink.cpp */; };
+		7B3336531E7A9BD900368971 /* decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336411E7A9BD900368971 /* decoder.cpp */; };
+		7B3336541E7A9BD900368971 /* demuxer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336431E7A9BD900368971 /* demuxer.cpp */; };
+		7B3336551E7A9BD900368971 /* encoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336461E7A9BD900368971 /* encoder.cpp */; };
+		7B3336561E7A9BD900368971 /* ffmpeg_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336481E7A9BD900368971 /* ffmpeg_util.cpp */; };
+		7B3336571E7A9BD900368971 /* muxer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33364A1E7A9BD900368971 /* muxer.cpp */; };
+		7B3336581E7A9BD900368971 /* scaler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33364D1E7A9BD900368971 /* scaler.cpp */; };
+		7B3336591E7A9BD900368971 /* video_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336511E7A9BD900368971 /* video_parser.cpp */; };
+		7B3336611E7A9BF800368971 /* file_media_src.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33365C1E7A9BF800368971 /* file_media_src.cpp */; };
+		7B3336721E7A9C1600368971 /* decode_filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336631E7A9C1600368971 /* decode_filter.cpp */; };
+		7B3336731E7A9C1600368971 /* encode_filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336651E7A9C1600368971 /* encode_filter.cpp */; };
+		7B3336741E7A9C1600368971 /* mux_sink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33366A1E7A9C1600368971 /* mux_sink.cpp */; };
+		7B3336751E7A9C1600368971 /* llog_message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33366E1E7A9C1600368971 /* llog_message.cpp */; };
+		7B3336761E7A9C1600368971 /* llog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336701E7A9C1600368971 /* llog.cpp */; };
 		7B3DEBCA1E6EA5FD002FF975 /* libuvc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; };
 		7B3DEBCD1E6EA856002FF975 /* libuvc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7B3DEBD01E6F9869002FF975 /* AtomCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */; };
@@ -300,6 +313,47 @@
 		7206D01414633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_DP_Property_ScheduledOutputNotificationProc.h; sourceTree = "<group>"; };
 		7B33363D1E7A305100368971 /* BlenderSink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlenderSink.cpp; path = Decoder/BlenderSink.cpp; sourceTree = "<group>"; };
 		7B33363E1E7A305100368971 /* BlenderSink.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BlenderSink.hpp; path = Decoder/BlenderSink.hpp; sourceTree = "<group>"; };
+		7B3336401E7A9BD900368971 /* any.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = any.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/any.h; sourceTree = "<group>"; };
+		7B3336411E7A9BD900368971 /* decoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = decoder.cpp; path = ../../../../../../BuildSystem/include/arv/av_toolbox/decoder.cpp; sourceTree = "<group>"; };
+		7B3336421E7A9BD900368971 /* decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = decoder.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/decoder.h; sourceTree = "<group>"; };
+		7B3336431E7A9BD900368971 /* demuxer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = demuxer.cpp; path = ../../../../../../BuildSystem/include/arv/av_toolbox/demuxer.cpp; sourceTree = "<group>"; };
+		7B3336441E7A9BD900368971 /* demuxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demuxer.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/demuxer.h; sourceTree = "<group>"; };
+		7B3336451E7A9BD900368971 /* dynamic_circular_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dynamic_circular_buffer.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/dynamic_circular_buffer.h; sourceTree = "<group>"; };
+		7B3336461E7A9BD900368971 /* encoder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = encoder.cpp; path = ../../../../../../BuildSystem/include/arv/av_toolbox/encoder.cpp; sourceTree = "<group>"; };
+		7B3336471E7A9BD900368971 /* encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = encoder.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/encoder.h; sourceTree = "<group>"; };
+		7B3336481E7A9BD900368971 /* ffmpeg_util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ffmpeg_util.cpp; path = ../../../../../../BuildSystem/include/arv/av_toolbox/ffmpeg_util.cpp; sourceTree = "<group>"; };
+		7B3336491E7A9BD900368971 /* ffmpeg_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ffmpeg_util.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/ffmpeg_util.h; sourceTree = "<group>"; };
+		7B33364A1E7A9BD900368971 /* muxer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = muxer.cpp; path = ../../../../../../BuildSystem/include/arv/av_toolbox/muxer.cpp; sourceTree = "<group>"; };
+		7B33364B1E7A9BD900368971 /* muxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = muxer.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/muxer.h; sourceTree = "<group>"; };
+		7B33364C1E7A9BD900368971 /* platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platform.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/platform.h; sourceTree = "<group>"; };
+		7B33364D1E7A9BD900368971 /* scaler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scaler.cpp; path = ../../../../../../BuildSystem/include/arv/av_toolbox/scaler.cpp; sourceTree = "<group>"; };
+		7B33364E1E7A9BD900368971 /* scaler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scaler.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/scaler.h; sourceTree = "<group>"; };
+		7B33364F1E7A9BD900368971 /* sp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sp.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/sp.h; sourceTree = "<group>"; };
+		7B3336501E7A9BD900368971 /* threadsafe_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = threadsafe_queue.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/threadsafe_queue.h; sourceTree = "<group>"; };
+		7B3336511E7A9BD900368971 /* video_parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = video_parser.cpp; path = ../../../../../../BuildSystem/include/arv/av_toolbox/video_parser.cpp; sourceTree = "<group>"; };
+		7B3336521E7A9BD900368971 /* video_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = video_parser.h; path = ../../../../../../BuildSystem/include/arv/av_toolbox/video_parser.h; sourceTree = "<group>"; };
+		7B33365B1E7A9BF800368971 /* editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editor.h; path = ../../../../../../BuildSystem/include/arv/editor/editor.h; sourceTree = "<group>"; };
+		7B33365C1E7A9BF800368971 /* file_media_src.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = file_media_src.cpp; path = ../../../../../../BuildSystem/include/arv/editor/file_media_src.cpp; sourceTree = "<group>"; };
+		7B33365D1E7A9BF800368971 /* file_media_src.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = file_media_src.h; path = ../../../../../../BuildSystem/include/arv/editor/file_media_src.h; sourceTree = "<group>"; };
+		7B33365E1E7A9BF800368971 /* media_pipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = media_pipe.h; path = ../../../../../../BuildSystem/include/arv/editor/media_pipe.h; sourceTree = "<group>"; };
+		7B33365F1E7A9BF800368971 /* media_src.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = media_src.h; path = ../../../../../../BuildSystem/include/arv/editor/media_src.h; sourceTree = "<group>"; };
+		7B3336601E7A9BF800368971 /* realtime_media_src.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = realtime_media_src.h; path = ../../../../../../BuildSystem/include/arv/editor/realtime_media_src.h; sourceTree = "<group>"; };
+		7B3336621E7A9C1600368971 /* circular_buffer_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = circular_buffer_filter.h; path = ../../../../../../BuildSystem/include/arv/editor/filter/circular_buffer_filter.h; sourceTree = "<group>"; };
+		7B3336631E7A9C1600368971 /* decode_filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = decode_filter.cpp; path = ../../../../../../BuildSystem/include/arv/editor/filter/decode_filter.cpp; sourceTree = "<group>"; };
+		7B3336641E7A9C1600368971 /* decode_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = decode_filter.h; path = ../../../../../../BuildSystem/include/arv/editor/filter/decode_filter.h; sourceTree = "<group>"; };
+		7B3336651E7A9C1600368971 /* encode_filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = encode_filter.cpp; path = ../../../../../../BuildSystem/include/arv/editor/filter/encode_filter.cpp; sourceTree = "<group>"; };
+		7B3336661E7A9C1600368971 /* encode_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = encode_filter.h; path = ../../../../../../BuildSystem/include/arv/editor/filter/encode_filter.h; sourceTree = "<group>"; };
+		7B3336671E7A9C1600368971 /* filter_tag_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filter_tag_wrapper.h; path = ../../../../../../BuildSystem/include/arv/editor/filter/filter_tag_wrapper.h; sourceTree = "<group>"; };
+		7B3336681E7A9C1600368971 /* log_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = log_filter.h; path = ../../../../../../BuildSystem/include/arv/editor/filter/log_filter.h; sourceTree = "<group>"; };
+		7B3336691E7A9C1600368971 /* media_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = media_filter.h; path = ../../../../../../BuildSystem/include/arv/editor/filter/media_filter.h; sourceTree = "<group>"; };
+		7B33366A1E7A9C1600368971 /* mux_sink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mux_sink.cpp; path = ../../../../../../BuildSystem/include/arv/editor/filter/mux_sink.cpp; sourceTree = "<group>"; };
+		7B33366B1E7A9C1600368971 /* mux_sink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mux_sink.h; path = ../../../../../../BuildSystem/include/arv/editor/filter/mux_sink.h; sourceTree = "<group>"; };
+		7B33366C1E7A9C1600368971 /* queue_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = queue_filter.h; path = ../../../../../../BuildSystem/include/arv/editor/filter/queue_filter.h; sourceTree = "<group>"; };
+		7B33366D1E7A9C1600368971 /* scale_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scale_filter.h; path = ../../../../../../BuildSystem/include/arv/editor/filter/scale_filter.h; sourceTree = "<group>"; };
+		7B33366E1E7A9C1600368971 /* llog_message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = llog_message.cpp; path = ../../../../../../BuildSystem/include/arv/llog/llog_message.cpp; sourceTree = "<group>"; };
+		7B33366F1E7A9C1600368971 /* llog_message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = llog_message.h; path = ../../../../../../BuildSystem/include/arv/llog/llog_message.h; sourceTree = "<group>"; };
+		7B3336701E7A9C1600368971 /* llog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = llog.cpp; path = ../../../../../../BuildSystem/include/arv/llog/llog.cpp; sourceTree = "<group>"; };
+		7B3336711E7A9C1600368971 /* llog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = llog.h; path = ../../../../../../BuildSystem/include/arv/llog/llog.h; sourceTree = "<group>"; };
 		7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuvc.dylib; path = ../Lib/libuvc.dylib; sourceTree = "<group>"; };
 		7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AtomCamera.cpp; sourceTree = "<group>"; };
 		7B3DEBCF1E6F9869002FF975 /* AtomCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomCamera.h; sourceTree = "<group>"; };
@@ -740,6 +794,7 @@
 		14F1EACF11A7328A00B28A43 /* Sample */ = {
 			isa = PBXGroup;
 			children = (
+				7B33365A1E7A9BDF00368971 /* Arv */,
 				7BBD2BEF1E791D9300CDD061 /* Decoder */,
 				7B3DEBD11E6F9879002FF975 /* Utils */,
 				14DEB09E155AEE0900E49CEA /* SamplePrefix.h */,
@@ -810,6 +865,54 @@
 				1469AC5A0A22D6E9001B6AE0 /* IOKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7B33365A1E7A9BDF00368971 /* Arv */ = {
+			isa = PBXGroup;
+			children = (
+				7B3336621E7A9C1600368971 /* circular_buffer_filter.h */,
+				7B3336631E7A9C1600368971 /* decode_filter.cpp */,
+				7B3336641E7A9C1600368971 /* decode_filter.h */,
+				7B3336651E7A9C1600368971 /* encode_filter.cpp */,
+				7B3336661E7A9C1600368971 /* encode_filter.h */,
+				7B3336671E7A9C1600368971 /* filter_tag_wrapper.h */,
+				7B3336681E7A9C1600368971 /* log_filter.h */,
+				7B3336691E7A9C1600368971 /* media_filter.h */,
+				7B33366A1E7A9C1600368971 /* mux_sink.cpp */,
+				7B33366B1E7A9C1600368971 /* mux_sink.h */,
+				7B33366C1E7A9C1600368971 /* queue_filter.h */,
+				7B33366D1E7A9C1600368971 /* scale_filter.h */,
+				7B33366E1E7A9C1600368971 /* llog_message.cpp */,
+				7B33366F1E7A9C1600368971 /* llog_message.h */,
+				7B3336701E7A9C1600368971 /* llog.cpp */,
+				7B3336711E7A9C1600368971 /* llog.h */,
+				7B33365B1E7A9BF800368971 /* editor.h */,
+				7B33365C1E7A9BF800368971 /* file_media_src.cpp */,
+				7B33365D1E7A9BF800368971 /* file_media_src.h */,
+				7B33365E1E7A9BF800368971 /* media_pipe.h */,
+				7B33365F1E7A9BF800368971 /* media_src.h */,
+				7B3336601E7A9BF800368971 /* realtime_media_src.h */,
+				7B3336401E7A9BD900368971 /* any.h */,
+				7B3336411E7A9BD900368971 /* decoder.cpp */,
+				7B3336421E7A9BD900368971 /* decoder.h */,
+				7B3336431E7A9BD900368971 /* demuxer.cpp */,
+				7B3336441E7A9BD900368971 /* demuxer.h */,
+				7B3336451E7A9BD900368971 /* dynamic_circular_buffer.h */,
+				7B3336461E7A9BD900368971 /* encoder.cpp */,
+				7B3336471E7A9BD900368971 /* encoder.h */,
+				7B3336481E7A9BD900368971 /* ffmpeg_util.cpp */,
+				7B3336491E7A9BD900368971 /* ffmpeg_util.h */,
+				7B33364A1E7A9BD900368971 /* muxer.cpp */,
+				7B33364B1E7A9BD900368971 /* muxer.h */,
+				7B33364C1E7A9BD900368971 /* platform.h */,
+				7B33364D1E7A9BD900368971 /* scaler.cpp */,
+				7B33364E1E7A9BD900368971 /* scaler.h */,
+				7B33364F1E7A9BD900368971 /* sp.h */,
+				7B3336501E7A9BD900368971 /* threadsafe_queue.h */,
+				7B3336511E7A9BD900368971 /* video_parser.cpp */,
+				7B3336521E7A9BD900368971 /* video_parser.h */,
+			);
+			name = Arv;
 			sourceTree = "<group>";
 		};
 		7B3DEBD11E6F9879002FF975 /* Utils */ = {
@@ -1332,10 +1435,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B3336591E7A9BD900368971 /* video_parser.cpp in Sources */,
 				E4C93A890E083DA6008CA4C5 /* CMIODPASample.defs in Sources */,
 				E42AA55A0E073EEC000C4D64 /* CMIODebugMacros.cpp in Sources */,
 				E42AA55B0E073EEC000C4D64 /* CMIODebugPrintf.cpp in Sources */,
 				E42AA5640E073EEC000C4D64 /* CMIO_DALA_System.cpp in Sources */,
+				7B3336761E7A9C1600368971 /* llog.cpp in Sources */,
 				E42AA5650E073EEC000C4D64 /* CMIO_DP_Object.cpp in Sources */,
 				E42AA5660E073EEC000C4D64 /* CMIO_DP_PlugIn.cpp in Sources */,
 				E42AA5670E073EEC000C4D64 /* CMIO_DP_Device.cpp in Sources */,
@@ -1356,23 +1461,31 @@
 				E42AA5760E073EEC000C4D64 /* CMIO_DP_Property_SuspendedByUser.cpp in Sources */,
 				7B33363F1E7A305100368971 /* BlenderSink.cpp in Sources */,
 				E42AA5770E073EEC000C4D64 /* CMIO_DP_Property_DeviceMaster.cpp in Sources */,
+				7B3336721E7A9C1600368971 /* decode_filter.cpp in Sources */,
 				E42AA5780E073EEC000C4D64 /* CMIO_DP_Property_HogMode.cpp in Sources */,
 				E42AA5790E073EEC000C4D64 /* CMIO_DP_IOV_ControlDictionary.cpp in Sources */,
 				E42AA57B0E073EEC000C4D64 /* CMIO_IOVA_Assistance.cpp in Sources */,
 				E42AA57C0E073EEC000C4D64 /* CMIO_DP_IOV_Control.cpp in Sources */,
 				E42AA57D0E073EEC000C4D64 /* CMIO_DP_Property_ClientSyncDiscontinuity.cpp in Sources */,
 				E42AA57E0E073EEC000C4D64 /* CMIO_DP_Property_SMPTETimeCallback.cpp in Sources */,
+				7B3336541E7A9BD900368971 /* demuxer.cpp in Sources */,
 				E42AA57F0E073EEC000C4D64 /* CMIO_DP_Property_NoData.cpp in Sources */,
+				7B3336561E7A9BD900368971 /* ffmpeg_util.cpp in Sources */,
 				E42AA5800E073EEC000C4D64 /* CMIO_DP_Property_EndOfData.cpp in Sources */,
+				7B3336531E7A9BD900368971 /* decoder.cpp in Sources */,
 				E42AA5810E073EEC000C4D64 /* CMIO_DP_Property_OutputBuffers.cpp in Sources */,
 				E42AA5CD0E07410B000C4D64 /* CMIO_DP_Sample_Device.cpp in Sources */,
+				7B3336551E7A9BD900368971 /* encoder.cpp in Sources */,
 				E42AA5CE0E07410B000C4D64 /* CMIO_DP_Sample_PlugIn.cpp in Sources */,
 				E42AA5CF0E07410B000C4D64 /* CMIO_DP_Sample_Stream.cpp in Sources */,
 				E42AA5D00E07410B000C4D64 /* CMIO_DP_Sample_Property_HogMode.cpp in Sources */,
+				7B3336741E7A9C1600368971 /* mux_sink.cpp in Sources */,
+				7B3336571E7A9BD900368971 /* muxer.cpp in Sources */,
 				E4C93A8E0E083EBF008CA4C5 /* CMIO_DPA_Sample_ClientExtras.cpp in Sources */,
 				E4A4DB290E78A09700979942 /* CMIO_SMPTETimeBase.cpp in Sources */,
 				E42920F810B75DB700EDA003 /* CMIO_DP_Property_Deck.cpp in Sources */,
 				E4857F1810C842AD008FE5C2 /* CMIO_DP_ControlDictionary.cpp in Sources */,
+				7B3336611E7A9BF800368971 /* file_media_src.cpp in Sources */,
 				E47C6D2D11AC8BFC004DD1E7 /* CMIO_DPA_Sample_Server_Device.cpp in Sources */,
 				E47C6D2E11AC8BFC004DD1E7 /* CMIO_DPA_Sample_Server_Frame.cpp in Sources */,
 				E47C6D2C11AC8BCC004DD1E7 /* CMIO_DPA_Sample_Server_ClientStream.cpp in Sources */,
@@ -1382,9 +1495,12 @@
 				E497688010F81488006AAA12 /* CMIO_DP_Property_FirstOutputPresentationTimeStamp.cpp in Sources */,
 				E47C6D3311AC8C47004DD1E7 /* CMIO_IOSA_Assistance.cpp in Sources */,
 				143FD3671379AE5800F53945 /* CMIO_PTA_NotificationPortThread.cpp in Sources */,
+				7B3336581E7A9BD900368971 /* scaler.cpp in Sources */,
 				143FD36A1379AF2A00F53945 /* CMIO_IOKA_NotificationPort.cpp in Sources */,
+				7B3336751E7A9C1600368971 /* llog_message.cpp in Sources */,
 				7206D01514633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp in Sources */,
 				E4E791EA1610E61500C2316E /* CMIO_SA_Assistance.cpp in Sources */,
+				7B3336731E7A9C1600368971 /* encode_filter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1453,7 +1569,7 @@
 				"CONFIGURATIONPREFIX[sdk=macosx10.8]" = "MountainLion-";
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/SamplePrefix.h";
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
@@ -1599,7 +1715,7 @@
 				"CONFIGURATIONPREFIX[sdk=macosx10.8]" = "MountainLion-";
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/SamplePrefix.h";
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;

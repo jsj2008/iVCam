@@ -14,6 +14,7 @@
 #include <av_toolbox/sp.h>
 #include <editor/media_src.h>
 #include "AtomCamera.h"
+#include "../Frame.h"
 
 struct AVStream;
 
@@ -24,7 +25,7 @@ namespace ins {
     class RawFrameSrc : public MediaSrc {
     public:
         
-        explicit RawFrameSrc(AtomCamera* camera);
+        explicit RawFrameSrc(AtomCamera* camera, int width, int height);
         ~RawFrameSrc();
         RawFrameSrc(const RawFrameSrc&) = delete;
         RawFrameSrc(RawFrameSrc &&) = delete;
@@ -51,12 +52,17 @@ namespace ins {
         void OnEnd();
         void OnError();
         void Loop();
+        void ParseNAL(const uint8_t* data, const int32_t data_size, unsigned char nal_type, int& start_pos, int& size);
+        bool ParseSPSPPS(const uint8_t* data, const int32_t data_size, unsigned char* buffer, int& len);
         
     private:
         bool eof_ = false;
         double progress_ = 0;
         bool stop_ = false;
         AtomCamera* mCamera;
+        int mStreamIndex;
+        int mWidth;
+        int mHeight;
     };
     
 }

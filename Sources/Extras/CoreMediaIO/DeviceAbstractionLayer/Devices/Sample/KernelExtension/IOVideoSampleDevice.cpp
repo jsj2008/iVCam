@@ -400,8 +400,9 @@ IOReturn IOVideoSampleDevice::sendOutputFrame(void)
 		return kIOReturnNotReady;
 	}
     
-    IOByteCount len = buffer->getDataBuffer()->getLength();
-    buffer->getDataBuffer()->writeBytes(0, 0, 0);
+    // to be fixed
+    // IOByteCount len = buffer->getDataBuffer()->getLength();
+    // buffer->getDataBuffer()->writeBytes(0, 0, 0);
     
 	ctrlDescriptor = OSDynamicCast(IOMemoryDescriptor, buffer->getControlBuffer());
 	if (NULL != ctrlDescriptor)

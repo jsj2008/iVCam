@@ -69,8 +69,18 @@
 #include "CAPThread.h"
 #include "CAGuard.h"
 
+extern "C" {
+#include <libswscale/swscale.h>
+}
+
 #include "AtomCamera.h"
 #include "Frame.h"
+#include "BlenderFilter.hpp"
+#include "BlenderSink.hpp"
+#include "RawFrameSrc.hpp"
+#include <editor/filter/decode_filter.h>
+#include <editor/filter/scale_filter.h>
+#include <editor/media_pipe.h>
 #include <boost/lockfree/spsc_queue.hpp>
 #include <thread>
 #include <chrono> 
@@ -240,8 +250,7 @@ namespace CMIO { namespace DP { namespace Sample
 		void									TimecodeChanged(Float64 timecode);
 		void									StreamDeckChanged(UInt32 changed, UInt16 opcode, UInt16 operand);
         void                                    StreamThread();
-        void                                    ParseNAL(const int8_t* data, const int32_t data_size, unsigned char nal_type, int& start_pos, int& size);
-        bool                                    ParseSPSPPS(const int8_t* data, const int32_t data_size, unsigned char* sps_buffer, int& sps_len, unsigned char* pps_buffer, int& pps_len);
+        
 	protected:
 		PropertyAddressList						mDeckPropertyListeners;
 
@@ -273,13 +282,10 @@ namespace CMIO { namespace DP { namespace Sample
 		UInt32									mRecentTimingInfoIdx;
         
         AtomCamera                                mAtomCamera;
-        boost::lockfree::spsc_queue<std::shared_ptr<Frame>, boost::lockfree::capacity<10> > mFrames;
+        boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<10> > mFrames;
         std::string                             mOffset;
         std::thread                             mStreamThread;
-        bool                                  mIsActive; // Stop the stream thread when finalize the plugin
-        unsigned char*                        m1472x736Buffer;
-        unsigned char*                        m2176x1088Buffer;
-        unsigned char*                        m3008x1504Buffer;
+        bool                                  mIsActive; // Stop the stream thread when finalize the plugin 
 	};
 }}}
 
