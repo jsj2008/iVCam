@@ -1023,7 +1023,6 @@ namespace CMIO { namespace DP { namespace Sample
 		// Throw an exception if already streaming
 		ThrowIf(Streaming(), CAException(kCMIOHardwareNotStoppedError), "CMIO::DP::Sample::Stream::Start: Can't start stream when it is already running");
 		
-        // 注册回调函数
 		// Spawn the thread that will get messaged from the Assistant with frames
 		mMessageThread.Reset(reinterpret_cast<CFMachPortCallBack>(Messages), this);
 
@@ -1203,7 +1202,6 @@ namespace CMIO { namespace DP { namespace Sample
 			}
 			else
 			{
-                
 				// Rather than mark a "hard" discontinuity, remember the frame's duration so the NEXT frame's duration can be extended accordingly
 				if (0 == mExtendedDurationHostTime)
 				{

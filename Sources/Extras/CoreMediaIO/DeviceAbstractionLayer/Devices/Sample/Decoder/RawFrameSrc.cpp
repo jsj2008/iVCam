@@ -10,6 +10,7 @@
 
 extern "C" {
 #include <libavformat/avformat.h>
+#include <libavutil/time.h>
 }
 #include <llog/llog.h>
 #include <chrono>
@@ -23,7 +24,9 @@ namespace ins {
     : mCamera(camera),
       mWidth(width),
       mHeight(height)
-    {}
+    {
+    
+    }
     
     RawFrameSrc::~RawFrameSrc()
     {
@@ -50,14 +53,15 @@ namespace ins {
             }
             // Validate the frame.
             uint8_t* data = frame->data();
-            if ((data[0] == 0 && data[1] == 0 && data[2] == 0 && data[3] == 1)
-                || (data[0] == 0 && data[1] == 0 && data[2] == 1))
+            if ((data[0] == 0 && data[1] == 0 && data[2] == 0 && data[3] == 1) || (data[0] == 0 && data[1] == 0 && data[2] == 1))
             {
                 // Calculate pts and dts
-                // To be fixed
+                // Convert to millisecond
+                int64_t dts = av_gettime()/1000;
+                int64_t pts = dts;
                 
                 // Create packet
-                auto packet = NewH264Packet(frame->data(), frame->size(), 0, 0, false, mStreamIndex);
+                auto packet = NewH264Packet(frame->data(), frame->size(), pts, dts, false, mStreamIndex);
 
                 if (video_filter_ && !video_filter_->Filter(packet))
                 {
@@ -113,8 +117,7 @@ namespace ins {
             
             // validate the frame
             uint8_t* data = frame->data();
-            if ((data[0] == 0 && data[1] == 0 && data[2] == 0 && data[3] == 1)
-                || (data[0] == 0 && data[1] == 0 && data[2] == 1))
+            if ((data[0] == 0 && data[1] == 0 && data[2] == 0 && data[3] == 1) || (data[0] == 0 && data[1] == 0 && data[2] == 1))
             {
                 LOG(VERBOSE) << "Get extra data!";
                 ParseSPSPPS(frame->data(), frame->size(), spspps, spspps_len);
@@ -164,7 +167,10 @@ namespace ins {
     
     void RawFrameSrc::Close()
     {
-        if (video_filter_) video_filter_->Close();
+        if (video_filter_)
+        {
+            video_filter_->Close();
+        }
     }
     
     void RawFrameSrc::ParseNAL(const uint8_t* data, const int32_t data_size, unsigned char nal_type, int& start_pos, int& size)

@@ -495,8 +495,6 @@
 		7BBD2BEA1E791D8400CDD061 /* RawFrameSrc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RawFrameSrc.cpp; path = Decoder/RawFrameSrc.cpp; sourceTree = "<group>"; };
 		7BBD2BEB1E791D8400CDD061 /* RawFrameSrc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RawFrameSrc.hpp; path = Decoder/RawFrameSrc.hpp; sourceTree = "<group>"; };
 		7BBD2BF01E7933B200CDD061 /* BlenderWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlenderWrapper.h; sourceTree = "<group>"; };
-		7BCC92D01E713C410063E5BA /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
-		7BCC92D21E713C410063E5BA /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 		7BCC92D31E71447E0063E5BA /* libcublas.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcublas.7.5.dylib; path = ../Lib/libcublas.7.5.dylib; sourceTree = "<group>"; };
 		7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcudart.7.5.dylib; path = ../Lib/libcudart.7.5.dylib; sourceTree = "<group>"; };
 		7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUniversalBlender.dylib; path = ../Lib/libUniversalBlender.dylib; sourceTree = "<group>"; };
@@ -935,8 +933,6 @@
 			isa = PBXGroup;
 			children = (
 				7BBD2BF01E7933B200CDD061 /* BlenderWrapper.h */,
-				7BCC92D01E713C410063E5BA /* common.h */,
-				7BCC92D21E713C410063E5BA /* util.h */,
 				7B3DEBD21E6F9910002FF975 /* Error.h */,
 				7B3DEBD31E6F9910002FF975 /* Frame.h */,
 				7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */,
