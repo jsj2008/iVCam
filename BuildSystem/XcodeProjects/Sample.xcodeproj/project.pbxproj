@@ -30,6 +30,10 @@
 		7B3336741E7A9C1600368971 /* mux_sink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33366A1E7A9C1600368971 /* mux_sink.cpp */; };
 		7B3336751E7A9C1600368971 /* llog_message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33366E1E7A9C1600368971 /* llog_message.cpp */; };
 		7B3336761E7A9C1600368971 /* llog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336701E7A9C1600368971 /* llog.cpp */; };
+		7B3336781E7B7AA100368971 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3336771E7B7AA100368971 /* AudioToolbox.framework */; };
+		7B33367A1E7B7AAC00368971 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3336791E7B7AAC00368971 /* VideoToolbox.framework */; };
+		7B33367C1E7B7B2A00368971 /* libiconv.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B33367B1E7B7B2A00368971 /* libiconv.2.tbd */; };
+		7B33367E1E7B7B7000368971 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B33367D1E7B7B7000368971 /* libz.tbd */; };
 		7B3DEBCA1E6EA5FD002FF975 /* libuvc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; };
 		7B3DEBCD1E6EA856002FF975 /* libuvc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7B3DEBD01E6F9869002FF975 /* AtomCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */; };
@@ -354,6 +358,10 @@
 		7B33366F1E7A9C1600368971 /* llog_message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = llog_message.h; path = ../../../../../../BuildSystem/include/arv/llog/llog_message.h; sourceTree = "<group>"; };
 		7B3336701E7A9C1600368971 /* llog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = llog.cpp; path = ../../../../../../BuildSystem/include/arv/llog/llog.cpp; sourceTree = "<group>"; };
 		7B3336711E7A9C1600368971 /* llog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = llog.h; path = ../../../../../../BuildSystem/include/arv/llog/llog.h; sourceTree = "<group>"; };
+		7B3336771E7B7AA100368971 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7B3336791E7B7AAC00368971 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		7B33367B1E7B7B2A00368971 /* libiconv.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.tbd; path = usr/lib/libiconv.2.tbd; sourceTree = SDKROOT; };
+		7B33367D1E7B7B7000368971 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuvc.dylib; path = ../Lib/libuvc.dylib; sourceTree = "<group>"; };
 		7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AtomCamera.cpp; sourceTree = "<group>"; };
 		7B3DEBCF1E6F9869002FF975 /* AtomCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomCamera.h; sourceTree = "<group>"; };
@@ -565,6 +573,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B33367E1E7B7B7000368971 /* libz.tbd in Frameworks */,
+				7B33367C1E7B7B2A00368971 /* libiconv.2.tbd in Frameworks */,
+				7B33367A1E7B7AAC00368971 /* VideoToolbox.framework in Frameworks */,
+				7B3336781E7B7AA100368971 /* AudioToolbox.framework in Frameworks */,
 				7BBD2BE11E791D1200CDD061 /* libavcodec.a in Frameworks */,
 				7BBD2BE21E791D1200CDD061 /* libavformat.a in Frameworks */,
 				7BBD2BE31E791D1200CDD061 /* libavutil.a in Frameworks */,
@@ -846,6 +858,10 @@
 		19E34B2909F9981000F50E49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B33367D1E7B7B7000368971 /* libz.tbd */,
+				7B33367B1E7B7B2A00368971 /* libiconv.2.tbd */,
+				7B3336791E7B7AAC00368971 /* VideoToolbox.framework */,
+				7B3336771E7B7AA100368971 /* AudioToolbox.framework */,
 				7BBD2BDC1E791D1200CDD061 /* libavcodec.a */,
 				7BBD2BDD1E791D1200CDD061 /* libavformat.a */,
 				7BBD2BDE1E791D1200CDD061 /* libavutil.a */,
