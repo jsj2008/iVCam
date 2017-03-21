@@ -1296,10 +1296,6 @@ namespace CMIO { namespace DP { namespace Sample
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;
             
-            FILE* file = fopen("/Users/zhangzhongke/Documents/out.bin", "wb");
-            fwrite(data, 1, frameSize, file);
-            fclose(file);
-            
 			DebugMessageLevel(2, "CMIO::DP::Sample::Stream::FrameArrived: Frametype = %d discontinuity = %d frameSize = %ld", message->mFrameType, GetDiscontinuityFlags(), frameSize);
 			
 			// Wrap the native frame in a block buffer.  kCFAllocatorNull will be used for the block allocator, so no memory will be deallocated when the block buffer goes out of scope.

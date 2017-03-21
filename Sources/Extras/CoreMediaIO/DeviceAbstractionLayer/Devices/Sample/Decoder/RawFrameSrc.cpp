@@ -45,6 +45,11 @@ namespace ins {
         
         while (!stop_)
         {
+            if (mCamera->isClosed())
+            {
+                Cancel();
+                continue;
+            }
             ret = mCamera->readFrame(&frame);
             if (ret != 0)
             {
@@ -108,6 +113,11 @@ namespace ins {
         int ret;
         while (true)
         {
+            if (mCamera->isClosed())
+            {
+                LOG(VERBOSE) << "The camera is closed.";
+                return false;
+            }
             ret = mCamera->readFrame(&frame);
             if (ret != 0)
             {

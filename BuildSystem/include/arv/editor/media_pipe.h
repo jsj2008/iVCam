@@ -77,6 +77,7 @@ public:
     for (auto &thread : src_threads_) {
       if (thread.joinable()) thread.join();
     }
+    OnEnd();
   }
 
   void Cancel() {
