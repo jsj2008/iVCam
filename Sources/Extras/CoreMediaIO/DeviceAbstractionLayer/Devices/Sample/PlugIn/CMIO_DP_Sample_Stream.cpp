@@ -1336,18 +1336,6 @@ namespace CMIO { namespace DP { namespace Sample
 			CMBlockBufferCustomBlockSource customBlockSource = { kCMBlockBufferCustomBlockSourceVersion, NULL, ReleaseBufferCallback, this };
 			// Get the size & data for the frame
 			size_t frameSize = message->mDescriptor.size;
-<<<<<<< HEAD
-            LOGINFO("original frame size: %d", frameSize);
-            // Get a frame from frame queue
-            void* data = message->mDescriptor.address;
-            memset(data, 0, frameSize);
-            
-            std::shared_ptr<DecodeFrame2> decodedFrame;
-            std::shared_ptr<Frame> rawFrame;
-            int rawFrameSize = 0;
-            static bool didGetSPS = false;
-=======
->>>>>>> feature-new-decoder
             
             if (mFrames.read_available())
             {
