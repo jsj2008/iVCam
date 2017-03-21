@@ -134,8 +134,7 @@ namespace CMIO { namespace DP { namespace Sample
 		mOutputHosttimeCorrection(0LL),
 		mPreviousCycleTimeSeconds(0xFFFFFFFF),
 		mSyncClock(true),
-        mAtomCamera(),
-        mIsActive(true)
+        mAtomCamera()
 	{
 	}
 	
@@ -261,9 +260,7 @@ namespace CMIO { namespace DP { namespace Sample
 			delete mDeck;
 			mDeck = NULL;
 		}
-        
-        // Signal the stream thread to terminate.
-        mIsActive = false;
+         
 		if (IsInput())
 		{
 			if (NULL != mNoData)
@@ -978,6 +975,54 @@ namespace CMIO { namespace DP { namespace Sample
 		return true;
 	}
     
+    void Stream::CvtColorSpace(std::shared_ptr<AVFrame> frame, void* dstBuffer, size_t frameSize)
+    {
+        int output_width_old = FRAME_WIDTH;
+        int output_height_old = FRAME_HEIGHT;
+        int output_width = FRAME_WIDTH;
+        int output_height = FRAME_HEIGHT;
+        
+        switch (frameSize)
+        {
+            // YUV422P: 1472x736x2
+            case 2166784:
+            {
+                output_width = 1472;
+                output_height = 736;
+                break;
+            }
+            // YUV422P: 2176x1088x2
+            case 4734976:
+            {
+                output_width = 2176;
+                output_height = 1088;
+                break;
+            }
+            // YUV422P: 3008x1504x2
+            case 9048064:
+            {
+                output_width = 3008;
+                output_height = 1504;
+                break;
+            }
+        }
+        
+        if (output_width_old != output_width || output_height_old != output_height)
+        {
+            output_width_old = output_width;
+            output_height_old = output_height;
+            mScaler = std::make_shared<ins::Scaler>(output_width, output_height, AV_PIX_FMT_UYVY422, SWS_FAST_BILINEAR);
+            mScaler->Init(frame);
+        }
+        
+        std::shared_ptr<AVFrame> scale_frame;
+        mScaler->ScaleFrame(frame, scale_frame);
+        if (scale_frame != nullptr)
+        {
+            memcpy(dstBuffer, scale_frame->data[0], frameSize);
+        }
+    }
+    
     void Stream::StreamThread()
     { 
         std::shared_ptr<ins::MediaPipe> mediaPipe = std::make_shared<ins::MediaPipe>();
@@ -1291,7 +1336,12 @@ namespace CMIO { namespace DP { namespace Sample
 			CMBlockBufferCustomBlockSource customBlockSource = { kCMBlockBufferCustomBlockSourceVersion, NULL, ReleaseBufferCallback, this };
 			// Get the size & data for the frame
 			size_t frameSize = message->mDescriptor.size;
-            LOGINFO("original frame size: %d", frameSize);
+            
+            if (mFrames.read_available())
+            {
+                CvtColorSpace(mFrames.front(), message->mDescriptor.address, frameSize);
+                mFrames.pop();
+            }
             
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;

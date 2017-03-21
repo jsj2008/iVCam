@@ -78,9 +78,11 @@ extern "C" {
 #include "BlenderFilter.hpp"
 #include "BlenderSink.hpp"
 #include "RawFrameSrc.hpp"
+
 #include <editor/filter/decode_filter.h>
 #include <editor/filter/scale_filter.h>
 #include <editor/media_pipe.h>
+#include <av_toolbox/scaler.h>
 #include <boost/lockfree/spsc_queue.hpp>
 #include <thread>
 #include <chrono> 
@@ -250,6 +252,7 @@ namespace CMIO { namespace DP { namespace Sample
 		void									TimecodeChanged(Float64 timecode);
 		void									StreamDeckChanged(UInt32 changed, UInt16 opcode, UInt16 operand);
         void                                    StreamThread();
+        void                                    CvtColorSpace(std::shared_ptr<AVFrame> frame, void* dstBuffer, size_t frameSize);
         
 	protected:
 		PropertyAddressList						mDeckPropertyListeners;
@@ -285,7 +288,7 @@ namespace CMIO { namespace DP { namespace Sample
         boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<10> > mFrames;
         std::string                             mOffset;
         std::thread                             mStreamThread;
-        bool                                  mIsActive; // Stop the stream thread when finalize the plugin 
+        std::shared_ptr<ins::Scaler>              mScaler;
 	};
 }}}
 
