@@ -1296,6 +1296,9 @@ namespace CMIO { namespace DP { namespace Sample
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;
             
+            FILE* file = fopen("/Users/zhangzhongke/Documents/out.bin", "wb");
+            fwrite(data, 1, frameSize, file);
+            fclose(file);
             
 			DebugMessageLevel(2, "CMIO::DP::Sample::Stream::FrameArrived: Frametype = %d discontinuity = %d frameSize = %ld", message->mFrameType, GetDiscontinuityFlags(), frameSize);
 			
