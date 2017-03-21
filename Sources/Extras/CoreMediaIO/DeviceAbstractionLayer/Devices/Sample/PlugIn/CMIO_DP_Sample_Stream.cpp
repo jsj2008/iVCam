@@ -181,6 +181,8 @@ namespace CMIO { namespace DP { namespace Sample
 				CFRelease(clock);
 			}
             
+            ins::InitFFmpeg();
+            
             // *** Create a new thread to open device and get preview stream
             int ret = mAtomCamera.open(StreamFormat::H264, FRAME_WIDTH, FRAME_HEIGHT, 30, 8*1024*1024);
             if (ret == 0)
@@ -983,14 +985,12 @@ namespace CMIO { namespace DP { namespace Sample
         std::shared_ptr<ins::DecodeFilter> decoderFilter = std::make_shared<ins::DecodeFilter>();
         std::shared_ptr<ins::ScaleFilter> scalerBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_RGBA, SWS_FAST_BILINEAR);
         std::shared_ptr<ins::BlenderFilter> blenderFilter = std::make_shared<ins::BlenderFilter>(FRAME_WIDTH, FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, mOffset);
-        std::shared_ptr<ins::ScaleFilter> scalerAfterBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_UYVY422, SWS_FAST_BILINEAR);
         std::shared_ptr<ins::BlenderSink> blenderSink = std::make_shared<ins::BlenderSink>(&mFrames);
         rawFrameSrc->set_video_filter(decoderFilter)
                     ->set_next_filter(scalerBeforeBlend)
                     ->set_next_filter(blenderFilter)
-                    ->set_next_filter(scalerAfterBlend)
                     ->set_next_filter(blenderSink);
-        if (rawFrameSrc->Prepare())
+        if (!rawFrameSrc->Prepare())
         {
             LOGERR("Raw frame source isn't ready.");
             return;

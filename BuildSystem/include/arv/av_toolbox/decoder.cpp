@@ -7,7 +7,7 @@ extern "C" {
 #if (__APPLE__)
 #include <libavcodec/videotoolbox.h>
 #endif
-#include <libavcodec/avcodec.h>
+#include <libavcodec/avcodec.h> 
 }
 #include <llog/llog.h>
 #include "ffmpeg_util.h"
@@ -20,7 +20,7 @@ Decoder::Decoder(const sp<AVCodecContext> &dec_ctx) noexcept : dec_ctx_(dec_ctx)
 
 int Decoder::Open() {
   auto ret = avcodec_open2(dec_ctx_.get(), dec_ctx_->codec, nullptr);
-  LOG_IF(ERROR, ret < 0) << "avcodec open failed:" << FFmpegErrorToString(ret);
+  LOG_IF(ERROR, ret < 0) << "avcodec open failed: " << FFmpegErrorToString(ret);
   return ret;
 }
 
@@ -48,6 +48,7 @@ int Decoder::ReceiveFrame(sp<AVFrame> &out_frame) {
     //  out_frame = frame;
     //}
     out_frame = frame;
+
   } else if (ret == AVERROR(EAGAIN)) {
     LOG(VERBOSE) << "receive frame err egain, need to send new input";
   } else if (ret == AVERROR_EOF) {

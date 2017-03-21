@@ -34,6 +34,7 @@ public:
     if (!scaler_->Init(frame)) return false;
     sp<AVFrame> scale_frame;
     auto ret = scaler_->ScaleFrame(frame, scale_frame);
+      
     return ret > 0 && next_filter_->Filter(scale_frame);
   }
 

@@ -103,7 +103,7 @@ namespace ins {
         eof_ = false;
         
         uint8_t spspps[512];
-        int spspps_len;
+        size_t spspps_len;
         std::shared_ptr<Frame> frame;
         int ret;
         while (true)
@@ -111,7 +111,6 @@ namespace ins {
             ret = mCamera->readFrame(&frame);
             if (ret != 0)
             {
-                LOG(ERROR) << "Failed to read frame.";
                 continue;
             }
             
@@ -119,9 +118,12 @@ namespace ins {
             uint8_t* data = frame->data();
             if ((data[0] == 0 && data[1] == 0 && data[2] == 0 && data[3] == 1) || (data[0] == 0 && data[1] == 0 && data[2] == 1))
             {
-                LOG(VERBOSE) << "Get extra data!";
-                ParseSPSPPS(frame->data(), frame->size(), spspps, spspps_len);
-                break;
+                bool ret = ParseSPSPPS(frame->data(), frame->size(), spspps, spspps_len);
+                if (ret)
+                {
+                    LOG(VERBOSE) << "Get extra data! length: " << spspps_len;
+                    break;
+                }
             }
             else
             {
@@ -141,7 +143,7 @@ namespace ins {
             timeBase.num = 1;
             timeBase.den = 1000;
             
-            auto video_stream = NewH264Stream(mWidth, mHeight, frameRate, timeBase, AV_CODEC_ID_H264, AV_PIX_FMT_YUV422P, spspps, spspps_len);
+            auto video_stream = NewH264Stream(mWidth, mHeight, frameRate, timeBase, AV_CODEC_ID_H264, AV_PIX_FMT_RGBA, spspps, (int)spspps_len);
             auto codecpar = NewAVCodecParameters();
             avcodec_parameters_copy(codecpar.get(), video_stream->codecpar);
             
@@ -149,7 +151,11 @@ namespace ins {
             video_bus.out_codecpar = codecpar;
             mStreamIndex = video_stream->index;
             
-            if (!video_filter_->Init(video_bus)) return false;
+            if (!video_filter_->Init(video_bus))
+            {
+                LOG(ERROR) << "Failed to initialize all filters.";
+                return false;
+            }
         }
         
         return true;
@@ -209,7 +215,7 @@ namespace ins {
         }
     }
     
-    bool RawFrameSrc::ParseSPSPPS(const uint8_t* data, const int32_t data_size, unsigned char* buffer, int& len)
+    bool RawFrameSrc::ParseSPSPPS(const uint8_t* data, const int32_t data_size, unsigned char* buffer, size_t& len)
     {
         int sps_start_pos;
         int sps_size;
@@ -223,12 +229,16 @@ namespace ins {
             LOG(ERROR) << "sps_size == 0 or pps_size == 0";
             return false;
         }
-        const int SPS_PPS_PAD = 0x0001;
+        // start code: 0x00000001 or 0x00000100
+        // Little endian
+        const int SPS_PPS_PAD = 0x01000000;
         
         memcpy(buffer, &SPS_PPS_PAD, sizeof(int));
         memcpy(buffer + sizeof(int), data + sps_start_pos, sps_size);
         memcpy(buffer + sizeof(int) + sps_size, &SPS_PPS_PAD, sizeof(int));
         memcpy(buffer + sizeof(int) + sps_size + sizeof(int), data + pps_start_pos, pps_size);
+        
+        len = sps_size + pps_size + sizeof(int)*2;
         
         return true;
     }

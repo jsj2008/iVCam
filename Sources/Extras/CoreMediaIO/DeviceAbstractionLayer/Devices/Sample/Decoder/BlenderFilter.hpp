@@ -9,14 +9,15 @@
 #ifndef BlenderFilter_hpp
 #define BlenderFilter_hpp
 
+#include "BlenderWrapper.h"
 #include <editor/filter/media_filter.h> 
-#include "../BlenderWrapper.h"
 #include <av_toolbox/ffmpeg_util.h>
+#include <llog/llog.h>
 
 extern "C" {
 #include <libavutil/pixfmt.h>
 #include <libavcodec/avcodec.h>
-}
+} 
 
 namespace ins {
     
@@ -33,6 +34,8 @@ namespace ins {
         CBlenderWrapper* mBlender; 
         sp<AVFrame> mBlendedFrame;
         BlenderParams mParams;
+        unsigned char* mInputBuffer;
+        unsigned char* mOutputBuffer;
     };
     
 }

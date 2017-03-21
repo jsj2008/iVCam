@@ -14,7 +14,7 @@
 #include <av_toolbox/sp.h>
 #include <editor/media_src.h>
 #include "AtomCamera.h"
-#include "../Frame.h"
+#include "Frame.h"
 
 struct AVStream;
 
@@ -53,7 +53,7 @@ namespace ins {
         void OnError();
         void Loop();
         void ParseNAL(const uint8_t* data, const int32_t data_size, unsigned char nal_type, int& start_pos, int& size);
-        bool ParseSPSPPS(const uint8_t* data, const int32_t data_size, unsigned char* buffer, int& len);
+        bool ParseSPSPPS(const uint8_t* data, const int32_t data_size, unsigned char* buffer, size_t& len);
         
     private:
         bool eof_ = false;
