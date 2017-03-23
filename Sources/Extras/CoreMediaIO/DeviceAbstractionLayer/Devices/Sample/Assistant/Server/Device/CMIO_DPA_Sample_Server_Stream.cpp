@@ -646,7 +646,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		// Save the current frame type & frame rate control in the event of an error so a restore attempt can be made
 		FrameType currentFrameType = mFrameType;
 		Float64 currentFrameRate = mFrameRate;
-        LOGINFO("current frame rate: %lf", currentFrameRate);
 		
         FrameRates::const_iterator i = mFrameRatesMap[frameType].find(mFrameRate);
         if (i == mFrameRatesMap[frameType].end())

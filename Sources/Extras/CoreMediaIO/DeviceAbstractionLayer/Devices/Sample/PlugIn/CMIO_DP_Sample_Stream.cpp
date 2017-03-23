@@ -180,8 +180,6 @@ namespace CMIO { namespace DP { namespace Sample
 				CFRelease(clock);
 			}
             
-            ins::InitFFmpeg();
-            
             // *** Create a new thread to open device and get preview stream
             int ret = mAtomCamera.open(StreamFormat::H264, FRAME_WIDTH, FRAME_HEIGHT, 30, 8*1024*1024);
             if (ret == 0)
@@ -190,6 +188,8 @@ namespace CMIO { namespace DP { namespace Sample
                 ret = mAtomCamera.getCameraOffset(mOffset);
                 if (ret == 0)
                 {
+                    ins::InitFFmpeg();
+                    
                     LOGINFO("Device offset: %s", mOffset.c_str());
                     // Start the thread to read frame from device.
                     mStreamThread = std::thread(&Stream::StreamThread, this);
@@ -635,8 +635,6 @@ namespace CMIO { namespace DP { namespace Sample
 		if (not mDeck->UseOneShotGetters())
 			return;
 		
-        LOGINFO("DP::Sample::Stream::PropertyListenerAdded calling StartDeckThreads");
-		
 		// Tell the deck to stop using one-shot getters
 		mDeck->SetUseOneShotGetters(false);
 		
@@ -803,11 +801,7 @@ namespace CMIO { namespace DP { namespace Sample
 		
 		// Correct the hosttime and drive the clock
 		nanosecondsHostTime -= mOutputHosttimeCorrection;
-
-		#if 1
-			LOGINFO("DP::Sample::Stream::DriveOutputClock: +++\t%p\t%lld\t%d\t%lld", mClock->GetClock(), clockTime.value, clockTime.timescale, nanosecondsHostTime);
-		#endif
-		
+        
 		OSStatus err = CMIOStreamClockPostTimingEvent(clockTime, CAHostTimeBase::ConvertFromNanos(nanosecondsHostTime), mSyncClock, mClock->GetClock());
 		DebugMessageIfError(err, "DP::Sample::Stream::DriveOutputClock: CMIOStreamClockPostTimingEvent() failed");
 				
@@ -815,10 +809,6 @@ namespace CMIO { namespace DP { namespace Sample
 		// start their graph timebase
 		if (mSyncClock)
 		{
-			#if 1
-				printf("+++\t%p\t%lld\t%d\t%lld\n", mClock->GetClock(), clockTime.value, clockTime.timescale, nanosecondsHostTime);
-			#endif
-			
 			mFirstOutputPresentationTimeStamp->SetFirstOutputPresentationTimeStamp(presentationTimeStamp);
 		}
 		
@@ -920,10 +910,6 @@ namespace CMIO { namespace DP { namespace Sample
                     
                 case kCMPixelFormat_24RGB:
                     extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 RGB24"));
-                    break;
-                    
-                case kCMVideoCodecType_JPEG:
-                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 JPEG"));
                     break;
                     
 				default:
