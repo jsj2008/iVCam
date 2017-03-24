@@ -124,13 +124,13 @@ namespace
 //#define kYUV_3008x1504_FrameSize (9048064)
 //#define kYUV_3008x1504_DataSize (kYUV_3008x1504_FrameSize)
 
-#define kYUV_1472X736_FrameSize (3250176)
+#define kYUV_1472X736_FrameSize (4333568)
 #define kYUV_1472x736_DataSize (kYUV_1472X736_FrameSize)
 
-#define kYUV_2176X1088_FrameSize (7102464)
+#define kYUV_2176X1088_FrameSize (9469952)
 #define kYUV_2176X1088_DataSize (kYUV_2176X1088_FrameSize)
 
-#define kYUV_3008x1504_FrameSize (13572096)
+#define kYUV_3008x1504_FrameSize (18096128)
 #define kYUV_3008x1504_DataSize (kYUV_3008x1504_FrameSize)
 
 #define MAX_FRAME_SIZE							(3008*1504*4)
