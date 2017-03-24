@@ -904,13 +904,9 @@ namespace CMIO { namespace DP { namespace Sample
 					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 v210"));
 					break;
                     
-				case kCMPixelFormat_32ARGB:
-					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 ARGB"));
-					break;
-                    
-                case kCMPixelFormat_24RGB:
-                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 RGB24"));
-                    break;
+				case kCMPixelFormat_24RGB:
+					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 RGB24"));
+					break; 
                     
 				default:
 					ThrowIf(true, CAException(kCMIODeviceUnsupportedFormatError), "CMIO::DP::Sample::Stream::AddAvailableFormatDescriptions: Assistant returned an unknown format");
