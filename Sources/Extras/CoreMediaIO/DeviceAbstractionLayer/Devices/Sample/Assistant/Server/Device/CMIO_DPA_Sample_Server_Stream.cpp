@@ -156,19 +156,19 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						{
 							case kYUV422_1472x736:
                             {
-                                mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_24RGB, formatWidth, formatHeight));
+                                mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_32ARGB, formatWidth, formatHeight));
                                 mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
                             }
 								break;
 							case kYUV422_2176x1088:
 							{
-								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_24RGB, formatWidth, formatHeight));
+								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_32ARGB, formatWidth, formatHeight));
 								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
 							}
 								break;
 							case kYUV422_3008x1504:
 							{
-								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_24RGB, formatWidth, formatHeight));
+								mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_32ARGB, formatWidth, formatHeight));
 								mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
 							}
 								break;

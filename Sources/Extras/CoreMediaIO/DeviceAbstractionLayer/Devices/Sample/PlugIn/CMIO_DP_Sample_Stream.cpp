@@ -82,13 +82,14 @@
 
 #define FRAME_WIDTH 2560
 #define FRAME_HEIGHT 1280
-#define kYUV_1472X736_FrameSize (3250176)
+
+#define kYUV_1472X736_FrameSize (4333568)
 #define kYUV_1472x736_DataSize (kYUV_1472X736_FrameSize)
 
-#define kYUV_2176X1088_FrameSize (7102464)
+#define kYUV_2176X1088_FrameSize (9469952)
 #define kYUV_2176X1088_DataSize (kYUV_2176X1088_FrameSize)
 
-#define kYUV_3008x1504_FrameSize (13572096)
+#define kYUV_3008x1504_FrameSize (18096128)
 #define kYUV_3008x1504_DataSize (kYUV_3008x1504_FrameSize)
 
 namespace
@@ -912,8 +913,8 @@ namespace CMIO { namespace DP { namespace Sample
 					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 v210"));
 					break;
                     
-				case kCMPixelFormat_24RGB: 
-					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - RGB24"));
+				case kCMPixelFormat_32ARGB:
+					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - 32ARGB"));
 					break; 
                     
 				default:
@@ -974,21 +975,21 @@ namespace CMIO { namespace DP { namespace Sample
         
         switch (frameSize)
         {
-            // RGB24: 1472x736x3
+            // ARGB: 1472x736x4
             case kYUV_1472x736_DataSize:
             {
                 output_width = 1472;
                 output_height = 736;
                 break;
             }
-            // RGB24: 2176x1088x3
+            // ARGB: 2176x1088x4
             case kYUV_2176X1088_DataSize:
             {
                 output_width = 2176;
                 output_height = 1088;
                 break;
             }
-            // RGB24: 3008x1504x3
+            // ARGB: 3008x1504x4
             case kYUV_3008x1504_DataSize:
             {
                 output_width = 3008;
@@ -1221,7 +1222,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::FrameArrived(DPA::Sample::FrameArrivedMessage* message) 
 	{
-        LOGINFO("DP::Sample::Stream::FrameArrived");
 		// Don't do anything if the buffer queue is full
 		if (1.0 == mBufferQueue.Fullness())
 		{
@@ -1325,7 +1325,6 @@ namespace CMIO { namespace DP { namespace Sample
 			CMBlockBufferCustomBlockSource customBlockSource = { kCMBlockBufferCustomBlockSourceVersion, NULL, ReleaseBufferCallback, this };
 			// Get the size & data for the frame
 			size_t frameSize = message->mDescriptor.size;
-            LOGINFO("Frame size: %d", frameSize);
             
             if (mFrames.read_available())
             {
