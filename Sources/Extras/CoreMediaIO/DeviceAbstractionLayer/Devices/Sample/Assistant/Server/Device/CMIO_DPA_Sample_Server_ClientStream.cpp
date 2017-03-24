@@ -84,7 +84,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mMessageThreadGuard("ClientStream Message Thread Guard"),
 		mFrameAvailableGuard(frameAvailableGuard)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::ClientStream::ClientStream CONSTRUCTOR");
 		StartMessageThread();
 	}
 
@@ -93,7 +92,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	ClientStream::~ClientStream()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::ClientStream::ClientStream CONSTRUCTOR");
 		// Stop the message thread if necessary
 		StopMessageThread();
 
@@ -107,7 +105,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void ClientStream::StartMessageThread()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::ClientStream::StartMessageThread");
 		// Grab the message thread guard
 		CAGuard::Locker messageThreadGuard(mMessageThreadGuard);
 		
@@ -123,7 +120,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void ClientStream::StopMessageThread()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::ClientStream::StopMessageThread");
 		// Grab the message thread guard
 		CAGuard::Locker messageThreadGuard(mMessageThreadGuard);
 
@@ -148,7 +144,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void* ClientStream::MessageThreadEntry(ClientStream& clientStream)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::ClientStream::MessageThreadEntry");
 		{
 			// Grab the message thread guard
 			CAGuard::Locker	messageThreadGuard(clientStream.mMessageThreadGuard);
@@ -191,7 +186,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void ClientStream::SendFrameArrivedMessage(mach_port_t& recipient, Frame& frame)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::ClientStream::SendFrameArrivedMessage");
 		// Setup the message
 		FrameArrivedMessage message =
 		{
@@ -254,7 +248,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		}
 		else
 		{
-			LOGINFO("SendFrameArrivedMessage() - Error sending frame to port %d 0x%08X", recipient, err);
 
 			// Something went wrong, so destroy the message so that all of its resources will be properly released
 			mach_msg_destroy(&message.mHeader);

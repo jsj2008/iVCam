@@ -82,6 +82,14 @@
 
 #define FRAME_WIDTH 2560
 #define FRAME_HEIGHT 1280
+#define kYUV_1472X736_FrameSize (3250176)
+#define kYUV_1472x736_DataSize (kYUV_1472X736_FrameSize)
+
+#define kYUV_2176X1088_FrameSize (7102464)
+#define kYUV_2176X1088_DataSize (kYUV_2176X1088_FrameSize)
+
+#define kYUV_3008x1504_FrameSize (13572096)
+#define kYUV_3008x1504_DataSize (kYUV_3008x1504_FrameSize)
 
 namespace
 {
@@ -888,9 +896,9 @@ namespace CMIO { namespace DP { namespace Sample
 		extensions.AddCFType(kCMFormatDescriptionExtension_FieldCount, CACFNumber(static_cast<SInt32>(1)).GetCFNumber());	
 		
 		// Mark 6-1-6 (SMPTE-C) color tags
-		extensions.AddCFType(kCMFormatDescriptionExtension_ColorPrimaries, kCMFormatDescriptionColorPrimaries_SMPTE_C);
-		extensions.AddCFType(kCMFormatDescriptionExtension_TransferFunction, kCMFormatDescriptionTransferFunction_ITU_R_709_2);
-		extensions.AddCFType(kCMFormatDescriptionExtension_YCbCrMatrix, kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4);
+		//extensions.AddCFType(kCMFormatDescriptionExtension_ColorPrimaries, kCMFormatDescriptionColorPrimaries_SMPTE_C);
+		//extensions.AddCFType(kCMFormatDescriptionExtension_TransferFunction, kCMFormatDescriptionTransferFunction_ITU_R_709_2);
+		//extensions.AddCFType(kCMFormatDescriptionExtension_YCbCrMatrix, kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4);
         
 		for (int i = 0; i < frameFormats.GetLength() ; ++i)
 		{
@@ -904,8 +912,8 @@ namespace CMIO { namespace DP { namespace Sample
 					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 v210"));
 					break;
                     
-				case kCMPixelFormat_24RGB:
-					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 RGB24"));
+				case kCMPixelFormat_24RGB: 
+					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - RGB24"));
 					break; 
                     
 				default:
@@ -966,22 +974,22 @@ namespace CMIO { namespace DP { namespace Sample
         
         switch (frameSize)
         {
-            // YUV422P: 1472x736x2
-            case 2166784:
+            // RGB24: 1472x736x3
+            case kYUV_1472x736_DataSize:
             {
                 output_width = 1472;
                 output_height = 736;
                 break;
             }
-            // YUV422P: 2176x1088x2
-            case 4734976:
+            // RGB24: 2176x1088x3
+            case kYUV_2176X1088_DataSize:
             {
                 output_width = 2176;
                 output_height = 1088;
                 break;
             }
-            // YUV422P: 3008x1504x2
-            case 9048064:
+            // RGB24: 3008x1504x3
+            case kYUV_3008x1504_DataSize:
             {
                 output_width = 3008;
                 output_height = 1504;
@@ -1035,7 +1043,6 @@ namespace CMIO { namespace DP { namespace Sample
         mediaPipe->Run();
         mediaPipe->Wait();
         
-        LOGINFO("Stream thread terminated.");
     }
 
 	#pragma mark -
@@ -1318,6 +1325,7 @@ namespace CMIO { namespace DP { namespace Sample
 			CMBlockBufferCustomBlockSource customBlockSource = { kCMBlockBufferCustomBlockSourceVersion, NULL, ReleaseBufferCallback, this };
 			// Get the size & data for the frame
 			size_t frameSize = message->mDescriptor.size;
+            LOGINFO("Frame size: %d", frameSize);
             
             if (mFrames.read_available())
             {
