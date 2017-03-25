@@ -21,7 +21,7 @@ namespace ins{
     
     class BlenderSink: public MediaSink<sp<AVFrame>> {
     public:
-        explicit BlenderSink(boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<10> >* queue);
+        explicit BlenderSink(boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<5> >* queue);
         ~BlenderSink() = default;
         
         bool Prepare() override;
@@ -31,7 +31,7 @@ namespace ins{
         void Close() override; 
     
     private:
-        boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<10> >* mQueue;
+        boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<5> >* mQueue;
     };
     
 }

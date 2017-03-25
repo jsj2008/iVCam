@@ -285,7 +285,7 @@ namespace CMIO { namespace DP { namespace Sample
 		UInt32									mRecentTimingInfoIdx;
         
         AtomCamera                                mAtomCamera;
-        boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<10> > mFrames;
+        boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<5> > mFrames;
         std::string                             mOffset;
         std::thread                             mStreamThread;
         std::shared_ptr<ins::Scaler>              mScaler;

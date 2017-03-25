@@ -10,7 +10,7 @@
 
 namespace ins {
     
-    BlenderSink::BlenderSink(boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<10> >* queue)
+    BlenderSink::BlenderSink(boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<5> >* queue)
     : mQueue(queue)
     {
         
