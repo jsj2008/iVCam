@@ -6,8 +6,7 @@
 #define INSPLAYER_SCALE_FILTER_H
 
 #include "av_toolbox/scaler.h"
-#include "media_filter.h"
-#include "llog.h"
+#include "media_filter.h" 
 
 namespace ins {
 
@@ -32,12 +31,10 @@ public:
   }
 
   bool Filter(const sp<AVFrame> &frame) override {
-      perf_timer.Reset();
     if (!scaler_->Init(frame)) return false;
     sp<AVFrame> scale_frame;
     auto ret = scaler_->ScaleFrame(frame, scale_frame);
-      auto pass_ms = perf_timer.Pass();
-      LOG(VERBOSE) << "Scale: " << pass_ms;
+      
     return ret > 0 && next_filter_->Filter(scale_frame);
   }
 
@@ -47,7 +44,6 @@ public:
 
 private:
   sp<Scaler> scaler_;
-    Timer perf_timer;
 };
 
 }

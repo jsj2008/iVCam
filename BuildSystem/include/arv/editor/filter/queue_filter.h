@@ -13,9 +13,10 @@
 #include <av_toolbox/any.h>
 #include "media_filter.h"
 
+
 namespace ins {
 
-const static std::string kQueueFilterMaxSize("queue_size"); //value type:int, default 10
+const static std::string kQueueFilterMaxSize("queue_size"); //value type:int, default 30
 
 template <typename DataType>
 class QueueFilter : public MediaFilter<DataType, DataType> {
@@ -32,8 +33,8 @@ private:
   void UnqueueBuffer();
 
 private:
-  /// set default queue max size 10
-  int queue_max_size_ = 10;
+  /// set default queue max size 30
+  int queue_max_size_ = 30;
   bool to_release_ = false;
 
   std::mutex queue_mtx_;
