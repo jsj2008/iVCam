@@ -12,26 +12,25 @@
 extern "C" {
 #include <libavformat/avformat.h> 
 }
-
-#include <editor/filter/media_filter.h>
-#include <boost/lockfree/spsc_queue.hpp>
+ 
+#include <editor/filter/media_filter.h> 
 #include <llog/llog.h>
 
 namespace ins{
     
     class BlenderSink: public MediaSink<sp<AVFrame>> {
     public:
-        explicit BlenderSink(boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<5> >* queue);
+        explicit BlenderSink(uint8_t* queue);
         ~BlenderSink() = default;
         
         bool Prepare() override;
         bool Init(MediaBus &bus) override;
         void SetOpt(const std::string &key, const any &value) override;
         bool Filter(const sp<AVFrame> &frame) override;
-        void Close() override; 
-    
+        void Close() override;
+        
     private:
-        boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<5> >* mQueue;
+        uint8_t* mBuffer;
     };
     
 }

@@ -81,11 +81,10 @@ extern "C" {
 
 #include <editor/filter/decode_filter.h>
 #include <editor/filter/scale_filter.h>
+#include <editor/filter/queue_filter.h>
 #include <editor/media_pipe.h>
 #include <av_toolbox/scaler.h>
-#include <boost/lockfree/spsc_queue.hpp>
 #include <thread>
-#include <chrono> 
 
 // System Includes
 #include <CoreMedia/CMSampleBuffer.h> 
@@ -251,8 +250,7 @@ namespace CMIO { namespace DP { namespace Sample
 		void									CueComplete(SInt32 cueStatus);
 		void									TimecodeChanged(Float64 timecode);
 		void									StreamDeckChanged(UInt32 changed, UInt16 opcode, UInt16 operand);
-        void                                    StreamThread();
-        void                                    CvtColorSpace(std::shared_ptr<AVFrame> frame, void* dstBuffer, size_t frameSize);
+        void                                    StreamThread(); 
         
 	protected:
 		PropertyAddressList						mDeckPropertyListeners;
@@ -284,11 +282,11 @@ namespace CMIO { namespace DP { namespace Sample
 		RecentTimingInfo						mRecentTimingInfo[2];
 		UInt32									mRecentTimingInfoIdx;
         
-        AtomCamera                                mAtomCamera;
-        boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<5> > mFrames;
+        AtomCamera                                mAtomCamera; 
         std::string                             mOffset;
         std::thread                             mStreamThread;
-        std::shared_ptr<ins::Scaler>              mScaler;
+        bool                                  mIsCameraOpened;
+        uint8_t*                               mFrame;
 	};
 }}}
 
