@@ -1287,7 +1287,6 @@ namespace CMIO { namespace DP { namespace Sample
 			CMBlockBufferCustomBlockSource customBlockSource = { kCMBlockBufferCustomBlockSourceVersion, NULL, ReleaseBufferCallback, this };
 			// Get the size & data for the frame
             size_t frameSize = message->mDescriptor.size;
-            LOGINFO("Frame size: %d", frameSize);
             
             if (mIsCameraOpened)
             {
