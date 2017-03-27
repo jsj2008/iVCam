@@ -34,7 +34,7 @@ namespace ins {
     bool BlenderSink::Filter(const sp<AVFrame> &frame)
     {
         if (mQueue->write_available()) {
-            mQueue->push(frame);
+            mQueue->push(frame); 
         }
         else
         {
