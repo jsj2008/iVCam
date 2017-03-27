@@ -139,7 +139,7 @@ namespace CMIO { namespace DP { namespace Sample
 		mSyncClock(true),
         mAtomCamera(),
         mIsCameraOpened(false),
-        mPrevFrame(nullptr)
+        mFrame(nullptr)
 	{
 	}
 	
@@ -149,9 +149,9 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Stream::~Stream()
 	{
-        if (mPrevFrame != nullptr)
+        if (mFrame != nullptr)
         {
-            delete [] mPrevFrame;
+            delete [] mFrame;
         }
 	}
 	
@@ -204,10 +204,10 @@ namespace CMIO { namespace DP { namespace Sample
                     mStreamThread = std::thread(&Stream::StreamThread, this);
                     mStreamThread.detach();
                     
-                    mPrevFrame = new uint8_t[kARGB_1472X736_FrameSize];
-                    if (mPrevFrame == nullptr)
+                    mFrame = new uint8_t[kARGB_1472X736_FrameSize];
+                    if (mFrame == nullptr)
                     {
-                        LOGERR("Can't allocate frame for previous frame.");
+                        LOGERR("Can't allocate frame for frame.");
                     }
                     mIsCameraOpened = true;
                 }
@@ -980,16 +980,13 @@ namespace CMIO { namespace DP { namespace Sample
         std::shared_ptr<ins::RawFrameSrc> rawFrameSrc = std::make_shared<ins::RawFrameSrc>(&mAtomCamera, FRAME_WIDTH, FRAME_HEIGHT);
         std::shared_ptr<ins::DecodeFilter> decoderFilter = std::make_shared<ins::DecodeFilter>();
         std::shared_ptr<ins::ScaleFilter> scaleBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_RGBA, SWS_FAST_BILINEAR);
-        auto decoderQueue = std::make_shared<ins::QueueFilter<ins::sp<AVFrame>>>();
         std::shared_ptr<ins::BlenderFilter> blenderFilter = std::make_shared<ins::BlenderFilter>(FRAME_WIDTH, FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, mOffset);
         std::shared_ptr<ins::ScaleFilter> scaleAfterBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_ARGB, SWS_FAST_BILINEAR);
-        auto blenderQueue = std::make_shared<ins::QueueFilter<ins::sp<AVFrame>>>();
-        std::shared_ptr<ins::BlenderSink> blenderSink = std::make_shared<ins::BlenderSink>(&mFrames);
+        std::shared_ptr<ins::BlenderSink> blenderSink = std::make_shared<ins::BlenderSink>(mFrame);
         rawFrameSrc->set_video_filter(decoderFilter)
                     ->set_next_filter(scaleBeforeBlend)
-                    //->set_next_filter(decoderQueue)
                     ->set_next_filter(blenderFilter)
-                    //->set_next_filter(blenderQueue)
+                    ->set_next_filter(scaleAfterBlend)
                     ->set_next_filter(blenderSink);
         if (!rawFrameSrc->Prepare())
         {
@@ -1291,26 +1288,11 @@ namespace CMIO { namespace DP { namespace Sample
 			// Get the size & data for the frame
             size_t frameSize = message->mDescriptor.size;
             LOGINFO("Frame size: %d", frameSize);
-            if (mFrames.read_available())
-            {
-                
-//                memcpy(message->mDescriptor.address, mFrames.front().get(), frameSize);
-//                if (mPrevFrame != nullptr)
-//                {
-//                    memcpy(mPrevFrame, message->mDescriptor.address, frameSize );
-//                }
-                
-                mFrames.pop();
-            }
-            else
-            {
-                // 使用上一帧填补空白
-//                if (mIsCameraOpened && mPrevFrame != nullptr)
-//                {
-//                    memcpy(message->mDescriptor.address, mPrevFrame, frameSize);
-//                }
-            }
             
+            if (mIsCameraOpened)
+            {
+                memcpy(message->mDescriptor.address, mFrame, frameSize);
+            }
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;
             

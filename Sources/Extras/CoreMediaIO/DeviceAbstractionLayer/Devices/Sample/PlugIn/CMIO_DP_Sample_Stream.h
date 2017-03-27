@@ -84,9 +84,7 @@ extern "C" {
 #include <editor/filter/queue_filter.h>
 #include <editor/media_pipe.h>
 #include <av_toolbox/scaler.h>
-#include <boost/lockfree/spsc_queue.hpp>
 #include <thread>
-#include <chrono> 
 
 // System Includes
 #include <CoreMedia/CMSampleBuffer.h> 
@@ -284,13 +282,11 @@ namespace CMIO { namespace DP { namespace Sample
 		RecentTimingInfo						mRecentTimingInfo[2];
 		UInt32									mRecentTimingInfoIdx;
         
-        AtomCamera                                mAtomCamera;
-        boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<5> > mFrames;
+        AtomCamera                                mAtomCamera; 
         std::string                             mOffset;
         std::thread                             mStreamThread;
-        std::shared_ptr<ins::Scaler>              mScaler;
         bool                                  mIsCameraOpened;
-        uint8_t*                               mPrevFrame;
+        uint8_t*                               mFrame;
 	};
 }}}
 
