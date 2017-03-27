@@ -10,8 +10,8 @@
 
 namespace ins {
     
-    BlenderSink::BlenderSink(boost::lockfree::spsc_queue<std::shared_ptr<AVFrame>, boost::lockfree::capacity<5> >* queue)
-    : mQueue(queue)
+    BlenderSink::BlenderSink(uint8_t* frame)
+    : mBuffer(frame)
     {
         
     }
@@ -33,13 +33,11 @@ namespace ins {
     
     bool BlenderSink::Filter(const sp<AVFrame> &frame)
     {
-        if (mQueue->write_available()) {
-            mQueue->push(frame); 
-        }
-        else
+        if (mBuffer)
         {
-            LOG(ERROR) << "The frame buffer is full.";
+            memcpy(mBuffer, frame->data[0], frame->linesize[0]*frame->height); 
         }
+        
         return true;
     }
     
