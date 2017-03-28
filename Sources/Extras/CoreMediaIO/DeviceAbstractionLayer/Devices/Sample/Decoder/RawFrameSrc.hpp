@@ -25,7 +25,7 @@ namespace ins {
     class RawFrameSrc : public MediaSrc {
     public:
         
-        explicit RawFrameSrc(AtomCamera* camera, int width, int height);
+        explicit RawFrameSrc(std::shared_ptr<AtomCamera> camera, int width, int height);
         ~RawFrameSrc();
         RawFrameSrc(const RawFrameSrc&) = delete;
         RawFrameSrc(RawFrameSrc &&) = delete;
@@ -58,7 +58,7 @@ namespace ins {
         bool eof_ = false;
         double progress_ = 0;
         bool stop_ = false;
-        AtomCamera* mCamera;
+        std::shared_ptr<AtomCamera> mCamera;
         int mStreamIndex;
         int mWidth;
         int mHeight;

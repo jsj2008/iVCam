@@ -20,7 +20,7 @@ extern "C" {
 
 namespace ins {
     
-    RawFrameSrc::RawFrameSrc(AtomCamera* camera, int width, int height)
+    RawFrameSrc::RawFrameSrc(std::shared_ptr<AtomCamera> camera, int width, int height)
     : mCamera(camera),
       mWidth(width),
       mHeight(height)

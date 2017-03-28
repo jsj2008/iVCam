@@ -250,7 +250,8 @@ namespace CMIO { namespace DP { namespace Sample
 		void									CueComplete(SInt32 cueStatus);
 		void									TimecodeChanged(Float64 timecode);
 		void									StreamDeckChanged(UInt32 changed, UInt16 opcode, UInt16 operand);
-        void                                    StreamThread(); 
+        void                                    StreamThread();
+        void                                    HotPlugDetection();
         
 	protected:
 		PropertyAddressList						mDeckPropertyListeners;
@@ -282,11 +283,21 @@ namespace CMIO { namespace DP { namespace Sample
 		RecentTimingInfo						mRecentTimingInfo[2];
 		UInt32									mRecentTimingInfoIdx;
         
-        AtomCamera                                mAtomCamera; 
+        std::shared_ptr<AtomCamera>              mAtomCamera;
         std::string                             mOffset;
         std::thread                             mStreamThread;
-        bool                                  mIsCameraOpened;
+        std::thread                             mPlugDetectionThread;
+        bool                                  mIsCameraAttached;
+        bool                                  mShouldTerminate;
         uint8_t*                               mFrame;
+        uint8_t*                               mLogo;
+        std::shared_ptr<ins::MediaPipe>           mMediaPipe;
+        std::shared_ptr<ins::RawFrameSrc>          mRawFrameSrc;
+        std::shared_ptr<ins::DecodeFilter>         mDecoderFilter;
+        std::shared_ptr<ins::ScaleFilter>          mScaleBeforeBlend;
+        std::shared_ptr<ins::BlenderFilter>        mBlenderFilter;
+        std::shared_ptr<ins::ScaleFilter>          mScaleAfterBlend;
+        std::shared_ptr<ins::BlenderSink>          mBlenderSink;
 	};
 }}}
 

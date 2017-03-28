@@ -41,9 +41,8 @@
 		7B45EB7B1E65598100BF6BBF /* libCoreAudioStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B45EB791E65597100BF6BBF /* libCoreAudioStatic.a */; };
 		7B45EB7F1E6564E300BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
 		7B45EB851E67F34C00BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
-		7BBD2BD91E77E45200CDD061 /* 1472x736.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7BBD2BD61E77E45200CDD061 /* 1472x736.yuv */; };
-		7BBD2BDA1E77E45200CDD061 /* 2176x1088.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7BBD2BD71E77E45200CDD061 /* 2176x1088.yuv */; };
-		7BBD2BDB1E77E45200CDD061 /* 3008x1504.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7BBD2BD81E77E45200CDD061 /* 3008x1504.yuv */; };
+		7BA8A78C1E8A5C4000840021 /* logo in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8A78B1E8A5C4000840021 /* logo */; };
+		7BA8A78F1E8A5C8700840021 /* logo in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BA8A78B1E8A5C4000840021 /* logo */; };
 		7BBD2BE11E791D1200CDD061 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDC1E791D1200CDD061 /* libavcodec.a */; };
 		7BBD2BE21E791D1200CDD061 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDD1E791D1200CDD061 /* libavformat.a */; };
 		7BBD2BE31E791D1200CDD061 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDE1E791D1200CDD061 /* libavutil.a */; };
@@ -201,6 +200,16 @@
 				7BCC92DD1E7144C60063E5BA /* libUniversalBlender.dylib in CopyFiles */,
 				7BCC92DE1E7144C60063E5BA /* libunrollmap.dylib in CopyFiles */,
 				7B3DEBCD1E6EA856002FF975 /* libuvc.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7BA8A78E1E8A5C6C00840021 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				7BA8A78F1E8A5C8700840021 /* logo in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,9 +491,7 @@
 		7B45EB7C1E6564E300BF6BBF /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
 		7B45EB7D1E6564E300BF6BBF /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		7B45EB7E1E6564E300BF6BBF /* macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
-		7BBD2BD61E77E45200CDD061 /* 1472x736.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1472x736.yuv; sourceTree = "<group>"; };
-		7BBD2BD71E77E45200CDD061 /* 2176x1088.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2176x1088.yuv; sourceTree = "<group>"; };
-		7BBD2BD81E77E45200CDD061 /* 3008x1504.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3008x1504.yuv; sourceTree = "<group>"; };
+		7BA8A78B1E8A5C4000840021 /* logo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = logo; sourceTree = "<group>"; };
 		7BBD2BDC1E791D1200CDD061 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../Lib/libavcodec.a; sourceTree = "<group>"; };
 		7BBD2BDD1E791D1200CDD061 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ../Lib/libavformat.a; sourceTree = "<group>"; };
 		7BBD2BDE1E791D1200CDD061 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ../Lib/libavutil.a; sourceTree = "<group>"; };
@@ -826,9 +833,6 @@
 		14F1EAE711A7375400B28A43 /* KernelExtension */ = {
 			isa = PBXGroup;
 			children = (
-				7BBD2BD61E77E45200CDD061 /* 1472x736.yuv */,
-				7BBD2BD71E77E45200CDD061 /* 2176x1088.yuv */,
-				7BBD2BD81E77E45200CDD061 /* 3008x1504.yuv */,
 				14F1EAEF11A7375400B28A43 /* SampleDriver-Info.plist */,
 				14F1EAF311A7375400B28A43 /* SampleUserClient-Info.plist */,
 				14F1EAE811A7375400B28A43 /* CMIO_KEXT_Sample_ControlIDs.h */,
@@ -1165,6 +1169,7 @@
 		E42AA5BE0E07410B000C4D64 /* PlugIn */ = {
 			isa = PBXGroup;
 			children = (
+				7BA8A78B1E8A5C4000840021 /* logo */,
 				E42AA5CA0E07410B000C4D64 /* Sample-Info.plist */,
 				E42AA5CB0E07410B000C4D64 /* Sample.exp */,
 				E42AA5C40E07410B000C4D64 /* CMIO_DP_Sample_PlugIn.h */,
@@ -1300,6 +1305,7 @@
 				149D29D011AAFD5600DF1946 /* Resources */,
 				149D29D111AAFD5600DF1946 /* Frameworks */,
 				7B45EB811E65757A00BF6BBF /* Headers */,
+				7BA8A78E1E8A5C6C00840021 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1401,9 +1407,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BBD2BDA1E77E45200CDD061 /* 2176x1088.yuv in Resources */,
-				7BBD2BD91E77E45200CDD061 /* 1472x736.yuv in Resources */,
-				7BBD2BDB1E77E45200CDD061 /* 3008x1504.yuv in Resources */,
+				7BA8A78C1E8A5C4000840021 /* logo in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
