@@ -162,8 +162,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mDevices(),
 		mClientInfoMap(),
 		mDeviceStateNotifiers()
-	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::Assistant");
+	{ 
 		// Wait for the notification port thread to be running prior to continuing
 		while (PTA::NotificationPortThread::kStarting == mNotificationPortThread.GetState())
 			pthread_yield_np();
@@ -195,7 +194,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Assistant* Assistant::Instance()
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::Instance");
 		if (0 == mInstance)
 			mInstance = new Assistant(); 
 		
@@ -211,7 +209,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::Connect(pid_t clientPID, mach_port_t* client)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::Connect");
 		*client = MACH_PORT_NULL;
 		
 		try
@@ -251,7 +248,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::Disconnect(Client client)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::Disconnect");
 		// Just forward this on to ClientDied(), since an explicit disconnect can be handled just like an accidetal death
 		ClientDied(client);
 		return KERN_SUCCESS;
@@ -263,7 +259,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Assistant::ClientDied(Client client)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::ClientDied");
 		// Grab the mutex for the Assistant's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -326,7 +321,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::GetDeviceStates(Client client, mach_port_t messagePort, DeviceState** deviceStates, mach_msg_type_number_t* length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::GetDeviceStates");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -369,7 +363,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::GetProperties(Client client, UInt64 guid, mach_port_t messagePort, UInt64 time, const PropertyAddress& matchAddress, PropertyAddress** addresses, mach_msg_type_number_t* length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::GetProperties");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -392,7 +385,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::GetPropertyState(Client client, UInt64 guid, const PropertyAddress& address, UInt8* qualifier, mach_msg_type_number_t qualifierLength, UInt8** data, mach_msg_type_number_t* length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::GetPropertyState");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -415,7 +407,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::SetPropertyState(Client client, UInt64 guid, bool sendChangedNotifications, const PropertyAddress& address, UInt8* qualifier, mach_msg_type_number_t qualifierLength, Byte* data, mach_msg_type_number_t length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::SetPropertyState");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -437,7 +428,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::GetControlList(Client client, UInt64 guid, UInt8** data, mach_msg_type_number_t* length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::GetControlList");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -460,7 +450,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::GetControls(Client client, UInt64 guid, mach_port_t messagePort, UInt64 time, ControlChanges** controlChanges, mach_msg_type_number_t* length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::GetControls");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -483,7 +472,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::SetControl(Client client, UInt64 guid, UInt32 controlID, UInt32 value, UInt32* newValue)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::SetControl");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -506,7 +494,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::StartStream(Client client, UInt64 guid, mach_port_t messagePort, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::StartStream");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -534,7 +521,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::StopStream(Client client, UInt64 guid, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::StopStream");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -562,7 +548,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::ProcessRS422Command(UInt64 guid, ByteArray512 command, mach_msg_type_number_t commandLength, UInt32 responseLength, UInt32 *responseUsed, UInt8** response, mach_msg_type_number_t *responseCount)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::ProcessRS422Command");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -594,7 +579,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::StartDeckThreads(Client client, UInt64 guid, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::StartDeckThreads");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -620,7 +604,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::StopDeckThreads(Client client, UInt64 guid, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::StopDeckThreads");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -647,7 +630,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::DeckPlay(Client client, UInt64 guid, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::DeckPlay");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -673,7 +655,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::DeckStop(Client client, UInt64 guid, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::DeckStop");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -699,7 +680,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::DeckJog(Client client, UInt64 guid, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element, SInt32 speed)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::DeckJog");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -725,7 +705,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	kern_return_t Assistant::DeckCueTo(Client client, UInt64 guid, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element, Float64 requestedTimecode, Boolean	playOnCue)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::DeckCueTo");
 		try
 		{
 			// Grab the mutex for the Assistant's state
@@ -752,7 +731,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Device& Assistant::GetDeviceByGUID(UInt64 guid)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::GetDeviceByGUID");
 		// Locate the device with the specified GUID
 		Devices::const_iterator i = std::find_if(mDevices.begin(), mDevices.end(), Device::GUIDEqual(guid));
 		ThrowIf(i == mDevices.end(), CAException(kIOReturnNoDevice), "Assistant::GetDeviceByGUID: no match for specified GUID");
@@ -766,7 +744,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Assistant::SendDeviceStatesChangedMessage(mach_port_t destination)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::SendDeviceStatesChangedMessage");
 		// Statically initialize the invariant portions of the message (using 'safe' values for the variable portion).
 		// (Note:  for messages with 'move' dispostions such as this one, the kernel will not alter the invariant portion of the message, so this is a safe optimization.)
 		static DeviceStatesChangedMessage message =
@@ -801,7 +778,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Assistant::DeviceArrived(Assistant& assistant, io_iterator_t iterator)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::DeviceArrived");
 		#if 0
 			// Wait forever until the Debugger can attach to the Assistant process
 			bool waiting = true;
@@ -869,7 +845,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Assistant::DeviceRemoved(Device& device)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::DeviceRemoved");
 		// Catch all exceptions since exceptions cannot leave this routine 
 		try
 		{
@@ -912,7 +887,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Assistant::InitializeDeviceAddedNotification()
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::InitializeDeviceAddedNotification");
 		// Create a matching dictionary to specify that only Sample devices are of interest
 		CACFDictionary matchingDictionary(IOServiceMatching("IOVideoSampleDevice"), true);
 		ThrowIf(not matchingDictionary.IsValid(), -1, "Assistant::InitializeDeviceAddedNotification: unable to get service matching dictionary");
@@ -927,7 +901,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Assistant::CreateDeviceAddedNotification(CFMutableDictionaryRef matchingDictionary)
 	{
-        LOGINFO("CMIO::DPA::Sample::Assistant::CreateDeviceAddedNotification");
 		// IOServiceAddMatchingNotification 'eats' a matching dictionary, so up the retention count
 		CFRetain(matchingDictionary);
 
@@ -952,7 +925,6 @@ using namespace CMIO::DPA::Sample::Server;
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 int main()
 {
-    LOGINFO("CMIO::DPA::Sample::Assistant::main()");
 	// Don't allow any exceptions to escape
 	try
 	{

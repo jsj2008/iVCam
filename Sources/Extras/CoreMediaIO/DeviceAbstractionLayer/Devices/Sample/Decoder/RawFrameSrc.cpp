@@ -56,31 +56,15 @@ namespace ins {
                 LOG(ERROR) << "Failed to read frame.";
                 continue;
             }
-            // Validate the frame.
-            uint8_t* data = frame->data();
-            if ((data[0] == 0 && data[1] == 0 && data[2] == 0 && data[3] == 1) || (data[0] == 0 && data[1] == 0 && data[2] == 1))
+            // Create packet
+            auto packet = NewMJpegPacket(frame->data(), (int)frame->size(), false, mStreamIndex);
+            
+            if (video_filter_ && !video_filter_->Filter(packet))
             {
-                // Calculate pts and dts
-                // Convert to millisecond
-                int64_t dts = av_gettime()/1000;
-                int64_t pts = dts;
-                
-                // Create packet
-                auto packet = NewH264Packet(frame->data(), frame->size(), pts, dts, false, mStreamIndex);
-
-                if (video_filter_ && !video_filter_->Filter(packet))
-                {
-                    LOG(ERROR) << "video filter error.";
-                    OnError();
-                }
-            }
-            else
-            {
-                LOG(ERROR) << "Damaged frame will be dropped.";
-                continue;
+                LOG(ERROR) << "video filter error.";
+                OnError();
             }
         }
-        LOG(VERBOSE) << "Loop finish.";
     }
     
     void RawFrameSrc::OnEnd()
@@ -102,44 +86,24 @@ namespace ins {
         }
     }
     
+    sp<ARVPacket> RawFrameSrc::NewMJpegPacket(const uint8_t * data, int size, bool keyframe, int stream_index)
+    {
+        auto pkt = NewPacket();
+        pkt->media_type = AVMEDIA_TYPE_VIDEO;
+        CHECK(pkt != nullptr);
+        pkt->data = new uint8_t[size];
+        pkt->size = size;
+        memcpy(pkt->data, data, size);
+        pkt->flags = keyframe ? AV_PKT_FLAG_KEY : 0;
+        pkt->stream_index = stream_index;
+        return pkt;
+    }
+
+    
     bool RawFrameSrc::Prepare()
     {
         stop_ = false;
         eof_ = false;
-        
-        uint8_t spspps[512];
-        size_t spspps_len;
-        std::shared_ptr<Frame> frame;
-        int ret;
-        while (true)
-        {
-            if (mCamera->isClosed())
-            {
-                LOG(VERBOSE) << "The camera is closed.";
-                return false;
-            }
-            ret = mCamera->readFrame(&frame);
-            if (ret != 0)
-            {
-                continue;
-            }
-            
-            // validate the frame
-            uint8_t* data = frame->data();
-            if ((data[0] == 0 && data[1] == 0 && data[2] == 0 && data[3] == 1) || (data[0] == 0 && data[1] == 0 && data[2] == 1))
-            {
-                bool ret = ParseSPSPPS(frame->data(), frame->size(), spspps, spspps_len);
-                if (ret)
-                {
-                    LOG(VERBOSE) << "Get extra data! length: " << spspps_len;
-                    break;
-                }
-            }
-            else
-            {
-                continue;
-            }
-        }
         
         //init filter
         if (video_filter_)
@@ -153,7 +117,7 @@ namespace ins {
             timeBase.num = 1;
             timeBase.den = 1000;
             
-            auto video_stream = NewH264Stream(mWidth, mHeight, frameRate, timeBase, AV_CODEC_ID_H264, AV_PIX_FMT_RGBA, spspps, (int)spspps_len);
+            auto video_stream = NewVideoStream(mWidth, mHeight, frameRate, timeBase, AV_CODEC_ID_MJPEG, AV_PIX_FMT_ARGB);
             auto codecpar = NewAVCodecParameters();
             avcodec_parameters_copy(codecpar.get(), video_stream->codecpar);
             
@@ -187,70 +151,6 @@ namespace ins {
         {
             video_filter_->Close();
         }
-    }
-    
-    void RawFrameSrc::ParseNAL(const uint8_t* data, const int32_t data_size, unsigned char nal_type, int& start_pos, int& size)
-    {
-        start_pos = -1;
-        size = 0;
-        for (int i = 0; i < data_size - 4; i++)
-        {
-            int offset = 0;
-            if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 0 && data[i + 3] == 1)
-            {
-                offset = 4;
-            }
-            else if (data[i] == 0 && data[i + 1] == 0 && data[i + 2] == 1)
-            {
-                offset = 3;
-            }
-            else
-            {
-                continue;
-            }
-            
-            if (start_pos != -1)
-            {
-                size = i - start_pos;
-                break;
-            }
-            else
-            {
-                if (nal_type == (data[i + offset] & 0x1f))
-                {
-                    start_pos = i + offset;
-                }
-            }
-            i += offset;
-        }
-    }
-    
-    bool RawFrameSrc::ParseSPSPPS(const uint8_t* data, const int32_t data_size, unsigned char* buffer, size_t& len)
-    {
-        int sps_start_pos;
-        int sps_size;
-        int pps_start_pos;
-        int pps_size;
-        
-        ParseNAL(data, data_size, 7, sps_start_pos, sps_size);
-        ParseNAL(data, data_size, 8, pps_start_pos, pps_size);
-        if (sps_size == 0 || pps_size == 0)
-        {
-            LOG(ERROR) << "sps_size == 0 or pps_size == 0";
-            return false;
-        }
-        // start code: 0x00000001 or 0x00000100
-        // Little endian
-        const int SPS_PPS_PAD = 0x01000000;
-        
-        memcpy(buffer, &SPS_PPS_PAD, sizeof(int));
-        memcpy(buffer + sizeof(int), data + sps_start_pos, sps_size);
-        memcpy(buffer + sizeof(int) + sps_size, &SPS_PPS_PAD, sizeof(int));
-        memcpy(buffer + sizeof(int) + sps_size + sizeof(int), data + pps_start_pos, pps_size);
-        
-        len = sps_size + pps_size + sizeof(int)*2;
-        
-        return true;
     }
     
 }

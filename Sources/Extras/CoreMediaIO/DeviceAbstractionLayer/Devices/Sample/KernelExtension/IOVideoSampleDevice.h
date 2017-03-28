@@ -84,12 +84,6 @@ protected:
     
     IOWorkLoop*					_workloop;
     IOTimerEventSource*			_timer;
-	char*						m1472YUVData;
-	size_t						m1472YUVSize;
-	char*						m2176YUVData;
-	size_t						m2176YUVSize;
-	char*						m3008YUVData;
-	size_t						m3008YUVSize;
 	bool						mCurrentDirection;
 	UInt32						mNumBuffers;
 	UInt32						mMaxNumBuffers;

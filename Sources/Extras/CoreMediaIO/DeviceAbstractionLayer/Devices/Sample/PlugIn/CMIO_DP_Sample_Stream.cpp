@@ -80,8 +80,11 @@
 // System Includes
 #include <IOKit/audio/IOAudioTypes.h>
 
-#define FRAME_WIDTH 2560
-#define FRAME_HEIGHT 1280
+#define FRAME_WIDTH 1472
+#define FRAME_HEIGHT 736
+
+#define kARGB_1472X736_FrameSize (4333568)
+#define kARGB_1472x736_DataSize (kARGB_1472X736_FrameSize)
 
 namespace
 {
@@ -120,7 +123,7 @@ namespace CMIO { namespace DP { namespace Sample
 		mScheduledOutputNotificationProc(NULL),
 		mDeck(NULL),
 		mFormatPairs(),
-		mFrameType(DPA::Sample::kYUV422_1472x736),
+		mFrameType(DPA::Sample::kARGB_1472x736),
 		mDeckPropertyListeners(),
 		mMessageThread(),
 		mBufferQueue(CMA::SimpleQueue<CMSampleBufferRef>::Create(NULL, 30)),
@@ -134,7 +137,9 @@ namespace CMIO { namespace DP { namespace Sample
 		mOutputHosttimeCorrection(0LL),
 		mPreviousCycleTimeSeconds(0xFFFFFFFF),
 		mSyncClock(true),
-        mAtomCamera()
+        mAtomCamera(),
+        mIsCameraOpened(false),
+        mFrame(nullptr)
 	{
 	}
 	
@@ -144,6 +149,10 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Stream::~Stream()
 	{
+        if (mFrame != nullptr)
+        {
+            delete [] mFrame;
+        }
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -180,20 +189,27 @@ namespace CMIO { namespace DP { namespace Sample
 				CFRelease(clock);
 			}
             
-            ins::InitFFmpeg();
-            
             // *** Create a new thread to open device and get preview stream
-            int ret = mAtomCamera.open(StreamFormat::H264, FRAME_WIDTH, FRAME_HEIGHT, 30, 8*1024*1024);
+            int ret = mAtomCamera.open(StreamFormat::MJPEG, FRAME_WIDTH, FRAME_HEIGHT, 30, 8*1024*1024);
             if (ret == 0)
             {
                 // Get offset from device.
                 ret = mAtomCamera.getCameraOffset(mOffset);
                 if (ret == 0)
                 {
+                    ins::InitFFmpeg();
+                    
                     LOGINFO("Device offset: %s", mOffset.c_str());
                     // Start the thread to read frame from device.
                     mStreamThread = std::thread(&Stream::StreamThread, this);
                     mStreamThread.detach();
+                    
+                    mFrame = new uint8_t[kARGB_1472X736_FrameSize];
+                    if (mFrame == nullptr)
+                    {
+                        LOGERR("Can't allocate frame for frame.");
+                    }
+                    mIsCameraOpened = true;
                 }
                 else
                 {
@@ -635,8 +651,6 @@ namespace CMIO { namespace DP { namespace Sample
 		if (not mDeck->UseOneShotGetters())
 			return;
 		
-        LOGINFO("DP::Sample::Stream::PropertyListenerAdded calling StartDeckThreads");
-		
 		// Tell the deck to stop using one-shot getters
 		mDeck->SetUseOneShotGetters(false);
 		
@@ -803,11 +817,7 @@ namespace CMIO { namespace DP { namespace Sample
 		
 		// Correct the hosttime and drive the clock
 		nanosecondsHostTime -= mOutputHosttimeCorrection;
-
-		#if 1
-			LOGINFO("DP::Sample::Stream::DriveOutputClock: +++\t%p\t%lld\t%d\t%lld", mClock->GetClock(), clockTime.value, clockTime.timescale, nanosecondsHostTime);
-		#endif
-		
+        
 		OSStatus err = CMIOStreamClockPostTimingEvent(clockTime, CAHostTimeBase::ConvertFromNanos(nanosecondsHostTime), mSyncClock, mClock->GetClock());
 		DebugMessageIfError(err, "DP::Sample::Stream::DriveOutputClock: CMIOStreamClockPostTimingEvent() failed");
 				
@@ -815,10 +825,6 @@ namespace CMIO { namespace DP { namespace Sample
 		// start their graph timebase
 		if (mSyncClock)
 		{
-			#if 1
-				printf("+++\t%p\t%lld\t%d\t%lld\n", mClock->GetClock(), clockTime.value, clockTime.timescale, nanosecondsHostTime);
-			#endif
-			
 			mFirstOutputPresentationTimeStamp->SetFirstOutputPresentationTimeStamp(presentationTimeStamp);
 		}
 		
@@ -898,9 +904,9 @@ namespace CMIO { namespace DP { namespace Sample
 		extensions.AddCFType(kCMFormatDescriptionExtension_FieldCount, CACFNumber(static_cast<SInt32>(1)).GetCFNumber());	
 		
 		// Mark 6-1-6 (SMPTE-C) color tags
-		extensions.AddCFType(kCMFormatDescriptionExtension_ColorPrimaries, kCMFormatDescriptionColorPrimaries_SMPTE_C);
-		extensions.AddCFType(kCMFormatDescriptionExtension_TransferFunction, kCMFormatDescriptionTransferFunction_ITU_R_709_2);
-		extensions.AddCFType(kCMFormatDescriptionExtension_YCbCrMatrix, kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4);
+		//extensions.AddCFType(kCMFormatDescriptionExtension_ColorPrimaries, kCMFormatDescriptionColorPrimaries_SMPTE_C);
+		//extensions.AddCFType(kCMFormatDescriptionExtension_TransferFunction, kCMFormatDescriptionTransferFunction_ITU_R_709_2);
+		//extensions.AddCFType(kCMFormatDescriptionExtension_YCbCrMatrix, kCMFormatDescriptionYCbCrMatrix_ITU_R_601_4);
         
 		for (int i = 0; i < frameFormats.GetLength() ; ++i)
 		{
@@ -915,16 +921,8 @@ namespace CMIO { namespace DP { namespace Sample
 					break;
                     
 				case kCMPixelFormat_32ARGB:
-					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 ARGB"));
-					break;
-                    
-                case kCMPixelFormat_24RGB:
-                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 RGB24"));
-                    break;
-                    
-                case kCMVideoCodecType_JPEG:
-                    extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 JPEG"));
-                    break;
+					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - 32ARGB"));
+					break; 
                     
 				default:
 					ThrowIf(true, CAException(kCMIODeviceUnsupportedFormatError), "CMIO::DP::Sample::Stream::AddAvailableFormatDescriptions: Assistant returned an unknown format");
@@ -975,65 +973,20 @@ namespace CMIO { namespace DP { namespace Sample
 		return true;
 	}
     
-    void Stream::CvtColorSpace(std::shared_ptr<AVFrame> frame, void* dstBuffer, size_t frameSize)
-    {
-        int output_width_old = FRAME_WIDTH;
-        int output_height_old = FRAME_HEIGHT;
-        int output_width = FRAME_WIDTH;
-        int output_height = FRAME_HEIGHT;
-        
-        switch (frameSize)
-        {
-            // YUV422P: 1472x736x2
-            case 2166784:
-            {
-                output_width = 1472;
-                output_height = 736;
-                break;
-            }
-            // YUV422P: 2176x1088x2
-            case 4734976:
-            {
-                output_width = 2176;
-                output_height = 1088;
-                break;
-            }
-            // YUV422P: 3008x1504x2
-            case 9048064:
-            {
-                output_width = 3008;
-                output_height = 1504;
-                break;
-            }
-        }
-        
-        if (output_width_old != output_width || output_height_old != output_height)
-        {
-            output_width_old = output_width;
-            output_height_old = output_height;
-            mScaler = std::make_shared<ins::Scaler>(output_width, output_height, AV_PIX_FMT_UYVY422, SWS_FAST_BILINEAR);
-            mScaler->Init(frame);
-        }
-        
-        std::shared_ptr<AVFrame> scale_frame;
-        mScaler->ScaleFrame(frame, scale_frame);
-        if (scale_frame != nullptr)
-        {
-            memcpy(dstBuffer, scale_frame->data[0], frameSize);
-        }
-    }
-    
     void Stream::StreamThread()
-    { 
+    {
+        LOGINFO("Streaming thread start...");
         std::shared_ptr<ins::MediaPipe> mediaPipe = std::make_shared<ins::MediaPipe>();
         std::shared_ptr<ins::RawFrameSrc> rawFrameSrc = std::make_shared<ins::RawFrameSrc>(&mAtomCamera, FRAME_WIDTH, FRAME_HEIGHT);
         std::shared_ptr<ins::DecodeFilter> decoderFilter = std::make_shared<ins::DecodeFilter>();
-        std::shared_ptr<ins::ScaleFilter> scalerBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_RGBA, SWS_FAST_BILINEAR);
+        std::shared_ptr<ins::ScaleFilter> scaleBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_RGBA, SWS_FAST_BILINEAR);
         std::shared_ptr<ins::BlenderFilter> blenderFilter = std::make_shared<ins::BlenderFilter>(FRAME_WIDTH, FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, mOffset);
-        std::shared_ptr<ins::BlenderSink> blenderSink = std::make_shared<ins::BlenderSink>(&mFrames);
+        std::shared_ptr<ins::ScaleFilter> scaleAfterBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_ARGB, SWS_FAST_BILINEAR);
+        std::shared_ptr<ins::BlenderSink> blenderSink = std::make_shared<ins::BlenderSink>(mFrame);
         rawFrameSrc->set_video_filter(decoderFilter)
-                    ->set_next_filter(scalerBeforeBlend)
+                    ->set_next_filter(scaleBeforeBlend)
                     ->set_next_filter(blenderFilter)
+                    ->set_next_filter(scaleAfterBlend)
                     ->set_next_filter(blenderSink);
         if (!rawFrameSrc->Prepare())
         {
@@ -1053,7 +1006,6 @@ namespace CMIO { namespace DP { namespace Sample
         mediaPipe->Run();
         mediaPipe->Wait();
         
-        LOGINFO("Stream thread terminated.");
     }
 
 	#pragma mark -
@@ -1232,7 +1184,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::FrameArrived(DPA::Sample::FrameArrivedMessage* message) 
 	{
-        LOGINFO("DP::Sample::Stream::FrameArrived");
 		// Don't do anything if the buffer queue is full
 		if (1.0 == mBufferQueue.Fullness())
 		{
@@ -1335,14 +1286,12 @@ namespace CMIO { namespace DP { namespace Sample
 			 
 			CMBlockBufferCustomBlockSource customBlockSource = { kCMBlockBufferCustomBlockSourceVersion, NULL, ReleaseBufferCallback, this };
 			// Get the size & data for the frame
-			size_t frameSize = message->mDescriptor.size;
+            size_t frameSize = message->mDescriptor.size;
             
-            if (mFrames.read_available())
+            if (mIsCameraOpened)
             {
-                CvtColorSpace(mFrames.front(), message->mDescriptor.address, frameSize);
-                mFrames.pop();
+                memcpy(message->mDescriptor.address, mFrame, frameSize);
             }
-            
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;
             

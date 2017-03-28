@@ -6,7 +6,7 @@
 #define INSPLAYER_SCALE_FILTER_H
 
 #include "av_toolbox/scaler.h"
-#include "media_filter.h"
+#include "media_filter.h" 
 
 namespace ins {
 

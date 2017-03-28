@@ -52,8 +52,7 @@ namespace ins {
         void OnEnd();
         void OnError();
         void Loop();
-        void ParseNAL(const uint8_t* data, const int32_t data_size, unsigned char nal_type, int& start_pos, int& size);
-        bool ParseSPSPPS(const uint8_t* data, const int32_t data_size, unsigned char* buffer, size_t& len);
+        sp<ARVPacket> NewMJpegPacket(const uint8_t * data, int size, bool keyframe, int stream_index);
         
     private:
         bool eof_ = false;

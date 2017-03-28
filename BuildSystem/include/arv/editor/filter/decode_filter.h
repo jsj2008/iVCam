@@ -11,6 +11,7 @@ extern "C" {
 }
 #include "media_filter.h"
 #include <av_toolbox/decoder.h>
+#include <llog/llog.h>
 
 struct AVCodecContext;
 
@@ -38,7 +39,7 @@ private:
   bool CreateSoftwareDecoder(const AVStream *stream);
 
 private:
-  bool enable_hwaccel_ = true;
+  bool enable_hwaccel_ = false;
   AVRational time_base_;
 //  AVStream *stream_ = nullptr;
   sp<AVCodecContext> dec_ctx_;

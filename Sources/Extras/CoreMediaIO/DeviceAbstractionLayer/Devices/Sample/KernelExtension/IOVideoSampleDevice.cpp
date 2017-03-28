@@ -115,17 +115,25 @@ namespace
 #define kHD1080pYUVV_10_FrameSize (5529600)
 #define kHD1080pYUV_10_DataSize (kHD1080pYUVV_10_FrameSize)
 
-#define kYUV_1472X736_FrameSize (2166784)
+//#define kYUV_1472X736_FrameSize (2166784)
+//#define kYUV_1472x736_DataSize (kYUV_1472X736_FrameSize)
+//
+//#define kYUV_2176X1088_FrameSize (4734976)
+//#define kYUV_2176X1088_DataSize (kYUV_2176X1088_FrameSize)
+//
+//#define kYUV_3008x1504_FrameSize (9048064)
+//#define kYUV_3008x1504_DataSize (kYUV_3008x1504_FrameSize)
+
+#define kYUV_1472X736_FrameSize (4333568)
 #define kYUV_1472x736_DataSize (kYUV_1472X736_FrameSize)
 
-#define kYUV_2176X1088_FrameSize (4734976)
+#define kYUV_2176X1088_FrameSize (4333568)
 #define kYUV_2176X1088_DataSize (kYUV_2176X1088_FrameSize)
 
-#define kYUV_3008x1504_FrameSize (9048064)
+#define kYUV_3008x1504_FrameSize (4333568)
 #define kYUV_3008x1504_DataSize (kYUV_3008x1504_FrameSize)
 
-
-#define MAX_FRAME_SIZE							(3008*1504*4)
+#define MAX_FRAME_SIZE							(1472*736*4)
 
 #if DEBUG
 #define DEBUG_LOG(format, ...) IOLog("%s[%d]: " format, __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
@@ -226,47 +234,8 @@ bool IOVideoSampleDevice::start(IOService* provider)
 		OSDictionary*	theSelectorControl =  NULL;
 		OSDictionary*	theSelectorItem = NULL;
         
-        struct mach_header_t*  mh;
-        extern kmod_info_t kmod_info;
-        
-        mh = (struct mach_header_t*)kmod_info.address;
-        m1472YUVData = (char*)getsectdatafromheader(mh,
-                                                (char*) "YUV_DATA_1472",
-                                                (char*)	 "yuv_data_1472",
-                                                &m1472YUVSize);
-        
-        if (NULL == m1472YUVData)
-        {
-            kprintf("couldn't get YUV_DATA_1472 section\n");
-            break;
-        }
-        
-        mh = (struct mach_header_t*)kmod_info.address;
-        m2176YUVData = (char*)getsectdatafromheader(mh,
-                                                (char*) "YUV_DATA_2176",
-                                                (char*) "yuv_data_2176",
-                                                &m2176YUVSize);
-        
-        if (NULL == m2176YUVData)
-        {
-            kprintf("couldn't get YUV_DATA_2176 section\n");
-            break;
-        }
-        
-        mh = (struct mach_header_t*)kmod_info.address;
-        m3008YUVData = (char*)getsectdatafromheader(mh,
-                                                (char*) "YUV_DATA_3008",
-                                                (char*) "yuv_data_3008",
-                                                &m3008YUVSize);
-        
-        if (NULL == m3008YUVData)
-        {
-            kprintf("couldn't get YUV_DATA_3008 section\n");
-            break;
-        }
- 
         mNumBuffers = 10;
-		mMaxNumBuffers = mNumBuffers;
+        mMaxNumBuffers = mNumBuffers;
  
 		result = AllocateFrameBuffers(MAX_FRAME_SIZE*mNumBuffers);
 		if (result != kIOReturnSuccess)
@@ -438,10 +407,6 @@ IOReturn IOVideoSampleDevice::sendOutputFrame(void)
 		kprintf("help, no buffer at index %d!\n", (int)_currentBuffer);
 		return kIOReturnNotReady;
 	}
-    
-    // to be fixed
-    // IOByteCount len = buffer->getDataBuffer()->getLength();
-    // buffer->getDataBuffer()->writeBytes(0, 0, 0);
     
 	ctrlDescriptor = OSDynamicCast(IOMemoryDescriptor, buffer->getControlBuffer());
 	if (NULL != ctrlDescriptor)
@@ -647,8 +612,6 @@ IOReturn IOVideoSampleDevice::startStream(IOVideoStream* stream)
 
 IOReturn IOVideoSampleDevice::stopStream(IOVideoStream* stream)
 {
-	kprintf("stopStream");
-	
 	if (_timer) _timer->cancelTimeout();
 
 	return kIOReturnSuccess;
@@ -657,8 +620,6 @@ IOReturn IOVideoSampleDevice::stopStream(IOVideoStream* stream)
 
 IOReturn IOVideoSampleDevice::suspendStream(IOVideoStream* stream)
 {
-	kprintf("suspendStream");
-	
 	if (_timer) _timer->cancelTimeout();
 	
 	return kIOReturnSuccess;
@@ -667,8 +628,6 @@ IOReturn IOVideoSampleDevice::suspendStream(IOVideoStream* stream)
 
 IOReturn IOVideoSampleDevice::setControlValue(UInt32 controlID, UInt32 value, UInt32* newValue)
 {
-	kprintf("IOVideoSampleDevice::setControlValue(%lu, %lu)", (long unsigned int)controlID, (long unsigned int)value);
-	
 	IOReturn theAnswer = kIOReturnNotFound;
 	
 	switch(controlID)
@@ -1282,15 +1241,13 @@ bool IOVideoSampleDevice::AddInputStreams()
 		{
 			case kYUV422_1472x736:
 			{
-                srcBuffer = m1472YUVData;
 				theBufferSize = kYUV_1472X736_FrameSize;
 			}
 				break;
                 
 			case kYUV422_2176x1088:
 			{
-                srcBuffer = m2176YUVData;
-				if (numBuffers > mMaxNumBuffers)
+                if (numBuffers > mMaxNumBuffers)
 					numBuffers = mMaxNumBuffers;
 				theBufferSize = kYUV_2176X1088_FrameSize;
 			}
@@ -1298,7 +1255,6 @@ bool IOVideoSampleDevice::AddInputStreams()
                 
 			case kYUV422_3008x1504:
 			{
-                srcBuffer = m3008YUVData;
 				if (numBuffers > mMaxNumBuffers)
 					numBuffers = mMaxNumBuffers;
 				theBufferSize = kYUV_3008x1504_FrameSize;
@@ -1306,7 +1262,7 @@ bool IOVideoSampleDevice::AddInputStreams()
 			}
 				break;
 		}
-		
+        srcBuffer = NULL;
 		mNumBuffers = numBuffers;
 		
 		buffers = OSArray::withCapacity(numBuffers);
@@ -1651,13 +1607,11 @@ bool IOVideoSampleDevice::ResetInputStreams()
 			{
 				case kYUV422_1472x736:
 				{
-                    srcBuffer = m1472YUVData;
 					bufferSize = kYUV_1472X736_FrameSize;
 				}
 					break;
 				case kYUV422_2176x1088:
 				{
-                    srcBuffer = m2176YUVData;
 					if (numBuffers > mMaxNumBuffers)
 						numBuffers = mMaxNumBuffers;
 					bufferSize = kYUV_2176X1088_FrameSize;
@@ -1666,7 +1620,6 @@ bool IOVideoSampleDevice::ResetInputStreams()
 					break;
 				case kYUV422_3008x1504:
 				{
-                    srcBuffer = m3008YUVData;
 					if (numBuffers > mMaxNumBuffers)
 						numBuffers = mMaxNumBuffers;
 					bufferSize = kYUV_3008x1504_FrameSize;
@@ -1675,6 +1628,7 @@ bool IOVideoSampleDevice::ResetInputStreams()
 					break;
 			}
             
+            srcBuffer = NULL;
 			mNumBuffers = numBuffers;
 			
 			kprintf("bufferSize = %ld\n", (long int)bufferSize);
@@ -1979,7 +1933,7 @@ IOReturn IOVideoSampleDevice::AllocateControlBuffers(size_t size)
 //--------------------------------------------------------------------------------------------------------------------
 void IOVideoSampleDevice::LoadFrameBuffer(void* buffer, char* src, IOByteCount frameSize, SInt32 number)
 {
-    bcopy(src, buffer, frameSize);
+    memset(buffer, 255, frameSize);
 }
 
 void IOVideoSampleDevice::ZeroControlBuffer(void* buffer, IOByteCount bufSize)

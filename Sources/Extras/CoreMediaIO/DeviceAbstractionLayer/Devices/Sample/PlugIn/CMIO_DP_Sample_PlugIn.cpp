@@ -387,7 +387,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void PlugIn::DeviceEvent(PlugIn& plugIn) 
 	{
-        LOGINFO("PlugIn::DeviceEvent");
 		// Don't let any exceptions	leave this callback
 		try
 		{	
@@ -424,7 +423,6 @@ namespace CMIO { namespace DP { namespace Sample
 			{
 				case DPA::Sample::kDeviceStatesChanged:
 				{
-                    LOGINFO("kDeviceStatesChanged");
 					// Update the state of the of the devices
 					plugIn.UpdateDeviceStates();
 				}
@@ -432,7 +430,6 @@ namespace CMIO { namespace DP { namespace Sample
 				
 				case 71:
 				{
-                    LOGINFO("71");
 					// Though not extensively documented, this is the message ID sent from a MIG server that held a 'send-once right' to a message port but died without ever having exercised that right.  The plugIn had given the Assistant a 'send-once' right when it had called DPA::Sample::GetDeviceStates(), so getting this message indicates the Assistant has crashed.
 
 					// Remove all the devices currently being managed

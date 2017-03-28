@@ -153,8 +153,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mPowerNotificationPort(GetNotificationThread().GetRunLoop(), kCFRunLoopDefaultMode, reinterpret_cast<IOServiceInterestCallback>(PowerNotification), this),
 		mSleeping(false),
 		mRestartStreamOnWake(false)
-	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device CONSTRUCTOR");
+	{ 
 		// Grab the mutex for the device's state
 		CAMutex::Locker locker(mStateMutex);
 		
@@ -183,7 +182,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Device::~Device()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::~Device DESTRUCTOR");
 		// Grab the mutex for the device's state
 		CAMutex::Locker locker(mStateMutex);
 		
@@ -222,7 +220,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::ClientDied(Client client)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::ClientDied");
 		// Grab the mutex for the device's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -307,7 +304,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::StartStream(Client client, mach_port_t messagePort, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element, UInt32 initialDiscontinuityFlags)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::StartStream");
 		// Grab the mutex for the device's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -331,7 +327,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::StopStream(Client client, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::StopStream");
 		// Grab the mutex for the overall device's state
 		CAMutex::Locker locker(mStateMutex);
 		
@@ -355,7 +350,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::DiscoverStreams()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::DiscoverStreams");
 		// Grab the mutex for the Device's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -447,7 +441,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::RemoveStreams()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::RemoveStreams");
 		// Grab the mutex for the Device's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -471,7 +464,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Stream& Device::GetStreamByScopeAndElement(CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::GetStreamByScopeAndElement");
 		// Figure out in input or output stream is being started
 		StreamMap& streams = (scope == kCMIODevicePropertyScopeInput) ? mInputStreams : mOutputStreams;
 		
@@ -491,7 +483,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Stream* Device::GetStreamByStreamID(UInt32 streamID)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::GetStreamByStreamID");
 		// See if the it is an input stream
 		StreamMap::iterator i = mInputStreams.find(streamID);
 		if (i != mInputStreams.end())
@@ -511,7 +502,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	bool Device::AnyStreamRunning() const
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::AnyStreamRunning");
 		// Check the input streams
 		StreamMap::const_iterator i = std::find_if(mInputStreams.begin(), mInputStreams.end(), Device::StreamIsActive());
 		if (i != mInputStreams.end())
@@ -529,7 +519,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::StartDeckThreads(Client client, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::StartDeckThreads");
 		// Grab the mutex for the device's state
 		CAMutex::Locker locker(mStateMutex);
 		
@@ -541,7 +530,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::StopDeckThreads(Client client, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::StopDeckThreads");
 		// Grab the mutex for the device's state
 		CAMutex::Locker locker(mStateMutex);
 		
@@ -552,7 +540,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::DeckPlay(Client client, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::DeckPlay");
 		// Make sure the device is allowed to be changed by this client
 		ThrowIf(not ClientIsDeviceMasterOrIsFree(client), CAException(kCMIODevicePermissionsError), "Device::DeckPlay: client not allowed to control deck");
 
@@ -567,7 +554,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::DeckStop(Client client, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::DeckStop");
 		// Make sure the device is allowed to be changed by this client
 		ThrowIf(not ClientIsDeviceMasterOrIsFree(client), CAException(kCMIODevicePermissionsError), "Device::DeckStop: client not allowed to control deck");
 
@@ -582,7 +568,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::DeckJog(Client client, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element, SInt32 speed)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::DeckJog");
 		// Make sure the device is allowed to be changed by this client
 		ThrowIf(not ClientIsDeviceMasterOrIsFree(client), CAException(kCMIODevicePermissionsError), "Device::DeckJog: client not allowed to control deck");
 
@@ -597,7 +582,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::DeckCueTo(Client client, CMIOObjectPropertyScope scope, CMIOObjectPropertyElement element, Float64 requestedTimecode, Boolean playOnCue)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::DeckCueTo");
 		// Make sure the device is allowed to be changed by this client
 		ThrowIf(not ClientIsDeviceMasterOrIsFree(client), CAException(kCMIODevicePermissionsError), "Device::DeckCueTo: client not allowed to control deck");		
 
@@ -613,7 +597,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::DiscoverCapabilities()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::DiscoverCapabilities");
 		// Grab the mutex for the Device's state
 		CAMutex::Locker locker(mStateMutex);
 		
@@ -633,7 +616,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::GetProperties(Client client, mach_port_t messagePort, UInt64 time, const PropertyAddress& matchAddress, PropertyAddress** addresses, mach_msg_type_number_t* length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::GetProperties");
 		// Grab the mutex for the Device's state
 		CAMutex::Locker locker(mStateMutex);
 		
@@ -690,7 +672,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::GetPropertyState(const PropertyAddress& address, UInt8* qualifier, mach_msg_type_number_t qualifierLength,  UInt8** data, mach_msg_type_number_t* length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::GetPropertyState");
 		// Grab the mutex for the Device's state
 		CAMutex::Locker locker(mStateMutex);
 
@@ -887,7 +868,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::SetPropertyState(Client client, bool sendChangedNotifications, const PropertyAddress& address, UInt8* qualifier, mach_msg_type_number_t qualifierLength, Byte* data, mach_msg_type_number_t length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::SetPropertyState");
 		// Make sure the device is allowed to be changed by this client
 		ThrowIf(not ClientIsDeviceMasterOrIsFree(client), CAException(kCMIODevicePermissionsError), "Device::SetPropertyState: client not allowed to set properties on device");
 
@@ -1013,7 +993,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::SendPropertyStatesChangedMessage()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::SendPropertyStatesChangedMessage");
 		// Statically initialize the invariant portions of the message (using 'safe' values for the variable portion).
 		// (Note:  for messages with 'move' dispostions such as this one, the kernel will not alter the invariant portion of the message, so this is a safe optimization.)
 		static PropertyStatesChangedMessage message =
@@ -1056,7 +1035,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::GetControls(Client client, mach_port_t messagePort, UInt64 time, ControlChanges** controlChanges, mach_msg_type_number_t* length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::StartStream");
 		// Grab the mutex for the Device's state
 		CAMutex::Locker locker(mStateMutex);
 		
@@ -1097,7 +1075,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::SetControl(Client client, UInt32 controlID, UInt32 value, UInt32* newValue)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::StartStream");
 		// Make sure the request is for a known control
 		ThrowIf(mControls.end() == mControls.find(controlID), CAException(kCMIOHardwareUnsupportedOperationError), "Device::SetControl: unknown control ID");
 
@@ -1158,12 +1135,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	IOReturn Device::RS422Command(const UInt8 *command, UInt32 commandLength, UInt8 *response, UInt32 *responseLength)
 	{
-		LOGINFO("Device::RS422Command: command Length = %d cmd %x %x %x %x", commandLength, *command++, *command++, *command++, *command++);
-		*responseLength = 4;
-		*response++ = 1;
-		*response++ = 2;
-		*response++ = 3;
-		*response++ = 4;
+		
 		return noErr; 
 	}
 	
@@ -1173,7 +1145,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::SendControlStatesChangedMessage()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::SendControlStatesChangedMessage");
 		// Statically initialize the invariant portions of the message (using 'safe' values for the variable portion).
 		// (Note:  for messages with 'move' dispostions such as this one, the kernel will not alter the invariant portion of the message, so this is a safe optimization.)
 		static ControlStatesChangedMessage message =
@@ -1213,7 +1184,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::InitializeControls()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::InitializeControls");
 		{
 			// Get the kext control list from the IORegistry
 			CACFArray controlList = CACFArray(static_cast<CFArrayRef>(IORegistryEntryCreateCFProperty(mRegistryEntry, CFSTR(kIOVideoDeviceKey_ControlList), NULL, 0)), true);
@@ -1304,7 +1274,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::InitializeProperties()
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::InitializeProperties");
 		UInt64 shadowTime = CAHostTimeBase::GetTheCurrentTime();
 
 		// Properties at the device level
@@ -1339,7 +1308,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::GetControlList(UInt8** data, mach_msg_type_number_t* length)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::GetControlList");
 		// Grab the mutex for the Device's state
 		CAMutex::Locker locker(mStateMutex);
 		
@@ -1375,7 +1343,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::IOVDeviceNotification(IOVideoDeviceRef /*deviceRef*/, Device& device, const IOVideoDeviceNotificationMessage& message)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::IOVDeviceNotification");
 		// Grab the mutex for the device's state
 		CAMutex::Locker locker(device.mStateMutex);
 		
@@ -1452,7 +1419,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::StreamNotification(const IOVideoDeviceNotification& /*notification*/, Stream& /*stream*/)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::StreamNotification");
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1460,7 +1426,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::ControlNotification(const IOVideoDeviceNotification& notification, UInt64 shadowTime)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::ControlNotification");
 		switch (notification.mNotificationID)
 		{
 			case kIOVideoDeviceNotificationID_ControlValueChanged:
@@ -1483,7 +1448,6 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::PowerNotification(Device& device, io_service_t unused, natural_t messageType, void* message)
 	{
-        LOGINFO("CMIO::DPA::Sample::Server::Device::PowerNotification");
 		// Catch all exceptions since this is invoked via a call back and the exception cannot leave this routine 
 		try
 		{
