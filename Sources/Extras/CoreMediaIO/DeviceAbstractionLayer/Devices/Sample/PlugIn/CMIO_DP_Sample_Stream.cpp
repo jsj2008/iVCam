@@ -1005,6 +1005,7 @@ namespace CMIO { namespace DP { namespace Sample
             
             if (!mIsCameraAttached)
             {
+                LOGINFO("Prepare to open camera...");
                 mAtomCamera = std::make_shared<AtomCamera>();
                 int ret = mAtomCamera->open(StreamFormat::MJPEG, FRAME_WIDTH, FRAME_HEIGHT, 30, 8*1024*1024);
                 if (ret == 0)

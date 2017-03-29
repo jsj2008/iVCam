@@ -25,6 +25,8 @@ namespace ins {
         mBlendedFrame = NewAVFrame(mParams.output_width, mParams.output_height, AV_PIX_FMT_RGBA);
         mInputBuffer = new unsigned char[mParams.input_width*mParams.input_height*4];
         mOutputBuffer = new unsigned char[mParams.output_width*mParams.output_height*4];
+        mParams.input_data = mInputBuffer;
+        mParams.output_data = mOutputBuffer;
         
         if (mBlender) {
             mBlender->capabilityAssessment();
@@ -43,8 +45,6 @@ namespace ins {
         if (mBlender && mBlendedFrame != nullptr && mInputBuffer != nullptr && mOutputBuffer != nullptr)
         {
             memcpy(mInputBuffer, frame->data[0], mParams.input_width*mParams.input_height*4);
-            mParams.input_data = mInputBuffer;
-            mParams.output_data = mOutputBuffer;
             mBlender->runImageBlender(mParams, CBlenderWrapper::PANORAMIC_BLENDER);
             memcpy(mBlendedFrame->data[0], mOutputBuffer, mParams.output_width*mParams.output_height*4);
             
@@ -73,7 +73,6 @@ namespace ins {
             delete [] mOutputBuffer;
             mOutputBuffer = nullptr;
         }
-        
         
         return next_filter_->Close();
     }
