@@ -55,7 +55,7 @@ sp<ARVPacket> NewPacket() {
   av_init_packet(packet);
   packet->media_type = AVMEDIA_TYPE_UNKNOWN;
   sp<ARVPacket> sp_pkt(packet, [](AVPacket *pkt){
-    av_packet_unref(pkt);
+    av_packet_unref(pkt); 
     free(pkt);
   });
   return sp_pkt;

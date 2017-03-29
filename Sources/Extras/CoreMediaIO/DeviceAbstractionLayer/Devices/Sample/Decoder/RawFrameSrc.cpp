@@ -20,7 +20,7 @@ extern "C" {
 
 namespace ins {
     
-    RawFrameSrc::RawFrameSrc(AtomCamera* camera, int width, int height)
+    RawFrameSrc::RawFrameSrc(std::shared_ptr<AtomCamera> camera, int width, int height)
     : mCamera(camera),
       mWidth(width),
       mHeight(height)
@@ -91,11 +91,13 @@ namespace ins {
         auto pkt = NewPacket();
         pkt->media_type = AVMEDIA_TYPE_VIDEO;
         CHECK(pkt != nullptr);
+        //auto mPacketData = std::make_shared<uint8_t>(new uint8_t[mWidth*mHeight*4], [](uint8_t*p){delete [] p;});
         pkt->data = new uint8_t[size];
         pkt->size = size;
         memcpy(pkt->data, data, size);
         pkt->flags = keyframe ? AV_PKT_FLAG_KEY : 0;
         pkt->stream_index = stream_index;
+        
         return pkt;
     }
 
