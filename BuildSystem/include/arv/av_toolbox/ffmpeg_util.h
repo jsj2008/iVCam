@@ -5,8 +5,7 @@
 #ifndef INSMEDIAUTIL_FFMPEG_OBJ_DEFINE_H
 #define INSMEDIAUTIL_FFMPEG_OBJ_DEFINE_H
 
-extern "C" {
-#include <libavutil/mathematics.h>
+extern "C" { 
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 };

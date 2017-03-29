@@ -55,10 +55,25 @@ namespace ins {
     }
     
     void BlenderFilter::Close()
-    {
-        delete mBlender;
-        delete [] mInputBuffer;
-        delete [] mOutputBuffer;
+    { 
+        if (mBlender != nullptr)
+        {
+            delete mBlender;
+            mBlender = nullptr;
+        }
+        
+        if (mInputBuffer != nullptr)
+        {
+            delete [] mInputBuffer;
+            mInputBuffer = nullptr;
+        }
+        
+        if (mOutputBuffer != nullptr)
+        {
+            delete [] mOutputBuffer;
+            mOutputBuffer = nullptr;
+        }
+        
         
         return next_filter_->Close();
     }

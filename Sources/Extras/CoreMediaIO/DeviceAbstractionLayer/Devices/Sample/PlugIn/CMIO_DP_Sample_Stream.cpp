@@ -983,6 +983,7 @@ namespace CMIO { namespace DP { namespace Sample
                     if (mFrame != nullptr)
                     {
                         delete [] mFrame;
+                        mFrame = nullptr;
                     }
                     
                     if (mIsCameraAttached)
@@ -1034,6 +1035,15 @@ namespace CMIO { namespace DP { namespace Sample
             std::this_thread::sleep_until(nextCheckTime);
         }
         
+        if (mMediaPipe != nullptr)
+        {
+            mMediaPipe->Cancel();
+        }
+        
+        if (mAtomCamera != nullptr)
+        {
+            mAtomCamera->close();
+        } 
     }
     
     void Stream::StreamThread()
