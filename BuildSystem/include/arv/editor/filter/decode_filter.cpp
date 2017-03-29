@@ -70,9 +70,11 @@ bool ins::DecodeFilter::Filter(const sp<ARVPacket> &pkt) {
   sp<AVFrame> picture;
   ret = decoder_->ReceiveFrame(picture);
   if (ret == 0) {
-//    LOG(INFO) << "decode frame size:" << picture->width << " " << picture->height
-//      << " time:" << TimestampToMs(picture->pts, time_base_)
-//      << " pix_fmt:" << av_pix_fmt_desc_get(static_cast<AVPixelFormat>(picture->format))->name;
+    if (pkt->data)
+    {
+      delete [] pkt->data;
+      pkt->data = nullptr;
+    }
     return next_filter_->Filter(picture);
   }
   return true;

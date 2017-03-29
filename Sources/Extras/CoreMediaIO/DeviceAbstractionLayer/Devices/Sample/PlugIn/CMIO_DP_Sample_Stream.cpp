@@ -137,9 +137,11 @@ namespace CMIO { namespace DP { namespace Sample
 		mOutputHosttimeCorrection(0LL),
 		mPreviousCycleTimeSeconds(0xFFFFFFFF),
 		mSyncClock(true),
-        mAtomCamera(),
-        mIsCameraOpened(false),
-        mFrame(nullptr)
+        mAtomCamera(nullptr),
+        mIsCameraAttached(false),
+        mShouldTerminate(false),
+        mFrame(nullptr),
+        mLogo(nullptr)
 	{
 	}
 	
@@ -149,17 +151,26 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Stream::~Stream()
 	{
-        if (mFrame != nullptr)
-        {
-            delete [] mFrame;
-        }
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// Initialize()
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Initialize()
-	{ 
+	{
+        ins::InitFFmpeg();
+        
+        mLogo = new uint8_t[kARGB_1472X736_FrameSize];
+        if (mLogo)
+        {
+            FILE* logo = fopen("/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/logo", "rb");
+            fread(mLogo, 1, kARGB_1472X736_FrameSize, logo);
+            fclose(logo);
+        }
+        
+        mPlugDetectionThread = std::thread(&Stream::HotPlugDetection, this);
+        mPlugDetectionThread.detach();
+        
 		// Initialize the super class
 		DP::Stream::Initialize();
 
@@ -189,34 +200,7 @@ namespace CMIO { namespace DP { namespace Sample
 				CFRelease(clock);
 			}
             
-            // *** Create a new thread to open device and get preview stream
-            int ret = mAtomCamera.open(StreamFormat::MJPEG, FRAME_WIDTH, FRAME_HEIGHT, 30, 8*1024*1024);
-            if (ret == 0)
-            {
-                // Get offset from device.
-                ret = mAtomCamera.getCameraOffset(mOffset);
-                if (ret == 0)
-                {
-                    ins::InitFFmpeg();
-                    
-                    LOGINFO("Device offset: %s", mOffset.c_str());
-                    // Start the thread to read frame from device.
-                    mStreamThread = std::thread(&Stream::StreamThread, this);
-                    mStreamThread.detach();
-                    
-                    mFrame = new uint8_t[kARGB_1472X736_FrameSize];
-                    if (mFrame == nullptr)
-                    {
-                        LOGERR("Can't allocate frame for frame.");
-                    }
-                    mIsCameraOpened = true;
-                }
-                else
-                {
-                    LOGERR("Failed to get device offset...");
-                }
-            }
-		}
+        }
 		else if (IsOutput())
 		{
 
@@ -262,10 +246,14 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Teardown()
 	{
-        if (!mAtomCamera.isClosed())
+        if (mLogo)
         {
-            mAtomCamera.close();
+            delete [] mLogo;
         }
+        
+        // The plugin instance is destroyed. We should terminate the child thread which used to
+        // detect the insertion or removal of camera.
+        mShouldTerminate = true;
         
 		// Empty all the format descriptions from the format list
 		mFormatList->RemoveAllAvailableFormats();
@@ -973,39 +961,130 @@ namespace CMIO { namespace DP { namespace Sample
 		return true;
 	}
     
+    void Stream::HotPlugDetection()
+    {
+        uvc_context_t *mUVCContext = nullptr;
+        
+        uvc_init(NULL ,&mUVCContext, NULL);
+        uvc_set_debuglog(mUVCContext, (char *)"uvc", 0);
+        int retv = -1;
+        
+        std::chrono::steady_clock::time_point nextCheckTime;
+        while(!mShouldTerminate)
+        {
+            nextCheckTime = std::chrono::steady_clock::now() + std::chrono::seconds(1);
+            int numDevs = 0;
+            uvc_device_t **devs = NULL;
+            retv = uvc_get_devices(mUVCContext, &devs, &numDevs, 0x2e1a, 0x1000);
+            if(retv != 0)
+            {
+                if(retv == UVC_ERROR_NO_DEVICE)
+                {
+                    if (mFrame != nullptr)
+                    {
+                        delete [] mFrame;
+                        mFrame = nullptr;
+                    }
+                    
+                    if (mIsCameraAttached)
+                    {
+                        mMediaPipe->Cancel();
+                        mIsCameraAttached = false;
+                        mAtomCamera->close();
+                    }
+                    
+                    std::this_thread::sleep_until(nextCheckTime);
+                    continue;
+                }
+                else
+                {
+                    LOGINFO("Failed to get uvc list.");
+                    break;
+                }
+            }
+            
+            if (!mIsCameraAttached)
+            {
+                LOGINFO("Prepare to open camera...");
+                mAtomCamera = std::make_shared<AtomCamera>();
+                int ret = mAtomCamera->open(StreamFormat::MJPEG, FRAME_WIDTH, FRAME_HEIGHT, 30, 8*1024*1024);
+                if (ret == 0)
+                {
+                    // Get offset from device.
+                    ret = mAtomCamera->getCameraOffset(mOffset);
+                    if (ret == 0)
+                    {
+                        LOGINFO("Device offset: %s", mOffset.c_str());
+                        
+                        mFrame = new uint8_t[kARGB_1472X736_FrameSize];
+                        if (mFrame == nullptr)
+                        {
+                            LOGERR("Can't allocate frame for frame.");
+                        }
+                        
+                        // Start the thread to read frame from device.
+                        mStreamThread = std::thread(&Stream::StreamThread, this);
+                        mStreamThread.detach();
+                    }
+                    else
+                    {
+                        LOGERR("Failed to get device offset...");
+                    }
+                }
+            }
+            
+            std::this_thread::sleep_until(nextCheckTime);
+        }
+        
+        if (mMediaPipe != nullptr)
+        {
+            mMediaPipe->Cancel();
+        }
+        
+        if (mAtomCamera != nullptr)
+        {
+            mAtomCamera->close();
+        } 
+    }
+    
     void Stream::StreamThread()
     {
         LOGINFO("Streaming thread start...");
-        std::shared_ptr<ins::MediaPipe> mediaPipe = std::make_shared<ins::MediaPipe>();
-        std::shared_ptr<ins::RawFrameSrc> rawFrameSrc = std::make_shared<ins::RawFrameSrc>(&mAtomCamera, FRAME_WIDTH, FRAME_HEIGHT);
-        std::shared_ptr<ins::DecodeFilter> decoderFilter = std::make_shared<ins::DecodeFilter>();
-        std::shared_ptr<ins::ScaleFilter> scaleBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_RGBA, SWS_FAST_BILINEAR);
-        std::shared_ptr<ins::BlenderFilter> blenderFilter = std::make_shared<ins::BlenderFilter>(FRAME_WIDTH, FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, mOffset);
-        std::shared_ptr<ins::ScaleFilter> scaleAfterBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_ARGB, SWS_FAST_BILINEAR);
-        std::shared_ptr<ins::BlenderSink> blenderSink = std::make_shared<ins::BlenderSink>(mFrame);
-        rawFrameSrc->set_video_filter(decoderFilter)
-                    ->set_next_filter(scaleBeforeBlend)
-                    ->set_next_filter(blenderFilter)
-                    ->set_next_filter(scaleAfterBlend)
-                    ->set_next_filter(blenderSink);
-        if (!rawFrameSrc->Prepare())
+        
+        mMediaPipe = std::make_shared<ins::MediaPipe>();
+        mRawFrameSrc = std::make_shared<ins::RawFrameSrc>(mAtomCamera, FRAME_WIDTH, FRAME_HEIGHT);
+        mDecoderFilter = std::make_shared<ins::DecodeFilter>();
+        mScaleBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_RGBA, SWS_FAST_BILINEAR);
+        mBlenderFilter = std::make_shared<ins::BlenderFilter>(FRAME_WIDTH, FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, mOffset);
+        mScaleAfterBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_ARGB, SWS_FAST_BILINEAR);
+        mBlenderSink = std::make_shared<ins::BlenderSink>(mFrame);
+        mRawFrameSrc->set_video_filter(mDecoderFilter)
+                    ->set_next_filter(mScaleBeforeBlend)
+                    ->set_next_filter(mBlenderFilter)
+                    ->set_next_filter(mScaleAfterBlend)
+                    ->set_next_filter(mBlenderSink);
+        if (!mRawFrameSrc->Prepare())
         {
             LOGERR("Raw frame source isn't ready.");
             return;
         }
         
-        mediaPipe->AddMediaSrc(rawFrameSrc);
+        mMediaPipe->AddMediaSrc(mRawFrameSrc);
         
-        mediaPipe->RegisterCallback([&](ins::MediaPipe::MediaPipeState state){
+        mMediaPipe->RegisterCallback([&](ins::MediaPipe::MediaPipeState state){
             if (state == ins::MediaPipe::kMediaPipeError)
             {
-                mediaPipe->Cancel();
+                mMediaPipe->Cancel();
                 LOGERR("Media pipe canceled.");
             }
         });
-        mediaPipe->Run();
-        mediaPipe->Wait();
         
+        mIsCameraAttached = true;
+        
+        mMediaPipe->Run();
+        mMediaPipe->Wait();
+        
+        LOGINFO("Streaming thread end...");
     }
 
 	#pragma mark -
@@ -1288,9 +1367,13 @@ namespace CMIO { namespace DP { namespace Sample
 			// Get the size & data for the frame
             size_t frameSize = message->mDescriptor.size;
             
-            if (mIsCameraOpened)
+            if (mIsCameraAttached)
             {
                 memcpy(message->mDescriptor.address, mFrame, frameSize);
+            }
+            else
+            {
+                memcpy(message->mDescriptor.address, mLogo, frameSize);
             }
             // Get a frame from frame queue
             void* data = message->mDescriptor.address;

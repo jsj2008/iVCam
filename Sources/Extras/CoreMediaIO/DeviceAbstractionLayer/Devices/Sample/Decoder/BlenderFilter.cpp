@@ -17,14 +17,17 @@ namespace ins {
         mParams.output_width = output_width;
         mParams.output_height = output_height;
         mParams.offset = offset;
-        mBlender = new CBlenderWrapper;
-        mBlendedFrame = NewAVFrame(mParams.output_width, mParams.output_height, AV_PIX_FMT_RGBA);
-        mInputBuffer = new unsigned char[input_width*input_height*4];
-        mOutputBuffer = new unsigned char[output_width*output_height*4];
     }
     
     bool BlenderFilter::Init(MediaBus &bus)
     {
+        mBlender = new CBlenderWrapper;
+        mBlendedFrame = NewAVFrame(mParams.output_width, mParams.output_height, AV_PIX_FMT_RGBA);
+        mInputBuffer = new unsigned char[mParams.input_width*mParams.input_height*4];
+        mOutputBuffer = new unsigned char[mParams.output_width*mParams.output_height*4];
+        mParams.input_data = mInputBuffer;
+        mParams.output_data = mOutputBuffer;
+        
         if (mBlender) {
             mBlender->capabilityAssessment();
             mBlender->getSingleInstance(CBlenderWrapper::FOUR_CHANNELS);
@@ -42,8 +45,6 @@ namespace ins {
         if (mBlender && mBlendedFrame != nullptr && mInputBuffer != nullptr && mOutputBuffer != nullptr)
         {
             memcpy(mInputBuffer, frame->data[0], mParams.input_width*mParams.input_height*4);
-            mParams.input_data = mInputBuffer;
-            mParams.output_data = mOutputBuffer;
             mBlender->runImageBlender(mParams, CBlenderWrapper::PANORAMIC_BLENDER);
             memcpy(mBlendedFrame->data[0], mOutputBuffer, mParams.output_width*mParams.output_height*4);
             
@@ -54,10 +55,24 @@ namespace ins {
     }
     
     void BlenderFilter::Close()
-    {
-        delete mBlender;
-        delete [] mInputBuffer;
-        delete [] mOutputBuffer;
+    { 
+        if (mBlender != nullptr)
+        {
+            delete mBlender;
+            mBlender = nullptr;
+        }
+        
+        if (mInputBuffer != nullptr)
+        {
+            delete [] mInputBuffer;
+            mInputBuffer = nullptr;
+        }
+        
+        if (mOutputBuffer != nullptr)
+        {
+            delete [] mOutputBuffer;
+            mOutputBuffer = nullptr;
+        }
         
         return next_filter_->Close();
     }
