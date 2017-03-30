@@ -163,7 +163,7 @@ namespace CMIO { namespace DP { namespace Sample
         mLogo = new uint8_t[kARGB_1472X736_FrameSize];
         if (mLogo)
         {
-            FILE* logo = fopen("/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/logo", "rb");
+            FILE* logo = fopen("/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources/logo", "rb");
             fread(mLogo, 1, kARGB_1472X736_FrameSize, logo);
             fclose(logo);
         }
