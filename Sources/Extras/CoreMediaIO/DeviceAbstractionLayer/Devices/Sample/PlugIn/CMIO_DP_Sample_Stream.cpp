@@ -1060,7 +1060,7 @@ namespace CMIO { namespace DP { namespace Sample
         mBlenderSink = std::make_shared<ins::BlenderSink>(mFrame);
         mRawFrameSrc->set_video_filter(mDecoderFilter)
                     ->set_next_filter(mScaleBeforeBlend)
-                    ->set_next_filter(mBlenderFilter)
+                    ->set_next_filter(mBlenderFilter) 
                     ->set_next_filter(mScaleAfterBlend)
                     ->set_next_filter(mBlenderSink);
         if (!mRawFrameSrc->Prepare())
