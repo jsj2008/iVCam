@@ -95,7 +95,7 @@ extern "C"
 			if (BOOTSTRAP_SUCCESS != err)
 			{
 				// Create an URL to SampleAssistant that resides at "/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/SampleAssistant" 
-				CACFURL assistantURL(CFURLCreateWithFileSystemPath(NULL, CFSTR("/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources/SampleAssistant"), kCFURLPOSIXPathStyle, false));
+				CACFURL assistantURL(CFURLCreateWithFileSystemPath(NULL, CFSTR("/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/SampleAssistant"), kCFURLPOSIXPathStyle, false));
 				ThrowIf(not assistantURL.IsValid(), CAException(-1), "AppleCMIODPSampleNewPlugIn: unable to create URL for the SampleAssistant");
 
 				// Get the maximum size of the of the file system representation of the SampleAssistant's absolute path

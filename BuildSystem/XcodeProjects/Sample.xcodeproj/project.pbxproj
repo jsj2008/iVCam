@@ -42,7 +42,6 @@
 		7B45EB7F1E6564E300BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
 		7B45EB851E67F34C00BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
 		7BA8A78C1E8A5C4000840021 /* logo in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8A78B1E8A5C4000840021 /* logo */; };
-		7BA8A78F1E8A5C8700840021 /* logo in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BA8A78B1E8A5C4000840021 /* logo */; };
 		7BBD2BE11E791D1200CDD061 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDC1E791D1200CDD061 /* libavcodec.a */; };
 		7BBD2BE21E791D1200CDD061 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDD1E791D1200CDD061 /* libavformat.a */; };
 		7BBD2BE31E791D1200CDD061 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDE1E791D1200CDD061 /* libavutil.a */; };
@@ -209,7 +208,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				7BA8A78F1E8A5C8700840021 /* logo in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
