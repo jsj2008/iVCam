@@ -42,7 +42,6 @@
 		7B45EB7F1E6564E300BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
 		7B45EB851E67F34C00BF6BBF /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B45EB7C1E6564E300BF6BBF /* log.cpp */; };
 		7BA8A78C1E8A5C4000840021 /* logo in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8A78B1E8A5C4000840021 /* logo */; };
-		7BA8A78F1E8A5C8700840021 /* logo in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BA8A78B1E8A5C4000840021 /* logo */; };
 		7BBD2BE11E791D1200CDD061 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDC1E791D1200CDD061 /* libavcodec.a */; };
 		7BBD2BE21E791D1200CDD061 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDD1E791D1200CDD061 /* libavformat.a */; };
 		7BBD2BE31E791D1200CDD061 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDE1E791D1200CDD061 /* libavutil.a */; };
@@ -209,7 +208,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				7BA8A78F1E8A5C8700840021 /* logo in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1363,6 +1361,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0440;
+				TargetAttributes = {
+					142050C511AB1CCE00460FC9 = {
+						ProvisioningStyle = Manual;
+					};
+					149D29D211AAFD5600DF1946 = {
+						ProvisioningStyle = Manual;
+					};
+				};
 			};
 			buildConfigurationList = DEFCDA6B09E701B800413E85 /* Build configuration list for PBXProject "Sample" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1426,7 +1432,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Copy plug-in to path for FCP (which uses embedded frameworks)\necho \"Copying plug-in to FCP's 3rd Party Plug-In path\"\npushd $SYMROOT/$CONFIGURATIONPREFIX$CONFIGURATION/symbolicroot\nmkdir -p ../FCP-DAL\nrm -Rf ../FCP-DAL/$PRODUCT_NAME.plugin\nditto $PRODUCT_NAME.plugin/ ../FCP-DAL/$PRODUCT_NAME.plugin/\nditto /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib ../FCP-DAL/$PRODUCT_NAME.plugin/Contents/Frameworks/\n\n# Remove the assistant (the \"system\" one should be used)\necho \"Removing Assistant\"\ncd ../FCP-DAL/\nrm -Rf $PRODUCT_NAME.plugin/Contents/Resources/*Assistant\n                                               \n# Fix rpaths\necho \"Fixing rpaths\"\n# install_name_tool -change /System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia @rpath/CoreMedia.framework/Versions/A/CoreMedia $PRODUCT_NAME.plugin/Contents/MacOS/$PRODUCT_NAME\n# install_name_tool -change /System/Library/Frameworks/CoreMediaIO.framework/Versions/A/CoreMediaIO @rpath/CoreMediaIO.framework/Versions/A/CoreMediaIO $PRODUCT_NAME.plugin/Contents/MacOS/$PRODUCT_NAME\necho \"otool -L output:\"\notool -L $PRODUCT_NAME.plugin/Contents/MacOS/$PRODUCT_NAME\npopd\n\n";
+			shellScript = "# Copy plug-in to path for FCP (which uses embedded frameworks)\necho \"Copying plug-in to FCP's 3rd Party Plug-In path\"\npushd $SYMROOT/$CONFIGURATIONPREFIX$CONFIGURATION/symbolicroot\nmkdir -p ../FCP-DAL\nrm -Rf ../FCP-DAL/$PRODUCT_NAME.plugin\nditto $PRODUCT_NAME.plugin/ ../FCP-DAL/$PRODUCT_NAME.plugin/\nditto /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib/*.dylib ../FCP-DAL/$PRODUCT_NAME.plugin/Contents/Frameworks/\n\n# Remove the assistant (the \"system\" one should be used)\necho \"Removing Assistant\"\ncd ../FCP-DAL/\nrm -Rf $PRODUCT_NAME.plugin/Contents/Resources/*\n                                               \n# Fix rpaths\necho \"Fixing rpaths\"\n# install_name_tool -change /System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia @rpath/CoreMedia.framework/Versions/A/CoreMedia $PRODUCT_NAME.plugin/Contents/MacOS/$PRODUCT_NAME\n# install_name_tool -change /System/Library/Frameworks/CoreMediaIO.framework/Versions/A/CoreMediaIO @rpath/CoreMediaIO.framework/Versions/A/CoreMediaIO $PRODUCT_NAME.plugin/Contents/MacOS/$PRODUCT_NAME\necho \"otool -L output:\"\notool -L $PRODUCT_NAME.plugin/Contents/MacOS/$PRODUCT_NAME\npopd\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1566,7 +1572,9 @@
 		142050C811AB1CCF00460FC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/KernelExtension/SampleUserClient-Info.plist";
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOVideoSample.kext/Contents/PlugIns";
 				MODULE_NAME = com.apple.cmio.UserClient.Sample;
@@ -1668,7 +1676,9 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"ARCHS[sdk=macosx10.7]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
@@ -1691,7 +1701,9 @@
 		14350709147319C300D80B41 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/KernelExtension/SampleUserClient-Info.plist";
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOVideoSample.kext/Contents/PlugIns";
 				MODULE_NAME = com.apple.cmio.UserClient.Sample;
@@ -1706,7 +1718,9 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"ARCHS[sdk=macosx10.7]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
