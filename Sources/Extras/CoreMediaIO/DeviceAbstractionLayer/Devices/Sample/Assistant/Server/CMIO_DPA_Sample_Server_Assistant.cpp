@@ -927,7 +927,7 @@ int main()
 {
 	// Don't allow any exceptions to escape
 	try
-	{
+	{  
 		// Check in with the bootstrap port under the agreed upon name to get the servicePort with receive rights
 		mach_port_t servicePort;
 		name_t serviceName = "com.apple.cmio.DPA.Sample";

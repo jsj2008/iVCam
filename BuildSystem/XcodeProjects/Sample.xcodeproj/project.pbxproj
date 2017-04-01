@@ -34,6 +34,7 @@
 		7B33367A1E7B7AAC00368971 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3336791E7B7AAC00368971 /* VideoToolbox.framework */; };
 		7B33367C1E7B7B2A00368971 /* libiconv.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B33367B1E7B7B2A00368971 /* libiconv.2.tbd */; };
 		7B33367E1E7B7B7000368971 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B33367D1E7B7B7000368971 /* libz.tbd */; };
+		7B335C321E8F9954005AB921 /* reloadKext.sh in Resources */ = {isa = PBXBuildFile; fileRef = 7B335C311E8F9954005AB921 /* reloadKext.sh */; };
 		7B3DEBCA1E6EA5FD002FF975 /* libuvc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; };
 		7B3DEBCD1E6EA856002FF975 /* libuvc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7B3DEBD01E6F9869002FF975 /* AtomCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */; };
@@ -369,6 +370,7 @@
 		7B3336791E7B7AAC00368971 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		7B33367B1E7B7B2A00368971 /* libiconv.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.tbd; path = usr/lib/libiconv.2.tbd; sourceTree = SDKROOT; };
 		7B33367D1E7B7B7000368971 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		7B335C311E8F9954005AB921 /* reloadKext.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = reloadKext.sh; sourceTree = "<group>"; };
 		7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuvc.dylib; path = ../Lib/libuvc.dylib; sourceTree = "<group>"; };
 		7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AtomCamera.cpp; sourceTree = "<group>"; };
 		7B3DEBCF1E6F9869002FF975 /* AtomCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomCamera.h; sourceTree = "<group>"; };
@@ -1167,6 +1169,7 @@
 		E42AA5BE0E07410B000C4D64 /* PlugIn */ = {
 			isa = PBXGroup;
 			children = (
+				7B335C311E8F9954005AB921 /* reloadKext.sh */,
 				7BA8A78B1E8A5C4000840021 /* logo */,
 				E42AA5CA0E07410B000C4D64 /* Sample-Info.plist */,
 				E42AA5CB0E07410B000C4D64 /* Sample.exp */,
@@ -1414,6 +1417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BA8A78C1E8A5C4000840021 /* logo in Resources */,
+				7B335C321E8F9954005AB921 /* reloadKext.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1577,9 +1581,9 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/KernelExtension/SampleUserClient-Info.plist";
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOVideoSample.kext/Contents/PlugIns";
-				MODULE_NAME = com.apple.cmio.UserClient.Sample;
+				MODULE_NAME = com.insta360.cmio.UserClient.Sample;
 				MODULE_VERSION = 1.0.0d1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.apple.cmio.driver.SampleUserClient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.SampleUserClient;
 				PRODUCT_NAME = IOVideoSampleUserClient;
 				WRAPPER_EXTENSION = kext;
 			};
@@ -1691,10 +1695,10 @@
 				HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2)";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/KernelExtension/SampleDriver-Info.plist";
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
-				MODULE_NAME = com.apple.cmio.driver.Sample;
+				MODULE_NAME = com.insta360.cmio.driver.Sample;
 				MODULE_VERSION = 1.0.0d1;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.apple.cmio.driver.Sample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.Sample;
 				PRODUCT_NAME = IOVideoSample;
 				WRAPPER_EXTENSION = kext;
 			};
@@ -1708,9 +1712,9 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/KernelExtension/SampleUserClient-Info.plist";
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOVideoSample.kext/Contents/PlugIns";
-				MODULE_NAME = com.apple.cmio.UserClient.Sample;
+				MODULE_NAME = com.insta360.cmio.UserClient.Sample;
 				MODULE_VERSION = 1.0.0d1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.apple.cmio.driver.SampleUserClient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.SampleUserClient;
 				PRODUCT_NAME = IOVideoSampleUserClient;
 				WRAPPER_EXTENSION = kext;
 			};
@@ -1731,10 +1735,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/KernelExtension/SampleDriver-Info.plist";
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
-				MODULE_NAME = com.apple.cmio.driver.Sample;
+				MODULE_NAME = com.insta360.cmio.driver.Sample;
 				MODULE_VERSION = 1.0.0d1;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.apple.cmio.driver.Sample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.Sample;
 				PRODUCT_NAME = IOVideoSample;
 				WRAPPER_EXTENSION = kext;
 			};
