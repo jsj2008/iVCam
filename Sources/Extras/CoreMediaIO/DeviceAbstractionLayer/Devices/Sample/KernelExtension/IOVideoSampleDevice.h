@@ -73,14 +73,14 @@ struct SampleVideoDeviceControlBuffer
     IOAudioSMPTETime   smpteTime;
 };
 
-class IOVideoAirDevice : IOVideoDevice
+class IOVideoSampleDevice : IOVideoDevice
 {
-	OSDeclareDefaultStructors(IOVideoAirDevice);
+	OSDeclareDefaultStructors(IOVideoSampleDevice);
 
 protected:
     IOStreamBufferID			_currentBuffer;
-    IOVideoAirStream*		_outputStream;
-    IOVideoAirStream*		_inputStream;
+    IOVideoSampleStream*		_outputStream;
+    IOVideoSampleStream*		_inputStream;
     
     IOWorkLoop*					_workloop;
     IOTimerEventSource*			_timer;

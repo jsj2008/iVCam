@@ -21,7 +21,7 @@
 		<key>IOVideoSampleDevice</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>com.insta360.cmio.driver.Sample</string>
+			<string>com.apple.cmio.driver.Sample</string>
 			<key>IOClass</key>
 			<string>IOVideoSampleDevice</string>
 			<key>IOMatchCategory</key>
