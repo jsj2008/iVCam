@@ -80,7 +80,7 @@ extern "C"
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void* AppleCMIODPSampleNewPlugIn(CFAllocatorRef allocator, CFUUIDRef requestedTypeUUID);
 	void* AppleCMIODPSampleNewPlugIn(CFAllocatorRef allocator, CFUUIDRef requestedTypeUUID) 
-	{
+	{       
 		if (not CFEqual(requestedTypeUUID, kCMIOHardwarePlugInTypeID))
 			return 0;
 		

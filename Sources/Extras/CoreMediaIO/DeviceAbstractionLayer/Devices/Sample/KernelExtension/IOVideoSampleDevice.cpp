@@ -115,15 +115,6 @@ namespace
 #define kHD1080pYUVV_10_FrameSize (5529600)
 #define kHD1080pYUV_10_DataSize (kHD1080pYUVV_10_FrameSize)
 
-//#define kYUV_1472X736_FrameSize (2166784)
-//#define kYUV_1472x736_DataSize (kYUV_1472X736_FrameSize)
-//
-//#define kYUV_2176X1088_FrameSize (4734976)
-//#define kYUV_2176X1088_DataSize (kYUV_2176X1088_FrameSize)
-//
-//#define kYUV_3008x1504_FrameSize (9048064)
-//#define kYUV_3008x1504_DataSize (kYUV_3008x1504_FrameSize)
-
 #define kYUV_1472X736_FrameSize (4333568)
 #define kYUV_1472x736_DataSize (kYUV_1472X736_FrameSize)
 
