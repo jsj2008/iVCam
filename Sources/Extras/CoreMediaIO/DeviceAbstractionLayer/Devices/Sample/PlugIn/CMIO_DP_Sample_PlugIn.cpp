@@ -90,12 +90,12 @@ extern "C"
 			// configured plist in /Library/LaunchDaemons, but if that is done then the process will be owned by root, thus complicating the debugging process.  Therefore, in the event that the
 			// plist is missing (as would be the case for most debugging efforts) attempt to register the SampleAssistant now.  It will fail gracefully if allready registered.
 			mach_port_t assistantServicePort;		
-			name_t assistantServiceName = "com.apple.cmio.DPA.Sample";
+			name_t assistantServiceName = "com.insta360.cmio.DPA.Air";
 			kern_return_t err = bootstrap_look_up(bootstrap_port, assistantServiceName, &assistantServicePort);
 			if (BOOTSTRAP_SUCCESS != err)
 			{
 				// Create an URL to SampleAssistant that resides at "/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/SampleAssistant" 
-				CACFURL assistantURL(CFURLCreateWithFileSystemPath(NULL, CFSTR("/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/SampleAssistant"), kCFURLPOSIXPathStyle, false));
+				CACFURL assistantURL(CFURLCreateWithFileSystemPath(NULL, CFSTR("/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources/VCamAssistant"), kCFURLPOSIXPathStyle, false));
 				ThrowIf(not assistantURL.IsValid(), CAException(-1), "AppleCMIODPSampleNewPlugIn: unable to create URL for the SampleAssistant");
 
 				// Get the maximum size of the of the file system representation of the SampleAssistant's absolute path
@@ -329,7 +329,7 @@ namespace CMIO { namespace DP { namespace Sample
 		{
 			case kCMIOObjectPropertyName:
 				ThrowIf(dataSize != GetPropertyDataSize(address, qualifierDataSize, qualifierData), CAException(kCMIOHardwareBadPropertySizeError), "CMIO::DP::Sample::PlugIn::GetPropertyData: wrong data size for kCMIOObjectPropertyName");
-				*static_cast<CFStringRef*>(data) = CFSTR("com.apple.cmio.DAL.Sample");
+				*static_cast<CFStringRef*>(data) = CFSTR("com.insta360.cmio.DAL.Air");
 				CFRetain(*static_cast<CFStringRef*>(data));
 				dataUsed = sizeof(CFStringRef);
 				break;

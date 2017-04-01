@@ -50,8 +50,7 @@
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // Self Include
-#include "CMIO_DPA_Sample_Server_Frame.h"
-#include "log.h"
+#include "CMIO_DPA_Sample_Server_Frame.h" 
 
 
 namespace CMIO { namespace DPA { namespace Sample { namespace Server

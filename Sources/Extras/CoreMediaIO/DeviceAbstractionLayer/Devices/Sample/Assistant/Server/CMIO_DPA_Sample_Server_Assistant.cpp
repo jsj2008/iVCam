@@ -154,7 +154,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	// Assistant()
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Assistant::Assistant() :
-		mStateMutex("SampleAssistant state mutex"),
+		mStateMutex("VCamAssistant state mutex"),
 		mPlugInBundle(CopyPlugInBundle()),
 		mPortSet(MACH_PORT_NULL),
 		mNotificationPortThread(true),
@@ -888,7 +888,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	void Assistant::InitializeDeviceAddedNotification()
 	{
 		// Create a matching dictionary to specify that only Sample devices are of interest
-		CACFDictionary matchingDictionary(IOServiceMatching("IOVideoSampleDevice"), true);
+		CACFDictionary matchingDictionary(IOServiceMatching("IOVideoAirDevice"), true);
 		ThrowIf(not matchingDictionary.IsValid(), -1, "Assistant::InitializeDeviceAddedNotification: unable to get service matching dictionary");
 
 		// Create the notification
@@ -930,7 +930,7 @@ int main()
 	{
 		// Check in with the bootstrap port under the agreed upon name to get the servicePort with receive rights
 		mach_port_t servicePort;
-		name_t serviceName = "com.apple.cmio.DPA.Sample";
+		name_t serviceName = "com.insta360.cmio.DPA.Air";
 		kern_return_t err = bootstrap_check_in(bootstrap_port, serviceName, &servicePort); 
 		if (BOOTSTRAP_SUCCESS != err)
 		{

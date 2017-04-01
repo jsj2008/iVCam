@@ -2,16 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>7.0</string>
+	<key>CFBundleVersion</key>
+	<string>7.0</string>
 	<key>Label</key>
-	<string>com.apple.cmio.DPA.Sample</string>
-	<key>ProgramArguments</key>
-	<array>
-		<string>/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/SampleAssistant</string>
-	</array>
+	<string>com.insta360.cmio.DPA.Air</string>
 	<key>MachServices</key>
 	<dict>
-		<key>com.apple.cmio.DPA.Sample</key>
+		<key>com.insta360.cmio.DPA.Air</key>
 		<true/>
 	</dict>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources/VCamAssistant</string>
+	</array>
 </dict>
 </plist>

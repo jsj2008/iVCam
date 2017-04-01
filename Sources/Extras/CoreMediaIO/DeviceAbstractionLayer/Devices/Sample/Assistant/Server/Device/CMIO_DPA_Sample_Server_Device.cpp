@@ -1225,11 +1225,11 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 				LOGINFO("Device::InitializeControls: couldn't allocate the source selector map array");
 			}
 			
-			theSelectorItem = CMIO::DP::ControlDictionary::CreateSelectorControlSelectorMapItem((UInt32)CMIO::DP::Sample::kProtocolSample, CACFString(CFSTR("Sample")));
+			theSelectorItem = CMIO::DP::ControlDictionary::CreateSelectorControlSelectorMapItem((UInt32)CMIO::DP::Sample::kProtocolSample, CACFString(CFSTR("Air")));
 			theSourceSelectorMap.AppendDictionary(theSelectorItem);
-			theSelectorItem = CMIO::DP::ControlDictionary::CreateSelectorControlSelectorMapItem((UInt32)CMIO::DP::Sample::kProtocolSampleBasic, CACFString(CFSTR("Sample Basic")));
+			theSelectorItem = CMIO::DP::ControlDictionary::CreateSelectorControlSelectorMapItem((UInt32)CMIO::DP::Sample::kProtocolSampleBasic, CACFString(CFSTR("Air Basic")));
 			theSourceSelectorMap.AppendDictionary(theSelectorItem);
-			theSelectorItem = CMIO::DP::ControlDictionary::CreateSelectorControlSelectorMapItem((UInt32)CMIO::DP::Sample::kProtocolSampleAdvanced, CACFString(CFSTR("Sample Advanced")));
+			theSelectorItem = CMIO::DP::ControlDictionary::CreateSelectorControlSelectorMapItem((UInt32)CMIO::DP::Sample::kProtocolSampleAdvanced, CACFString(CFSTR("Air Advanced")));
 			theSourceSelectorMap.AppendDictionary(theSelectorItem);
 			
 			//	create a custom play through boolean control

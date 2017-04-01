@@ -1576,11 +1576,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/KernelExtension/SampleUserClient-Info.plist";
-				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOVideoSample.kext/Contents/PlugIns";
-				MODULE_NAME = com.insta360.cmio.UserClient.Sample;
-				MODULE_VERSION = 1.0.0d1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.SampleUserClient;
-				PRODUCT_NAME = IOVideoSampleUserClient;
+				INSTALL_GROUP = root;
+				INSTALL_OWNER = wheel;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOVideoAir.kext/Contents/PlugIns";
+				MODULE_NAME = com.insta360.cmio.UserClient.Air;
+				MODULE_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.AirUserClient;
+				PRODUCT_NAME = IOVideoAirUserClient;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -1612,6 +1614,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXPORTED_SYMBOLS_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/PlugIn/Sample.exp";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1640,7 +1643,8 @@
 					"$(value)",
 					"-DkCMIOModuleKey=\\\"CMIO_DAL_PlugIn_Sample.Debug\\\"",
 				);
-				PRODUCT_NAME = Sample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.DAL.Air;
+				PRODUCT_NAME = Insta360VCam;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Release;
@@ -1651,6 +1655,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"ARCHS[sdk=macosx10.7]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(value)",
@@ -1659,8 +1664,9 @@
 				);
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DERIVED_FILES_DIR)/$(CURRENT_ARCH)\"";
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
+				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/Assistant/com.apple.cmio.DPA.Sample.plist";
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
-				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources";
+				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources";
 				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
 				OTHER_CFLAGS = (
 					"$(value)",
@@ -1668,7 +1674,8 @@
 					"-DkCMIOModuleKey=\\\"CMIO_DPA_Sample.Debug\\\"",
 					"-DUSEHARDWARECLOCK=1",
 				);
-				PRODUCT_NAME = SampleAssistant;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.DPA.Air;
+				PRODUCT_NAME = VCamAssistant;
 			};
 			name = Release;
 		};
@@ -1690,12 +1697,14 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				HEADER_SEARCH_PATHS = "$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2)";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/KernelExtension/SampleDriver-Info.plist";
+				INSTALL_GROUP = root;
+				INSTALL_OWNER = wheel;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
-				MODULE_NAME = com.insta360.cmio.driver.Sample;
-				MODULE_VERSION = 1.0.0d1;
+				MODULE_NAME = com.insta360.cmio.driver.Air;
+				MODULE_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.Sample;
-				PRODUCT_NAME = IOVideoSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.Air;
+				PRODUCT_NAME = IOVideoAir;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
@@ -1707,11 +1716,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/KernelExtension/SampleUserClient-Info.plist";
-				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOVideoSample.kext/Contents/PlugIns";
-				MODULE_NAME = com.insta360.cmio.UserClient.Sample;
-				MODULE_VERSION = 1.0.0d1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.SampleUserClient;
-				PRODUCT_NAME = IOVideoSampleUserClient;
+				INSTALL_GROUP = root;
+				INSTALL_OWNER = wheel;
+				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions/IOVideoAir.kext/Contents/PlugIns";
+				MODULE_NAME = com.insta360.cmio.UserClient.Air;
+				MODULE_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.AirUserClient;
+				PRODUCT_NAME = IOVideoAirUserClient;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Release;
@@ -1730,12 +1741,14 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/KernelExtension/SampleDriver-Info.plist";
+				INSTALL_GROUP = root;
+				INSTALL_OWNER = wheel;
 				INSTALL_PATH = "$(SYSTEM_LIBRARY_DIR)/Extensions";
-				MODULE_NAME = com.insta360.cmio.driver.Sample;
-				MODULE_VERSION = 1.0.0d1;
+				MODULE_NAME = com.insta360.cmio.driver.Air;
+				MODULE_VERSION = 1.0.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.Sample;
-				PRODUCT_NAME = IOVideoSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.driver.Air;
+				PRODUCT_NAME = IOVideoAir;
 				WRAPPER_EXTENSION = kext;
 			};
 			name = Debug;
@@ -1769,6 +1782,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXPORTED_SYMBOLS_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/PlugIn/Sample.exp";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1793,7 +1807,8 @@
 					"$(value)",
 					"-DkCMIOModuleKey=\\\"CMIO_DAL_PlugIn_Sample.Debug\\\"",
 				);
-				PRODUCT_NAME = Sample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.DAL.Air;
+				PRODUCT_NAME = Insta360VCam;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Debug;
@@ -1804,6 +1819,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"ARCHS[sdk=macosx10.7]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "";
 				GCC_DYNAMIC_NO_PIC = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(value)",
@@ -1812,8 +1828,9 @@
 				);
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DERIVED_FILES_DIR)/$(CURRENT_ARCH)\"";
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
+				INFOPLIST_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/Assistant/com.apple.cmio.DPA.Sample.plist";
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
-				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources";
+				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources";
 				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
 				OTHER_CFLAGS = (
 					"$(value)",
@@ -1821,7 +1838,8 @@
 					"-DkCMIOModuleKey=\\\"CMIO_DPA_Sample.Debug\\\"",
 					"-DUSEHARDWARECLOCK=1",
 				);
-				PRODUCT_NAME = SampleAssistant;
+				PRODUCT_BUNDLE_IDENTIFIER = com.insta360.cmio.DPA.Air;
+				PRODUCT_NAME = VCamAssistant;
 			};
 			name = Debug;
 		};
