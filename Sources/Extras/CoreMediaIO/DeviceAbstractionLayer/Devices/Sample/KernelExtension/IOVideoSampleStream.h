@@ -51,9 +51,9 @@
 // System Includes
 #include <IOKit/video/IOVideoStream.h>
 
-class IOVideoSampleStream : public IOVideoStream
+class IOVideoAirStream : public IOVideoStream
 {
-	OSDeclareDefaultStructors(IOVideoSampleStream);
+	OSDeclareDefaultStructors(IOVideoAirStream);
 
 protected:
 	OSArray*					_freeBuffers;
@@ -62,7 +62,7 @@ protected:
 public:
 	virtual void				free(void);
 	
-	static IOVideoSampleStream*	withBuffers(OSArray* buffers, IOStreamMode mode = kIOStreamModeOutput, IOItemCount queueLength = 0, OSDictionary* properties = 0);
+	static IOVideoAirStream*	withBuffers(OSArray* buffers, IOStreamMode mode = kIOStreamModeOutput, IOItemCount queueLength = 0, OSDictionary* properties = 0);
 	
 	virtual bool				initWithBuffers(OSArray* buffers, IOStreamMode mode = kIOStreamModeOutput, IOItemCount queueLength = 0, OSDictionary* properties = 0);
 	

@@ -143,15 +143,15 @@ namespace
 
 #define super IOVideoDevice
 
-OSDefineMetaClassAndStructors(IOVideoSampleDevice, IOVideoDevice)
+OSDefineMetaClassAndStructors(IOVideoAirDevice, IOVideoDevice)
 
 
-void IOVideoSampleDevice::timerFired(OSObject* owner, IOTimerEventSource* timer)
+void IOVideoAirDevice::timerFired(OSObject* owner, IOTimerEventSource* timer)
 {
-	IOVideoSampleDevice* device;
+	IOVideoAirDevice* device;
 	kprintf("timer fired\n");
 	
-	device = OSDynamicCast(IOVideoSampleDevice, owner);
+	device = OSDynamicCast(IOVideoAirDevice, owner);
 	if (device)
 	{
 		if (device->mCurrentDirection)
@@ -196,9 +196,9 @@ extern void *getsectdatafromheader(struct mach_header_t*, char*, char*, size_t*)
 	
 }
 
-void IOVideoSampleDevice::free()
+void IOVideoAirDevice::free()
 {
-    kprintf("IOVideoSampleDevice::free");
+    kprintf("IOVideoAirDevice::free");
 	if (_timer) _timer->cancelTimeout();
 
 	RELEASE_IF_SET(_timer);
@@ -207,9 +207,9 @@ void IOVideoSampleDevice::free()
 	super::free();
 }
 
-bool IOVideoSampleDevice::start(IOService* provider)
+bool IOVideoAirDevice::start(IOService* provider)
 {
-    kprintf("IOVideoSampleDevice::start");
+    kprintf("IOVideoAirDevice::start");
 	KernelDebugEnable(true);
 	KernelDebugSetLevel(7);
 	KernelDebugSetOutputType(kKernelDebugOutputKextLoggerType); 
@@ -240,14 +240,14 @@ bool IOVideoSampleDevice::start(IOService* provider)
 		result = AllocateFrameBuffers(MAX_FRAME_SIZE*mNumBuffers);
 		if (result != kIOReturnSuccess)
 		{
-			kprintf("Starting IOVideoSampleDevice - AllocateFrameBuffers failed\n");
+			kprintf("Starting IOVideoAirDevice - AllocateFrameBuffers failed\n");
 			break;
 		}
 
 		result = AllocateControlBuffers(sizeof(struct SampleVideoDeviceControlBuffer)*mNumBuffers);
 		if (result != kIOReturnSuccess)
 		{
-			kprintf("Starting IOVideoSampleDevice - AllocateFrameBuffers failed\n");
+			kprintf("Starting IOVideoAirDevice - AllocateFrameBuffers failed\n");
 			break;
 		}
         
@@ -257,14 +257,14 @@ bool IOVideoSampleDevice::start(IOService* provider)
 		theControlList = OSArray::withCapacity(1);
 		if (!theControlList)
 		{
-			kprintf("IOVideoSampleDevice::start : couldn't allocate the control list\n");
+			kprintf("IOVideoAirDevice::start : couldn't allocate the control list\n");
 			break;
 		}
 		//	create a custom play through boolean control
 		theControl = IOVideoControlDictionary::createBooleanControl(CMIO::KEXT::Sample::kDirectionControlID, kIOVideoControlBaseClassIDBoolean, kIOVideoBooleanControlClassIDDirection, kIOVideoControlScopeGlobal, kIOVideoControlElementMaster, mCurrentDirection, false, 0, OSString::withCString("Direction Control"));
 		if (!theControl)
 		{
-			kprintf("IOVideoSampleDevice::start: couldn't allocate the direction control\n");
+			kprintf("IOVideoAirDevice::start: couldn't allocate the direction control\n");
 			break;
 		}
 		
@@ -274,7 +274,7 @@ bool IOVideoSampleDevice::start(IOService* provider)
 		theSourceSelectorMap = OSArray::withCapacity(3);
 		if (!theSourceSelectorMap)
 		{
-			kprintf("IOVideoSampleDevice::start: couldn't allocate the source selector map array\n");
+			kprintf("IOVideoAirDevice::start: couldn't allocate the source selector map array\n");
 			break;
 		}
 		theSelectorItem = IOVideoControlDictionary::createSelectorControlSelectorMapItem((UInt32)1, OSString::withCString("Tuner"));
@@ -291,7 +291,7 @@ bool IOVideoSampleDevice::start(IOService* provider)
 		theSelectorControl = IOVideoControlDictionary::createSelectorControl(CMIO::KEXT::Sample::kInputSourceSelectorControlID, kIOVideoControlBaseClassIDSelector, kIOVideoSelectorControlClassIDDataSource, kIOVideoControlScopeGlobal, kIOVideoControlElementMaster, CMIO::KEXT::Sample::kSampleSourceSVideo, theSourceSelectorMap, false, 0, OSString::withCString("Video Source"));
 		if (!theSelectorControl)
 		{
-			kprintf("IOVideoSampleDevice::start: couldn't allocate the theSelectorControl control\n");
+			kprintf("IOVideoAirDevice::start: couldn't allocate the theSelectorControl control\n");
 			break;
 		}
 		
@@ -335,7 +335,7 @@ bool IOVideoSampleDevice::start(IOService* provider)
 				
 		registerService();
 		
-		kprintf("IOVideoSampleDevice start successful\n");
+		kprintf("IOVideoAirDevice start successful\n");
 		
 		return true;
 		
@@ -347,16 +347,16 @@ bool IOVideoSampleDevice::start(IOService* provider)
 	RELEASE_IF_SET (_timer);
 	RELEASE_IF_SET (_workloop);
 	
-	kprintf("IOVideoSampleDevice start failed\n");
+	kprintf("IOVideoAirDevice start failed\n");
 	
 	return false;
 }
 //-------------------------------------------------------------------------------------------------------
 //	stop
 //-------------------------------------------------------------------------------------------------------
-void IOVideoSampleDevice::stop(IOService* provider)
+void IOVideoAirDevice::stop(IOService* provider)
 {
-	kprintf("Stopping IOVideoSampleDevice\n");
+	kprintf("Stopping IOVideoAirDevice\n");
 	
 	super::stop(provider);
 	
@@ -384,7 +384,7 @@ void IOVideoSampleDevice::stop(IOService* provider)
 }
 
 
-IOReturn IOVideoSampleDevice::sendOutputFrame(void)
+IOReturn IOVideoAirDevice::sendOutputFrame(void)
 {
 	IOStreamBuffer* buffer;
 	IOReturn result;
@@ -471,7 +471,7 @@ IOReturn IOVideoSampleDevice::sendOutputFrame(void)
 }
 
 
-IOReturn IOVideoSampleDevice::consumeInputFrame(void)
+IOReturn IOVideoAirDevice::consumeInputFrame(void)
 {
 	kprintf("consumeInputFrame\n");
 
@@ -555,7 +555,7 @@ IOReturn IOVideoSampleDevice::consumeInputFrame(void)
 }
 
 
-IOReturn IOVideoSampleDevice::startStream(IOVideoStream* stream)
+IOReturn IOVideoAirDevice::startStream(IOVideoStream* stream)
 {
 	kprintf("startStream");
 	mFrameCountFromStart = 0;
@@ -610,7 +610,7 @@ IOReturn IOVideoSampleDevice::startStream(IOVideoStream* stream)
 }
 
 
-IOReturn IOVideoSampleDevice::stopStream(IOVideoStream* stream)
+IOReturn IOVideoAirDevice::stopStream(IOVideoStream* stream)
 {
 	if (_timer) _timer->cancelTimeout();
 
@@ -618,7 +618,7 @@ IOReturn IOVideoSampleDevice::stopStream(IOVideoStream* stream)
 }
 
 
-IOReturn IOVideoSampleDevice::suspendStream(IOVideoStream* stream)
+IOReturn IOVideoAirDevice::suspendStream(IOVideoStream* stream)
 {
 	if (_timer) _timer->cancelTimeout();
 	
@@ -626,7 +626,7 @@ IOReturn IOVideoSampleDevice::suspendStream(IOVideoStream* stream)
 }
 
 
-IOReturn IOVideoSampleDevice::setControlValue(UInt32 controlID, UInt32 value, UInt32* newValue)
+IOReturn IOVideoAirDevice::setControlValue(UInt32 controlID, UInt32 value, UInt32* newValue)
 {
 	IOReturn theAnswer = kIOReturnNotFound;
 	
@@ -654,7 +654,7 @@ IOReturn IOVideoSampleDevice::setControlValue(UInt32 controlID, UInt32 value, UI
 							
 							if (currentDirection != newDirection)
 							{
-								kprintf("IOVideoSampleDevice::setControlValue kDirectionControlID changing direction = %d", newDirection);
+								kprintf("IOVideoAirDevice::setControlValue kDirectionControlID changing direction = %d", newDirection);
 								if (newDirection)
 								{
 									RemoveOutputStreams();
@@ -738,9 +738,9 @@ IOReturn IOVideoSampleDevice::setControlValue(UInt32 controlID, UInt32 value, UI
 }
 
 
-IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStreamDescription* newStreamFormat)
+IOReturn IOVideoAirDevice::setStreamFormat(UInt32 streamID, const IOVideoStreamDescription* newStreamFormat)
 {
-	kprintf("IOVideoSampleDevice::setStreamFormat() streamID = %lu format = %lu codecFlags = %x", (long unsigned int)streamID, (long unsigned int)newStreamFormat->mVideoCodecType,(unsigned int)newStreamFormat->mVideoCodecFlags);
+	kprintf("IOVideoAirDevice::setStreamFormat() streamID = %lu format = %lu codecFlags = %x", (long unsigned int)streamID, (long unsigned int)newStreamFormat->mVideoCodecType,(unsigned int)newStreamFormat->mVideoCodecFlags);
 	//	first, we need to be sure we were handed properly sized data and a valid stream ID
 	IOReturn theAnswer = kIOReturnBadArgument;
 	if (((streamID == kInputStreamID) || (streamID == kOutputStreamID))	 && (NULL != newStreamFormat))
@@ -757,36 +757,36 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 				OSArray* theLocalInputStreamList = (OSArray*)theInputStreamList->copyCollection();
 				if (NULL != theLocalInputStreamList)
 				{
-					kprintf("IOVideoSampleDevice::setStreamFormat() got input list");
+					kprintf("IOVideoAirDevice::setStreamFormat() got input list");
 					//	get the stream dictionary (this driver only has a single input stream and we already validated the ID as good)
 					OSDictionary* theStreamDictionary = OSDynamicCast(OSDictionary, theLocalInputStreamList->getObject(0));
 					if (NULL != theStreamDictionary)
 					{
 						//	make sure that the sample format is supported
-						kprintf("IOVideoSampleDevice::setStreamFormat() got stream dictionary");
+						kprintf("IOVideoAirDevice::setStreamFormat() got stream dictionary");
 						OSArray* theSupportedFormats = IOVideoStreamDictionary::copyAvailableFormats(theStreamDictionary);
 						if (NULL != theSupportedFormats)
 						{
 							//	iterate through the supported formats and see if the new one matches any of them
-							kprintf("IOVideoSampleDevice::setStreamFormat() supported format");
+							kprintf("IOVideoAirDevice::setStreamFormat() supported format");
 							IOVideoStreamDescription theSanitizedNewFormat;
 							UInt32 theFormatIndex = 0xFFFFFFFF;
 							UInt32 theNumberSupportedFormats = theSupportedFormats->getCount();
-							kprintf("IOVideoSampleDevice::setStreamFormat() supported format count = %lu", (long unsigned int)theNumberSupportedFormats);
+							kprintf("IOVideoAirDevice::setStreamFormat() supported format count = %lu", (long unsigned int)theNumberSupportedFormats);
 							for(UInt32 theSupportedFormatIndex = 0; (0xFFFFFFFF == theFormatIndex) && (theSupportedFormatIndex < theNumberSupportedFormats); ++theSupportedFormatIndex)
 							{
 								//	get the format dictionary
 								OSDictionary* theFormatDictionary = OSDynamicCast(OSDictionary, theSupportedFormats->getObject(theSupportedFormatIndex));
 								if (NULL != theFormatDictionary)
 								{							
-									kprintf("IOVideoSampleDevice::setStreamFormat() got format dictionary");
+									kprintf("IOVideoAirDevice::setStreamFormat() got format dictionary");
 									IOVideoStreamDescription theSupportedFormat;
 									IOVideoStreamFormatDictionary::getDescription(theFormatDictionary, theSupportedFormat);
 									//	check to see if it was supported
-									kprintf("IOVideoSampleDevice::setStreamFormat() format = %lu", (long unsigned int)theSupportedFormat.mVideoCodecType);
+									kprintf("IOVideoAirDevice::setStreamFormat() format = %lu", (long unsigned int)theSupportedFormat.mVideoCodecType);
 									if (IOVideoStreamFormatDictionary::isSameSampleFormat(theSupportedFormat, theNewFormat))
 									{
-										kprintf("IOVideoSampleDevice::setStreamFormat() found matching format %lu", (long unsigned int)theSupportedFormatIndex);
+										kprintf("IOVideoAirDevice::setStreamFormat() found matching format %lu", (long unsigned int)theSupportedFormatIndex);
 										//	it is, so fill out the new format struct
 										theSanitizedNewFormat = theSupportedFormat;
 										
@@ -803,8 +803,8 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 							if (0xFFFFFFFF != theFormatIndex)
 							{
 								//	but only if the new format is different from the current format
-								kprintf("IOVideoSampleDevice::setStreamFormat() theFormatIndex is %lu", (long unsigned int)theFormatIndex);
-								kprintf("IOVideoSampleDevice::setStreamFormat() sanitized codecFlags = %x currentCodeFlags is %x", (unsigned int)theSanitizedNewFormat.mVideoCodecFlags,(unsigned int)mCurrentInputStreamFormat.mVideoCodecFlags);
+								kprintf("IOVideoAirDevice::setStreamFormat() theFormatIndex is %lu", (long unsigned int)theFormatIndex);
+								kprintf("IOVideoAirDevice::setStreamFormat() sanitized codecFlags = %x currentCodeFlags is %x", (unsigned int)theSanitizedNewFormat.mVideoCodecFlags,(unsigned int)mCurrentInputStreamFormat.mVideoCodecFlags);
                                 
 								if (!IOVideoStreamFormatDictionary::isSameSampleFormat(theSanitizedNewFormat, mCurrentInputStreamFormat))
 								{
@@ -817,7 +817,7 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 									//	represents the new sample format.
 									//requestConfigChange(kIOAudio2UserClientMethodID_ChangeStreamFormat, kOutputStreamID, theSanitizedNewFormat.mSampleRate, theFormatIndex);
 									//change the format.
-									kprintf("IOVideoSampleDevice::setStreamFormat() change the format");
+									kprintf("IOVideoAirDevice::setStreamFormat() change the format");
 									// twiddle the hardware here to change format
 									
 									mCurrentInputStreamFormat = theSanitizedNewFormat;
@@ -849,7 +849,7 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 								}
 								else
 								{
-									kprintf("IOVideoSampleDevice::setStreamFormat() formats are not different");
+									kprintf("IOVideoAirDevice::setStreamFormat() formats are not different");
 								}
 								
 								//	make sure we return that we were successful
@@ -858,7 +858,7 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 						}
 						else
 						{
-							kprintf("IOVideoSampleDevice::setStreamFormat() no supported formats");
+							kprintf("IOVideoAirDevice::setStreamFormat() no supported formats");
 							//	when there are no explicitly supported formats, the stream's format can't be changed
 							//	but we should return a bad format error if the new format is different from the current format
 							if (IOVideoStreamFormatDictionary::isSameSampleFormat(theNewFormat, mCurrentInputStreamFormat))
@@ -882,36 +882,36 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 				if (NULL != theLocalOutputStreamList)
 				{
 					
-					kprintf("IOVideoSampleDevice::setStreamFormat() got output list");
+					kprintf("IOVideoAirDevice::setStreamFormat() got output list");
 					//	get the stream dictionary (this driver only has a single input stream and we already validated the ID as good)
 					OSDictionary* theStreamDictionary = OSDynamicCast(OSDictionary, theLocalOutputStreamList->getObject(0));
 					if (NULL != theStreamDictionary)
 					{
 							//	make sure that the sample format is supported
-						kprintf("IOVideoSampleDevice::setStreamFormat() got stream dictionary");
+						kprintf("IOVideoAirDevice::setStreamFormat() got stream dictionary");
 						OSArray* theSupportedFormats = IOVideoStreamDictionary::copyAvailableFormats(theStreamDictionary);
 						if (NULL != theSupportedFormats)
 						{
 							//	iterate through the supported formats and see if the new one matches any of them
-							kprintf("IOVideoSampleDevice::setStreamFormat() supported format");
+							kprintf("IOVideoAirDevice::setStreamFormat() supported format");
 							IOVideoStreamDescription theSanitizedNewFormat;
 							UInt32 theFormatIndex = 0xFFFFFFFF;
 							UInt32 theNumberSupportedFormats = theSupportedFormats->getCount();
-							kprintf("IOVideoSampleDevice::setStreamFormat() supported format count = %lu", (long unsigned int)theNumberSupportedFormats);
+							kprintf("IOVideoAirDevice::setStreamFormat() supported format count = %lu", (long unsigned int)theNumberSupportedFormats);
 							for(UInt32 theSupportedFormatIndex = 0; (0xFFFFFFFF == theFormatIndex) && (theSupportedFormatIndex < theNumberSupportedFormats); ++theSupportedFormatIndex)
 							{
 								//	get the format dictionary
 								OSDictionary* theFormatDictionary = OSDynamicCast(OSDictionary, theSupportedFormats->getObject(theSupportedFormatIndex));
 								if (NULL != theFormatDictionary)
 								{							
-									kprintf("IOVideoSampleDevice::setStreamFormat() got format dictionary");
+									kprintf("IOVideoAirDevice::setStreamFormat() got format dictionary");
 									IOVideoStreamDescription theSupportedFormat;
 									IOVideoStreamFormatDictionary::getDescription(theFormatDictionary, theSupportedFormat);
 									//	check to see if it was supported
-									kprintf("IOVideoSampleDevice::setStreamFormat() format = %lu", (long unsigned int)theSupportedFormat.mVideoCodecType);
+									kprintf("IOVideoAirDevice::setStreamFormat() format = %lu", (long unsigned int)theSupportedFormat.mVideoCodecType);
 									if (IOVideoStreamFormatDictionary::isSameSampleFormat(theSupportedFormat, theNewFormat))
 									{
-										kprintf("IOVideoSampleDevice::setStreamFormat() found matching format %lu", (long unsigned int)theSupportedFormatIndex);
+										kprintf("IOVideoAirDevice::setStreamFormat() found matching format %lu", (long unsigned int)theSupportedFormatIndex);
 										//	it is, so fill out the new format struct
 										theSanitizedNewFormat = theSupportedFormat;
 										
@@ -928,8 +928,8 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 							if (0xFFFFFFFF != theFormatIndex)
 							{
 								//	but only if the new format is different from the current format
-								kprintf("IOVideoSampleDevice::setStreamFormat() theFormatIndex is %lu", (long unsigned int)theFormatIndex);
-								kprintf("IOVideoSampleDevice::setStreamFormat() sanitized codecFlags = %x currentCodeFlags is %x", (unsigned int)theSanitizedNewFormat.mVideoCodecFlags,(unsigned int)mCurrentOutputStreamFormat.mVideoCodecFlags);
+								kprintf("IOVideoAirDevice::setStreamFormat() theFormatIndex is %lu", (long unsigned int)theFormatIndex);
+								kprintf("IOVideoAirDevice::setStreamFormat() sanitized codecFlags = %x currentCodeFlags is %x", (unsigned int)theSanitizedNewFormat.mVideoCodecFlags,(unsigned int)mCurrentOutputStreamFormat.mVideoCodecFlags);
 								if (!IOVideoStreamFormatDictionary::isSameSampleFormat(theSanitizedNewFormat, mCurrentOutputStreamFormat))
 								{
 									//	This driver is painfully simple, so we will encode the new format into the
@@ -941,7 +941,7 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 									//	represents the new sample format.
 									//requestConfigChange(kIOAudio2UserClientMethodID_ChangeStreamFormat, kOutputStreamID, theSanitizedNewFormat.mSampleRate, theFormatIndex);
 									//change the format.
-									kprintf("IOVideoSampleDevice::setStreamFormat() change the format");
+									kprintf("IOVideoAirDevice::setStreamFormat() change the format");
 									// twiddle the hardware here to change format
 									mCurrentOutputStreamFormat = theSanitizedNewFormat;
 									
@@ -976,13 +976,13 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 											break;
 									}
 									
-									kprintf("IOVideoSampleDevice::setStreamFormat() mTimeInterval = %d",(int)mTimeInterval);
+									kprintf("IOVideoAirDevice::setStreamFormat() mTimeInterval = %d",(int)mTimeInterval);
 									
 									ResetOutputStreams();
 								}
 								else
 								{
-									kprintf("IOVideoSampleDevice::setStreamFormat() formats are not different");
+									kprintf("IOVideoAirDevice::setStreamFormat() formats are not different");
 								}
 								
 								//	make sure we return that we were successful
@@ -991,7 +991,7 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 						}
 						else
 						{
-							kprintf("IOVideoSampleDevice::setStreamFormat() no supported formats");
+							kprintf("IOVideoAirDevice::setStreamFormat() no supported formats");
 							//	when there are no explicitly supported formats, the stream's format can't be changed
 							//	but we should return a bad format error if the new format is different from the current format
 							if (IOVideoStreamFormatDictionary::isSameSampleFormat(theNewFormat, mCurrentOutputStreamFormat))
@@ -1008,9 +1008,9 @@ IOReturn IOVideoSampleDevice::setStreamFormat(UInt32 streamID, const IOVideoStre
 	return kIOReturnSuccess; 
 }
 
-OSDictionary*	IOVideoSampleDevice::createDefaultInputStreamDictionary()
+OSDictionary*	IOVideoAirDevice::createDefaultInputStreamDictionary()
 {
-	kprintf("IOVideoSampleDevice::createDefaultInputStreamDictionary()");
+	kprintf("IOVideoAirDevice::createDefaultInputStreamDictionary()");
 
 	//	This method create an output stream dictionary in it's default state
 	OSDictionary* theAnswer = NULL;
@@ -1062,9 +1062,9 @@ Done:
 	return theAnswer;
 }
 
-OSDictionary*	IOVideoSampleDevice::createDefaultOutputStreamDictionary()
+OSDictionary*	IOVideoAirDevice::createDefaultOutputStreamDictionary()
 {
-	kprintf("IOVideoSampleDevice::createDefaultOutputStreamDictionary()");
+	kprintf("IOVideoAirDevice::createDefaultOutputStreamDictionary()");
 
 	//	This method create an output stream dictionary in it's default state
 	OSDictionary* theAnswer = NULL;
@@ -1205,7 +1205,7 @@ Done:
 	return theAnswer;
 }
 
-bool IOVideoSampleDevice::AddInputStreams()
+bool IOVideoAirDevice::AddInputStreams()
 {
 	int i;
 	IOMemoryDescriptor* descr;
@@ -1218,7 +1218,7 @@ bool IOVideoSampleDevice::AddInputStreams()
 	IOByteCount		theBufferSize;
 	char*			srcBuffer;
 
-	kprintf("IOVideoSampleDevice::AddInputStreams\n");
+	kprintf("IOVideoAirDevice::AddInputStreams\n");
 
 	do
 	{
@@ -1304,7 +1304,7 @@ bool IOVideoSampleDevice::AddInputStreams()
 		
 		_currentBuffer = 0;
 		
-		_outputStream = IOVideoSampleStream::withBuffers(buffers, kIOStreamModeOutput, 0, theInputStream);
+		_outputStream = IOVideoAirStream::withBuffers(buffers, kIOStreamModeOutput, 0, theInputStream);
 		if (!_outputStream)
 			break;
 		
@@ -1338,7 +1338,7 @@ bool IOVideoSampleDevice::AddInputStreams()
 	return false;
 
 }
-bool IOVideoSampleDevice::AddOutputStreams()
+bool IOVideoAirDevice::AddOutputStreams()
 {
 	int i;
 	IOMemoryDescriptor* descr;
@@ -1351,7 +1351,7 @@ bool IOVideoSampleDevice::AddOutputStreams()
 	OSArray*		theOutputStreamList = NULL;
 	IOByteCount		theBufferSize;
 
-	kprintf("IOVideoSampleDevice::AddOutputStreams\n");
+	kprintf("IOVideoAirDevice::AddOutputStreams\n");
 	do
 	{
 		//	create the array that will hold the output streams
@@ -1494,7 +1494,7 @@ bool IOVideoSampleDevice::AddOutputStreams()
 		
 		_currentBuffer = 0;
 		
-		_inputStream = IOVideoSampleStream::withBuffers(buffers, kIOStreamModeInput, 0, theOutputStream);
+		_inputStream = IOVideoAirStream::withBuffers(buffers, kIOStreamModeInput, 0, theOutputStream);
 		if (!_inputStream) break;
 		
 		// This will attach the stream in the registry
@@ -1525,9 +1525,9 @@ bool IOVideoSampleDevice::AddOutputStreams()
 	return false;
 }
 
-bool IOVideoSampleDevice::RemoveInputStreams()
+bool IOVideoAirDevice::RemoveInputStreams()
 {
-	kprintf("IOVideoSampleDevice::RemoveInputStreams\n");
+	kprintf("IOVideoAirDevice::RemoveInputStreams\n");
 	do
 	{
         removeProperty(kIOVideoDeviceKey_InputStreamList);
@@ -1554,9 +1554,9 @@ bool IOVideoSampleDevice::RemoveInputStreams()
 	return false;
 }
 
-bool IOVideoSampleDevice::RemoveOutputStreams()
+bool IOVideoAirDevice::RemoveOutputStreams()
 {
-	kprintf("IOVideoSampleDevice::RemoveOutputStreams\n");
+	kprintf("IOVideoAirDevice::RemoveOutputStreams\n");
 	do
 	{
         removeProperty(kIOVideoDeviceKey_OutputStreamList);
@@ -1585,7 +1585,7 @@ bool IOVideoSampleDevice::RemoveOutputStreams()
 	return false;
 }
 
-bool IOVideoSampleDevice::ResetInputStreams()
+bool IOVideoAirDevice::ResetInputStreams()
 {
 	OSArray* buffers;
 	IOMemoryDescriptor* descr, * controlDescr;
@@ -1688,7 +1688,7 @@ bool IOVideoSampleDevice::ResetInputStreams()
 	return false;
 }
 
-bool IOVideoSampleDevice::ResetOutputStreams()
+bool IOVideoAirDevice::ResetOutputStreams()
 {
 	OSArray* buffers;
 	IOMemoryDescriptor* descr, *controlDescr;
@@ -1844,9 +1844,9 @@ bool IOVideoSampleDevice::ResetOutputStreams()
 //--------------------------------------------------------------------------------------------------------------------
 //	AllocateFrameBuffers
 //--------------------------------------------------------------------------------------------------------------------
-IOReturn IOVideoSampleDevice::AllocateFrameBuffers(size_t size)
+IOReturn IOVideoAirDevice::AllocateFrameBuffers(size_t size)
 {	
-	kprintf("IOVideoSampleDevice::AllocateDataBuffers\n");
+	kprintf("IOVideoAirDevice::AllocateDataBuffers\n");
 	
 	// allocate the memory
 	#if TARGET_CPU_X86
@@ -1865,7 +1865,7 @@ IOReturn IOVideoSampleDevice::AllocateFrameBuffers(size_t size)
 										 
 	if (NULL == mMemDescFrameBuf)
 	{
-		kprintf("IOVideoSampleDevice::AllocateFrameBuffers Unable to allocate memory desc\n");
+		kprintf("IOVideoAirDevice::AllocateFrameBuffers Unable to allocate memory desc\n");
 		return kIOReturnNoMemory;
 	}
 	
@@ -1873,7 +1873,7 @@ IOReturn IOVideoSampleDevice::AllocateFrameBuffers(size_t size)
 	mMemMapFrameBuf = mMemDescFrameBuf->map() ;
 	if (NULL == mMemMapFrameBuf)
 	{
-		kprintf("IOVideoSampleDevice::AllocateFrameBuffers Unable to obtain memory map\n");
+		kprintf("IOVideoAirDevice::AllocateFrameBuffers Unable to obtain memory map\n");
 		return kIOReturnNoMemory;
 	}
 
@@ -1888,9 +1888,9 @@ IOReturn IOVideoSampleDevice::AllocateFrameBuffers(size_t size)
 //--------------------------------------------------------------------------------------------------------------------
 //	AllocateControlBuffers
 //--------------------------------------------------------------------------------------------------------------------
-IOReturn IOVideoSampleDevice::AllocateControlBuffers(size_t size)
+IOReturn IOVideoAirDevice::AllocateControlBuffers(size_t size)
 {	
-	kprintf("IOVideoSampleDevice::AllocateControlBuffers\n");
+	kprintf("IOVideoAirDevice::AllocateControlBuffers\n");
 
 	// allocate the memory
 	#if TARGET_CPU_X86
@@ -1909,7 +1909,7 @@ IOReturn IOVideoSampleDevice::AllocateControlBuffers(size_t size)
 										 
 	if (NULL == mMemDescControlBuf)
 	{
-		kprintf("IOVideoSampleDevice::AllocateControlBuffers Unable to allocate memory desc\n");
+		kprintf("IOVideoAirDevice::AllocateControlBuffers Unable to allocate memory desc\n");
 		return kIOReturnNoMemory;
 	}
 	
@@ -1917,7 +1917,7 @@ IOReturn IOVideoSampleDevice::AllocateControlBuffers(size_t size)
 	mMemMapControlBuf = mMemDescControlBuf->map() ;
 	if (NULL == mMemMapControlBuf)
 	{
-		kprintf("IOVideoSampleDevice::AllocateControlBuffers Unable to obtain memory map\n");
+		kprintf("IOVideoAirDevice::AllocateControlBuffers Unable to obtain memory map\n");
 		return kIOReturnNoMemory;
 	}
 
@@ -1931,17 +1931,17 @@ IOReturn IOVideoSampleDevice::AllocateControlBuffers(size_t size)
 //--------------------------------------------------------------------------------------------------------------------
 //	LoadFrameBuffer
 //--------------------------------------------------------------------------------------------------------------------
-void IOVideoSampleDevice::LoadFrameBuffer(void* buffer, char* src, IOByteCount frameSize, SInt32 number)
+void IOVideoAirDevice::LoadFrameBuffer(void* buffer, char* src, IOByteCount frameSize, SInt32 number)
 {
     memset(buffer, 255, frameSize);
 }
 
-void IOVideoSampleDevice::ZeroControlBuffer(void* buffer, IOByteCount bufSize)
+void IOVideoAirDevice::ZeroControlBuffer(void* buffer, IOByteCount bufSize)
 {
     bzero(buffer,bufSize);	
 }
 
-UInt32 IOVideoSampleDevice::CodecFlagsToFrameRate(UInt32 codecFlags)
+UInt32 IOVideoAirDevice::CodecFlagsToFrameRate(UInt32 codecFlags)
 {
     UInt32 frameRate= kTimerIntervalNTSC;
     
@@ -1988,7 +1988,7 @@ UInt32 IOVideoSampleDevice::CodecFlagsToFrameRate(UInt32 codecFlags)
         }
             break;
     }
-    kprintf("IOVideoSampleDevice::CodecFlagsToFrameRate rate = %d\n",(int)frameRate);
+    kprintf("IOVideoAirDevice::CodecFlagsToFrameRate rate = %d\n",(int)frameRate);
     return frameRate; 
 }
 

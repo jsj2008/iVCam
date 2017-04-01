@@ -55,12 +55,12 @@
 #include <IOKit/usb/IOUSBLog.h>
 
 #define super IOVideoStream
-OSDefineMetaClassAndStructors( IOVideoSampleStream, IOVideoStream)
+OSDefineMetaClassAndStructors( IOVideoAirStream, IOVideoStream)
 
-IOVideoSampleStream* IOVideoSampleStream::withBuffers(OSArray* buffers, IOStreamMode mode, IOItemCount queueLength, OSDictionary* properties)
+IOVideoAirStream* IOVideoAirStream::withBuffers(OSArray* buffers, IOStreamMode mode, IOItemCount queueLength, OSDictionary* properties)
 {
-    USBLog(1, "IOVideoSampleStream::withBuffers\n");
-    IOVideoSampleStream* stream = new IOVideoSampleStream;
+    USBLog(1, "IOVideoAirStream::withBuffers\n");
+    IOVideoAirStream* stream = new IOVideoAirStream;
     
     if (stream)
 	{
@@ -73,9 +73,9 @@ IOVideoSampleStream* IOVideoSampleStream::withBuffers(OSArray* buffers, IOStream
     return NULL;
 }
 
-bool IOVideoSampleStream::initWithBuffers(OSArray* buffers, IOStreamMode mode, IOItemCount queueLength, OSDictionary* properties)
+bool IOVideoAirStream::initWithBuffers(OSArray* buffers, IOStreamMode mode, IOItemCount queueLength, OSDictionary* properties)
 {
-    USBLog(1, "IOVideoSampleStream::initWithBuffers\n");
+    USBLog(1, "IOVideoAirStream::initWithBuffers\n");
 	
 	OSDictionary* props = (OSDictionary*) properties->copyCollection();
 	
@@ -101,9 +101,9 @@ bool IOVideoSampleStream::initWithBuffers(OSArray* buffers, IOStreamMode mode, I
     return true;
 }
 
-void IOVideoSampleStream::free(void)
+void IOVideoAirStream::free(void)
 {
-    USBLog(1, "IOVideoSampleStream::free\n");
+    USBLog(1, "IOVideoAirStream::free\n");
 	
 	if (_freeBuffers)
 	{
@@ -120,9 +120,9 @@ void IOVideoSampleStream::free(void)
 	super::free();
 }
 
-bool IOVideoSampleStream::handleOpen(IOService* forClient, IOOptionBits options, void* arg)
+bool IOVideoAirStream::handleOpen(IOService* forClient, IOOptionBits options, void* arg)
 {
-    USBLog(1, "IOVideoSampleStream::handleOpen\n");
+    USBLog(1, "IOVideoAirStream::handleOpen\n");
 
 	if (!super::handleOpen(forClient, options, arg))
 	{
@@ -138,9 +138,9 @@ bool IOVideoSampleStream::handleOpen(IOService* forClient, IOOptionBits options,
 	return true;
 }
 
-void IOVideoSampleStream::handleClose(IOService* forClient, IOOptionBits options)
+void IOVideoAirStream::handleClose(IOService* forClient, IOOptionBits options)
 {
-    USBLog(1, "IOVideoSampleStream::handleClose\n");
+    USBLog(1, "IOVideoAirStream::handleClose\n");
 	
 	super::handleClose(forClient, options);
 	
@@ -150,9 +150,9 @@ void IOVideoSampleStream::handleClose(IOService* forClient, IOOptionBits options
 	_freeBuffers->merge(_buffers);
 }
 
-void IOVideoSampleStream::inputCallback(UInt32 token)
+void IOVideoAirStream::inputCallback(UInt32 token)
 {
-    USBLog(1, "IOVideoSampleStream::inputCallback(%d)\n", (int)token);
+    USBLog(1, "IOVideoAirStream::inputCallback(%d)\n", (int)token);
 
 	IOReturn result;
 	if (mStreamMode == kIOStreamModeInput)
@@ -166,7 +166,7 @@ void IOVideoSampleStream::inputCallback(UInt32 token)
 				IOStreamBuffer *buf = getBufferWithID(entry.bufferID);
 				if (NULL == buf)
 				{
-					USBLog(1, "IOVideoSampleStream::inputCallback Invalid Buffer ID %d\n", (int)entry.bufferID);
+					USBLog(1, "IOVideoAirStream::inputCallback Invalid Buffer ID %d\n", (int)entry.bufferID);
 					break;
 				}
 				
@@ -176,15 +176,15 @@ void IOVideoSampleStream::inputCallback(UInt32 token)
 	}
 }
 
-void IOVideoSampleStream::inputSyncCallback(UInt32 token)
+void IOVideoAirStream::inputSyncCallback(UInt32 token)
 {
-    USBLog(1, "IOVideoSampleStream::inputSyncCallback(%d)\n", (int)token);
+    USBLog(1, "IOVideoAirStream::inputSyncCallback(%d)\n", (int)token);
 }
 
-IOStreamBuffer* IOVideoSampleStream::getFilledBuffer()
+IOStreamBuffer* IOVideoAirStream::getFilledBuffer()
 {
 	IOStreamBuffer* streamBuffer = OSDynamicCast(IOStreamBuffer, _filledBuffers->getObject(0));
-	USBLog(1, "IOVideoSampleStream::getFilledBuffer buffer=%llx", (long long unsigned int)streamBuffer);
+	USBLog(1, "IOVideoAirStream::getFilledBuffer buffer=%llx", (long long unsigned int)streamBuffer);
 	
 	if (NULL != streamBuffer)
 		_filledBuffers->removeObject (0);
@@ -192,23 +192,23 @@ IOStreamBuffer* IOVideoSampleStream::getFilledBuffer()
 	return streamBuffer;
 }
 
-void IOVideoSampleStream::returnBufferToFreeQueue(IOStreamBuffer* buffer)
+void IOVideoAirStream::returnBufferToFreeQueue(IOStreamBuffer* buffer)
 {
 	if (NULL == buffer)
 	{
-		USBLog(1, "IOVideoSampleStream::returnBufferToFreeQueue - NULL == returnBufferToFreeQueue\n");
+		USBLog(1, "IOVideoAirStream::returnBufferToFreeQueue - NULL == returnBufferToFreeQueue\n");
 		return;
 	}
 	
 	_freeBuffers->setObject(buffer);
 }
 
-void IOVideoSampleStream::postFreeInputBuffer(UInt64 vbiTime, UInt64 outputTime, UInt64 totalFrameCount, UInt64 droppedFrameCount,UInt64 lastDisplayedSequenceNumber)
+void IOVideoAirStream::postFreeInputBuffer(UInt64 vbiTime, UInt64 outputTime, UInt64 totalFrameCount, UInt64 droppedFrameCount,UInt64 lastDisplayedSequenceNumber)
 {
 	IOStreamBuffer* buf = OSDynamicCast(IOStreamBuffer, _freeBuffers->getObject(0));
 	if (NULL == buf)
 	{
-		USBLog(1, "IOVideoSampleStream::postFreeInputBuffer - no free buffers\n");
+		USBLog(1, "IOVideoAirStream::postFreeInputBuffer - no free buffers\n");
 		if ((getOutputQueue())->entryCount > 0)
 		{
 			//all the free buffers are in the queue already so just alert the host
@@ -222,9 +222,9 @@ void IOVideoSampleStream::postFreeInputBuffer(UInt64 vbiTime, UInt64 outputTime,
 	IOMemoryDescriptor *ctrlDescriptor = OSDynamicCast(IOMemoryDescriptor, buf->getControlBuffer());
 	if (NULL != ctrlDescriptor)
 	{
-		USBLog(1, "IOVideoSampleStream got control buffer descriptor\n");
+		USBLog(1, "IOVideoAirStream got control buffer descriptor\n");
 		SampleVideoDeviceControlBuffer theBuffControl, readBackControl;
-		USBLog(1, "IOVideoSampleStream::postFreeInputBuffer - passed in vbiTime = %lld outputTime = %lld framecount = %lld droppedframecount = %lld lastDisplayedSequenceNumber = %lld  \n", vbiTime, outputTime, totalFrameCount, droppedFrameCount, lastDisplayedSequenceNumber);
+		USBLog(1, "IOVideoAirStream::postFreeInputBuffer - passed in vbiTime = %lld outputTime = %lld framecount = %lld droppedframecount = %lld lastDisplayedSequenceNumber = %lld  \n", vbiTime, outputTime, totalFrameCount, droppedFrameCount, lastDisplayedSequenceNumber);
 
 		theBuffControl.vbiTime = vbiTime; 
 		theBuffControl.outputTime = outputTime; 
@@ -238,21 +238,21 @@ void IOVideoSampleStream::postFreeInputBuffer(UInt64 vbiTime, UInt64 outputTime,
 		
         ctrlDescriptor->writeBytes(0, &theBuffControl, buf->getControlBuffer()->getLength());
 		ctrlDescriptor->readBytes(0, &readBackControl, buf->getControlBuffer()->getLength());
-		USBLog(1, "IOVideoSampleStream::postFreeInputBuffer - control buffer info vbiTime = %lld outputTime = %lld framecount = %lld droppedframecount = %lld  sequencenumber = %lld\n", readBackControl.vbiTime, readBackControl.outputTime, readBackControl.totalFrameCount, readBackControl.droppedFrameCount,readBackControl.sequenceNumber);
+		USBLog(1, "IOVideoAirStream::postFreeInputBuffer - control buffer info vbiTime = %lld outputTime = %lld framecount = %lld droppedframecount = %lld  sequencenumber = %lld\n", readBackControl.vbiTime, readBackControl.outputTime, readBackControl.totalFrameCount, readBackControl.droppedFrameCount,readBackControl.sequenceNumber);
 		(void) ctrlDescriptor->complete();
 	}
 		
 	IOReturn result = enqueueOutputBuffer(buf, 0, buf->getDataBuffer()->getLength(), 0, buf->getControlBuffer()->getLength()); 
 	if (result != kIOReturnSuccess)
 	{
-		USBLog(1, "IOVideoSampleStream::postFreeInputBuffer help enqueueOutputBuffer failed! (%x)\n", result);
+		USBLog(1, "IOVideoAirStream::postFreeInputBuffer help enqueueOutputBuffer failed! (%x)\n", result);
 		return;
 	}
 	
 	result = sendOutputNotification();
 	if (result != kIOReturnSuccess)
 	{
-		USBLog(1, "IOVideoSampleStream::postFreeInputBuffer help sendOutputNotification failed! (%x)\n", result);
+		USBLog(1, "IOVideoAirStream::postFreeInputBuffer help sendOutputNotification failed! (%x)\n", result);
 		return;
 	}
 }
