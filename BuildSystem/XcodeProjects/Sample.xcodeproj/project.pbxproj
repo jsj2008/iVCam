@@ -1644,7 +1644,7 @@
 					"$(value)",
 					"-DkCMIOModuleKey=\\\"CMIO_DAL_PlugIn_Sample.Debug\\\"",
 				);
-				PRODUCT_NAME = Sample;
+				PRODUCT_NAME = Insta360VCam;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Release;
@@ -1797,7 +1797,7 @@
 					"$(value)",
 					"-DkCMIOModuleKey=\\\"CMIO_DAL_PlugIn_Sample.Debug\\\"",
 				);
-				PRODUCT_NAME = Sample;
+				PRODUCT_NAME = Insta360VCam;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Debug;
