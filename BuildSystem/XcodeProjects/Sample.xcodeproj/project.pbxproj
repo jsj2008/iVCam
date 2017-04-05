@@ -1616,6 +1616,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXPORTED_SYMBOLS_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/PlugIn/Sample.exp";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1655,6 +1656,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"ARCHS[sdk=macosx10.7]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(value)",
@@ -1773,6 +1775,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXPORTED_SYMBOLS_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/PlugIn/Sample.exp";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1808,6 +1811,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"ARCHS[sdk=macosx10.7]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(value)",
