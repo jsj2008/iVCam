@@ -988,9 +988,17 @@ namespace CMIO { namespace DP { namespace Sample
                     
                     if (mIsCameraAttached)
                     {
-                        mMediaPipe->Cancel();
                         mIsCameraAttached = false;
+                        
+                        mMediaPipe->OnError();
+                        if (mStreamThread.joinable())
+                        {
+                            mStreamThread.join();
+                        }
+                        mMediaPipe = nullptr;
+                        
                         mAtomCamera->close();
+                        mAtomCamera = nullptr;
                     }
                     
                     std::this_thread::sleep_until(nextCheckTime);
@@ -998,12 +1006,12 @@ namespace CMIO { namespace DP { namespace Sample
                 }
                 else
                 {
-                    LOGINFO("Failed to get uvc list.");
+                    LOGERR("Failed to get uvc list.");
                     break;
                 }
             }
             
-            if (!mIsCameraAttached)
+            if (!mIsCameraAttached && numDevs >= 0)
             {
                 LOGINFO("Prepare to open camera...");
                 mAtomCamera = std::make_shared<AtomCamera>();
@@ -1024,7 +1032,6 @@ namespace CMIO { namespace DP { namespace Sample
                         
                         // Start the thread to read frame from device.
                         mStreamThread = std::thread(&Stream::StreamThread, this);
-                        mStreamThread.detach();
                     }
                     else
                     {
@@ -1038,9 +1045,14 @@ namespace CMIO { namespace DP { namespace Sample
         
         if (mMediaPipe != nullptr)
         {
-            mMediaPipe->Cancel();
+            mMediaPipe->OnError();
         }
         
+        if (mStreamThread.joinable())
+        {
+            mStreamThread.join();
+        }
+
         if (mAtomCamera != nullptr)
         {
             mAtomCamera->close();
