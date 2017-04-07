@@ -970,6 +970,8 @@ namespace CMIO { namespace DP { namespace Sample
         int retv = -1;
         
         std::chrono::steady_clock::time_point nextCheckTime;
+        // mShouldTerminate indicate that the plugin instance is destroyed.
+        // Then all children threads of the program should terminate.
         while(!mShouldTerminate)
         {
             nextCheckTime = std::chrono::steady_clock::now() + std::chrono::seconds(1);
@@ -986,6 +988,8 @@ namespace CMIO { namespace DP { namespace Sample
                         mFrame = nullptr;
                     }
                     
+                    // The camera is removed and the streaming thread
+                    // should be terminate to release resources.
                     if (mIsCameraAttached)
                     {
                         mIsCameraAttached = false;
@@ -1011,6 +1015,8 @@ namespace CMIO { namespace DP { namespace Sample
                 }
             }
             
+            // The hot plugging detection thread detects that the camera is attached.
+            // We then prepare to open the camera and start a child thread to convey video frames.
             if (!mIsCameraAttached && numDevs >= 0)
             {
                 LOGINFO("Prepare to open camera...");
