@@ -156,7 +156,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						{
 							case kARGB_1472x736:
                             {
-                                mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_32ARGB, formatWidth, formatHeight));
+                                mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_32BGRA, formatWidth, formatHeight));
                                 mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
                             }
 								break;
