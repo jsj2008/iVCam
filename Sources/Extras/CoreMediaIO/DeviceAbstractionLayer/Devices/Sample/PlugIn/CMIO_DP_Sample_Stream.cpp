@@ -908,8 +908,8 @@ namespace CMIO { namespace DP { namespace Sample
 					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 v210"));
 					break;
                     
-				case kCMPixelFormat_32ARGB:
-					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - 32ARGB"));
+				case kCMPixelFormat_32BGRA:
+					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - 32BGRA"));
 					break; 
                     
 				default:
@@ -964,9 +964,7 @@ namespace CMIO { namespace DP { namespace Sample
     void Stream::HotPlugDetection()
     {
         uvc_context_t *mUVCContext = nullptr;
-        
         uvc_init(NULL ,&mUVCContext, NULL);
-        uvc_set_debuglog(mUVCContext, (char *)"uvc", 0);
         int retv = -1;
         
         std::chrono::steady_clock::time_point nextCheckTime;
@@ -982,6 +980,7 @@ namespace CMIO { namespace DP { namespace Sample
             {
                 if(retv == UVC_ERROR_NO_DEVICE)
                 {
+                    LOGINFO("No device found, prepare to release resource.");
                     if (mFrame != nullptr)
                     {
                         delete [] mFrame;
@@ -994,7 +993,12 @@ namespace CMIO { namespace DP { namespace Sample
                     {
                         mIsCameraAttached = false;
                         
-                        mMediaPipe->OnError();
+                        if (mMediaPipe != nullptr)
+                        {
+                            mMediaPipe->Cancel();
+                            mMediaPipe->OnEnd();
+                        }
+                        
                         if (mStreamThread.joinable())
                         {
                             mStreamThread.join();
@@ -1051,7 +1055,8 @@ namespace CMIO { namespace DP { namespace Sample
         
         if (mMediaPipe != nullptr)
         {
-            mMediaPipe->OnError();
+            mMediaPipe->Cancel();
+            mMediaPipe->OnEnd();
         }
         
         if (mStreamThread.joinable())
@@ -1072,14 +1077,12 @@ namespace CMIO { namespace DP { namespace Sample
         mMediaPipe = std::make_shared<ins::MediaPipe>();
         mRawFrameSrc = std::make_shared<ins::RawFrameSrc>(mAtomCamera, FRAME_WIDTH, FRAME_HEIGHT);
         mDecoderFilter = std::make_shared<ins::DecodeFilter>();
-        mScaleBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_RGBA, SWS_FAST_BILINEAR);
+        mScaleBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_BGRA, SWS_FAST_BILINEAR);
         mBlenderFilter = std::make_shared<ins::BlenderFilter>(FRAME_WIDTH, FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, mOffset);
-        mScaleAfterBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_ARGB, SWS_FAST_BILINEAR);
         mBlenderSink = std::make_shared<ins::BlenderSink>(mFrame);
         mRawFrameSrc->set_video_filter(mDecoderFilter)
                     ->set_next_filter(mScaleBeforeBlend)
-                    ->set_next_filter(mBlenderFilter) 
-                    ->set_next_filter(mScaleAfterBlend)
+                    ->set_next_filter(mBlenderFilter)
                     ->set_next_filter(mBlenderSink);
         if (!mRawFrameSrc->Prepare())
         {

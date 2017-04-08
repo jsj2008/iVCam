@@ -8,7 +8,7 @@
 #include "log.h"
 #include <chrono>
 #include <stdlib.h>
-#include <sys/types.h>
+#include <sys/types.h> 
 
 using namespace std;
 using namespace chrono;
@@ -28,8 +28,6 @@ int AtomCamera::open(StreamFormat format, int width, int height, int fps, int bi
         LOGINFO("UVC open error: %s", uvc_strerror(res));
         goto error;
     }
-
-    LOGINFO("UVC Device opened");
 
     mStreamCtrl = (uvc_stream_ctrl_t *)malloc(sizeof(*mStreamCtrl));
     res = uvc_get_stream_ctrl_format_size(
@@ -67,6 +65,8 @@ int AtomCamera::open(StreamFormat format, int width, int height, int fps, int bi
         frame->size(),
         (int)frame->data()[0], (int)frame->data()[1], (int)frame->data()[2], (int)frame->data()[3],
         (int)frame->data()[4], (int)frame->data()[5], (int)frame->data()[6], (int)frame->data()[7]);
+    
+    LOGINFO("UVC Device opened");
     
     return 0;
 
