@@ -296,7 +296,6 @@ namespace CMIO { namespace DP { namespace Sample
         std::shared_ptr<ins::DecodeFilter>         mDecoderFilter;
         std::shared_ptr<ins::ScaleFilter>          mScaleBeforeBlend;
         std::shared_ptr<ins::BlenderFilter>        mBlenderFilter;
-        std::shared_ptr<ins::ScaleFilter>          mScaleAfterBlend;
         std::shared_ptr<ins::BlenderSink>          mBlenderSink;
 	};
 }}}

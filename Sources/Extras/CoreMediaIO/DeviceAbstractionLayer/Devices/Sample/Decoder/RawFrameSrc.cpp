@@ -47,7 +47,6 @@ namespace ins {
         {
             if (mCamera->isClosed())
             {
-                Cancel();
                 continue;
             }
             ret = mCamera->readFrame(&frame);

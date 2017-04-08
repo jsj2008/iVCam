@@ -83,7 +83,6 @@ public:
   void Cancel() {
     for (auto &src : sources_) {
       src->Cancel();
-      src->Close();
     }
   }
 
