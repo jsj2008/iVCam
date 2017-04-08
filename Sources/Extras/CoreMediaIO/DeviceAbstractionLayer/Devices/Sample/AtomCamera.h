@@ -44,7 +44,7 @@ private:
 
 private:
     AtomCamera(const AtomCamera &) = delete;
-    AtomCamera &operator=(const AtomCamera &) = delete;
+    AtomCamera &operator=(const AtomCamera &) = delete; 
 };
 
 

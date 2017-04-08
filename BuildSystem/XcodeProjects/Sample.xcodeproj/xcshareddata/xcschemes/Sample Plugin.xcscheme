@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E42AA5540E073EEC000C4D64"
-               BuildableName = "Sample.plugin"
+               BuildableName = "Insta360VCam.plugin"
                BlueprintName = "Sample Plugin"
                ReferencedContainer = "container:Sample.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E42AA5540E073EEC000C4D64"
-            BuildableName = "Sample.plugin"
+            BuildableName = "Insta360VCam.plugin"
             BlueprintName = "Sample Plugin"
             ReferencedContainer = "container:Sample.xcodeproj">
          </BuildableReference>

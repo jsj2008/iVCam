@@ -12,7 +12,6 @@
 		143FD3691379AE8000F53945 /* libobjc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E4857F2510C8445C008FE5C2 /* libobjc.dylib */; };
 		143FD36A1379AF2A00F53945 /* CMIO_IOKA_NotificationPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14EE83800A257AF600095EDC /* CMIO_IOKA_NotificationPort.cpp */; };
 		143FD36B1379B1E900F53945 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EEB3960CD0434200ADEEEF /* CoreVideo.framework */; };
-		14A927581549E63000AF3DAB /* com.apple.cmio.DPA.Sample.plist in Copy com.apple.cmio.DPA.Sample.plist to /Library/LaunchDaemons */ = {isa = PBXBuildFile; fileRef = 14A927561549E5E500AF3DAB /* com.apple.cmio.DPA.Sample.plist */; };
 		14C6D76E11AB20D700E54D26 /* IOVideoSampleDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14F1EAF011A7375400B28A43 /* IOVideoSampleDevice.cpp */; };
 		14C6D76F11AB20D900E54D26 /* IOVideoSampleStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14F1EAF411A7375400B28A43 /* IOVideoSampleStream.cpp */; };
 		7206D01514633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7206D01314633F5B00CAE772 /* CMIO_DP_Property_ScheduledOutputNotificationProc.cpp */; };
@@ -58,6 +57,7 @@
 		7BCC92DC1E7144C60063E5BA /* libcudart.7.5.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7BCC92DD1E7144C60063E5BA /* libUniversalBlender.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7BCC92DE1E7144C60063E5BA /* libunrollmap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7BCC92D61E71447E0063E5BA /* libunrollmap.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7BDB0C401E94D43200A33BE9 /* com.insta360.cmio.DPA.Assistant.plist in Copy com.apple.cmio.DPA.Sample.plist to /Library/LaunchDaemons */ = {isa = PBXBuildFile; fileRef = 7BDB0C3E1E94D41400A33BE9 /* com.insta360.cmio.DPA.Assistant.plist */; };
 		E42920F810B75DB700EDA003 /* CMIO_DP_Property_Deck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E42920F610B75DB700EDA003 /* CMIO_DP_Property_Deck.cpp */; };
 		E42920F910B75DB700EDA003 /* CMIO_DP_Property_Deck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E42920F610B75DB700EDA003 /* CMIO_DP_Property_Deck.cpp */; };
 		E42AA55A0E073EEC000C4D64 /* CMIODebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEFCDB6509E703CE00413E85 /* CMIODebugMacros.cpp */; };
@@ -184,7 +184,7 @@
 			dstPath = /Library/LaunchDaemons;
 			dstSubfolderSpec = 0;
 			files = (
-				14A927581549E63000AF3DAB /* com.apple.cmio.DPA.Sample.plist in Copy com.apple.cmio.DPA.Sample.plist to /Library/LaunchDaemons */,
+				7BDB0C401E94D43200A33BE9 /* com.insta360.cmio.DPA.Assistant.plist in Copy com.apple.cmio.DPA.Sample.plist to /Library/LaunchDaemons */,
 			);
 			name = "Copy com.apple.cmio.DPA.Sample.plist to /Library/LaunchDaemons";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,7 +238,6 @@
 		149D29D311AAFD5600DF1946 /* IOVideoSample.kext */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IOVideoSample.kext; sourceTree = BUILT_PRODUCTS_DIR; };
 		14A4C1D10A1D71740086C951 /* CMIO_PropertyAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_PropertyAddress.h; sourceTree = "<group>"; };
 		14A5FDDB146DC66300D7119A /* CMIO_IOKA_Iterator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMIO_IOKA_Iterator.h; sourceTree = "<group>"; };
-		14A927561549E5E500AF3DAB /* com.apple.cmio.DPA.Sample.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.apple.cmio.DPA.Sample.plist; sourceTree = "<group>"; };
 		14AB16EB0AFF79F300FB0E7F /* CMIO_IOSA_Assistance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIO_IOSA_Assistance.cpp; sourceTree = "<group>"; };
 		14AB16EC0AFF79F300FB0E7F /* CMIO_IOSA_Assistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_IOSA_Assistance.h; sourceTree = "<group>"; };
 		14B76D9611C949C8008D4060 /* CMIO_CMA_Time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_CMA_Time.h; sourceTree = "<group>"; };
@@ -506,6 +505,7 @@
 		7BCC92D41E71447E0063E5BA /* libcudart.7.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcudart.7.5.dylib; path = ../Lib/libcudart.7.5.dylib; sourceTree = "<group>"; };
 		7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUniversalBlender.dylib; path = ../Lib/libUniversalBlender.dylib; sourceTree = "<group>"; };
 		7BCC92D61E71447E0063E5BA /* libunrollmap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunrollmap.dylib; path = ../Lib/libunrollmap.dylib; sourceTree = "<group>"; };
+		7BDB0C3E1E94D41400A33BE9 /* com.insta360.cmio.DPA.Assistant.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.insta360.cmio.DPA.Assistant.plist; sourceTree = "<group>"; };
 		DE69900A0DBE99B60077AED4 /* CoreMediaIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMediaIO.framework; path = /System/Library/Frameworks/CoreMediaIO.framework; sourceTree = "<absolute>"; };
 		DEFCDB6509E703CE00413E85 /* CMIODebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIODebugMacros.cpp; sourceTree = "<group>"; };
 		DEFCDB6609E703CE00413E85 /* CMIODebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIODebugMacros.h; sourceTree = "<group>"; };
@@ -515,7 +515,7 @@
 		DEFD29DD0A6D8AC70030D7C0 /* CMIO_DP_Property_Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_DP_Property_Clock.h; sourceTree = "<group>"; };
 		E42920F610B75DB700EDA003 /* CMIO_DP_Property_Deck.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIO_DP_Property_Deck.cpp; sourceTree = "<group>"; };
 		E42920F710B75DB700EDA003 /* CMIO_DP_Property_Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_DP_Property_Deck.h; sourceTree = "<group>"; };
-		E42AA5940E073EEC000C4D64 /* Sample.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sample.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		E42AA5940E073EEC000C4D64 /* Sample.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Sample.plugin; path = Insta360VCam.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42AA5BB0E073EFB000C4D64 /* SampleAssistant */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SampleAssistant; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42AA5C10E07410B000C4D64 /* CMIO_DP_Sample_Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIO_DP_Sample_Device.cpp; sourceTree = "<group>"; };
 		E42AA5C20E07410B000C4D64 /* CMIO_DP_Sample_Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIO_DP_Sample_Device.h; sourceTree = "<group>"; };
@@ -1197,7 +1197,7 @@
 		E42AA5D30E07412E000C4D64 /* Assistant */ = {
 			isa = PBXGroup;
 			children = (
-				14A927561549E5E500AF3DAB /* com.apple.cmio.DPA.Sample.plist */,
+				7BDB0C3E1E94D41400A33BE9 /* com.insta360.cmio.DPA.Assistant.plist */,
 				E42AA5D90E0741B7000C4D64 /* CMIO_DPA_Sample_Shared.h */,
 				E42AA5DA0E0741B7000C4D64 /* Server */,
 				E42AA5D40E0741B7000C4D64 /* Client */,
@@ -1616,6 +1616,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXPORTED_SYMBOLS_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/PlugIn/Sample.exp";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1644,7 +1645,7 @@
 					"$(value)",
 					"-DkCMIOModuleKey=\\\"CMIO_DAL_PlugIn_Sample.Debug\\\"",
 				);
-				PRODUCT_NAME = Sample;
+				PRODUCT_NAME = Insta360VCam;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Release;
@@ -1655,6 +1656,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"ARCHS[sdk=macosx10.7]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(value)",
@@ -1664,7 +1666,7 @@
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DERIVED_FILES_DIR)/$(CURRENT_ARCH)\"";
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
-				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources";
+				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources";
 				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
 				OTHER_CFLAGS = (
 					"$(value)",
@@ -1773,6 +1775,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				COMBINE_HIDPI_IMAGES = YES;
 				EXPORTED_SYMBOLS_FILE = "$(SRCROOT)/../../Sources/Extras/CoreMediaIO/DeviceAbstractionLayer/Devices/Sample/PlugIn/Sample.exp";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1797,7 +1800,7 @@
 					"$(value)",
 					"-DkCMIOModuleKey=\\\"CMIO_DAL_PlugIn_Sample.Debug\\\"",
 				);
-				PRODUCT_NAME = Sample;
+				PRODUCT_NAME = Insta360VCam;
 				WRAPPER_EXTENSION = plugin;
 			};
 			name = Debug;
@@ -1808,6 +1811,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"ARCHS[sdk=macosx10.7]" = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(value)",
@@ -1817,7 +1821,7 @@
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DERIVED_FILES_DIR)/$(CURRENT_ARCH)\"";
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
-				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources";
+				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources";
 				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
 				OTHER_CFLAGS = (
 					"$(value)",

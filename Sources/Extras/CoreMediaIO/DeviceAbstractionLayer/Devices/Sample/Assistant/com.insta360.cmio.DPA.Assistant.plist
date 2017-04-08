@@ -6,7 +6,7 @@
 	<string>com.apple.cmio.DPA.Sample</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/SampleAssistant</string>
+		<string>/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources/SampleAssistant</string>
 	</array>
 	<key>MachServices</key>
 	<dict>

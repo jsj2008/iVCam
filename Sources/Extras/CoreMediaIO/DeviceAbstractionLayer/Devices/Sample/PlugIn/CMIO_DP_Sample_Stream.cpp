@@ -163,7 +163,7 @@ namespace CMIO { namespace DP { namespace Sample
         mLogo = new uint8_t[kARGB_1472X736_FrameSize];
         if (mLogo)
         {
-            FILE* logo = fopen("/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/logo", "rb");
+            FILE* logo = fopen("/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources/logo", "rb");
             fread(mLogo, 1, kARGB_1472X736_FrameSize, logo);
             fclose(logo);
         }
@@ -908,8 +908,8 @@ namespace CMIO { namespace DP { namespace Sample
 					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - CCIR-601 v210"));
 					break;
                     
-				case kCMPixelFormat_32ARGB:
-					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - 32ARGB"));
+				case kCMPixelFormat_32BGRA:
+					extensions.AddCFType(kCMFormatDescriptionExtension_FormatName, CFSTR("Component Video - 32BGRA"));
 					break; 
                     
 				default:
@@ -964,12 +964,12 @@ namespace CMIO { namespace DP { namespace Sample
     void Stream::HotPlugDetection()
     {
         uvc_context_t *mUVCContext = nullptr;
-        
         uvc_init(NULL ,&mUVCContext, NULL);
-        uvc_set_debuglog(mUVCContext, (char *)"uvc", 0);
         int retv = -1;
         
         std::chrono::steady_clock::time_point nextCheckTime;
+        // mShouldTerminate indicate that the plugin instance is destroyed.
+        // Then all children threads of the program should terminate.
         while(!mShouldTerminate)
         {
             nextCheckTime = std::chrono::steady_clock::now() + std::chrono::seconds(1);
@@ -980,17 +980,33 @@ namespace CMIO { namespace DP { namespace Sample
             {
                 if(retv == UVC_ERROR_NO_DEVICE)
                 {
+                    LOGINFO("No device found, prepare to release resource.");
                     if (mFrame != nullptr)
                     {
                         delete [] mFrame;
                         mFrame = nullptr;
                     }
                     
+                    // The camera is removed and the streaming thread
+                    // should be terminate to release resources.
                     if (mIsCameraAttached)
                     {
-                        mMediaPipe->Cancel();
                         mIsCameraAttached = false;
+                        
+                        if (mMediaPipe != nullptr)
+                        {
+                            mMediaPipe->Cancel();
+                            mMediaPipe->OnEnd();
+                        }
+                        
+                        if (mStreamThread.joinable())
+                        {
+                            mStreamThread.join();
+                        }
+                        mMediaPipe = nullptr;
+                        
                         mAtomCamera->close();
+                        mAtomCamera = nullptr;
                     }
                     
                     std::this_thread::sleep_until(nextCheckTime);
@@ -998,12 +1014,14 @@ namespace CMIO { namespace DP { namespace Sample
                 }
                 else
                 {
-                    LOGINFO("Failed to get uvc list.");
+                    LOGERR("Failed to get uvc list.");
                     break;
                 }
             }
             
-            if (!mIsCameraAttached)
+            // The hot plugging detection thread detects that the camera is attached.
+            // We then prepare to open the camera and start a child thread to convey video frames.
+            if (!mIsCameraAttached && numDevs >= 0)
             {
                 LOGINFO("Prepare to open camera...");
                 mAtomCamera = std::make_shared<AtomCamera>();
@@ -1024,7 +1042,6 @@ namespace CMIO { namespace DP { namespace Sample
                         
                         // Start the thread to read frame from device.
                         mStreamThread = std::thread(&Stream::StreamThread, this);
-                        mStreamThread.detach();
                     }
                     else
                     {
@@ -1039,8 +1056,14 @@ namespace CMIO { namespace DP { namespace Sample
         if (mMediaPipe != nullptr)
         {
             mMediaPipe->Cancel();
+            mMediaPipe->OnEnd();
         }
         
+        if (mStreamThread.joinable())
+        {
+            mStreamThread.join();
+        }
+
         if (mAtomCamera != nullptr)
         {
             mAtomCamera->close();
@@ -1054,14 +1077,12 @@ namespace CMIO { namespace DP { namespace Sample
         mMediaPipe = std::make_shared<ins::MediaPipe>();
         mRawFrameSrc = std::make_shared<ins::RawFrameSrc>(mAtomCamera, FRAME_WIDTH, FRAME_HEIGHT);
         mDecoderFilter = std::make_shared<ins::DecodeFilter>();
-        mScaleBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_RGBA, SWS_FAST_BILINEAR);
+        mScaleBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_BGRA, SWS_FAST_BILINEAR);
         mBlenderFilter = std::make_shared<ins::BlenderFilter>(FRAME_WIDTH, FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, mOffset);
-        mScaleAfterBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_ARGB, SWS_FAST_BILINEAR);
         mBlenderSink = std::make_shared<ins::BlenderSink>(mFrame);
         mRawFrameSrc->set_video_filter(mDecoderFilter)
                     ->set_next_filter(mScaleBeforeBlend)
-                    ->set_next_filter(mBlenderFilter) 
-                    ->set_next_filter(mScaleAfterBlend)
+                    ->set_next_filter(mBlenderFilter)
                     ->set_next_filter(mBlenderSink);
         if (!mRawFrameSrc->Prepare())
         {
