@@ -91,14 +91,13 @@ extern "C"
 			// plist is missing (as would be the case for most debugging efforts) attempt to register the SampleAssistant now.  It will fail gracefully if allready registered.
 			mach_port_t assistantServicePort;		
 			name_t assistantServiceName = "com.apple.cmio.DPA.Sample";
-            LOGINFO("MARKER");
 			kern_return_t err = bootstrap_look_up(bootstrap_port, assistantServiceName, &assistantServicePort);
 			if (BOOTSTRAP_SUCCESS != err)
 			{
 				// Create an URL to SampleAssistant that resides at "/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/SampleAssistant" 
 				CACFURL assistantURL(CFURLCreateWithFileSystemPath(NULL, CFSTR("/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources/SampleAssistant"), kCFURLPOSIXPathStyle, false));
 				ThrowIf(not assistantURL.IsValid(), CAException(-1), "AppleCMIODPSampleNewPlugIn: unable to create URL for the SampleAssistant");
-                LOGINFO("MARKER");
+              
 				// Get the maximum size of the of the file system representation of the SampleAssistant's absolute path
 				CFIndex length = CFStringGetMaximumSizeOfFileSystemRepresentation(CACFString(CFURLCopyFileSystemPath(CACFURL(CFURLCopyAbsoluteURL(assistantURL.GetCFObject())).GetCFObject(), kCFURLPOSIXPathStyle)).GetCFString());
 
@@ -109,7 +108,7 @@ extern "C"
 				mach_port_t assistantServerPort;
 				err = bootstrap_create_server(bootstrap_port, path, getuid(), true, &assistantServerPort);
 				ThrowIf(BOOTSTRAP_SUCCESS != err, CAException(err), "AppleCMIODPSampleNewPlugIn: couldn't create server");
-				LOGINFO("MARKER");
+				
 				err = bootstrap_check_in(assistantServerPort, assistantServiceName, &assistantServicePort);
 
 				// The server port is no longer needed so get rid of it
@@ -125,12 +124,12 @@ extern "C"
 
 			CMIO::DP::Sample::PlugIn* plugIn = new CMIO::DP::Sample::PlugIn(requestedTypeUUID);
 			plugIn->Retain();
-            LOGINFO("MARKER");
+            
 			return plugIn->GetInterface();
 		}
 		catch (...)
 		{
-            LOGINFO("MARKER");
+            LOGINFO("Unknown exception throwed up...");
 			return NULL;
 		}
 	}
