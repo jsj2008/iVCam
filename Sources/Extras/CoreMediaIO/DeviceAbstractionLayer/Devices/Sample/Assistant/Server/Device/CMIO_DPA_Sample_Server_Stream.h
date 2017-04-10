@@ -83,9 +83,9 @@ extern "C" {
 
 #include "AtomCamera.h"
 #include "Frame.h"
-#include "BlenderFilter.h"
-#include "BlenderSink.h"
-#include "RawFrameSrc.h"
+#include "BlenderFilter.hpp"
+#include "BlenderSink.hpp"
+#include "RawFrameSrc.hpp"
 
 // Standard Library Includes
 #include <map>

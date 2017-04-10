@@ -8,6 +8,10 @@
 #include "av_toolbox/scaler.h"
 #include "media_filter.h" 
 
+extern "C" {
+#include <libavcodec/avcodec.h>
+}
+
 namespace ins {
 
 class ScaleFilter : public VideoImageFilter<sp<AVFrame>> {

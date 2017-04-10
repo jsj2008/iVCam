@@ -34,6 +34,28 @@
 		7B33367C1E7B7B2A00368971 /* libiconv.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B33367B1E7B7B2A00368971 /* libiconv.2.tbd */; };
 		7B33367E1E7B7B7000368971 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B33367D1E7B7B7000368971 /* libz.tbd */; };
 		7B335C321E8F9954005AB921 /* reloadKext.sh in Resources */ = {isa = PBXBuildFile; fileRef = 7B335C311E8F9954005AB921 /* reloadKext.sh */; };
+		7B3AB0601E9B8DE600317A08 /* decode_filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336631E7A9C1600368971 /* decode_filter.cpp */; };
+		7B3AB0611E9B8DE600317A08 /* llog_message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33366E1E7A9C1600368971 /* llog_message.cpp */; };
+		7B3AB0621E9B8DE600317A08 /* llog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336701E7A9C1600368971 /* llog.cpp */; };
+		7B3AB0631E9B8DE600317A08 /* decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336411E7A9BD900368971 /* decoder.cpp */; };
+		7B3AB0641E9B8DE600317A08 /* ffmpeg_util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3336481E7A9BD900368971 /* ffmpeg_util.cpp */; };
+		7B3AB0651E9B8DE600317A08 /* scaler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33364D1E7A9BD900368971 /* scaler.cpp */; };
+		7B3AB0661E9B8DE600317A08 /* BlenderFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD2BE61E791D8400CDD061 /* BlenderFilter.cpp */; };
+		7B3AB0671E9B8DE700317A08 /* RawFrameSrc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7BBD2BEA1E791D8400CDD061 /* RawFrameSrc.cpp */; };
+		7B3AB0681E9B8DE700317A08 /* BlenderSink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B33363D1E7A305100368971 /* BlenderSink.cpp */; };
+		7B3AB0691E9B8DE700317A08 /* AtomCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */; };
+		7B3AB06A1E9B8E3C00317A08 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDC1E791D1200CDD061 /* libavcodec.a */; };
+		7B3AB06B1E9B8E3C00317A08 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDD1E791D1200CDD061 /* libavformat.a */; };
+		7B3AB06C1E9B8E3C00317A08 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDE1E791D1200CDD061 /* libavutil.a */; };
+		7B3AB06D1E9B8E3C00317A08 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BDF1E791D1200CDD061 /* libswresample.a */; };
+		7B3AB06E1E9B8E3C00317A08 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BBD2BE01E791D1200CDD061 /* libswscale.a */; };
+		7B3AB06F1E9B8E3C00317A08 /* libUniversalBlender.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */; };
+		7B3AB0701E9B8E3C00317A08 /* libunrollmap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCC92D61E71447E0063E5BA /* libunrollmap.dylib */; };
+		7B3AB0711E9B8E3C00317A08 /* libuvc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; };
+		7B3AB0721E9B8E5400317A08 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3336771E7B7AA100368971 /* AudioToolbox.framework */; };
+		7B3AB0731E9B8E5B00317A08 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3336791E7B7AAC00368971 /* VideoToolbox.framework */; };
+		7B3AB0741E9B8E6100317A08 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B33367D1E7B7B7000368971 /* libz.tbd */; };
+		7B3AB0761E9B8E6E00317A08 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3AB0751E9B8E6E00317A08 /* libiconv.tbd */; };
 		7B3DEBCA1E6EA5FD002FF975 /* libuvc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; };
 		7B3DEBCD1E6EA856002FF975 /* libuvc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		7B3DEBD01E6F9869002FF975 /* AtomCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */; };
@@ -370,6 +392,7 @@
 		7B33367B1E7B7B2A00368971 /* libiconv.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.tbd; path = usr/lib/libiconv.2.tbd; sourceTree = SDKROOT; };
 		7B33367D1E7B7B7000368971 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		7B335C311E8F9954005AB921 /* reloadKext.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = reloadKext.sh; sourceTree = "<group>"; };
+		7B3AB0751E9B8E6E00317A08 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		7B3DEBC91E6EA5FD002FF975 /* libuvc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libuvc.dylib; path = ../Lib/libuvc.dylib; sourceTree = "<group>"; };
 		7B3DEBCE1E6F9869002FF975 /* AtomCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AtomCamera.cpp; sourceTree = "<group>"; };
 		7B3DEBCF1E6F9869002FF975 /* AtomCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomCamera.h; sourceTree = "<group>"; };
@@ -607,7 +630,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B3AB0761E9B8E6E00317A08 /* libiconv.tbd in Frameworks */,
+				7B3AB0741E9B8E6100317A08 /* libz.tbd in Frameworks */,
+				7B3AB0731E9B8E5B00317A08 /* VideoToolbox.framework in Frameworks */,
+				7B3AB0721E9B8E5400317A08 /* AudioToolbox.framework in Frameworks */,
+				7B3AB06A1E9B8E3C00317A08 /* libavcodec.a in Frameworks */,
+				7B3AB06B1E9B8E3C00317A08 /* libavformat.a in Frameworks */,
+				7B3AB06C1E9B8E3C00317A08 /* libavutil.a in Frameworks */,
 				7B45EB7B1E65598100BF6BBF /* libCoreAudioStatic.a in Frameworks */,
+				7B3AB06D1E9B8E3C00317A08 /* libswresample.a in Frameworks */,
+				7B3AB06E1E9B8E3C00317A08 /* libswscale.a in Frameworks */,
+				7B3AB06F1E9B8E3C00317A08 /* libUniversalBlender.dylib in Frameworks */,
+				7B3AB0701E9B8E3C00317A08 /* libunrollmap.dylib in Frameworks */,
+				7B3AB0711E9B8E3C00317A08 /* libuvc.dylib in Frameworks */,
 				E47C6CC311AC8A35004DD1E7 /* CoreMedia.framework in Frameworks */,
 				E42AA5B00E073EFB000C4D64 /* IOKit.framework in Frameworks */,
 				E42AA5B10E073EFB000C4D64 /* CoreFoundation.framework in Frameworks */,
@@ -860,6 +895,7 @@
 		19E34B2909F9981000F50E49 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B3AB0751E9B8E6E00317A08 /* libiconv.tbd */,
 				7B33367D1E7B7B7000368971 /* libz.tbd */,
 				7B33367B1E7B7B2A00368971 /* libiconv.2.tbd */,
 				7B3336791E7B7AAC00368971 /* VideoToolbox.framework */,
@@ -1534,6 +1570,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B3AB0601E9B8DE600317A08 /* decode_filter.cpp in Sources */,
+				7B3AB0611E9B8DE600317A08 /* llog_message.cpp in Sources */,
+				7B3AB0621E9B8DE600317A08 /* llog.cpp in Sources */,
+				7B3AB0631E9B8DE600317A08 /* decoder.cpp in Sources */,
+				7B3AB0641E9B8DE600317A08 /* ffmpeg_util.cpp in Sources */,
+				7B3AB0651E9B8DE600317A08 /* scaler.cpp in Sources */,
+				7B3AB0661E9B8DE600317A08 /* BlenderFilter.cpp in Sources */,
+				7B3AB0671E9B8DE700317A08 /* RawFrameSrc.cpp in Sources */,
+				7B3AB0681E9B8DE700317A08 /* BlenderSink.cpp in Sources */,
+				7B3AB0691E9B8DE700317A08 /* AtomCamera.cpp in Sources */,
 				7B45EB851E67F34C00BF6BBF /* log.cpp in Sources */,
 				E42AA5E90E0741B7000C4D64 /* CMIODPASample.defs in Sources */,
 				E42AA5990E073EFB000C4D64 /* CMIO_IOKA_NotificationPort.cpp in Sources */,
@@ -1655,6 +1701,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"ARCHS[sdk=macosx10.7]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1662,11 +1709,16 @@
 					"$(value)",
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(PROJECT_DIR)/../include/",
+					"$(PROJECT_DIR)/../include/arv",
+					"$(PROJECT_DIR)/../include/ffmpeg",
+					"$(PROJECT_DIR)/../include/libuvc",
 				);
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DERIVED_FILES_DIR)/$(CURRENT_ARCH)\"";
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
 				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
 				OTHER_CFLAGS = (
 					"$(value)",
@@ -1810,6 +1862,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				"ARCHS[sdk=macosx10.7]" = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Developer ID Application: Shenzhen Arashi Vision Co., Ltd. (847R5ZLN8S)";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1822,6 +1875,7 @@
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
 				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
 				OTHER_CFLAGS = (
 					"$(value)",
