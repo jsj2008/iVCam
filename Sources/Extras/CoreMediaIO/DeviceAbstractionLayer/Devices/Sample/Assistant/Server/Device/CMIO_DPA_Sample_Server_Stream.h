@@ -70,6 +70,22 @@
 #include <CoreMedia/CMTime.h>
 #include <IOKit/stream/IOStreamLib.h>
 
+extern "C" {
+#include <libswscale/swscale.h>
+}
+
+#include <editor/filter/decode_filter.h>
+#include <editor/filter/scale_filter.h>
+#include <editor/filter/queue_filter.h>
+#include <editor/media_pipe.h>
+#include <av_toolbox/scaler.h>
+#include <thread>
+
+#include "AtomCamera.h"
+#include "Frame.h"
+#include "BlenderFilter.h"
+#include "BlenderSink.h"
+#include "RawFrameSrc.h"
 
 // Standard Library Includes
 #include <map>
@@ -249,6 +265,26 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		void							StreamDeckChanged();
 		void							DeckTimecodeChanged();
 		void							DeckCueingChanged();
+        
+    private:
+        std::shared_ptr<AtomCamera>               mAtomCamera;
+        std::string                             mOffset;
+        std::thread                             mStreamThread;
+        std::thread                             mPlugDetectionThread;
+        bool                                  mIsCameraAttached;
+        bool                                  mShouldTerminate;
+        uint8_t*                               mFrame;
+        uint8_t*                               mLogo;
+        std::shared_ptr<ins::MediaPipe>           mMediaPipe;
+        std::shared_ptr<ins::RawFrameSrc>          mRawFrameSrc;
+        std::shared_ptr<ins::DecodeFilter>         mDecoderFilter;
+        std::shared_ptr<ins::ScaleFilter>          mScaleBeforeBlend;
+        std::shared_ptr<ins::BlenderFilter>        mBlenderFilter;
+        std::shared_ptr<ins::BlenderSink>          mBlenderSink;
+        
+    private:
+        void                                    StreamThread();
+        void                                    HotPlugDetection();
 
 	};
 }}}}

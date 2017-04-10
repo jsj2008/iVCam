@@ -77,6 +77,12 @@
 
 #define kMaxRequestsPerCallback 4
 
+#define FRAME_WIDTH 1472
+#define FRAME_HEIGHT 736
+
+#define kARGB_1472X736_FrameSize (4333568)
+#define kARGB_1472x736_DataSize (kARGB_1472X736_FrameSize)
+
 namespace CMIO { namespace DPA { namespace Sample { namespace Server
 {
 	#pragma mark -
@@ -115,7 +121,12 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mClientStreams(),
 		mClientStreamsMutex("CMIO::DPA::Sample::Server::Stream client streams mutex"),
 		mFrameAvailableGuard("frame available guard"),
-		mDeck(*this)
+		mDeck(*this),
+        mAtomCamera(nullptr),
+        mIsCameraAttached(false),
+        mShouldTerminate(false),
+        mFrame(nullptr),
+        mLogo(nullptr)
 	{
 		mStreamDictionary = streamDictionary;
 		// Specify the stream's callback
@@ -129,6 +140,16 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 
 		if (IsInput())
 		{
+            ins::InitFFmpeg();
+            
+            mLogo = new uint8_t[kARGB_1472X736_FrameSize];
+            if (mLogo)
+            {
+                FILE* logo = fopen("/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources/logo", "rb");
+                fread(mLogo, 1, kARGB_1472X736_FrameSize, logo);
+                fclose(logo);
+            }
+            
 			// This stream only has a single format that provides frames @ 29.97 fps.
 			// (Note:  this should really be extracted from the the stream dictionary)
 			
@@ -385,6 +406,15 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	Stream::~Stream()
 	{
+        if (mLogo)
+        {
+            delete [] mLogo;
+        }
+        
+        // The plugin instance is destroyed. We should terminate the child thread which used to
+        // detect the insertion or removal of camera.
+        mShouldTerminate = true;
+        
 		if (mIOSAStream.IsValid())
 		{
 			// Remove the stream's callback
@@ -1144,6 +1174,8 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 			// Grab the mutex for the device's state
 			CAMutex::Locker locker(mStateMutex);
 			
+            mPlugDetectionThread = std::thread(&Stream::HotPlugDetection, this);
+            
 			// Add the  Client to the set of clients to which are listening to the stream
 			if (MACH_PORT_NULL != client)
 			{
@@ -1245,6 +1277,9 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 	{
 		// Grab the mutex for the overall device's state
 		CAMutex::Locker locker(mStateMutex);
+        
+        mShouldTerminate = true;
+        mPlugDetectionThread.join();
 
 		// Delete and erase the client's from the ClientStream map
 		ClientStreamMap::iterator i = mClientStreams.find(client);
@@ -1452,12 +1487,149 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		// Indicate that the output callback is not being invoked
 		stream.mInOutputCallBack = false;
 	}
+    
+    void Stream::HotPlugDetection()
+    {
+        uvc_context_t *mUVCContext = nullptr;
+        uvc_init(nullptr ,&mUVCContext, nullptr);
+        int retv = -1;
+        
+        std::chrono::steady_clock::time_point nextCheckTime;
+        // mShouldTerminate indicate that the plugin instance is destroyed.
+        // Then all children threads of the program should terminate.
+        while(!mShouldTerminate)
+        {
+            nextCheckTime = std::chrono::steady_clock::now() + std::chrono::seconds(1);
+            int numDevs = 0;
+            uvc_device_t **devs = NULL;
+            retv = uvc_get_devices(mUVCContext, &devs, &numDevs, 0x2e1a, 0x1000);
+            if(retv != 0)
+            {
+                if(retv == UVC_ERROR_NO_DEVICE)
+                {
+                    LOGINFO("No device found, prepare to release resource.");
+                    if (mFrame != nullptr)
+                    {
+                        delete [] mFrame;
+                        mFrame = nullptr;
+                    }
+                    
+                    // The camera is removed and the streaming thread
+                    // should be terminate to release resources.
+                    if (mIsCameraAttached)
+                    {
+                        LOGINFO("Free decoder resources.");
+                        mIsCameraAttached = false;
+                        
+                        if (mStreamThread.joinable())
+                        {
+                            mStreamThread.join();
+                        }
+                        mMediaPipe = nullptr;
+                        
+                        LOGINFO("Release camera.");
+                        mAtomCamera->close();
+                        mAtomCamera = nullptr;
+                    }
+                    
+                    std::this_thread::sleep_until(nextCheckTime);
+                    continue;
+                }
+                else
+                {
+                    LOGERR("Failed to get uvc list.");
+                    break;
+                }
+            }
+            
+            // The hot plugging detection thread detects that the camera is attached.
+            // We then prepare to open the camera and start a child thread to convey video frames.
+            if (!mIsCameraAttached && numDevs > 0)
+            {
+                LOGINFO("Prepare to open camera...");
+                mAtomCamera = std::make_shared<AtomCamera>();
+                int ret = mAtomCamera->open(StreamFormat::MJPEG, FRAME_WIDTH, FRAME_HEIGHT, 30, 8*1024*1024);
+                if (ret == 0)
+                {
+                    // Get offset from device.
+                    ret = mAtomCamera->getCameraOffset(mOffset);
+                    if (ret == 0)
+                    {
+                        LOGINFO("Device offset: %s", mOffset.c_str());
+                        
+                        mFrame = new uint8_t[kARGB_1472X736_FrameSize];
+                        if (mFrame == nullptr)
+                        {
+                            LOGERR("Can't allocate frame for frame.");
+                        }
+                        
+                        // Start the thread to read frame from device.
+                        mStreamThread = std::thread(&Stream::StreamThread, this);
+                    }
+                    else
+                    {
+                        LOGERR("Failed to get device offset...");
+                    }
+                }
+            }
+            
+            std::this_thread::sleep_until(nextCheckTime);
+        }
+        
+        if (mAtomCamera != nullptr)
+        {
+            mAtomCamera->close();
+        }
+        
+        if (mStreamThread.joinable())
+        {
+            mStreamThread.join();
+        }
+    }
+    
+    void Stream::StreamThread()
+    {
+        LOGINFO("Streaming thread start...");
+        
+        mMediaPipe = std::make_shared<ins::MediaPipe>();
+        mRawFrameSrc = std::make_shared<ins::RawFrameSrc>(mAtomCamera, FRAME_WIDTH, FRAME_HEIGHT);
+        mDecoderFilter = std::make_shared<ins::DecodeFilter>();
+        mScaleBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_BGRA, SWS_FAST_BILINEAR);
+        mBlenderFilter = std::make_shared<ins::BlenderFilter>(FRAME_WIDTH, FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, mOffset);
+        mBlenderSink = std::make_shared<ins::BlenderSink>(mFrame);
+        mRawFrameSrc->set_video_filter(mDecoderFilter)
+                    ->set_next_filter(mScaleBeforeBlend)
+                    ->set_next_filter(mBlenderFilter)
+                    ->set_next_filter(mBlenderSink);
+        if (!mRawFrameSrc->Prepare())
+        {
+            LOGERR("Raw frame source isn't ready.");
+            return;
+        }
+        
+        mMediaPipe->AddMediaSrc(mRawFrameSrc);
+        
+        mMediaPipe->RegisterCallback([&](ins::MediaPipe::MediaPipeState state){
+            if (state == ins::MediaPipe::kMediaPipeError)
+            {
+                mMediaPipe->Cancel();
+                LOGERR("Media pipe canceled.");
+            }
+        });
+        
+        mMediaPipe->Run();
+        
+        mIsCameraAttached = true;
+        mMediaPipe->Wait(); 
+    }
+
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// FrameArrived()
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::FrameArrived(IOStreamBufferQueueEntry& entry)
 	{
+        LOGINFO("DPA::Sample::Server::Stream::FrameArrived");
 		// Get the host time of the the frame (currently reported as the sole contents of the entry's control buffer)
 		SampleVideoDeviceControlBuffer* theBufferControl = reinterpret_cast<SampleVideoDeviceControlBuffer*>(mIOSAStream.GetControlBuffer(entry.bufferID));
 		ThrowIfNULL(theBufferControl, CAException(kCMIOHardwareUnspecifiedError), "Stream::FrameArrived: unable to get control buffer");
@@ -1467,10 +1639,19 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		
 		// Create the timing information
 		CMA::SampleBuffer::TimingInfo timingInfo(GetNominalFrameDuration(), presentationTimeStamp, kCMTimeInvalid);
-		
-		// Wrap the entry in a Frame
-		Frame* frame = new Frame(mIOSAStream, GetFrameType(), theBufferControl->vbiTime, timingInfo, GetDiscontinuityFlags(), theBufferControl->droppedFrameCount, theBufferControl->firstVBITime, entry.bufferID, entry.dataLength, mIOSAStream.GetDataBuffer(entry.bufferID));
-
+		 
+        // Wrap the entry in a Frame
+        Frame* frame = nullptr;
+        
+        if (mIsCameraAttached)
+        {
+            frame = new Frame(mIOSAStream, GetFrameType(), theBufferControl->vbiTime, timingInfo, GetDiscontinuityFlags(), theBufferControl->droppedFrameCount, theBufferControl->firstVBITime, entry.bufferID, entry.dataLength, mFrame);
+        }
+        else
+        {
+            frame = new Frame(mIOSAStream, GetFrameType(), theBufferControl->vbiTime, timingInfo, GetDiscontinuityFlags(), theBufferControl->droppedFrameCount, theBufferControl->firstVBITime, entry.bufferID, entry.dataLength, mLogo);
+        }
+        
 		// Clear the discontinuity flags since any accumulated discontinuties have passed onward with the frame
 		SetDiscontinuityFlags(kCMIOSampleBufferNoDiscontinuities);
 	
