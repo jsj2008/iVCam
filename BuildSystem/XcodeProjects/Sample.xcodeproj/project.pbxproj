@@ -375,117 +375,6 @@
 		7B3DEBCF1E6F9869002FF975 /* AtomCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AtomCamera.h; sourceTree = "<group>"; };
 		7B3DEBD21E6F9910002FF975 /* Error.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
 		7B3DEBD31E6F9910002FF975 /* Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frame.h; sourceTree = "<group>"; };
-		7B45EB0A1E65576000BF6BBF /* ACBaseCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACBaseCodec.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACBaseCodec.h; sourceTree = "<absolute>"; };
-		7B45EB0B1E65576000BF6BBF /* ACCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACCodec.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACCodec.h; sourceTree = "<absolute>"; };
-		7B45EB0C1E65576000BF6BBF /* ACCodecDispatchTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACCodecDispatchTypes.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACCodecDispatchTypes.h; sourceTree = "<absolute>"; };
-		7B45EB0D1E65576000BF6BBF /* ACConditionalMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACConditionalMacros.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACConditionalMacros.h; sourceTree = "<absolute>"; };
-		7B45EB0E1E65576000BF6BBF /* ACPlugInDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACPlugInDispatch.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACPlugInDispatch.h; sourceTree = "<absolute>"; };
-		7B45EB0F1E65576000BF6BBF /* ACSimpleCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACSimpleCodec.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACSimpleCodec.h; sourceTree = "<absolute>"; };
-		7B45EB101E65576000BF6BBF /* GetCodecBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetCodecBundle.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/GetCodecBundle.h; sourceTree = "<absolute>"; };
-		7B45EB111E65576000BF6BBF /* AudioFileComponentBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileComponentBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioFile/AFPublic/AudioFileComponentBase.h; sourceTree = "<absolute>"; };
-		7B45EB121E65576000BF6BBF /* AudioFileFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileFormat.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioFile/AFPublic/AudioFileFormat.h; sourceTree = "<absolute>"; };
-		7B45EB131E65576000BF6BBF /* AudioFileObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileObject.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioFile/AFPublic/AudioFileObject.h; sourceTree = "<absolute>"; };
-		7B45EB141E65576000BF6BBF /* CompressedPacketTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompressedPacketTable.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioFile/AFPublic/CompressedPacketTable.h; sourceTree = "<absolute>"; };
-		7B45EB151E65576000BF6BBF /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSource.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioFile/AFPublic/DataSource.h; sourceTree = "<absolute>"; };
-		7B45EB161E65576000BF6BBF /* AUBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUBase.h; sourceTree = "<absolute>"; };
-		7B45EB171E65576000BF6BBF /* AUDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUDispatch.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUDispatch.h; sourceTree = "<absolute>"; };
-		7B45EB181E65576000BF6BBF /* AUInputElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUInputElement.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUInputElement.h; sourceTree = "<absolute>"; };
-		7B45EB191E65576000BF6BBF /* AUOutputElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUOutputElement.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUOutputElement.h; sourceTree = "<absolute>"; };
-		7B45EB1A1E65576000BF6BBF /* AUPlugInDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUPlugInDispatch.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUPlugInDispatch.h; sourceTree = "<absolute>"; };
-		7B45EB1B1E65576100BF6BBF /* AUScopeElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUScopeElement.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUScopeElement.h; sourceTree = "<absolute>"; };
-		7B45EB1C1E65576100BF6BBF /* ComponentBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComponentBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/ComponentBase.h; sourceTree = "<absolute>"; };
-		7B45EB1D1E65576100BF6BBF /* AUCarbonViewBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUCarbonViewBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUCarbonViewBase/AUCarbonViewBase.h; sourceTree = "<absolute>"; };
-		7B45EB1E1E65576100BF6BBF /* AUCarbonViewControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUCarbonViewControl.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUCarbonViewBase/AUCarbonViewControl.h; sourceTree = "<absolute>"; };
-		7B45EB1F1E65576100BF6BBF /* AUControlGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUControlGroup.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUCarbonViewBase/AUControlGroup.h; sourceTree = "<absolute>"; };
-		7B45EB201E65576100BF6BBF /* CarbonEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarbonEventHandler.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUCarbonViewBase/CarbonEventHandler.h; sourceTree = "<absolute>"; };
-		7B45EB211E65576100BF6BBF /* AUInstrumentBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUInstrumentBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/AUInstrumentBase.h; sourceTree = "<absolute>"; };
-		7B45EB221E65576100BF6BBF /* LockFreeFIFO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LockFreeFIFO.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/LockFreeFIFO.h; sourceTree = "<absolute>"; };
-		7B45EB231E65576100BF6BBF /* MIDIControlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIControlHandler.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/MIDIControlHandler.h; sourceTree = "<absolute>"; };
-		7B45EB241E65576100BF6BBF /* SynthElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthElement.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/SynthElement.h; sourceTree = "<absolute>"; };
-		7B45EB251E65576100BF6BBF /* SynthEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthEvent.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/SynthEvent.h; sourceTree = "<absolute>"; };
-		7B45EB261E65576100BF6BBF /* SynthNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthNote.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/SynthNote.h; sourceTree = "<absolute>"; };
-		7B45EB271E65576100BF6BBF /* SynthNoteList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthNoteList.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/SynthNoteList.h; sourceTree = "<absolute>"; };
-		7B45EB281E65576100BF6BBF /* AUViewLocalizedStringKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUViewLocalizedStringKeys.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUViewBase/AUViewLocalizedStringKeys.h; sourceTree = "<absolute>"; };
-		7B45EB291E65576100BF6BBF /* AUEffectBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUEffectBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/AUEffectBase.h; sourceTree = "<absolute>"; };
-		7B45EB2A1E65576100BF6BBF /* AUMIDIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUMIDIBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/AUMIDIBase.h; sourceTree = "<absolute>"; };
-		7B45EB2B1E65576100BF6BBF /* AUMIDIEffectBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUMIDIEffectBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/AUMIDIEffectBase.h; sourceTree = "<absolute>"; };
-		7B45EB2C1E65576100BF6BBF /* AUOutputBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUOutputBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/AUOutputBase.h; sourceTree = "<absolute>"; };
-		7B45EB2D1E65576100BF6BBF /* AUPannerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUPannerBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/AUPannerBase.h; sourceTree = "<absolute>"; };
-		7B45EB2E1E65576100BF6BBF /* MusicDeviceBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MusicDeviceBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/MusicDeviceBase.h; sourceTree = "<absolute>"; };
-		7B45EB2F1E65576100BF6BBF /* AUBaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUBaseHelper.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUBaseHelper.h; sourceTree = "<absolute>"; };
-		7B45EB301E65576100BF6BBF /* AUBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUBuffer.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUBuffer.h; sourceTree = "<absolute>"; };
-		7B45EB311E65576100BF6BBF /* AUInputFormatConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUInputFormatConverter.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUInputFormatConverter.h; sourceTree = "<absolute>"; };
-		7B45EB321E65576100BF6BBF /* AUMIDIDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUMIDIDefs.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUMIDIDefs.h; sourceTree = "<absolute>"; };
-		7B45EB331E65576100BF6BBF /* AUSilentTimeout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUSilentTimeout.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUSilentTimeout.h; sourceTree = "<absolute>"; };
-		7B45EB341E65576100BF6BBF /* AUTimestampGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUTimestampGenerator.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUTimestampGenerator.h; sourceTree = "<absolute>"; };
-		7B45EB351E65576100BF6BBF /* AUOutputBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUOutputBL.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/AUOutputBL.h; sourceTree = "<absolute>"; };
-		7B45EB361E65576100BF6BBF /* AUParamInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUParamInfo.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/AUParamInfo.h; sourceTree = "<absolute>"; };
-		7B45EB371E65576100BF6BBF /* CAAtomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAtomic.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAtomic.h; sourceTree = "<absolute>"; };
-		7B45EB381E65576100BF6BBF /* CAAtomicStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAtomicStack.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAtomicStack.h; sourceTree = "<absolute>"; };
-		7B45EB391E65576100BF6BBF /* CAAudioBufferList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioBufferList.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioBufferList.h; sourceTree = "<absolute>"; };
-		7B45EB3A1E65576100BF6BBF /* CAAudioChannelLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioChannelLayout.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioChannelLayout.h; sourceTree = "<absolute>"; };
-		7B45EB3B1E65576100BF6BBF /* CAAudioFileFormats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioFileFormats.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioFileFormats.h; sourceTree = "<absolute>"; };
-		7B45EB3C1E65576100BF6BBF /* CAAudioTimeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioTimeStamp.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioTimeStamp.h; sourceTree = "<absolute>"; };
-		7B45EB3D1E65576100BF6BBF /* CAAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioUnit.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioUnit.h; sourceTree = "<absolute>"; };
-		7B45EB3E1E65576100BF6BBF /* CAAudioUnitOutputCapturer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioUnitOutputCapturer.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioUnitOutputCapturer.h; sourceTree = "<absolute>"; };
-		7B45EB3F1E65576100BF6BBF /* CAAudioValueRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioValueRange.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioValueRange.h; sourceTree = "<absolute>"; };
-		7B45EB401E65576100BF6BBF /* CAAUMIDIMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAUMIDIMap.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAUMIDIMap.h; sourceTree = "<absolute>"; };
-		7B45EB411E65576100BF6BBF /* CAAUMIDIMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAUMIDIMapManager.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAUMIDIMapManager.h; sourceTree = "<absolute>"; };
-		7B45EB421E65576100BF6BBF /* CAAUParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAUParameter.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAUParameter.h; sourceTree = "<absolute>"; };
-		7B45EB431E65576100BF6BBF /* CAAUProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAUProcessor.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAUProcessor.h; sourceTree = "<absolute>"; };
-		7B45EB441E65576100BF6BBF /* CAAutoDisposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAutoDisposer.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAutoDisposer.h; sourceTree = "<absolute>"; };
-		7B45EB451E65576100BF6BBF /* CABitOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CABitOperations.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CABitOperations.h; sourceTree = "<absolute>"; };
-		7B45EB461E65576100BF6BBF /* CABool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CABool.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CABool.h; sourceTree = "<absolute>"; };
-		7B45EB471E65576100BF6BBF /* CABufferList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CABufferList.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CABufferList.h; sourceTree = "<absolute>"; };
-		7B45EB481E65576100BF6BBF /* CABundleLocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CABundleLocker.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CABundleLocker.h; sourceTree = "<absolute>"; };
-		7B45EB491E65576100BF6BBF /* CAByteOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAByteOrder.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAByteOrder.h; sourceTree = "<absolute>"; };
-		7B45EB4A1E65576100BF6BBF /* CACFArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFArray.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFArray.h; sourceTree = "<absolute>"; };
-		7B45EB4B1E65576100BF6BBF /* CACFData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFData.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFData.h; sourceTree = "<absolute>"; };
-		7B45EB4C1E65576100BF6BBF /* CACFDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFDictionary.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFDictionary.h; sourceTree = "<absolute>"; };
-		7B45EB4D1E65576100BF6BBF /* CACFDistributedNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFDistributedNotification.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFDistributedNotification.h; sourceTree = "<absolute>"; };
-		7B45EB4E1E65576100BF6BBF /* CACFMachPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFMachPort.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFMachPort.h; sourceTree = "<absolute>"; };
-		7B45EB4F1E65576100BF6BBF /* CACFMessagePort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFMessagePort.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFMessagePort.h; sourceTree = "<absolute>"; };
-		7B45EB501E65576100BF6BBF /* CACFNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFNumber.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFNumber.h; sourceTree = "<absolute>"; };
-		7B45EB511E65576100BF6BBF /* CACFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFObject.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFObject.h; sourceTree = "<absolute>"; };
-		7B45EB521E65576100BF6BBF /* CACFPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFPlugIn.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFPlugIn.h; sourceTree = "<absolute>"; };
-		7B45EB531E65576100BF6BBF /* CACFPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFPreferences.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFPreferences.h; sourceTree = "<absolute>"; };
-		7B45EB541E65576100BF6BBF /* CACFString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFString.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFString.h; sourceTree = "<absolute>"; };
-		7B45EB551E65576100BF6BBF /* CAComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAComponent.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAComponent.h; sourceTree = "<absolute>"; };
-		7B45EB561E65576100BF6BBF /* CAComponentDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAComponentDescription.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAComponentDescription.h; sourceTree = "<absolute>"; };
-		7B45EB571E65576100BF6BBF /* CADebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADebugger.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CADebugger.h; sourceTree = "<absolute>"; };
-		7B45EB581E65576100BF6BBF /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADebugMacros.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CADebugMacros.h; sourceTree = "<absolute>"; };
-		7B45EB591E65576100BF6BBF /* CADebugPrintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADebugPrintf.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CADebugPrintf.h; sourceTree = "<absolute>"; };
-		7B45EB5A1E65576100BF6BBF /* CAException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAException.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAException.h; sourceTree = "<absolute>"; };
-		7B45EB5B1E65576100BF6BBF /* CAExtAudioFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAExtAudioFile.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAExtAudioFile.h; sourceTree = "<absolute>"; };
-		7B45EB5C1E65576100BF6BBF /* CAFilePathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAFilePathUtils.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAFilePathUtils.h; sourceTree = "<absolute>"; };
-		7B45EB5D1E65576100BF6BBF /* CAGuard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAGuard.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAGuard.h; sourceTree = "<absolute>"; };
-		7B45EB5E1E65576100BF6BBF /* CAHALAudioDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAHALAudioDevice.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAHALAudioDevice.h; sourceTree = "<absolute>"; };
-		7B45EB5F1E65576100BF6BBF /* CAHALAudioObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAHALAudioObject.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAHALAudioObject.h; sourceTree = "<absolute>"; };
-		7B45EB601E65576100BF6BBF /* CAHALAudioStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAHALAudioStream.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAHALAudioStream.h; sourceTree = "<absolute>"; };
-		7B45EB611E65576100BF6BBF /* CAHALAudioSystemObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAHALAudioSystemObject.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAHALAudioSystemObject.h; sourceTree = "<absolute>"; };
-		7B45EB621E65576100BF6BBF /* CAHostTimeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAHostTimeBase.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAHostTimeBase.h; sourceTree = "<absolute>"; };
-		7B45EB631E65576100BF6BBF /* CALogMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CALogMacros.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CALogMacros.h; sourceTree = "<absolute>"; };
-		7B45EB641E65576100BF6BBF /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAMath.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAMath.h; sourceTree = "<absolute>"; };
-		7B45EB651E65576100BF6BBF /* CAMixMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAMixMap.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAMixMap.h; sourceTree = "<absolute>"; };
-		7B45EB661E65576100BF6BBF /* CAMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAMutex.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAMutex.h; sourceTree = "<absolute>"; };
-		7B45EB671E65576100BF6BBF /* CAProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAProcess.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAProcess.h; sourceTree = "<absolute>"; };
-		7B45EB681E65576100BF6BBF /* CAPropertyAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAPropertyAddress.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAPropertyAddress.h; sourceTree = "<absolute>"; };
-		7B45EB691E65576100BF6BBF /* CAPThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAPThread.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAPThread.h; sourceTree = "<absolute>"; };
-		7B45EB6A1E65576100BF6BBF /* CAReferenceCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAReferenceCounted.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAReferenceCounted.h; sourceTree = "<absolute>"; };
-		7B45EB6B1E65576100BF6BBF /* CARingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CARingBuffer.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CARingBuffer.h; sourceTree = "<absolute>"; };
-		7B45EB6C1E65576100BF6BBF /* CASettingsStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASettingsStorage.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CASettingsStorage.h; sourceTree = "<absolute>"; };
-		7B45EB6D1E65576100BF6BBF /* CASharedLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASharedLibrary.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CASharedLibrary.h; sourceTree = "<absolute>"; };
-		7B45EB6E1E65576100BF6BBF /* CASpectralProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASpectralProcessor.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CASpectralProcessor.h; sourceTree = "<absolute>"; };
-		7B45EB6F1E65576100BF6BBF /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAStreamBasicDescription.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.h; sourceTree = "<absolute>"; };
-		7B45EB701E65576100BF6BBF /* CAStreamRangedDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAStreamRangedDescription.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAStreamRangedDescription.h; sourceTree = "<absolute>"; };
-		7B45EB711E65576100BF6BBF /* CAThreadSafeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAThreadSafeList.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAThreadSafeList.h; sourceTree = "<absolute>"; };
-		7B45EB721E65576100BF6BBF /* CATink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CATink.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CATink.h; sourceTree = "<absolute>"; };
-		7B45EB731E65576100BF6BBF /* CATokenMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CATokenMap.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CATokenMap.h; sourceTree = "<absolute>"; };
-		7B45EB741E65576100BF6BBF /* CAVectorUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAVectorUnit.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAVectorUnit.h; sourceTree = "<absolute>"; };
-		7B45EB751E65576100BF6BBF /* CAVectorUnitTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAVectorUnitTypes.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAVectorUnitTypes.h; sourceTree = "<absolute>"; };
-		7B45EB761E65576100BF6BBF /* CAVolumeCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAVolumeCurve.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAVolumeCurve.h; sourceTree = "<absolute>"; };
-		7B45EB771E65576100BF6BBF /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAXException.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAXException.h; sourceTree = "<absolute>"; };
-		7B45EB781E65576100BF6BBF /* MatrixMixerVolumes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatrixMixerVolumes.h; path = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/MatrixMixerVolumes.h; sourceTree = "<absolute>"; };
 		7B45EB791E65597100BF6BBF /* libCoreAudioStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCoreAudioStatic.a; path = ../Lib/libCoreAudioStatic.a; sourceTree = "<group>"; };
 		7B45EB7C1E6564E300BF6BBF /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
 		7B45EB7D1E6564E300BF6BBF /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
@@ -506,6 +395,119 @@
 		7BCC92D51E71447E0063E5BA /* libUniversalBlender.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libUniversalBlender.dylib; path = ../Lib/libUniversalBlender.dylib; sourceTree = "<group>"; };
 		7BCC92D61E71447E0063E5BA /* libunrollmap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libunrollmap.dylib; path = ../Lib/libunrollmap.dylib; sourceTree = "<group>"; };
 		7BDB0C3E1E94D41400A33BE9 /* com.insta360.cmio.DPA.Assistant.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.insta360.cmio.DPA.Assistant.plist; sourceTree = "<group>"; };
+		CA0BFC061E9E047000C14E64 /* ACBaseCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACBaseCodec.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACBaseCodec.h; sourceTree = "<group>"; };
+		CA0BFC071E9E047000C14E64 /* ACCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACCodec.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACCodec.h; sourceTree = "<group>"; };
+		CA0BFC081E9E047000C14E64 /* ACCodecDispatchTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACCodecDispatchTypes.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACCodecDispatchTypes.h; sourceTree = "<group>"; };
+		CA0BFC091E9E047000C14E64 /* ACComponentResources.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; name = ACComponentResources.r; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACComponentResources.r; sourceTree = "<group>"; };
+		CA0BFC0A1E9E047000C14E64 /* ACConditionalMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACConditionalMacros.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACConditionalMacros.h; sourceTree = "<group>"; };
+		CA0BFC0B1E9E047000C14E64 /* ACPlugInDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACPlugInDispatch.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACPlugInDispatch.h; sourceTree = "<group>"; };
+		CA0BFC0C1E9E047000C14E64 /* ACSimpleCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACSimpleCodec.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/ACSimpleCodec.h; sourceTree = "<group>"; };
+		CA0BFC0D1E9E047000C14E64 /* GetCodecBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetCodecBundle.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioCodecs/ACPublic/GetCodecBundle.h; sourceTree = "<group>"; };
+		CA0BFC0E1E9E047000C14E64 /* AudioFileComponentBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileComponentBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioFile/AFPublic/AudioFileComponentBase.h; sourceTree = "<group>"; };
+		CA0BFC0F1E9E047000C14E64 /* AudioFileFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileFormat.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioFile/AFPublic/AudioFileFormat.h; sourceTree = "<group>"; };
+		CA0BFC101E9E047000C14E64 /* AudioFileObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioFileObject.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioFile/AFPublic/AudioFileObject.h; sourceTree = "<group>"; };
+		CA0BFC111E9E047000C14E64 /* CompressedPacketTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompressedPacketTable.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioFile/AFPublic/CompressedPacketTable.h; sourceTree = "<group>"; };
+		CA0BFC121E9E047000C14E64 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSource.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioFile/AFPublic/DataSource.h; sourceTree = "<group>"; };
+		CA0BFC131E9E047000C14E64 /* AUBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUBase.h; sourceTree = "<group>"; };
+		CA0BFC141E9E047000C14E64 /* AUDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUDispatch.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUDispatch.h; sourceTree = "<group>"; };
+		CA0BFC151E9E047000C14E64 /* AUInputElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUInputElement.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUInputElement.h; sourceTree = "<group>"; };
+		CA0BFC161E9E047000C14E64 /* AUOutputElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUOutputElement.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUOutputElement.h; sourceTree = "<group>"; };
+		CA0BFC171E9E047000C14E64 /* AUPlugInDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUPlugInDispatch.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUPlugInDispatch.h; sourceTree = "<group>"; };
+		CA0BFC181E9E047000C14E64 /* AUResources.r */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.rez; name = AUResources.r; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUResources.r; sourceTree = "<group>"; };
+		CA0BFC191E9E047000C14E64 /* AUScopeElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUScopeElement.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/AUScopeElement.h; sourceTree = "<group>"; };
+		CA0BFC1A1E9E047000C14E64 /* ComponentBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComponentBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUBase/ComponentBase.h; sourceTree = "<group>"; };
+		CA0BFC1B1E9E047000C14E64 /* AUCarbonViewBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUCarbonViewBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUCarbonViewBase/AUCarbonViewBase.h; sourceTree = "<group>"; };
+		CA0BFC1C1E9E047000C14E64 /* AUCarbonViewControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUCarbonViewControl.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUCarbonViewBase/AUCarbonViewControl.h; sourceTree = "<group>"; };
+		CA0BFC1D1E9E047000C14E64 /* AUControlGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUControlGroup.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUCarbonViewBase/AUControlGroup.h; sourceTree = "<group>"; };
+		CA0BFC1E1E9E047000C14E64 /* CarbonEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarbonEventHandler.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUCarbonViewBase/CarbonEventHandler.h; sourceTree = "<group>"; };
+		CA0BFC1F1E9E047000C14E64 /* AUInstrumentBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUInstrumentBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/AUInstrumentBase.h; sourceTree = "<group>"; };
+		CA0BFC201E9E047000C14E64 /* LockFreeFIFO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LockFreeFIFO.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/LockFreeFIFO.h; sourceTree = "<group>"; };
+		CA0BFC211E9E047000C14E64 /* MIDIControlHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDIControlHandler.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/MIDIControlHandler.h; sourceTree = "<group>"; };
+		CA0BFC221E9E047000C14E64 /* SynthElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthElement.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/SynthElement.h; sourceTree = "<group>"; };
+		CA0BFC231E9E047000C14E64 /* SynthEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthEvent.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/SynthEvent.h; sourceTree = "<group>"; };
+		CA0BFC241E9E047000C14E64 /* SynthNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthNote.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/SynthNote.h; sourceTree = "<group>"; };
+		CA0BFC251E9E047000C14E64 /* SynthNoteList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthNoteList.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUInstrumentBase/SynthNoteList.h; sourceTree = "<group>"; };
+		CA0BFC261E9E047000C14E64 /* AUViewLocalizedStringKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUViewLocalizedStringKeys.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/AUViewBase/AUViewLocalizedStringKeys.h; sourceTree = "<group>"; };
+		CA0BFC271E9E047000C14E64 /* AUEffectBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUEffectBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/AUEffectBase.h; sourceTree = "<group>"; };
+		CA0BFC281E9E047000C14E64 /* AUMIDIBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUMIDIBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/AUMIDIBase.h; sourceTree = "<group>"; };
+		CA0BFC291E9E047000C14E64 /* AUMIDIEffectBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUMIDIEffectBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/AUMIDIEffectBase.h; sourceTree = "<group>"; };
+		CA0BFC2A1E9E047000C14E64 /* AUOutputBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUOutputBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/AUOutputBase.h; sourceTree = "<group>"; };
+		CA0BFC2B1E9E047000C14E64 /* AUPannerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUPannerBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/AUPannerBase.h; sourceTree = "<group>"; };
+		CA0BFC2C1E9E047000C14E64 /* MusicDeviceBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MusicDeviceBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/OtherBases/MusicDeviceBase.h; sourceTree = "<group>"; };
+		CA0BFC2D1E9E047000C14E64 /* AUBaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUBaseHelper.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUBaseHelper.h; sourceTree = "<group>"; };
+		CA0BFC2E1E9E047000C14E64 /* AUBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUBuffer.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUBuffer.h; sourceTree = "<group>"; };
+		CA0BFC2F1E9E047000C14E64 /* AUInputFormatConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUInputFormatConverter.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUInputFormatConverter.h; sourceTree = "<group>"; };
+		CA0BFC301E9E047000C14E64 /* AUMIDIDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUMIDIDefs.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUMIDIDefs.h; sourceTree = "<group>"; };
+		CA0BFC311E9E047000C14E64 /* AUSilentTimeout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUSilentTimeout.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUSilentTimeout.h; sourceTree = "<group>"; };
+		CA0BFC321E9E047000C14E64 /* AUTimestampGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUTimestampGenerator.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/AudioUnits/AUPublic/Utility/AUTimestampGenerator.h; sourceTree = "<group>"; };
+		CA0BFC331E9E047000C14E64 /* AUOutputBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUOutputBL.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/AUOutputBL.h; sourceTree = "<group>"; };
+		CA0BFC341E9E047000C14E64 /* AUParamInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUParamInfo.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/AUParamInfo.h; sourceTree = "<group>"; };
+		CA0BFC351E9E047000C14E64 /* CAAtomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAtomic.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAtomic.h; sourceTree = "<group>"; };
+		CA0BFC361E9E047000C14E64 /* CAAtomicStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAtomicStack.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAtomicStack.h; sourceTree = "<group>"; };
+		CA0BFC371E9E047000C14E64 /* CAAudioBufferList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioBufferList.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioBufferList.h; sourceTree = "<group>"; };
+		CA0BFC381E9E047000C14E64 /* CAAudioChannelLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioChannelLayout.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioChannelLayout.h; sourceTree = "<group>"; };
+		CA0BFC391E9E047000C14E64 /* CAAudioFileFormats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioFileFormats.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioFileFormats.h; sourceTree = "<group>"; };
+		CA0BFC3A1E9E047000C14E64 /* CAAudioTimeStamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioTimeStamp.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioTimeStamp.h; sourceTree = "<group>"; };
+		CA0BFC3B1E9E047000C14E64 /* CAAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioUnit.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioUnit.h; sourceTree = "<group>"; };
+		CA0BFC3C1E9E047100C14E64 /* CAAudioUnitOutputCapturer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioUnitOutputCapturer.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioUnitOutputCapturer.h; sourceTree = "<group>"; };
+		CA0BFC3D1E9E047100C14E64 /* CAAudioValueRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAudioValueRange.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAudioValueRange.h; sourceTree = "<group>"; };
+		CA0BFC3E1E9E047100C14E64 /* CAAUMIDIMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAUMIDIMap.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAUMIDIMap.h; sourceTree = "<group>"; };
+		CA0BFC3F1E9E047100C14E64 /* CAAUMIDIMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAUMIDIMapManager.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAUMIDIMapManager.h; sourceTree = "<group>"; };
+		CA0BFC401E9E047100C14E64 /* CAAUParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAUParameter.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAUParameter.h; sourceTree = "<group>"; };
+		CA0BFC411E9E047100C14E64 /* CAAUProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAUProcessor.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAUProcessor.h; sourceTree = "<group>"; };
+		CA0BFC421E9E047100C14E64 /* CAAutoDisposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAAutoDisposer.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAAutoDisposer.h; sourceTree = "<group>"; };
+		CA0BFC431E9E047100C14E64 /* CABitOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CABitOperations.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CABitOperations.h; sourceTree = "<group>"; };
+		CA0BFC441E9E047100C14E64 /* CABool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CABool.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CABool.h; sourceTree = "<group>"; };
+		CA0BFC451E9E047100C14E64 /* CABufferList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CABufferList.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CABufferList.h; sourceTree = "<group>"; };
+		CA0BFC461E9E047100C14E64 /* CABundleLocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CABundleLocker.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CABundleLocker.h; sourceTree = "<group>"; };
+		CA0BFC471E9E047100C14E64 /* CAByteOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAByteOrder.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAByteOrder.h; sourceTree = "<group>"; };
+		CA0BFC481E9E047100C14E64 /* CACFArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFArray.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFArray.h; sourceTree = "<group>"; };
+		CA0BFC491E9E047100C14E64 /* CACFData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFData.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFData.h; sourceTree = "<group>"; };
+		CA0BFC4A1E9E047100C14E64 /* CACFDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFDictionary.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFDictionary.h; sourceTree = "<group>"; };
+		CA0BFC4B1E9E047100C14E64 /* CACFDistributedNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFDistributedNotification.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFDistributedNotification.h; sourceTree = "<group>"; };
+		CA0BFC4C1E9E047100C14E64 /* CACFMachPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFMachPort.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFMachPort.h; sourceTree = "<group>"; };
+		CA0BFC4D1E9E047100C14E64 /* CACFMessagePort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFMessagePort.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFMessagePort.h; sourceTree = "<group>"; };
+		CA0BFC4E1E9E047100C14E64 /* CACFNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFNumber.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFNumber.h; sourceTree = "<group>"; };
+		CA0BFC4F1E9E047100C14E64 /* CACFObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFObject.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFObject.h; sourceTree = "<group>"; };
+		CA0BFC501E9E047100C14E64 /* CACFPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFPlugIn.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFPlugIn.h; sourceTree = "<group>"; };
+		CA0BFC511E9E047100C14E64 /* CACFPreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFPreferences.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFPreferences.h; sourceTree = "<group>"; };
+		CA0BFC521E9E047100C14E64 /* CACFString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CACFString.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CACFString.h; sourceTree = "<group>"; };
+		CA0BFC531E9E047100C14E64 /* CAComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAComponent.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAComponent.h; sourceTree = "<group>"; };
+		CA0BFC541E9E047100C14E64 /* CAComponentDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAComponentDescription.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAComponentDescription.h; sourceTree = "<group>"; };
+		CA0BFC551E9E047100C14E64 /* CADebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADebugger.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CADebugger.h; sourceTree = "<group>"; };
+		CA0BFC561E9E047100C14E64 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADebugMacros.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CADebugMacros.h; sourceTree = "<group>"; };
+		CA0BFC571E9E047100C14E64 /* CADebugPrintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADebugPrintf.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CADebugPrintf.h; sourceTree = "<group>"; };
+		CA0BFC581E9E047100C14E64 /* CAException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAException.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAException.h; sourceTree = "<group>"; };
+		CA0BFC591E9E047100C14E64 /* CAExtAudioFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAExtAudioFile.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAExtAudioFile.h; sourceTree = "<group>"; };
+		CA0BFC5A1E9E047100C14E64 /* CAFilePathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAFilePathUtils.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAFilePathUtils.h; sourceTree = "<group>"; };
+		CA0BFC5B1E9E047100C14E64 /* CAGuard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAGuard.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAGuard.h; sourceTree = "<group>"; };
+		CA0BFC5C1E9E047100C14E64 /* CAHALAudioDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAHALAudioDevice.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAHALAudioDevice.h; sourceTree = "<group>"; };
+		CA0BFC5D1E9E047100C14E64 /* CAHALAudioObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAHALAudioObject.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAHALAudioObject.h; sourceTree = "<group>"; };
+		CA0BFC5E1E9E047100C14E64 /* CAHALAudioStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAHALAudioStream.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAHALAudioStream.h; sourceTree = "<group>"; };
+		CA0BFC5F1E9E047100C14E64 /* CAHALAudioSystemObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAHALAudioSystemObject.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAHALAudioSystemObject.h; sourceTree = "<group>"; };
+		CA0BFC601E9E047100C14E64 /* CAHostTimeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAHostTimeBase.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAHostTimeBase.h; sourceTree = "<group>"; };
+		CA0BFC611E9E047100C14E64 /* CALogMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CALogMacros.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CALogMacros.h; sourceTree = "<group>"; };
+		CA0BFC621E9E047100C14E64 /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAMath.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAMath.h; sourceTree = "<group>"; };
+		CA0BFC631E9E047100C14E64 /* CAMixMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAMixMap.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAMixMap.h; sourceTree = "<group>"; };
+		CA0BFC641E9E047100C14E64 /* CAMutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAMutex.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAMutex.h; sourceTree = "<group>"; };
+		CA0BFC651E9E047100C14E64 /* CAProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAProcess.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAProcess.h; sourceTree = "<group>"; };
+		CA0BFC661E9E047100C14E64 /* CAPropertyAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAPropertyAddress.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAPropertyAddress.h; sourceTree = "<group>"; };
+		CA0BFC671E9E047100C14E64 /* CAPThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAPThread.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAPThread.h; sourceTree = "<group>"; };
+		CA0BFC681E9E047100C14E64 /* CAReferenceCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAReferenceCounted.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAReferenceCounted.h; sourceTree = "<group>"; };
+		CA0BFC691E9E047100C14E64 /* CARingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CARingBuffer.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CARingBuffer.h; sourceTree = "<group>"; };
+		CA0BFC6A1E9E047100C14E64 /* CASettingsStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASettingsStorage.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CASettingsStorage.h; sourceTree = "<group>"; };
+		CA0BFC6B1E9E047100C14E64 /* CASharedLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASharedLibrary.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CASharedLibrary.h; sourceTree = "<group>"; };
+		CA0BFC6C1E9E047100C14E64 /* CASpectralProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASpectralProcessor.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CASpectralProcessor.h; sourceTree = "<group>"; };
+		CA0BFC6D1E9E047100C14E64 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAStreamBasicDescription.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAStreamBasicDescription.h; sourceTree = "<group>"; };
+		CA0BFC6E1E9E047100C14E64 /* CAStreamRangedDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAStreamRangedDescription.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAStreamRangedDescription.h; sourceTree = "<group>"; };
+		CA0BFC6F1E9E047100C14E64 /* CAThreadSafeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAThreadSafeList.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAThreadSafeList.h; sourceTree = "<group>"; };
+		CA0BFC701E9E047100C14E64 /* CATink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CATink.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CATink.h; sourceTree = "<group>"; };
+		CA0BFC711E9E047100C14E64 /* CATokenMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CATokenMap.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CATokenMap.h; sourceTree = "<group>"; };
+		CA0BFC721E9E047100C14E64 /* CAVectorUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAVectorUnit.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAVectorUnit.h; sourceTree = "<group>"; };
+		CA0BFC731E9E047100C14E64 /* CAVectorUnitTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAVectorUnitTypes.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAVectorUnitTypes.h; sourceTree = "<group>"; };
+		CA0BFC741E9E047100C14E64 /* CAVolumeCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAVolumeCurve.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAVolumeCurve.h; sourceTree = "<group>"; };
+		CA0BFC751E9E047100C14E64 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAXException.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/CAXException.h; sourceTree = "<group>"; };
+		CA0BFC761E9E047100C14E64 /* MatrixMixerVolumes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatrixMixerVolumes.h; path = ../../../Users/zhongkezhang/Documents/projects/CoreImageIO/CoreMediaIO/Sources/Extras/CoreAudio/PublicUtility/MatrixMixerVolumes.h; sourceTree = "<group>"; };
 		DE69900A0DBE99B60077AED4 /* CoreMediaIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMediaIO.framework; path = /System/Library/Frameworks/CoreMediaIO.framework; sourceTree = "<absolute>"; };
 		DEFCDB6509E703CE00413E85 /* CMIODebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CMIODebugMacros.cpp; sourceTree = "<group>"; };
 		DEFCDB6609E703CE00413E85 /* CMIODebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMIODebugMacros.h; sourceTree = "<group>"; };
@@ -1005,117 +1007,119 @@
 		DEFCDA8F09E702E600413E85 /* CoreAudio */ = {
 			isa = PBXGroup;
 			children = (
-				7B45EB0A1E65576000BF6BBF /* ACBaseCodec.h */,
-				7B45EB0B1E65576000BF6BBF /* ACCodec.h */,
-				7B45EB0C1E65576000BF6BBF /* ACCodecDispatchTypes.h */,
-				7B45EB0D1E65576000BF6BBF /* ACConditionalMacros.h */,
-				7B45EB0E1E65576000BF6BBF /* ACPlugInDispatch.h */,
-				7B45EB0F1E65576000BF6BBF /* ACSimpleCodec.h */,
-				7B45EB101E65576000BF6BBF /* GetCodecBundle.h */,
-				7B45EB111E65576000BF6BBF /* AudioFileComponentBase.h */,
-				7B45EB121E65576000BF6BBF /* AudioFileFormat.h */,
-				7B45EB131E65576000BF6BBF /* AudioFileObject.h */,
-				7B45EB141E65576000BF6BBF /* CompressedPacketTable.h */,
-				7B45EB151E65576000BF6BBF /* DataSource.h */,
-				7B45EB161E65576000BF6BBF /* AUBase.h */,
-				7B45EB171E65576000BF6BBF /* AUDispatch.h */,
-				7B45EB181E65576000BF6BBF /* AUInputElement.h */,
-				7B45EB191E65576000BF6BBF /* AUOutputElement.h */,
-				7B45EB1A1E65576000BF6BBF /* AUPlugInDispatch.h */,
-				7B45EB1B1E65576100BF6BBF /* AUScopeElement.h */,
-				7B45EB1C1E65576100BF6BBF /* ComponentBase.h */,
-				7B45EB1D1E65576100BF6BBF /* AUCarbonViewBase.h */,
-				7B45EB1E1E65576100BF6BBF /* AUCarbonViewControl.h */,
-				7B45EB1F1E65576100BF6BBF /* AUControlGroup.h */,
-				7B45EB201E65576100BF6BBF /* CarbonEventHandler.h */,
-				7B45EB211E65576100BF6BBF /* AUInstrumentBase.h */,
-				7B45EB221E65576100BF6BBF /* LockFreeFIFO.h */,
-				7B45EB231E65576100BF6BBF /* MIDIControlHandler.h */,
-				7B45EB241E65576100BF6BBF /* SynthElement.h */,
-				7B45EB251E65576100BF6BBF /* SynthEvent.h */,
-				7B45EB261E65576100BF6BBF /* SynthNote.h */,
-				7B45EB271E65576100BF6BBF /* SynthNoteList.h */,
-				7B45EB281E65576100BF6BBF /* AUViewLocalizedStringKeys.h */,
-				7B45EB291E65576100BF6BBF /* AUEffectBase.h */,
-				7B45EB2A1E65576100BF6BBF /* AUMIDIBase.h */,
-				7B45EB2B1E65576100BF6BBF /* AUMIDIEffectBase.h */,
-				7B45EB2C1E65576100BF6BBF /* AUOutputBase.h */,
-				7B45EB2D1E65576100BF6BBF /* AUPannerBase.h */,
-				7B45EB2E1E65576100BF6BBF /* MusicDeviceBase.h */,
-				7B45EB2F1E65576100BF6BBF /* AUBaseHelper.h */,
-				7B45EB301E65576100BF6BBF /* AUBuffer.h */,
-				7B45EB311E65576100BF6BBF /* AUInputFormatConverter.h */,
-				7B45EB321E65576100BF6BBF /* AUMIDIDefs.h */,
-				7B45EB331E65576100BF6BBF /* AUSilentTimeout.h */,
-				7B45EB341E65576100BF6BBF /* AUTimestampGenerator.h */,
-				7B45EB351E65576100BF6BBF /* AUOutputBL.h */,
-				7B45EB361E65576100BF6BBF /* AUParamInfo.h */,
-				7B45EB371E65576100BF6BBF /* CAAtomic.h */,
-				7B45EB381E65576100BF6BBF /* CAAtomicStack.h */,
-				7B45EB391E65576100BF6BBF /* CAAudioBufferList.h */,
-				7B45EB3A1E65576100BF6BBF /* CAAudioChannelLayout.h */,
-				7B45EB3B1E65576100BF6BBF /* CAAudioFileFormats.h */,
-				7B45EB3C1E65576100BF6BBF /* CAAudioTimeStamp.h */,
-				7B45EB3D1E65576100BF6BBF /* CAAudioUnit.h */,
-				7B45EB3E1E65576100BF6BBF /* CAAudioUnitOutputCapturer.h */,
-				7B45EB3F1E65576100BF6BBF /* CAAudioValueRange.h */,
-				7B45EB401E65576100BF6BBF /* CAAUMIDIMap.h */,
-				7B45EB411E65576100BF6BBF /* CAAUMIDIMapManager.h */,
-				7B45EB421E65576100BF6BBF /* CAAUParameter.h */,
-				7B45EB431E65576100BF6BBF /* CAAUProcessor.h */,
-				7B45EB441E65576100BF6BBF /* CAAutoDisposer.h */,
-				7B45EB451E65576100BF6BBF /* CABitOperations.h */,
-				7B45EB461E65576100BF6BBF /* CABool.h */,
-				7B45EB471E65576100BF6BBF /* CABufferList.h */,
-				7B45EB481E65576100BF6BBF /* CABundleLocker.h */,
-				7B45EB491E65576100BF6BBF /* CAByteOrder.h */,
-				7B45EB4A1E65576100BF6BBF /* CACFArray.h */,
-				7B45EB4B1E65576100BF6BBF /* CACFData.h */,
-				7B45EB4C1E65576100BF6BBF /* CACFDictionary.h */,
-				7B45EB4D1E65576100BF6BBF /* CACFDistributedNotification.h */,
-				7B45EB4E1E65576100BF6BBF /* CACFMachPort.h */,
-				7B45EB4F1E65576100BF6BBF /* CACFMessagePort.h */,
-				7B45EB501E65576100BF6BBF /* CACFNumber.h */,
-				7B45EB511E65576100BF6BBF /* CACFObject.h */,
-				7B45EB521E65576100BF6BBF /* CACFPlugIn.h */,
-				7B45EB531E65576100BF6BBF /* CACFPreferences.h */,
-				7B45EB541E65576100BF6BBF /* CACFString.h */,
-				7B45EB551E65576100BF6BBF /* CAComponent.h */,
-				7B45EB561E65576100BF6BBF /* CAComponentDescription.h */,
-				7B45EB571E65576100BF6BBF /* CADebugger.h */,
-				7B45EB581E65576100BF6BBF /* CADebugMacros.h */,
-				7B45EB591E65576100BF6BBF /* CADebugPrintf.h */,
-				7B45EB5A1E65576100BF6BBF /* CAException.h */,
-				7B45EB5B1E65576100BF6BBF /* CAExtAudioFile.h */,
-				7B45EB5C1E65576100BF6BBF /* CAFilePathUtils.h */,
-				7B45EB5D1E65576100BF6BBF /* CAGuard.h */,
-				7B45EB5E1E65576100BF6BBF /* CAHALAudioDevice.h */,
-				7B45EB5F1E65576100BF6BBF /* CAHALAudioObject.h */,
-				7B45EB601E65576100BF6BBF /* CAHALAudioStream.h */,
-				7B45EB611E65576100BF6BBF /* CAHALAudioSystemObject.h */,
-				7B45EB621E65576100BF6BBF /* CAHostTimeBase.h */,
-				7B45EB631E65576100BF6BBF /* CALogMacros.h */,
-				7B45EB641E65576100BF6BBF /* CAMath.h */,
-				7B45EB651E65576100BF6BBF /* CAMixMap.h */,
-				7B45EB661E65576100BF6BBF /* CAMutex.h */,
-				7B45EB671E65576100BF6BBF /* CAProcess.h */,
-				7B45EB681E65576100BF6BBF /* CAPropertyAddress.h */,
-				7B45EB691E65576100BF6BBF /* CAPThread.h */,
-				7B45EB6A1E65576100BF6BBF /* CAReferenceCounted.h */,
-				7B45EB6B1E65576100BF6BBF /* CARingBuffer.h */,
-				7B45EB6C1E65576100BF6BBF /* CASettingsStorage.h */,
-				7B45EB6D1E65576100BF6BBF /* CASharedLibrary.h */,
-				7B45EB6E1E65576100BF6BBF /* CASpectralProcessor.h */,
-				7B45EB6F1E65576100BF6BBF /* CAStreamBasicDescription.h */,
-				7B45EB701E65576100BF6BBF /* CAStreamRangedDescription.h */,
-				7B45EB711E65576100BF6BBF /* CAThreadSafeList.h */,
-				7B45EB721E65576100BF6BBF /* CATink.h */,
-				7B45EB731E65576100BF6BBF /* CATokenMap.h */,
-				7B45EB741E65576100BF6BBF /* CAVectorUnit.h */,
-				7B45EB751E65576100BF6BBF /* CAVectorUnitTypes.h */,
-				7B45EB761E65576100BF6BBF /* CAVolumeCurve.h */,
-				7B45EB771E65576100BF6BBF /* CAXException.h */,
-				7B45EB781E65576100BF6BBF /* MatrixMixerVolumes.h */,
+				CA0BFC061E9E047000C14E64 /* ACBaseCodec.h */,
+				CA0BFC071E9E047000C14E64 /* ACCodec.h */,
+				CA0BFC081E9E047000C14E64 /* ACCodecDispatchTypes.h */,
+				CA0BFC091E9E047000C14E64 /* ACComponentResources.r */,
+				CA0BFC0A1E9E047000C14E64 /* ACConditionalMacros.h */,
+				CA0BFC0B1E9E047000C14E64 /* ACPlugInDispatch.h */,
+				CA0BFC0C1E9E047000C14E64 /* ACSimpleCodec.h */,
+				CA0BFC0D1E9E047000C14E64 /* GetCodecBundle.h */,
+				CA0BFC0E1E9E047000C14E64 /* AudioFileComponentBase.h */,
+				CA0BFC0F1E9E047000C14E64 /* AudioFileFormat.h */,
+				CA0BFC101E9E047000C14E64 /* AudioFileObject.h */,
+				CA0BFC111E9E047000C14E64 /* CompressedPacketTable.h */,
+				CA0BFC121E9E047000C14E64 /* DataSource.h */,
+				CA0BFC131E9E047000C14E64 /* AUBase.h */,
+				CA0BFC141E9E047000C14E64 /* AUDispatch.h */,
+				CA0BFC151E9E047000C14E64 /* AUInputElement.h */,
+				CA0BFC161E9E047000C14E64 /* AUOutputElement.h */,
+				CA0BFC171E9E047000C14E64 /* AUPlugInDispatch.h */,
+				CA0BFC181E9E047000C14E64 /* AUResources.r */,
+				CA0BFC191E9E047000C14E64 /* AUScopeElement.h */,
+				CA0BFC1A1E9E047000C14E64 /* ComponentBase.h */,
+				CA0BFC1B1E9E047000C14E64 /* AUCarbonViewBase.h */,
+				CA0BFC1C1E9E047000C14E64 /* AUCarbonViewControl.h */,
+				CA0BFC1D1E9E047000C14E64 /* AUControlGroup.h */,
+				CA0BFC1E1E9E047000C14E64 /* CarbonEventHandler.h */,
+				CA0BFC1F1E9E047000C14E64 /* AUInstrumentBase.h */,
+				CA0BFC201E9E047000C14E64 /* LockFreeFIFO.h */,
+				CA0BFC211E9E047000C14E64 /* MIDIControlHandler.h */,
+				CA0BFC221E9E047000C14E64 /* SynthElement.h */,
+				CA0BFC231E9E047000C14E64 /* SynthEvent.h */,
+				CA0BFC241E9E047000C14E64 /* SynthNote.h */,
+				CA0BFC251E9E047000C14E64 /* SynthNoteList.h */,
+				CA0BFC261E9E047000C14E64 /* AUViewLocalizedStringKeys.h */,
+				CA0BFC271E9E047000C14E64 /* AUEffectBase.h */,
+				CA0BFC281E9E047000C14E64 /* AUMIDIBase.h */,
+				CA0BFC291E9E047000C14E64 /* AUMIDIEffectBase.h */,
+				CA0BFC2A1E9E047000C14E64 /* AUOutputBase.h */,
+				CA0BFC2B1E9E047000C14E64 /* AUPannerBase.h */,
+				CA0BFC2C1E9E047000C14E64 /* MusicDeviceBase.h */,
+				CA0BFC2D1E9E047000C14E64 /* AUBaseHelper.h */,
+				CA0BFC2E1E9E047000C14E64 /* AUBuffer.h */,
+				CA0BFC2F1E9E047000C14E64 /* AUInputFormatConverter.h */,
+				CA0BFC301E9E047000C14E64 /* AUMIDIDefs.h */,
+				CA0BFC311E9E047000C14E64 /* AUSilentTimeout.h */,
+				CA0BFC321E9E047000C14E64 /* AUTimestampGenerator.h */,
+				CA0BFC331E9E047000C14E64 /* AUOutputBL.h */,
+				CA0BFC341E9E047000C14E64 /* AUParamInfo.h */,
+				CA0BFC351E9E047000C14E64 /* CAAtomic.h */,
+				CA0BFC361E9E047000C14E64 /* CAAtomicStack.h */,
+				CA0BFC371E9E047000C14E64 /* CAAudioBufferList.h */,
+				CA0BFC381E9E047000C14E64 /* CAAudioChannelLayout.h */,
+				CA0BFC391E9E047000C14E64 /* CAAudioFileFormats.h */,
+				CA0BFC3A1E9E047000C14E64 /* CAAudioTimeStamp.h */,
+				CA0BFC3B1E9E047000C14E64 /* CAAudioUnit.h */,
+				CA0BFC3C1E9E047100C14E64 /* CAAudioUnitOutputCapturer.h */,
+				CA0BFC3D1E9E047100C14E64 /* CAAudioValueRange.h */,
+				CA0BFC3E1E9E047100C14E64 /* CAAUMIDIMap.h */,
+				CA0BFC3F1E9E047100C14E64 /* CAAUMIDIMapManager.h */,
+				CA0BFC401E9E047100C14E64 /* CAAUParameter.h */,
+				CA0BFC411E9E047100C14E64 /* CAAUProcessor.h */,
+				CA0BFC421E9E047100C14E64 /* CAAutoDisposer.h */,
+				CA0BFC431E9E047100C14E64 /* CABitOperations.h */,
+				CA0BFC441E9E047100C14E64 /* CABool.h */,
+				CA0BFC451E9E047100C14E64 /* CABufferList.h */,
+				CA0BFC461E9E047100C14E64 /* CABundleLocker.h */,
+				CA0BFC471E9E047100C14E64 /* CAByteOrder.h */,
+				CA0BFC481E9E047100C14E64 /* CACFArray.h */,
+				CA0BFC491E9E047100C14E64 /* CACFData.h */,
+				CA0BFC4A1E9E047100C14E64 /* CACFDictionary.h */,
+				CA0BFC4B1E9E047100C14E64 /* CACFDistributedNotification.h */,
+				CA0BFC4C1E9E047100C14E64 /* CACFMachPort.h */,
+				CA0BFC4D1E9E047100C14E64 /* CACFMessagePort.h */,
+				CA0BFC4E1E9E047100C14E64 /* CACFNumber.h */,
+				CA0BFC4F1E9E047100C14E64 /* CACFObject.h */,
+				CA0BFC501E9E047100C14E64 /* CACFPlugIn.h */,
+				CA0BFC511E9E047100C14E64 /* CACFPreferences.h */,
+				CA0BFC521E9E047100C14E64 /* CACFString.h */,
+				CA0BFC531E9E047100C14E64 /* CAComponent.h */,
+				CA0BFC541E9E047100C14E64 /* CAComponentDescription.h */,
+				CA0BFC551E9E047100C14E64 /* CADebugger.h */,
+				CA0BFC561E9E047100C14E64 /* CADebugMacros.h */,
+				CA0BFC571E9E047100C14E64 /* CADebugPrintf.h */,
+				CA0BFC581E9E047100C14E64 /* CAException.h */,
+				CA0BFC591E9E047100C14E64 /* CAExtAudioFile.h */,
+				CA0BFC5A1E9E047100C14E64 /* CAFilePathUtils.h */,
+				CA0BFC5B1E9E047100C14E64 /* CAGuard.h */,
+				CA0BFC5C1E9E047100C14E64 /* CAHALAudioDevice.h */,
+				CA0BFC5D1E9E047100C14E64 /* CAHALAudioObject.h */,
+				CA0BFC5E1E9E047100C14E64 /* CAHALAudioStream.h */,
+				CA0BFC5F1E9E047100C14E64 /* CAHALAudioSystemObject.h */,
+				CA0BFC601E9E047100C14E64 /* CAHostTimeBase.h */,
+				CA0BFC611E9E047100C14E64 /* CALogMacros.h */,
+				CA0BFC621E9E047100C14E64 /* CAMath.h */,
+				CA0BFC631E9E047100C14E64 /* CAMixMap.h */,
+				CA0BFC641E9E047100C14E64 /* CAMutex.h */,
+				CA0BFC651E9E047100C14E64 /* CAProcess.h */,
+				CA0BFC661E9E047100C14E64 /* CAPropertyAddress.h */,
+				CA0BFC671E9E047100C14E64 /* CAPThread.h */,
+				CA0BFC681E9E047100C14E64 /* CAReferenceCounted.h */,
+				CA0BFC691E9E047100C14E64 /* CARingBuffer.h */,
+				CA0BFC6A1E9E047100C14E64 /* CASettingsStorage.h */,
+				CA0BFC6B1E9E047100C14E64 /* CASharedLibrary.h */,
+				CA0BFC6C1E9E047100C14E64 /* CASpectralProcessor.h */,
+				CA0BFC6D1E9E047100C14E64 /* CAStreamBasicDescription.h */,
+				CA0BFC6E1E9E047100C14E64 /* CAStreamRangedDescription.h */,
+				CA0BFC6F1E9E047100C14E64 /* CAThreadSafeList.h */,
+				CA0BFC701E9E047100C14E64 /* CATink.h */,
+				CA0BFC711E9E047100C14E64 /* CATokenMap.h */,
+				CA0BFC721E9E047100C14E64 /* CAVectorUnit.h */,
+				CA0BFC731E9E047100C14E64 /* CAVectorUnitTypes.h */,
+				CA0BFC741E9E047100C14E64 /* CAVolumeCurve.h */,
+				CA0BFC751E9E047100C14E64 /* CAXException.h */,
+				CA0BFC761E9E047100C14E64 /* MatrixMixerVolumes.h */,
 			);
 			name = CoreAudio;
 			path = /Library/Developer/CoreAudio;
@@ -1640,7 +1644,7 @@
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
 				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Lib";
 				OTHER_CFLAGS = (
 					"$(value)",
 					"-DkCMIOModuleKey=\\\"CMIO_DAL_PlugIn_Sample.Debug\\\"",
@@ -1667,7 +1671,7 @@
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
 				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources";
-				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Lib";
 				OTHER_CFLAGS = (
 					"$(value)",
 					"-DCoreAudio_UseSysLog=1",
@@ -1795,7 +1799,7 @@
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
 				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Lib";
 				OTHER_CFLAGS = (
 					"$(value)",
 					"-DkCMIOModuleKey=\\\"CMIO_DAL_PlugIn_Sample.Debug\\\"",
@@ -1822,7 +1826,7 @@
 				HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DSTROOT)/System/Library/Frameworks/Kernel.framework/Versions/A/PrivateHeaders\"";
 				INSTALL_MODE_FLAG = "u+w,og-w,a+rX";
 				INSTALL_PATH = "/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources";
-				LIBRARY_SEARCH_PATHS = /Users/zhangzhongke/Documents/projects/CoreImageIO/CoreMediaIO/BuildSystem/Lib;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../Lib";
 				OTHER_CFLAGS = (
 					"$(value)",
 					"-DCoreAudio_UseSysLog=1",
