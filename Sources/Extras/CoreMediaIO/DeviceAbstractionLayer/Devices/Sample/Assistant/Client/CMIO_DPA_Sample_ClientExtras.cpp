@@ -85,7 +85,7 @@ namespace CMIO { namespace DPA { namespace Sample
 		{
 			// Lookup the SampleAssistant service from the bootstrap mechanism
 			mach_port_t assistantServicePort;		
-			name_t assistantServiceName = "com.apple.cmio.DPA.Sample";
+			name_t assistantServiceName = "com.insta360.DPA.Assistant";
 			kern_return_t err = bootstrap_look_up(bootstrap_port, assistantServiceName, &assistantServicePort);
 			ThrowIfKernelError(err, CAException(err), "CMIO::DPA::Sample::GetPort: bootstrap_look_up() failed");
 	

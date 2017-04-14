@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>Label</key>
-	<string>com.apple.cmio.DPA.Sample</string>
+	<string>com.insta360.DPA.Assistant</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources/SampleAssistant</string>
 	</array>
 	<key>MachServices</key>
 	<dict>
-		<key>com.apple.cmio.DPA.Sample</key>
+		<key>com.insta360.DPA.Assistant</key>
 		<true/>
 	</dict>
 </dict>

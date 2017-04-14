@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>com.apple.cmio.DAL.Sample</string>
+	<string>com.insta360.DAL.VCam</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -24,26 +24,26 @@
 	<string>7.0</string>
 	<key>CFPlugInFactories</key>
 	<dict>
-		<key>E1E3EB8E-3D0F-49C9-8924-A8A40E1E1CAE</key>
+		<key>E1A3EB8E-3D0F-C9C9-8924-A8A40E1E1CAB</key>
 		<string>Insta360VCamPlugIn</string>
 	</dict>
 	<key>CFPlugInTypes</key>
 	<dict>
 		<key>30010C1C-93BF-11D8-8B5B-000A95AF9C6A</key>
 		<array>
-			<string>E1E3EB8E-3D0F-49C9-8924-A8A40E1E1CAE</string>
+			<string>E1A3EB8E-3D0F-C9C9-8924-A8A40E1E1CAB</string>
 		</array>
 	</dict>
+	<key>CMIOHardwareAssistantServiceNames</key>
+	<array>
+		<string>com.insta360.DPA.Assistant</string>
+	</array>
 	<key>NoCMIOHardwarePlugInLazyLoadingInfo</key>
 	<array>
 		<dict>
 			<key>IOProviderClass</key>
 			<string>IOVideoSampleDevice</string>
 		</dict>
-	</array>
-	<key>CMIOHardwareAssistantServiceNames</key>
-	<array>
-		<string>com.apple.cmio.DPA.Sample</string>
 	</array>
 </dict>
 </plist>

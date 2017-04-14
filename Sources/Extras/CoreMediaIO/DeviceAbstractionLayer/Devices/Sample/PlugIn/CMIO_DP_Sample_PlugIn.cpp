@@ -91,7 +91,7 @@ extern "C"
 			// configured plist in /Library/LaunchDaemons, but if that is done then the process will be owned by root, thus complicating the debugging process.  Therefore, in the event that the
 			// plist is missing (as would be the case for most debugging efforts) attempt to register the SampleAssistant now.  It will fail gracefully if allready registered.
 			mach_port_t assistantServicePort;		
-			name_t assistantServiceName = "com.apple.cmio.DPA.Sample";
+			name_t assistantServiceName = "com.insta360.DPA.Assistant";
 			kern_return_t err = bootstrap_look_up(bootstrap_port, assistantServiceName, &assistantServicePort);
 			if (BOOTSTRAP_SUCCESS != err)
 			{
@@ -125,7 +125,7 @@ extern "C"
 
 			CMIO::DP::Sample::PlugIn* plugIn = new CMIO::DP::Sample::PlugIn(requestedTypeUUID);
 			plugIn->Retain();
-            LOGINFO("Plugin initialized successfully.");
+            LOGINFO("Plugin initialized manually successfully.");
 			return plugIn->GetInterface();
 		}
 		catch (...)
@@ -332,7 +332,7 @@ namespace CMIO { namespace DP { namespace Sample
 		{
 			case kCMIOObjectPropertyName:
 				ThrowIf(dataSize != GetPropertyDataSize(address, qualifierDataSize, qualifierData), CAException(kCMIOHardwareBadPropertySizeError), "CMIO::DP::Sample::PlugIn::GetPropertyData: wrong data size for kCMIOObjectPropertyName");
-				*static_cast<CFStringRef*>(data) = CFSTR("com.apple.cmio.DAL.Sample");
+				*static_cast<CFStringRef*>(data) = CFSTR("com.insta360.DAL.VCam");
 				CFRetain(*static_cast<CFStringRef*>(data));
 				dataUsed = sizeof(CFStringRef);
 				break;
