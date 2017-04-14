@@ -2,4 +2,4 @@
 #	<abstract>Only the PlugIn "Factory Function" needs to be exported</abstract>
 #	</codex>
 
-_AppleCMIODPSampleNewPlugIn
+_Insta360VCamPlugIn

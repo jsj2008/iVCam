@@ -25,7 +25,7 @@
 	<key>CFPlugInFactories</key>
 	<dict>
 		<key>E1E3EB8E-3D0F-49C9-8924-A8A40E1E1CAE</key>
-		<string>AppleCMIODPSampleNewPlugIn</string>
+		<string>Insta360VCamPlugIn</string>
 	</dict>
 	<key>CFPlugInTypes</key>
 	<dict>
