@@ -71,7 +71,8 @@
 
 // System Includes
 #include <IOKit/IOMessage.h>
-#include <servers/bootstrap.h>
+#include <servers/bootstrap.h> 
+#include <thread>
 
 extern "C"
 {
@@ -80,7 +81,7 @@ extern "C"
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void* AppleCMIODPSampleNewPlugIn(CFAllocatorRef allocator, CFUUIDRef requestedTypeUUID);
 	void* AppleCMIODPSampleNewPlugIn(CFAllocatorRef allocator, CFUUIDRef requestedTypeUUID) 
-	{       
+	{
 		if (not CFEqual(requestedTypeUUID, kCMIOHardwarePlugInTypeID))
 			return 0;
 		
@@ -254,7 +255,7 @@ namespace CMIO { namespace DP { namespace Sample
 			DP::PlugIn::Teardown();
 			
 			// And leave the rest to die with the process...
-		}
+		} 
 	}
 	
 	#pragma mark -

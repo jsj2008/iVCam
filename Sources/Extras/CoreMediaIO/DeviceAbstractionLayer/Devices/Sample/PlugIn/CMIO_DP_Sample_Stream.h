@@ -286,9 +286,9 @@ namespace CMIO { namespace DP { namespace Sample
         std::shared_ptr<AtomCamera>              mAtomCamera;
         std::string                             mOffset;
         std::thread                             mStreamThread;
-        std::thread                             mPlugDetectionThread;
-        bool                                  mIsCameraAttached;
-        bool                                  mShouldTerminate;
+        std::thread                            mPlugDetectionThread;
+        bool                                    mIsCameraAttached;
+        bool                                    mShouldTerminate;
         uint8_t*                               mFrame;
         uint8_t*                               mLogo;
         std::shared_ptr<ins::MediaPipe>           mMediaPipe;
@@ -296,6 +296,7 @@ namespace CMIO { namespace DP { namespace Sample
         std::shared_ptr<ins::DecodeFilter>         mDecoderFilter;
         std::shared_ptr<ins::ScaleFilter>          mScaleBeforeBlend;
         std::shared_ptr<ins::BlenderFilter>        mBlenderFilter;
+        std::shared_ptr<ins::ScaleFilter>          mScaleAfterBlend;
         std::shared_ptr<ins::BlenderSink>          mBlenderSink;
 	};
 }}}

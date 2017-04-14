@@ -22,7 +22,7 @@ namespace ins {
     bool BlenderFilter::Init(MediaBus &bus)
     {
         mBlender = new CBlenderWrapper;
-        mBlendedFrame = NewAVFrame(mParams.output_width, mParams.output_height, AV_PIX_FMT_RGBA);
+        mBlendedFrame = NewAVFrame(mParams.output_width, mParams.output_height, AV_PIX_FMT_BGRA);
         mInputBuffer = new unsigned char[mParams.input_width*mParams.input_height*4];
         mOutputBuffer = new unsigned char[mParams.output_width*mParams.output_height*4];
         mParams.input_data = mInputBuffer;
@@ -36,7 +36,7 @@ namespace ins {
         
         bus.out_codecpar->width = mParams.output_width;
         bus.out_codecpar->height = mParams.output_height;
-        bus.out_codecpar->format = AV_PIX_FMT_RGBA;
+        bus.out_codecpar->format = AV_PIX_FMT_BGRA;
         return this->next_filter_->Init(bus);
     }
     
