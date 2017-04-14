@@ -123,7 +123,7 @@ namespace CMIO { namespace DP { namespace Sample
 		mScheduledOutputNotificationProc(NULL),
 		mDeck(NULL),
 		mFormatPairs(),
-		mFrameType(DPA::Sample::kARGB_1472x736),
+		mFrameType(DPA::Sample::kYUV422_1472x828),
 		mDeckPropertyListeners(),
 		mMessageThread(),
 		mBufferQueue(CMA::SimpleQueue<CMSampleBufferRef>::Create(NULL, 30)),
@@ -168,8 +168,8 @@ namespace CMIO { namespace DP { namespace Sample
             fclose(logo);
         }
         
-        mPlugDetectionThread = std::thread(&Stream::HotPlugDetection, this);
-        mPlugDetectionThread.detach();
+//        mPlugDetectionThread = std::thread(&Stream::HotPlugDetection, this);
+//        mPlugDetectionThread.detach();
         
 		// Initialize the super class
 		DP::Stream::Initialize();
