@@ -108,7 +108,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 		mEndOfData(false),
 		mUnderrunCount(0),
 		mFrameFormats(),
-		mFrameType(kARGB_1472x736),
+		mFrameType(kYUV422_1472x828),
 		mFrameRatesMap(),
 		mFrameRate(30000.0 / 1001.0),
 		mNominalFrameDuration(CMTimeMake(1001, 30000)),
@@ -154,9 +154,9 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
                         
 						switch (codecType)
 						{
-							case kARGB_1472x736:
+							case kYUV422_1472x828:
                             {
-                                mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_32BGRA, formatWidth, formatHeight));
+                                mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
                                 mFrameRatesMap[(CMIO::DPA::Sample::FrameType)codecType][(30000.0 / 1001.0)] = CMTimeMake(1000, 30001);
                             }
 								break;
@@ -203,27 +203,12 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 						formatCACFDictionary.GetUInt32(CFSTR(kIOVideoStreamFormatKey_Height), formatHeight);
 						switch(codecType)
 						{
-							case kYUV422_720x480:
-                            case kYUV422_720x486:
-                            case kYUV422_720x576:
-                            case kYUV422_1280x720:
-                            case kYUV422_1920x1080:
+							case kYUV422_1472x828:
 							{
                                 it = mFrameFormats.find(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
                                
 							}
 								break;
-                            case kYUV422_10_720x480:
-                            case kYUV422_10_720x486:
-                            case kYUV422_10_720x576:
-                            case kYUV422_10_1280x720:
-                            case kYUV422_10_1920x1080:
-							{
-                                it = mFrameFormats.find(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_422YpCbCr10, formatWidth, formatHeight));
-                                
-                            }
-                                break;
-                               
                         }
                         if (it !=mFrameFormats.end())
                         {
@@ -287,26 +272,12 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
                         {
                             switch(codecType)
                             {
-                                case kYUV422_720x480:
-                                case kYUV422_720x486:
-                                case kYUV422_720x576:
-                                case kYUV422_1280x720:
-                                case kYUV422_1920x1080:
+                                case kYUV422_1472x828:
                                 {
                                     mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMVideoCodecType_422YpCbCr8, formatWidth, formatHeight));
                                     
                                 }
                                     break;
-                                case kYUV422_10_720x480:
-                                case kYUV422_10_720x486:
-                                case kYUV422_10_720x576:
-                                case kYUV422_10_1280x720:
-                                case kYUV422_10_1920x1080:
-                                {
-                                    mFrameFormats.insert(FrameFormat((CMIO::DPA::Sample::FrameType)codecType, kCMPixelFormat_422YpCbCr10, formatWidth, formatHeight));                                    
-                                }
-                                    break;
-                                    
                             }
                             
                             Float64 frameRate = CodecFlagsToFrameRate(codecFlags);
@@ -641,81 +612,11 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 				IOVideoStreamDescription theNewFormat;
 				switch(mFrameType)
 				{
-					case kYUV422_720x480:
-						theNewFormat.mVideoCodecType = kYUV422_720x480; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 480;
-						break;
-
-					case kYUV422_720x486:
-						theNewFormat.mVideoCodecType = kYUV422_720x486; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 486;
-						break;
-                        
-					case kYUV422_720x576:
-						theNewFormat.mVideoCodecType = kYUV422_720x576; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 576;
-						break;
-
-					case kYUV422_1280x720:
-						theNewFormat.mVideoCodecType = kYUV422_1280x720; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1280;
-						theNewFormat.mHeight = 720;
-						break;
-				
-					case kYUV422_1920x1080:
-						theNewFormat.mVideoCodecType = kYUV422_1920x1080; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1920;
-						theNewFormat.mHeight = 1080;
-						break;
-
-                    case kYUV422_10_720x480:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x480; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 480;
-						break;
-                        
-					case kYUV422_10_720x486:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x486; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 486;
-						break;
-                        
-					case kYUV422_10_720x576:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x576; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 576;
-						break;
-                        
-					case kYUV422_10_1280x720:
-						theNewFormat.mVideoCodecType = kYUV422_10_1280x720; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1280;
-						theNewFormat.mHeight = 720;
-						break;
-						
-					case kYUV422_10_1920x1080:
-						theNewFormat.mVideoCodecType = kYUV422_10_1920x1080; 
-						theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1920;
-						theNewFormat.mHeight = 1080;
-						break;
-                        
-                    case kARGB_1472x736:
-                        theNewFormat.mVideoCodecType = kARGB_1472x736;
+                    case kYUV422_1472x828:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x828;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 1472;
-                        theNewFormat.mHeight = 736;
+                        theNewFormat.mHeight = 828;
                         break;
 						
 					default:
@@ -758,81 +659,11 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 				IOVideoStreamDescription theNewFormat;
 				switch(mFrameType)
 				{
-					case kYUV422_720x480:
-						theNewFormat.mVideoCodecType = kYUV422_720x480; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 480;
-						break;
-					
-					case kYUV422_720x486:
-						theNewFormat.mVideoCodecType = kYUV422_720x486; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 486;
-						break;
-                        
-					case kYUV422_720x576:
-						theNewFormat.mVideoCodecType = kYUV422_720x576; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 576;
-						break;
-                        
-					case kYUV422_1280x720:
-						theNewFormat.mVideoCodecType = kYUV422_1280x720; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1280;
-						theNewFormat.mHeight = 720;
-						break;
-						
-					case kYUV422_1920x1080:
-						theNewFormat.mVideoCodecType = kYUV422_1920x1080; 
-						theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1920;
-						theNewFormat.mHeight = 1080;
-						break;
-
-                    case kYUV422_10_720x480:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x480; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 480;
-						break;
-                        
-					case kYUV422_10_720x486:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x486; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 486;
-						break;
-                        
-					case kYUV422_10_720x576:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x576; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 576;
-						break;
-                        
-					case kYUV422_10_1280x720:
-						theNewFormat.mVideoCodecType = kYUV422_10_1280x720; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1280;
-						theNewFormat.mHeight = 720;
-						break;
-						
-					case kYUV422_10_1920x1080:
-						theNewFormat.mVideoCodecType = kYUV422_10_1920x1080; 
-						theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1920;
-						theNewFormat.mHeight = 1080;
-						break;
-                        
-                    case kARGB_1472x736:
-                        theNewFormat.mVideoCodecType = kARGB_1472x736;
+                    case kYUV422_1472x828:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x828;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 1472;
-                        theNewFormat.mHeight = 736;
+                        theNewFormat.mHeight = 828;
                         break;
 						
 					default:
@@ -930,81 +761,11 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 				IOVideoStreamDescription theNewFormat;
 				switch(mFrameType)
 				{
-					case kYUV422_720x480:
-						theNewFormat.mVideoCodecType = kYUV422_720x480; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(frameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 480;
-						break;
-                        
-					case kYUV422_720x486:
-						theNewFormat.mVideoCodecType = kYUV422_720x486; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 486;
-						break;
-                        
-					case kYUV422_720x576:
-						theNewFormat.mVideoCodecType = kYUV422_720x576; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 576;
-						break;
-                        
-					case kYUV422_1280x720:
-						theNewFormat.mVideoCodecType = kYUV422_1280x720; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(frameRate);
-						theNewFormat.mWidth = 1280;
-						theNewFormat.mHeight = 720;
-						break;
-                        
-					case kYUV422_1920x1080:
-						theNewFormat.mVideoCodecType = kYUV422_1920x1080; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(frameRate);
-						theNewFormat.mWidth = 1920;
-						theNewFormat.mHeight = 1080;
-						break;
- 
-                    case kYUV422_10_720x480:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x480; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 480;
-						break;
-                        
-					case kYUV422_10_720x486:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x486; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 486;
-						break;
-                        
-					case kYUV422_10_720x576:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x576; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 576;
-						break;
-                        
-					case kYUV422_10_1280x720:
-						theNewFormat.mVideoCodecType = kYUV422_10_1280x720; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1280;
-						theNewFormat.mHeight = 720;
-						break;
-						
-					case kYUV422_10_1920x1080:
-						theNewFormat.mVideoCodecType = kYUV422_10_1920x1080; 
-						theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1920;
-						theNewFormat.mHeight = 1080;
-						break;
-                        
-                    case kARGB_1472x736:
-                        theNewFormat.mVideoCodecType = kARGB_1472x736;
+                    case kYUV422_1472x828:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x828;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 1472;
-                        theNewFormat.mHeight = 736;
+                        theNewFormat.mHeight = 828;
                         break;
 						
 				}
@@ -1039,80 +800,11 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 				IOVideoStreamDescription theNewFormat;
 				switch(mFrameType)
 				{
-					case kYUV422_720x480:
-						theNewFormat.mVideoCodecType = kYUV422_720x480; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(frameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 480;
-						break;
-			
-					case kYUV422_720x486:
-						theNewFormat.mVideoCodecType = kYUV422_720x486; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 486;
-						break;
-		
-					case kYUV422_720x576:
-						theNewFormat.mVideoCodecType = kYUV422_720x576; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 576;
-						break;
-                        
-					case kYUV422_1280x720:
-						theNewFormat.mVideoCodecType = kYUV422_1280x720; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(frameRate);
-						theNewFormat.mWidth = 1280;
-						theNewFormat.mHeight = 720;
-						break;
-						
-					case kYUV422_1920x1080:
-						theNewFormat.mVideoCodecType = kYUV422_1920x1080; 
-						theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(frameRate);
-						theNewFormat.mWidth = 1920;
-						theNewFormat.mHeight = 1080;
-						break;
-                    case kYUV422_10_720x480:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x480; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 480;
-						break;
-                        
-					case kYUV422_10_720x486:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x486; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 486;
-						break;
-                        
-					case kYUV422_10_720x576:
-						theNewFormat.mVideoCodecType = kYUV422_10_720x576; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 720;
-						theNewFormat.mHeight = 576;
-						break;
-                        
-					case kYUV422_10_1280x720:
-						theNewFormat.mVideoCodecType = kYUV422_10_1280x720; 
-						theNewFormat.mVideoCodecFlags = FrameRateToCodecFlags(mFrameRate);
-						theNewFormat.mWidth = 1280;
-						theNewFormat.mHeight = 720;
-						break;
-						
-					case kYUV422_10_1920x1080:
-						theNewFormat.mVideoCodecType = kYUV422_10_1920x1080; 
-						theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);  
-						theNewFormat.mWidth = 1920;
-						theNewFormat.mHeight = 1080;
-						break;
-                        
-                    case kARGB_1472x736:
-                        theNewFormat.mVideoCodecType = kARGB_1472x736;
+                    case kYUV422_1472x828:
+                        theNewFormat.mVideoCodecType = kYUV422_1472x828;
                         theNewFormat.mVideoCodecFlags =FrameRateToCodecFlags(mFrameRate);
                         theNewFormat.mWidth = 1472;
-                        theNewFormat.mHeight = 736;
+                        theNewFormat.mHeight = 828;
                         break;
                }
 				

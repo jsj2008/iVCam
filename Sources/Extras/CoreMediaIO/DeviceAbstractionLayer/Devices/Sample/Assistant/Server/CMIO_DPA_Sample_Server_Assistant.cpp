@@ -104,7 +104,7 @@ namespace
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// CopyPlugInBundle()
-	//	This locates the com.apple.cmio.DAL.Sample bundle so localized device names can be extracted from it.
+	//	This locates the com.insta360.DAL.VCam bundle so localized device names can be extracted from it.
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	CFBundleRef CopyPlugInBundle()
 	{
@@ -310,7 +310,7 @@ namespace CMIO { namespace DPA { namespace Sample { namespace Server
 			return;
 			
 		// There are no more clients, so exit the SampleAssistant server process.
-		// The "com.apple.cmio.DPA.Sample" service will still be registered with the bootstrap_look_up mechanism, so the next time a client needs to establish a connection it will
+		// The "com.insta360.DPA.Assistant" service will still be registered with the bootstrap_look_up mechanism, so the next time a client needs to establish a connection it will
 		// cause the SampleAssistant server process to be restarted.
 		exit(0);
 	}
@@ -930,7 +930,7 @@ int main()
 	{  
 		// Check in with the bootstrap port under the agreed upon name to get the servicePort with receive rights
 		mach_port_t servicePort;
-		name_t serviceName = "com.apple.cmio.DPA.Sample";
+		name_t serviceName = "com.insta360.DPA.Assistant";
 		kern_return_t err = bootstrap_check_in(bootstrap_port, serviceName, &servicePort); 
 		if (BOOTSTRAP_SUCCESS != err)
 		{

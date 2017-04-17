@@ -71,16 +71,19 @@
 
 // System Includes
 #include <IOKit/IOMessage.h>
-#include <servers/bootstrap.h>
+#include <servers/bootstrap.h> 
+#include <thread>
 
+bool  ShouldTerminate = false;
 extern "C"
 {
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// AppleCMIODPSampleNewPlugIn()
+	// Insta360VCamPlugIn()
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	void* AppleCMIODPSampleNewPlugIn(CFAllocatorRef allocator, CFUUIDRef requestedTypeUUID);
-	void* AppleCMIODPSampleNewPlugIn(CFAllocatorRef allocator, CFUUIDRef requestedTypeUUID) 
-	{       
+	void* Insta360VCamPlugIn(CFAllocatorRef allocator, CFUUIDRef requestedTypeUUID);
+	void* Insta360VCamPlugIn(CFAllocatorRef allocator, CFUUIDRef requestedTypeUUID)
+	{
+        ShouldTerminate = false;
 		if (not CFEqual(requestedTypeUUID, kCMIOHardwarePlugInTypeID))
 			return 0;
 		
@@ -90,14 +93,14 @@ extern "C"
 			// configured plist in /Library/LaunchDaemons, but if that is done then the process will be owned by root, thus complicating the debugging process.  Therefore, in the event that the
 			// plist is missing (as would be the case for most debugging efforts) attempt to register the SampleAssistant now.  It will fail gracefully if allready registered.
 			mach_port_t assistantServicePort;		
-			name_t assistantServiceName = "com.apple.cmio.DPA.Sample";
+			name_t assistantServiceName = "com.insta360.DPA.Assistant";
 			kern_return_t err = bootstrap_look_up(bootstrap_port, assistantServiceName, &assistantServicePort);
 			if (BOOTSTRAP_SUCCESS != err)
 			{
 				// Create an URL to SampleAssistant that resides at "/Library/CoreMediaIO/Plug-Ins/DAL/Sample.plugin/Contents/Resources/SampleAssistant" 
 				CACFURL assistantURL(CFURLCreateWithFileSystemPath(NULL, CFSTR("/Library/CoreMediaIO/Plug-Ins/DAL/Insta360VCam.plugin/Contents/Resources/SampleAssistant"), kCFURLPOSIXPathStyle, false));
-				ThrowIf(not assistantURL.IsValid(), CAException(-1), "AppleCMIODPSampleNewPlugIn: unable to create URL for the SampleAssistant");
-              
+				ThrowIf(not assistantURL.IsValid(), CAException(-1), "Insta360VCamPlugIn: unable to create URL for the SampleAssistant");
+
 				// Get the maximum size of the of the file system representation of the SampleAssistant's absolute path
 				CFIndex length = CFStringGetMaximumSizeOfFileSystemRepresentation(CACFString(CFURLCopyFileSystemPath(CACFURL(CFURLCopyAbsoluteURL(assistantURL.GetCFObject())).GetCFObject(), kCFURLPOSIXPathStyle)).GetCFString());
 
@@ -107,15 +110,15 @@ extern "C"
                 
 				mach_port_t assistantServerPort;
 				err = bootstrap_create_server(bootstrap_port, path, getuid(), true, &assistantServerPort);
-				ThrowIf(BOOTSTRAP_SUCCESS != err, CAException(err), "AppleCMIODPSampleNewPlugIn: couldn't create server");
-				
+				ThrowIf(BOOTSTRAP_SUCCESS != err, CAException(err), "Insta360VCamPlugIn: couldn't create server");
+
 				err = bootstrap_check_in(assistantServerPort, assistantServiceName, &assistantServicePort);
 
 				// The server port is no longer needed so get rid of it
 				(void) mach_port_deallocate(mach_task_self(), assistantServerPort);
 
 				// Make sure the call to bootstrap_create_service() succeeded
-				ThrowIf(BOOTSTRAP_SUCCESS != err, CAException(err), "AppleCMIODPSampleNewPlugIn: couldn't create SampleAssistant service port");
+				ThrowIf(BOOTSTRAP_SUCCESS != err, CAException(err), "Insta360VCamPlugIn: couldn't create SampleAssistant service port");
 			}
 
 			// The service port is not longer needed so get rid of it
@@ -124,7 +127,7 @@ extern "C"
 
 			CMIO::DP::Sample::PlugIn* plugIn = new CMIO::DP::Sample::PlugIn(requestedTypeUUID);
 			plugIn->Retain();
-            
+            LOGINFO("Plugin initialized manually successfully.");
 			return plugIn->GetInterface();
 		}
 		catch (...)
@@ -215,6 +218,8 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void PlugIn::Teardown()
 	{
+        LOGINFO("Plugin Teardown");
+        ShouldTerminate = true;
 		// Grab the muxtex for the plugIn's state
 		CAMutex::Locker locker(GetStateMutex());
 		
@@ -255,6 +260,7 @@ namespace CMIO { namespace DP { namespace Sample
 			
 			// And leave the rest to die with the process...
 		}
+        std::this_thread::sleep_for(std::chrono::seconds(3));
 	}
 	
 	#pragma mark -
@@ -331,7 +337,7 @@ namespace CMIO { namespace DP { namespace Sample
 		{
 			case kCMIOObjectPropertyName:
 				ThrowIf(dataSize != GetPropertyDataSize(address, qualifierDataSize, qualifierData), CAException(kCMIOHardwareBadPropertySizeError), "CMIO::DP::Sample::PlugIn::GetPropertyData: wrong data size for kCMIOObjectPropertyName");
-				*static_cast<CFStringRef*>(data) = CFSTR("com.apple.cmio.DAL.Sample");
+				*static_cast<CFStringRef*>(data) = CFSTR("com.insta360.DAL.VCam");
 				CFRetain(*static_cast<CFStringRef*>(data));
 				dataUsed = sizeof(CFStringRef);
 				break;

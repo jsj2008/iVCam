@@ -61,6 +61,7 @@
 // CA Public Utility Includes
 #include "CACFMachPort.h"
 
+extern bool ShouldTerminate;
 namespace CMIO { namespace DP { namespace Sample
 {
 	class Device;

@@ -47,12 +47,14 @@ namespace ins {
         {
             if (mCamera->isClosed())
             {
+                stop_ = true;
                 continue;
             }
             ret = mCamera->readFrame(&frame);
             if (ret != 0)
             {
                 LOG(ERROR) << "Failed to read frame.";
+                stop_ = true;
                 continue;
             }
             // Create packet

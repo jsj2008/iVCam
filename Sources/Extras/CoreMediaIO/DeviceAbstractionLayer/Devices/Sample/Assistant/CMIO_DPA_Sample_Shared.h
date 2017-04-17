@@ -145,18 +145,8 @@ namespace CMIO { namespace DPA { namespace Sample
 	//	Arbitrary constants representing the types of frames the device can generate.
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	enum FrameType
-	{
-		kYUV422_720x480,
-        kYUV422_720x486,
-        kYUV422_720x576,
-		kYUV422_1280x720,
-		kYUV422_1920x1080,
-        kYUV422_10_720x480,
-        kYUV422_10_720x486,
-        kYUV422_10_720x576,
-        kYUV422_10_1280x720,
-        kYUV422_10_1920x1080,
-        kARGB_1472x736,
+	{ 
+        kYUV422_1472x828,
 		kFrameTypePad = 0xFFFFFFFFUL
 	};
 
