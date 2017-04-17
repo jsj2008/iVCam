@@ -171,6 +171,7 @@ namespace CMIO { namespace DP { namespace Sample
             fclose(logo);
         }
         
+         mPlugDetectionThread = std::thread(&Stream::HotPlugDetection, this);
 		// Initialize the super class
 		DP::Stream::Initialize();
 
@@ -1083,11 +1084,13 @@ namespace CMIO { namespace DP { namespace Sample
         mRawFrameSrc = std::make_shared<ins::RawFrameSrc>(mAtomCamera, FRAME_WIDTH, FRAME_HEIGHT);
         mDecoderFilter = std::make_shared<ins::DecodeFilter>();
         mScaleBeforeBlend = std::make_shared<ins::ScaleFilter>(FRAME_WIDTH, FRAME_HEIGHT, AV_PIX_FMT_BGRA, SWS_FAST_BILINEAR);
+        mDecodeQueue = std::make_shared<ins::QueueFilter<std::shared_ptr<AVFrame>>>();
         mBlenderFilter = std::make_shared<ins::BlenderFilter>(FRAME_WIDTH, FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, mOffset);
         mScaleAfterBlend = std::make_shared<ins::ScaleFilter>(OUTPUT_WIDTH, OUTPUT_HEIGHT, AV_PIX_FMT_UYVY422, SWS_FAST_BILINEAR);
         mBlenderSink = std::make_shared<ins::BlenderSink>(mFrame);
         mRawFrameSrc->set_video_filter(mDecoderFilter)
                     ->set_next_filter(mScaleBeforeBlend)
+                    ->set_next_filter(mDecodeQueue)
                     ->set_next_filter(mBlenderFilter)
                     ->set_next_filter(mScaleAfterBlend)
                     ->set_next_filter(mBlenderSink);
@@ -1119,7 +1122,6 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Stream::Start()
 	{
-        mPlugDetectionThread = std::thread(&Stream::HotPlugDetection, this);
 		// Throw an exception if another process is hogging the device
 		ThrowIf(not GetOwningDevice().HogModeIsOwnedBySelfOrIsFree(), CAException(kCMIODevicePermissionsError), "CMIO::DP::Sample::Stream::Start: can't start the stream because hog mode is owned by another process");
 
