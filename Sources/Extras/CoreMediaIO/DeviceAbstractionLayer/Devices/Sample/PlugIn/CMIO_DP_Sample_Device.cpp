@@ -183,7 +183,7 @@ namespace CMIO { namespace DP { namespace Sample
 	//	••• This needs to be revisted to make sure enough is actually being done here.
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void Device::Finalize()
-	{
+	{ 
 		// Finalize the input streams
 		UInt32 numberStreams = GetNumberStreams(kCMIODevicePropertyScopeInput);
 		for (UInt32 streamIndex = 0; streamIndex != numberStreams; ++streamIndex)

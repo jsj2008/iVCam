@@ -74,6 +74,7 @@
 #include <servers/bootstrap.h> 
 #include <thread>
 
+bool  ShouldTerminate = false;
 extern "C"
 {
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -82,6 +83,7 @@ extern "C"
 	void* Insta360VCamPlugIn(CFAllocatorRef allocator, CFUUIDRef requestedTypeUUID);
 	void* Insta360VCamPlugIn(CFAllocatorRef allocator, CFUUIDRef requestedTypeUUID)
 	{
+        ShouldTerminate = false;
 		if (not CFEqual(requestedTypeUUID, kCMIOHardwarePlugInTypeID))
 			return 0;
 		
@@ -216,6 +218,8 @@ namespace CMIO { namespace DP { namespace Sample
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void PlugIn::Teardown()
 	{
+        LOGINFO("Plugin Teardown");
+        ShouldTerminate = true;
 		// Grab the muxtex for the plugIn's state
 		CAMutex::Locker locker(GetStateMutex());
 		
@@ -255,7 +259,8 @@ namespace CMIO { namespace DP { namespace Sample
 			DP::PlugIn::Teardown();
 			
 			// And leave the rest to die with the process...
-		} 
+		}
+        std::this_thread::sleep_for(std::chrono::seconds(3));
 	}
 	
 	#pragma mark -

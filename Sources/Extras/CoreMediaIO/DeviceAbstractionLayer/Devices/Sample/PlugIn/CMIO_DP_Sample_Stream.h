@@ -288,7 +288,6 @@ namespace CMIO { namespace DP { namespace Sample
         std::thread                             mStreamThread;
         std::thread                            mPlugDetectionThread;
         bool                                    mIsCameraAttached;
-        bool                                    mShouldTerminate;
         uint8_t*                               mFrame;
         uint8_t*                               mLogo;
         std::shared_ptr<ins::MediaPipe>           mMediaPipe;

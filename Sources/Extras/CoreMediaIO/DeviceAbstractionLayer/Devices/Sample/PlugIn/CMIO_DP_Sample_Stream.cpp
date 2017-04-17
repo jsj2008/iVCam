@@ -89,6 +89,7 @@
 #define kYUV_1472X828_FrameSize (2437632)
 #define kYUV_1472x828_DataSize (kARGB_1472X828_FrameSize)
 
+extern bool ShouldTerminate;
 namespace
 {
 	bool IsDeckPropertyAddress(const CMIO::PropertyAddress& address)
@@ -142,7 +143,6 @@ namespace CMIO { namespace DP { namespace Sample
 		mSyncClock(true),
         mAtomCamera(nullptr),
         mIsCameraAttached(false),
-        mShouldTerminate(false),
         mFrame(nullptr),
         mLogo(nullptr)
 	{
@@ -250,7 +250,12 @@ namespace CMIO { namespace DP { namespace Sample
         {
             delete [] mLogo;
         }
-         
+        
+        if (mPlugDetectionThread.joinable())
+        {
+            mPlugDetectionThread.join();
+        }
+        
 		// Empty all the format descriptions from the format list
 		mFormatList->RemoveAllAvailableFormats();
 		
@@ -967,7 +972,7 @@ namespace CMIO { namespace DP { namespace Sample
         std::chrono::steady_clock::time_point nextCheckTime;
         // mShouldTerminate indicate that the plugin instance is destroyed.
         // Then all children threads of the program should terminate.
-        while(!mShouldTerminate)
+        while(!ShouldTerminate)
         {
             nextCheckTime = std::chrono::steady_clock::now() + std::chrono::milliseconds(500);
             int numDevs = 0;
@@ -995,16 +1000,16 @@ namespace CMIO { namespace DP { namespace Sample
                             mMediaPipe->Cancel();
                         }
                         
-                        if (mStreamThread.joinable())
-                        {
-                            mStreamThread.join();
-                        }
-                        
                         if (mAtomCamera != nullptr)
                         {
                             LOGINFO("Camera closed successfully.");
                             mAtomCamera->close();
                             mAtomCamera = nullptr;
+                        }
+                        
+                        if (mStreamThread.joinable())
+                        {
+                            mStreamThread.join();
                         }
                     }
                 }
@@ -1036,6 +1041,7 @@ namespace CMIO { namespace DP { namespace Sample
                             LOGERR("Can't allocate frame for frame.");
                         }
                         
+                        mIsCameraAttached = true;
                         // Start the thread to read frame from device.
                         mStreamThread = std::thread(&Stream::StreamThread, this);
                     }
@@ -1054,16 +1060,16 @@ namespace CMIO { namespace DP { namespace Sample
             mMediaPipe->Cancel();
         }
         
-        if (mStreamThread.joinable())
-        {
-            mStreamThread.join();
-        }
-
         if (mAtomCamera != nullptr)
         {
             LOGINFO("Camera closed successfully.");
             mAtomCamera->close();
             mAtomCamera = nullptr;
+        }
+        
+        if (mStreamThread.joinable())
+        {
+            mStreamThread.join();
         }
         
         LOGINFO("Detection thread end...");
@@ -1101,8 +1107,6 @@ namespace CMIO { namespace DP { namespace Sample
             }
         });
         
-        mIsCameraAttached = true;
-        
         mMediaPipe->Run();
         mMediaPipe->Wait();
         
@@ -1116,7 +1120,6 @@ namespace CMIO { namespace DP { namespace Sample
 	void Stream::Start()
 	{
         mPlugDetectionThread = std::thread(&Stream::HotPlugDetection, this);
-        mPlugDetectionThread.detach();
 		// Throw an exception if another process is hogging the device
 		ThrowIf(not GetOwningDevice().HogModeIsOwnedBySelfOrIsFree(), CAException(kCMIODevicePermissionsError), "CMIO::DP::Sample::Stream::Start: can't start the stream because hog mode is owned by another process");
 
